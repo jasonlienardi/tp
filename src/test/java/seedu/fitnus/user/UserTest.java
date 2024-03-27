@@ -3,7 +3,7 @@ package seedu.fitnus.user;
 import org.junit.jupiter.api.Test;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Meal;
-//import seedu.fitnus.Parser;
+//import seedu.fitnus.parser.Parser;
 //import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.UnregisteredMealException;

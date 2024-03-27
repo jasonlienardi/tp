@@ -1,5 +1,9 @@
-package seedu.fitnus;
+package seedu.fitnus.parser;
 
+import seedu.fitnus.Drink;
+import seedu.fitnus.Exercise;
+import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.IncompleteExerciseException;
