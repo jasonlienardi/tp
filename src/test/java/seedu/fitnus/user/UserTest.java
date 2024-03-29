@@ -54,7 +54,8 @@ public class UserTest {
     }
 
     @Test
-    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException, InvalidServingSizeException {
+    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException,
+            InvalidServingSizeException {
         String command = "ate m/pizza s/3";
         testUser.handleMeal(command);
 
@@ -283,35 +284,4 @@ public class UserTest {
         assertEquals(0, testMealList.size());
         assertEquals(0, testDrinkList.size());
     }
-
-//    @Test
-//    public void handleDrink_unknownServingSize_addDrinkFailed() throws IncompleteDrinkException, UnregisteredDrinkException,
-//            InvalidServingSizeException {
-//
-//        Exception exception = assertThrows(IncompleteDrinkException.class, () -> {
-//            String command = "drink d/sprite";
-//            testUser.handleDrink(command);
-//        });
-//
-//        String error = "Incomplete command, the format must be [drink d/DRINK s/SERVING_SIZE].";
-//        String actualMessage = exception.getMessage();
-//
-//        assertEquals(error, actualMessage);
-//    }
-//
-//    @Test
-//    public void handleDrink_invalidServingSize_addDrinkFailed() throws IncompleteDrinkException, UnregisteredDrinkException,
-//            InvalidServingSizeException {
-//
-//        Exception exception = assertThrows(NumberFormatException.class, () -> {
-//            String command = "drink d/sprite s/null";
-//            testUser.handleDrink(command);
-//        });
-//
-//        String expectedMessage = "An integer value is expected, try again please :)";
-//        String actualMessage = exception.getMessage();
-//
-//        assertTrue(actualMessage.contains(expectedMessage));
-//    }
-//
 }
