@@ -1,4 +1,4 @@
 package seedu.fitnus.exception;
 
-public class invalidIndexException extends Exception {
+public class InvalidIndexException extends Exception {
 }

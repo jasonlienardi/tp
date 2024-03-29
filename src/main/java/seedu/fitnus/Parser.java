@@ -8,7 +8,7 @@ import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.invalidIndexException;
+import seedu.fitnus.exception.InvalidIndexException;
 import seedu.fitnus.user.User;
 
 public class Parser {
@@ -106,7 +106,7 @@ public class Parser {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
-        } catch (invalidIndexException e) {
+        } catch (InvalidIndexException e) {
             System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
                     "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {
@@ -148,7 +148,8 @@ public class Parser {
         System.out.println("- Exit the app: exit ");
     }
 
-    public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException, InvalidServingSizeException {
+    public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException,
+            InvalidServingSizeException {
         if (!command.contains("m/") || !command.contains("s/")) {
             throw new IncompleteMealException();
         }
