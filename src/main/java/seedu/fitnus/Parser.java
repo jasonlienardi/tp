@@ -4,11 +4,11 @@ import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidIndexException;
 import seedu.fitnus.user.User;
 
 public class Parser {
@@ -106,7 +106,7 @@ public class Parser {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
-        } catch (InvalidIndexException e) {
+        } catch (InvalidListIndexException e) {
             System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
                     "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {

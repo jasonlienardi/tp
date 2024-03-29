@@ -11,7 +11,7 @@ import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidIndexException;
+import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.storage.Storage;
 
 import java.io.ByteArrayOutputStream;
@@ -225,16 +225,16 @@ public class UserTest {
     }
 
     @Test
-    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidIndexException,
+    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidListIndexException,
             InvalidServingSizeException {
-        Exception exception = assertThrows(InvalidIndexException.class, () -> {
+        Exception exception = assertThrows(InvalidListIndexException.class, () -> {
             String command = "editMeal 5 s/10";
             testUser.handleEditMealServingSize(command);
         });
     }
 
     @Test
-    public void handleEditMealServingSize_validCommand_editMealSuccessful() throws InvalidIndexException,
+    public void handleEditMealServingSize_validCommand_editMealSuccessful() throws InvalidListIndexException,
             InvalidServingSizeException {
         String command = "editMeal 2 s/100000000";
         testUser.handleEditMealServingSize(command);
@@ -245,7 +245,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleEditDrinkServingSize_validCommand_editDrinkSuccessful() throws InvalidIndexException,
+    public void handleEditDrinkServingSize_validCommand_editDrinkSuccessful() throws InvalidListIndexException,
             InvalidServingSizeException {
         String command = "editDrink 1 s/100000000";
         testUser.handleEditDrinkServingSize(command);
@@ -256,7 +256,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleDeleteMeal_validCommand_deleteMealSuccessful() throws InvalidIndexException {
+    public void handleDeleteMeal_validCommand_deleteMealSuccessful() throws InvalidListIndexException {
         String command = "deleteMeal 1";
         testUser.handleDeleteMeal(command);
         assertEquals(1, testMealList.size());
@@ -264,15 +264,15 @@ public class UserTest {
     }
 
     @Test
-    public void handleDeleteDrink_invalidDrinkIndex_exceptionThrown() throws InvalidIndexException {
-        Exception exception = assertThrows(InvalidIndexException.class, () -> {
+    public void handleDeleteDrink_invalidDrinkIndex_exceptionThrown() throws InvalidListIndexException {
+        Exception exception = assertThrows(InvalidListIndexException.class, () -> {
             String command = "deleteDrink 5";
             testUser.handleDeleteDrink(command);
         });
     }
 
     @Test
-    public void handleDeleteDrink_validCommand_deleteDrinkSuccessful() throws InvalidIndexException {
+    public void handleDeleteDrink_validCommand_deleteDrinkSuccessful() throws InvalidListIndexException {
         String command = "deleteDrink 1";
         testUser.handleDeleteDrink(command);
         assertEquals(0, testDrinkList.size());

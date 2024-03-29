@@ -16,7 +16,7 @@ import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidIndexException;
+import seedu.fitnus.exception.InvalidListIndexException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -256,11 +256,11 @@ public class User {
         }
     }
 
-    public static void handleEditMealServingSize(String command) throws InvalidIndexException,
+    public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
             InvalidServingSizeException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
-            throw new InvalidIndexException();
+            throw new InvalidListIndexException();
         }
 
         String mealName = mealList.get(Parser.editMealIndex).getName();
@@ -271,12 +271,12 @@ public class User {
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
 
-    public static void handleEditDrinkServingSize(String command) throws InvalidIndexException,
+    public static void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
             InvalidServingSizeException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
-            throw new InvalidIndexException();
+            throw new InvalidListIndexException();
         }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
         String drinkDate = drinkList.get(Parser.editDrinkIndex).getDate();
@@ -286,17 +286,17 @@ public class User {
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
 
-    public static void handleEditWaterIntake(String command) throws InvalidIndexException, InvalidServingSizeException {
+    public static void handleEditWaterIntake(String command) throws InvalidListIndexException, InvalidServingSizeException {
         Parser.parseEditWater(command);
         Water.editWaterIntake(Parser.editWaterSize);
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
-    public void handleDeleteMeal(String command) throws InvalidIndexException {
+    public void handleDeleteMeal(String command) throws InvalidListIndexException {
         int mealIndex = Integer.parseInt(command.substring(11)) - 1;
 
         if (mealIndex >= mealList.size() || mealIndex < 0) {
-            throw new InvalidIndexException();
+            throw new InvalidListIndexException();
         }
 
         String mealName = mealList.get(mealIndex).getName();
@@ -304,10 +304,10 @@ public class User {
         System.out.println("Removed " + mealName + " from meals");
     }
 
-    public void handleDeleteDrink(String command) throws InvalidIndexException {
+    public void handleDeleteDrink(String command) throws InvalidListIndexException {
         int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
         if (drinkIndex >= drinkList.size() || drinkIndex < 0) {
-            throw new InvalidIndexException();
+            throw new InvalidListIndexException();
         }
 
         String drinkName = drinkList.get(drinkIndex).getName();
