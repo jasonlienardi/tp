@@ -7,8 +7,16 @@ import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.Parser;
 import seedu.fitnus.Water;
-import seedu.fitnus.exception.*;
 import seedu.fitnus.storage.Storage;
+
+import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteExerciseException;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.InvalidServingSizeException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredExerciseException;
+import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.invalidIndexException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -92,7 +100,8 @@ public class User {
         }
     }
 
-    public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException, InvalidServingSizeException {
+    public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
+            InvalidServingSizeException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
@@ -247,7 +256,8 @@ public class User {
         }
     }
 
-    public static void handleEditMealServingSize(String command) throws invalidIndexException, InvalidServingSizeException {
+    public static void handleEditMealServingSize(String command) throws invalidIndexException,
+            InvalidServingSizeException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new invalidIndexException();
@@ -261,7 +271,8 @@ public class User {
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
 
-    public static void handleEditDrinkServingSize(String command) throws invalidIndexException, InvalidServingSizeException {
+    public static void handleEditDrinkServingSize(String command) throws invalidIndexException,
+            InvalidServingSizeException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
