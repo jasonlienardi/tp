@@ -153,11 +153,11 @@ public class UserTest {
         testMealList.clear();
         testUser.handleListMeals();
 
-        String expectedOutput = "here's what you have eaten today\r\n" +
+        String expectedOutput = "here's what you have eaten today\n" +
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -169,7 +169,7 @@ public class UserTest {
                 "2. chicken rice (serving size: 10)";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -181,7 +181,7 @@ public class UserTest {
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
 
@@ -194,7 +194,7 @@ public class UserTest {
                 "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -208,7 +208,7 @@ public class UserTest {
                 "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -221,7 +221,7 @@ public class UserTest {
                 "3. sprite (volume: 100ml)\r\n\r\n" +
                 "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
