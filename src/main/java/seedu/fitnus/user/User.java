@@ -248,14 +248,14 @@ public class User {
     }
 
     public static void handleEditMealServingSize(String command) throws invalidIndexException, InvalidServingSizeException {
-        Parser.parseEditMeal(command);
-        assert Parser.editMealIndex != 0: "meal index out of bounds";
-        if (Parser.editMealIndex >= mealList.size()) {
+        Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
+        if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new invalidIndexException();
         }
 
         String mealName = mealList.get(Parser.editMealIndex).getName();
         String mealDate = mealList.get(Parser.editMealIndex).getDate();
+
         Meal updatedMeal = new Meal(mealName, Parser.editMealSize, mealDate);
         mealList.set(Parser.editMealIndex, updatedMeal);
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
@@ -263,9 +263,8 @@ public class User {
 
     public static void handleEditDrinkServingSize(String command) throws invalidIndexException, InvalidServingSizeException {
         Parser.parseEditDrink(command);
-        assert Parser.editDrinkIndex != 0: "drink index out of bounds";
 
-        if (Parser.editDrinkIndex >= drinkList.size()) {
+        if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
             throw new invalidIndexException();
         }
         String drinkName = drinkList.get(Parser.editDrinkIndex).getName();
@@ -282,17 +281,24 @@ public class User {
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
-    public void handleDeleteMeal(String command) {
+    public void handleDeleteMeal(String command) throws invalidIndexException {
         int mealIndex = Integer.parseInt(command.substring(11)) - 1;
-        assert mealIndex >= 0: "meal index out of bounds";
+
+        if (mealIndex >= mealList.size() || mealIndex < 0) {
+            throw new invalidIndexException();
+        }
+
         String mealName = mealList.get(mealIndex).getName();
         mealList.remove(mealIndex);
         System.out.println("Removed " + mealName + " from meals");
     }
 
-    public void handleDeleteDrink(String command) {
+    public void handleDeleteDrink(String command) throws invalidIndexException {
         int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
-        assert drinkIndex >= 0: "drink index out of bounds";
+        if (drinkIndex >= drinkList.size() || drinkIndex < 0) {
+            throw new invalidIndexException();
+        }
+
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
         System.out.println("Removed " + drinkName + " from drinks");
