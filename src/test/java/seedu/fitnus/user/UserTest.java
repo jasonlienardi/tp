@@ -205,7 +205,7 @@ public class UserTest {
 
         String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
                 "  >> nothing so far :o" + System.lineSeparator() + System.lineSeparator() +
-        "Total water intake: 0 ml";
+                "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(expectedOutput, actualOutput);
