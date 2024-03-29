@@ -108,7 +108,7 @@ public class Parser {
             System.out.println("Sorry that meal is not registered in the database.");
         } catch (invalidIndexException e) {
             System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
-                    "to view valid " + "indexes.");
+                    "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {
             System.out.println("Sorry that exercise is not registered in the database.");
         } catch (InvalidServingSizeException e) {
