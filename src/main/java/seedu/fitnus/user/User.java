@@ -286,7 +286,8 @@ public class User {
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
 
-    public static void handleEditWaterIntake(String command) throws InvalidListIndexException, InvalidServingSizeException {
+    public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
+            InvalidServingSizeException {
         Parser.parseEditWater(command);
         Water.editWaterIntake(Parser.editWaterSize);
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");

@@ -153,7 +153,7 @@ public class UserTest {
         testMealList.clear();
         testUser.handleListMeals();
 
-        String expectedOutput = "here's what you have eaten today\n" +
+        String expectedOutput = "here's what you have eaten today" + System.lineSeparator() +
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
 
@@ -164,8 +164,8 @@ public class UserTest {
     public void handleListMeals_validList_printListAccurate() {
         testUser.handleListMeals();
 
-        String expectedOutput = "here's what you have eaten today\r\n" +
-                "1. pizza (serving size: 4)\r\n" +
+        String expectedOutput = "here's what you have eaten today" + System.lineSeparator() +
+                "1. pizza (serving size: 4)" + System.lineSeparator() +
                 "2. chicken rice (serving size: 10)";
         String actualOutput = outputStream.toString().trim();
 
@@ -177,7 +177,7 @@ public class UserTest {
         testDrinkList.clear();
         testUser.handleListDrinks();
 
-        String expectedOutput = "here's what you have drank today\r\n" +
+        String expectedOutput = "here's what you have drank today" + System.lineSeparator()  +
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
 
@@ -189,8 +189,8 @@ public class UserTest {
     public void handleListDrinks_validList_printListAccurate() {
         testUser.handleListDrinks();
 
-        String expectedOutput = "here's what you have drank today\r\n" +
-                "1. sprite (volume: 100ml)\r\n\r\n" +
+        String expectedOutput = "here's what you have drank today" + System.lineSeparator() +
+                "1. sprite (volume: 100ml)" + System.lineSeparator() + System.lineSeparator() +
                 "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
 
@@ -203,9 +203,9 @@ public class UserTest {
         testDrinkList.clear();
         testUser.handleListEverything();
 
-        String expectedOutput = "here's what you have consumed today\r\n" +
-                "  >> nothing so far :o\r\n\r\n" +
-                "Total water intake: 0 ml";
+        String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
+                "  >> nothing so far :o" + System.lineSeparator() + System.lineSeparator() +
+        "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(expectedOutput, actualOutput);
@@ -215,10 +215,10 @@ public class UserTest {
     public void handleListEverything_validList_printListAccurate() {
         testUser.handleListEverything();
 
-        String expectedOutput = "here's what you have consumed today\r\n" +
-                "1. pizza (serving size: 4)\r\n" +
-                "2. chicken rice (serving size: 10)\r\n" +
-                "3. sprite (volume: 100ml)\r\n\r\n" +
+        String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
+                "1. pizza (serving size: 4)" + System.lineSeparator() +
+                "2. chicken rice (serving size: 10)" + System.lineSeparator() +
+                "3. sprite (volume: 100ml)" + System.lineSeparator() + System.lineSeparator() +
                 "Total water intake: 0 ml";
         String actualOutput = outputStream.toString().trim();
         assertEquals(expectedOutput, actualOutput);
