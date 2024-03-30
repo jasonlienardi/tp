@@ -1,5 +1,6 @@
 package seedu.fitnus;
 
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.parser.Parser;
 
@@ -77,14 +78,15 @@ public class Exercise {
     }
 
     // Method to print exercise details
-    public static void handleInfoExercise(String command) throws UnregisteredExerciseException {
+    public static void handleInfoExercise(String command) throws UnregisteredExerciseException,
+            IncompleteInfoException {
         String name = Parser.parseInfoExercise(command);
         int[] details = exerciseDetails.get(name);
         if (details == null) {
             throw new UnregisteredExerciseException();
         }
         System.out.println("Exercise: " + name);
-        System.out.println("Calories Burnt: ");
+        System.out.println("~ Calories burnt for a 1 minute workout of ~");
         System.out.println("HIGH intensity: " + details[0]);
         System.out.println("MEDIUM intensity: " + details[1]);
         System.out.println("LOW intensity: " + details[2]);

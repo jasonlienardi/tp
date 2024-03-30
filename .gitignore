@@ -15,3 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+data/DrinkList.txt
+data/MealList.txt
+src/test/resources/MealList.txt
+src/test/resources/DrinkList.txt

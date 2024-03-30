@@ -5,6 +5,9 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
+import seedu.fitnus.exception.IncompleteDeleteException;
+import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
@@ -12,7 +15,6 @@ import seedu.fitnus.storage.Storage;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
@@ -101,7 +103,7 @@ public class User {
     }
 
     public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
@@ -115,7 +117,7 @@ public class User {
     }
 
     public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
@@ -137,6 +139,9 @@ public class User {
         }
         for (Drink drink: drinkList) {
             caloriesCount += drink.getCalories();
+        }
+        for (Exercise exercise: exerciseList) {
+            caloriesCount -= exercise.getCaloriesBurnt();
         }
         System.out.println("Total Calories: " + caloriesCount);
     }
@@ -210,8 +215,8 @@ public class User {
     public void printExerciseList() {
         for (int i = 0; i < exerciseList.size(); i++) {
             Exercise currentExercise = exerciseList.get(i);
-            System.out.println((i+1) + ". " + currentExercise.getName() + "duration:" + currentExercise.getDuration() +
-                    " (intensity: " + currentExercise.getIntensity() + ")");
+            System.out.println((i+1) + ". " + currentExercise.getName() + " | duration: " +
+                    currentExercise.getDuration() + " | intensity: " + currentExercise.getIntensity());
         }
     }
     public void handleListMeals() {
@@ -233,12 +238,24 @@ public class User {
 
     public void handleListDrinks() {
         System.out.println("here's what you have drank today");
-        if (drinkList.isEmpty()) {
+        if (drinkList.isEmpty() && Water.getWater() == 0) {
             System.out.println("  >> nothing so far :o");
+        } else if (drinkList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+            handleViewWaterIntake();
         } else {
             printDrinkList(1);
             System.out.println();
             handleViewWaterIntake();
+        }
+    }
+
+    public void handleListExercises() {
+        System.out.println("here's the exercises you've done today");
+        if (exerciseList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printExerciseList();
         }
     }
 
@@ -254,10 +271,13 @@ public class User {
             System.out.println();
             handleViewWaterIntake();
         }
+
+        System.out.println("       ~~~");
+        handleListExercises();
     }
 
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new InvalidListIndexException();
@@ -272,7 +292,7 @@ public class User {
     }
 
     public static void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
@@ -287,14 +307,17 @@ public class User {
     }
 
     public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditWater(command);
         Water.editWaterIntake(Parser.editWaterSize);
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
-    public void handleDeleteMeal(String command) throws InvalidListIndexException {
-        int mealIndex = Integer.parseInt(command.substring(11)) - 1;
+    public void handleDeleteMeal(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 12) {
+            throw new IncompleteDeleteException();
+        }
+        int mealIndex = Integer.parseInt(command.substring(11).trim()) - 1;
 
         if (mealIndex >= mealList.size() || mealIndex < 0) {
             throw new InvalidListIndexException();
@@ -305,8 +328,12 @@ public class User {
         System.out.println("Removed " + mealName + " from meals");
     }
 
-    public void handleDeleteDrink(String command) throws InvalidListIndexException {
-        int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
+    public void handleDeleteDrink(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 13) {
+            throw new IncompleteDeleteException();
+        }
+
+        int drinkIndex = Integer.parseInt(command.substring(12).trim()) - 1;
         if (drinkIndex >= drinkList.size() || drinkIndex < 0) {
             throw new InvalidListIndexException();
         }
@@ -316,7 +343,23 @@ public class User {
         System.out.println("Removed " + drinkName + " from drinks");
     }
 
-    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException {
+    public void handleDeleteExercise(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 16) {
+            throw new IncompleteDeleteException();
+        }
+
+        int exerciseIndex = Integer.parseInt(command.substring(15).trim()) - 1;
+        if (exerciseIndex >= exerciseList.size() || exerciseIndex < 0) {
+            throw new InvalidListIndexException();
+        }
+
+        String exerciseName = exerciseList.get(exerciseIndex).getName();
+        exerciseList.remove(exerciseIndex);
+        System.out.println("Removed " + exerciseName + " from exercises done");
+    }
+
+    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
+            NegativeValueException {
         Parser.parseExercise(command);
         String exerciseType = Parser.exerciseDescription;
         int duration = Parser.exerciseDuration;
@@ -331,8 +374,11 @@ public class User {
         mealList.clear();
         drinkList.clear();
         Water.editWaterIntake(0);
+        exerciseList.clear();
+
         assert mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
+        assert exerciseList.isEmpty(): "clearing of exercise list failed";
 
         System.out.println("All entries have been deleted");
     }
@@ -343,14 +389,5 @@ public class User {
             caloriesBurnt += exercise.getCaloriesBurnt();
         }
         System.out.println("Total calories burnt: " + caloriesBurnt);
-    }
-
-    public void handleListExercises() {
-        System.out.println("here's the exercises you've done today");
-        if (exerciseList.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printExerciseList();
-        }
     }
 }

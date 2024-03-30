@@ -1,5 +1,6 @@
 package seedu.fitnus;
 
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.parser.Parser;
 
@@ -79,7 +80,7 @@ public class Meal {
     }
 
     // Method to print all meal info
-    public static void handleInfoMeal(String command) throws UnregisteredMealException {
+    public static void handleInfoMeal(String command) throws UnregisteredMealException, IncompleteInfoException {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name + " (per serving)");

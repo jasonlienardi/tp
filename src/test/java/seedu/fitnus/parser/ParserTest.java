@@ -1,9 +1,10 @@
 package seedu.fitnus.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ParserTest {
     @Test
     public void parseMeal_validInputs_success() throws IncompleteMealException, UnregisteredMealException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "ate m/chicken rice s/1";
         Parser.parseMeal(command);
         assertEquals("chicken rice", Parser.mealDescription);
@@ -23,7 +24,7 @@ public class ParserTest {
 
     @Test
     public void parseDrink_validInputs_success() throws IncompleteDrinkException, UnregisteredDrinkException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "drink d/sprite s/300";
         Parser.parseDrink(command);
         assertEquals("sprite", Parser.drinkDescription);
@@ -31,7 +32,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseInfoMeal_unregisteredMeal_exceptionThrown() {
+    public void parseInfoMeal_unregisteredMeal_exceptionThrown() throws IncompleteInfoException {
         String command = "infoMeal blablabla";
         try {
             Parser.parseInfoMeal(command);
