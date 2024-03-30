@@ -6,6 +6,7 @@ import seedu.fitnus.Meal;
 
 import seedu.fitnus.Water;
 
+import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidServingSizeException;
@@ -256,7 +257,25 @@ public class UserTest {
     }
 
     @Test
-    public void handleDeleteMeal_validCommand_deleteMealSuccessful() throws InvalidListIndexException {
+    public void handleDeleteMeal_noIndexInput_exceptionThrown() throws InvalidListIndexException,
+            IncompleteDeleteException {
+        Exception exception = assertThrows(IncompleteDeleteException.class, () -> {
+            String command = "deleteMeal ";
+            testUser.handleDeleteMeal(command);
+        });
+    }
+
+    @Test
+    public void handleDeleteMeal_noIntegerInput_exceptionThrown() throws InvalidListIndexException,
+            IncompleteDeleteException {
+        Exception exception = assertThrows(NumberFormatException.class, () -> {
+            String command = "deleteMeal         ";
+            testUser.handleDeleteMeal(command);
+        });
+    }
+
+    @Test
+    public void handleDeleteMeal_validCommand_deleteMealSuccessful() throws InvalidListIndexException, IncompleteDeleteException {
         String command = "deleteMeal 1";
         testUser.handleDeleteMeal(command);
         assertEquals(1, testMealList.size());
@@ -272,7 +291,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleDeleteDrink_validCommand_deleteDrinkSuccessful() throws InvalidListIndexException {
+    public void handleDeleteDrink_validCommand_deleteDrinkSuccessful() throws InvalidListIndexException, IncompleteDeleteException {
         String command = "deleteDrink 1";
         testUser.handleDeleteDrink(command);
         assertEquals(0, testDrinkList.size());
