@@ -21,6 +21,8 @@ import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
 
 public class Parser {
+    public static final int MIN_INTEGER_VALUE = -2147483648;
+    public static final int MAX_INTEGER_VALUE = 2147483647;
     public static String mealDescription;
     public static int mealSize;
     public static String drinkDescription;
@@ -127,7 +129,9 @@ public class Parser {
             System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and" +
                     " try again");
         } catch (NumberFormatException e) {
-            System.out.println("An integer value is expected, try again please :)");
+            System.out.println("An integer value is expected, try again please :)\n" +
+                    "  > Friendly reminder that integer values cannot exceed the range of " + MIN_INTEGER_VALUE + " to "
+                    + MAX_INTEGER_VALUE + ".\n    Although, we highly doubt you will ever exceed this range");
         } catch (IncompleteDeleteException e) {
             System.out.println("Please specify an index that you would like to delete. The format should be " +
                     "[deleteMeal/deleteDrink/deleteExercise INDEX]");
