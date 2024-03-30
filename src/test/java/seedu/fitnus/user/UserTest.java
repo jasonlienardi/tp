@@ -108,7 +108,7 @@
 //
 //    @Test
 //    public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-//        Water.getInstance(500, "28-04-2024");
+//        Water.checkInstance(500, "28-04-2024");
 //
 //        testUser.handleViewWaterIntake();
 //        String expectedOutput = "Total water intake: 500";
