@@ -6,7 +6,7 @@ import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDeleteException;
-import seedu.fitnus.exception.InvalidExerciseDurationException;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
@@ -14,7 +14,6 @@ import seedu.fitnus.storage.Storage;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
@@ -103,7 +102,7 @@ public class User {
     }
 
     public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
@@ -117,7 +116,7 @@ public class User {
     }
 
     public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
@@ -273,8 +272,7 @@ public class User {
         handleListExercises();
     }
 
-    public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+    public static void handleEditMealServingSize(String command) throws InvalidListIndexException, NegativeValueException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new InvalidListIndexException();
@@ -289,7 +287,7 @@ public class User {
     }
 
     public static void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
@@ -304,7 +302,7 @@ public class User {
     }
 
     public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException {
         Parser.parseEditWater(command);
         Water.editWaterIntake(Parser.editWaterSize);
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
@@ -355,7 +353,8 @@ public class User {
         System.out.println("Removed " + exerciseName + " from exercises done");
     }
 
-    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException, InvalidExerciseDurationException {
+    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
+            NegativeValueException {
         Parser.parseExercise(command);
         String exerciseType = Parser.exerciseDescription;
         int duration = Parser.exerciseDuration;

@@ -9,7 +9,7 @@ import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.InvalidServingSizeException;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.InvalidListIndexException;
@@ -56,7 +56,7 @@ public class UserTest {
 
     @Test
     public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "ate m/pizza s/3";
         testUser.handleMeal(command);
 
@@ -68,7 +68,7 @@ public class UserTest {
 
     @Test
     public void handleDrink_validInputs_correctlyAddDrink() throws IncompleteDrinkException, UnregisteredDrinkException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "drink d/sprite s/500";
         testUser.handleDrink(command);
 
@@ -226,8 +226,8 @@ public class UserTest {
     }
 
     @Test
-    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidListIndexException,
-            InvalidServingSizeException {
+    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidListIndexException
+    {
         Exception exception = assertThrows(InvalidListIndexException.class, () -> {
             String command = "editMeal 5 s/10";
             testUser.handleEditMealServingSize(command);
@@ -236,7 +236,7 @@ public class UserTest {
 
     @Test
     public void handleEditMealServingSize_validCommand_editMealSuccessful() throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "editMeal 2 s/100000000";
         testUser.handleEditMealServingSize(command);
 
@@ -247,7 +247,7 @@ public class UserTest {
 
     @Test
     public void handleEditDrinkServingSize_validCommand_editDrinkSuccessful() throws InvalidListIndexException,
-            InvalidServingSizeException {
+            NegativeValueException {
         String command = "editDrink 1 s/100000000";
         testUser.handleEditDrinkServingSize(command);
 

@@ -4,19 +4,21 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
+
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
-import seedu.fitnus.exception.InvalidExerciseDurationException;
 import seedu.fitnus.exception.InvalidListIndexException;
-import seedu.fitnus.exception.InvalidServingSizeException;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
+
 import seedu.fitnus.user.User;
+import seedu.fitnus.validator.IntegerValidation;
 
 public class Parser {
     public static String mealDescription;
@@ -124,10 +126,6 @@ public class Parser {
         } catch (UnregisteredExerciseException e) {
             System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and" +
                     " try again");
-        } catch (InvalidServingSizeException e) {
-            System.out.println("Serving Size must be at least 0!");
-        } catch (InvalidExerciseDurationException e) {
-            System.out.println("Exercise Duration must be at least 0!");
         } catch (NumberFormatException e) {
             System.out.println("An integer value is expected, try again please :)");
         } catch (IncompleteDeleteException e) {
@@ -136,6 +134,8 @@ public class Parser {
         } catch (IncompleteInfoException e) {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");
+        } catch (NegativeValueException e) {
+            System.out.println("Your serving size/exercise duration must be at least 0!");
         }
 
     }
@@ -171,7 +171,7 @@ public class Parser {
     }
 
     public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            InvalidServingSizeException {
+            NegativeValueException {
         if (!command.contains("m/") || !command.contains("s/")) {
             throw new IncompleteMealException();
         }
@@ -188,13 +188,11 @@ public class Parser {
             throw new UnregisteredMealException();
         }
         mealSize = Integer.parseInt(command.substring(sizeIndex).trim());
-        if (mealSize <= 0) {
-            throw new InvalidServingSizeException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(mealSize);
     }
 
     public static void parseDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            InvalidServingSizeException {
+            NegativeValueException {
         if (!command.contains("d/") || !command.contains("s/")) {
             throw new IncompleteDrinkException();
         }
@@ -212,9 +210,7 @@ public class Parser {
         }
 
         drinkSize = Integer.parseInt(command.substring(sizeIndex).trim());
-        if (drinkSize <= 0) {
-            throw new InvalidServingSizeException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(drinkSize);
     }
 
     public static String parseInfoMeal(String command) throws UnregisteredMealException, IncompleteInfoException {
@@ -254,30 +250,24 @@ public class Parser {
         return infoDrinkDescription;
     }
 
-    public static void parseEditMeal(String command) throws InvalidServingSizeException {
+    public static void parseEditMeal(String command) throws NegativeValueException {
         int mealSizePosition = command.indexOf("/");
         editMealIndex = Integer.parseInt(command.substring(9, mealSizePosition - 2).trim()) - 1;
         editMealSize = Integer.parseInt(command.substring(mealSizePosition + 1).trim());
-        if (editMealSize <= 0) {
-            throw new InvalidServingSizeException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(editMealSize);
     }
 
-    public static void parseEditDrink(String command) throws InvalidServingSizeException {
+    public static void parseEditDrink(String command) throws NegativeValueException {
         int drinkSizePosition = command.indexOf("/");
         editDrinkIndex = Integer.parseInt(command.substring(10, drinkSizePosition - 2).trim()) - 1;
         editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 1).trim());
-        if (editDrinkSize <= 0) {
-            throw new InvalidServingSizeException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(editMealSize);
     }
 
-    public static void parseEditWater(String command) throws InvalidServingSizeException {
+    public static void parseEditWater(String command) throws NegativeValueException {
         int waterSizePosition = command.indexOf("s/") + 2;
         editWaterSize = Integer.parseInt(command.substring(waterSizePosition).trim());
-        if (editWaterSize <= 0) {
-            throw new InvalidServingSizeException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(editWaterSize);
     }
 
     public static void parseMealStorage(String data) {
@@ -294,7 +284,8 @@ public class Parser {
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
     }
 
-    public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException, InvalidExerciseDurationException {
+    public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
+            NegativeValueException {
         if (!command.contains("e/") || !command.contains("d/") || !command.contains("i/")) {
             throw new IncompleteExerciseException();
         }
@@ -313,9 +304,7 @@ public class Parser {
         }
 
         exerciseDuration = Integer.parseInt(command.substring(durationIndex, intensityIndex - 2).trim());
-        if (exerciseDuration <= 0) {
-            throw new InvalidExerciseDurationException();
-        }
+        IntegerValidation.checkIntegerGreaterThanZero(exerciseDuration);
 
         String intensityString = command.substring(intensityIndex).trim().toUpperCase();
         try {
