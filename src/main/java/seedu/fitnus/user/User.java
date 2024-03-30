@@ -6,6 +6,7 @@ import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDeleteException;
+import seedu.fitnus.exception.InvalidExerciseDurationException;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
@@ -354,7 +355,7 @@ public class User {
         System.out.println("Removed " + exerciseName + " from exercises done");
     }
 
-    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException {
+    public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException, InvalidExerciseDurationException {
         Parser.parseExercise(command);
         String exerciseType = Parser.exerciseDescription;
         int duration = Parser.exerciseDuration;

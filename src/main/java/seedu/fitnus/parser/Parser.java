@@ -10,6 +10,7 @@ import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.InvalidExerciseDurationException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
@@ -125,6 +126,8 @@ public class Parser {
                     " try again");
         } catch (InvalidServingSizeException e) {
             System.out.println("Serving Size must be at least 0!");
+        } catch (InvalidExerciseDurationException e) {
+            System.out.println("Exercise Duration must be at least 0!");
         } catch (NumberFormatException e) {
             System.out.println("An integer value is expected, try again please :)");
         } catch (IncompleteDeleteException e) {
@@ -134,6 +137,7 @@ public class Parser {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");
         }
+
     }
 
     public static void handleHelp() {
@@ -290,7 +294,7 @@ public class Parser {
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
     }
 
-    public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException {
+    public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException, InvalidExerciseDurationException {
         if (!command.contains("e/") || !command.contains("d/") || !command.contains("i/")) {
             throw new IncompleteExerciseException();
         }
@@ -309,6 +313,9 @@ public class Parser {
         }
 
         exerciseDuration = Integer.parseInt(command.substring(durationIndex, intensityIndex - 2).trim());
+        if (exerciseDuration <= 0) {
+            throw new InvalidExerciseDurationException();
+        }
 
         String intensityString = command.substring(intensityIndex).trim().toUpperCase();
         try {
