@@ -8,6 +8,7 @@ import seedu.fitnus.Water;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
@@ -236,7 +237,7 @@ public class UserTest {
 
     @Test
     public void handleEditMealServingSize_validCommand_editMealSuccessful() throws InvalidListIndexException,
-            NegativeValueException {
+            NegativeValueException, IncompleteEditException {
         String command = "editMeal 2 s/100000000";
         testUser.handleEditMealServingSize(command);
 
@@ -247,7 +248,7 @@ public class UserTest {
 
     @Test
     public void handleEditDrinkServingSize_validCommand_editDrinkSuccessful() throws InvalidListIndexException,
-            NegativeValueException {
+            NegativeValueException, IncompleteEditException {
         String command = "editDrink 1 s/100000000";
         testUser.handleEditDrinkServingSize(command);
 

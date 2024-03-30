@@ -6,6 +6,7 @@ import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDeleteException;
+import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
@@ -275,7 +276,8 @@ public class User {
         handleListExercises();
     }
 
-    public static void handleEditMealServingSize(String command) throws InvalidListIndexException, NegativeValueException {
+    public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new InvalidListIndexException();
@@ -290,7 +292,7 @@ public class User {
     }
 
     public static void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
-            NegativeValueException {
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
@@ -305,7 +307,7 @@ public class User {
     }
 
     public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
-            NegativeValueException {
+            NegativeValueException, IncompleteEditException {
         Parser.parseEditWater(command);
         Water.editWaterIntake(Parser.editWaterSize);
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");

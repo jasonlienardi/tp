@@ -7,6 +7,7 @@ import seedu.fitnus.Meal;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
@@ -135,6 +136,9 @@ public class Parser {
         } catch (IncompleteDeleteException e) {
             System.out.println("Please specify an index that you would like to delete. The format should be " +
                     "[deleteMeal/deleteDrink/deleteExercise INDEX]");
+        } catch (IncompleteEditException e) {
+            System.out.println("Please specify an index that you would like to edit AND/OR the new serving size. "+
+                    "Type [help] to view the commands format.");
         } catch (IncompleteInfoException e) {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");
@@ -254,22 +258,33 @@ public class Parser {
         return infoDrinkDescription;
     }
 
-    public static void parseEditMeal(String command) throws NegativeValueException {
-        int mealSizePosition = command.indexOf("/");
-        editMealIndex = Integer.parseInt(command.substring(9, mealSizePosition - 2).trim()) - 1;
-        editMealSize = Integer.parseInt(command.substring(mealSizePosition + 1).trim());
+    public static void parseEditMeal(String command) throws NegativeValueException, IncompleteEditException {
+        int mealSizePosition = command.indexOf("s/");
+        if (mealSizePosition <= 9) {
+            throw new IncompleteEditException();
+        }
+
+        editMealIndex = Integer.parseInt(command.substring(9, mealSizePosition).trim()) - 1;
+        editMealSize = Integer.parseInt(command.substring(mealSizePosition + 2).trim());
         IntegerValidation.checkIntegerGreaterThanZero(editMealSize);
     }
 
-    public static void parseEditDrink(String command) throws NegativeValueException {
-        int drinkSizePosition = command.indexOf("/");
-        editDrinkIndex = Integer.parseInt(command.substring(10, drinkSizePosition - 2).trim()) - 1;
-        editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 1).trim());
-        IntegerValidation.checkIntegerGreaterThanZero(editMealSize);
+    public static void parseEditDrink(String command) throws NegativeValueException, IncompleteEditException {
+        int drinkSizePosition = command.indexOf("s/");
+        if (drinkSizePosition <= 10) {
+            throw new IncompleteEditException();
+        }
+
+        editDrinkIndex = Integer.parseInt(command.substring(10, drinkSizePosition).trim()) - 1;
+        editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 2).trim());
+        IntegerValidation.checkIntegerGreaterThanZero(editDrinkSize);
     }
 
-    public static void parseEditWater(String command) throws NegativeValueException {
+    public static void parseEditWater(String command) throws NegativeValueException, IncompleteEditException {
         int waterSizePosition = command.indexOf("s/") + 2;
+        if (waterSizePosition <= 1) { //-1 + 2
+            throw new IncompleteEditException();
+        }
         editWaterSize = Integer.parseInt(command.substring(waterSizePosition).trim());
         IntegerValidation.checkIntegerGreaterThanZero(editWaterSize);
     }
