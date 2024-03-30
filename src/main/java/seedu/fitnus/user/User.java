@@ -5,7 +5,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
-import seedu.fitnus.Parser;
+import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;

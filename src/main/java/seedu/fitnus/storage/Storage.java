@@ -19,6 +19,8 @@ public class Storage {
         this.textContent = "";
         this.folderPath = folderPath;
         this.filePath = filePath;
+        assert (filePath != null && !filePath.isEmpty()) : "File path should not be empty";
+        assert (folderPath != null && !folderPath.isEmpty()) : "Folder path should not be empty";
     }
 
     /**
@@ -35,6 +37,7 @@ public class Storage {
      * @throws FileNotFoundException If the file does not exist
      */
     public ArrayList<String> readFile() throws FileNotFoundException {
+        assert (filePath != null && !filePath.isEmpty()) : "File path should not be empty";
         ArrayList<String> input = new ArrayList<>();
         File file = new File(filePath);
         Scanner s = new Scanner(file);

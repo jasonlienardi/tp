@@ -1,6 +1,7 @@
 package seedu.fitnus;
 
 import seedu.fitnus.exception.UnregisteredExerciseException;
+import seedu.fitnus.parser.Parser;
 
 import java.util.HashMap;
 
