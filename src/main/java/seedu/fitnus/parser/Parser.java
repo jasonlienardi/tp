@@ -95,6 +95,8 @@ public class Parser {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
                 user.handleDeleteDrink(command);
+            } else if (command.startsWith("deleteExercise")) {
+                user.handleDeleteExercise(command);
             } else if (command.equals("clear")) {
                 user.handleClear();
             } else {
@@ -116,18 +118,18 @@ public class Parser {
             System.out.println("Sorry that meal is not registered in the database. Please check the spelling and " +
                     "try again");
         } catch (InvalidListIndexException e) {
-            System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
+            System.out.println("Sorry the index you provided is invalid, check [listMeals/listDrinks/listExercises] " +
                     "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {
-            System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and " +
-                    "try again");
+            System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and" +
+                    " try again");
         } catch (InvalidServingSizeException e) {
             System.out.println("Serving Size must be at least 0!");
         } catch (NumberFormatException e) {
             System.out.println("An integer value is expected, try again please :)");
         } catch (IncompleteDeleteException e) {
             System.out.println("Please specify an index that you would like to delete. The format should be " +
-                    "[deleteMeal/deleteDrink INDEX]");
+                    "[deleteMeal/deleteDrink/deleteExercise INDEX]");
         } catch (IncompleteInfoException e) {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");

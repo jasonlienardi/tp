@@ -313,7 +313,7 @@ public class User {
         if (command.length() < 12) {
             throw new IncompleteDeleteException();
         }
-        int mealIndex = Integer.parseInt(command.substring(11)) - 1;
+        int mealIndex = Integer.parseInt(command.substring(11).trim()) - 1;
 
         if (mealIndex >= mealList.size() || mealIndex < 0) {
             throw new InvalidListIndexException();
@@ -329,7 +329,7 @@ public class User {
             throw new IncompleteDeleteException();
         }
 
-        int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
+        int drinkIndex = Integer.parseInt(command.substring(12).trim()) - 1;
         if (drinkIndex >= drinkList.size() || drinkIndex < 0) {
             throw new InvalidListIndexException();
         }
@@ -337,6 +337,21 @@ public class User {
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
         System.out.println("Removed " + drinkName + " from drinks");
+    }
+
+    public void handleDeleteExercise(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 16) {
+            throw new IncompleteDeleteException();
+        }
+
+        int exerciseIndex = Integer.parseInt(command.substring(15).trim()) - 1;
+        if (exerciseIndex >= exerciseList.size() || exerciseIndex < 0) {
+            throw new InvalidListIndexException();
+        }
+
+        String exerciseName = exerciseList.get(exerciseIndex).getName();
+        exerciseList.remove(exerciseIndex);
+        System.out.println("Removed " + exerciseName + " from exercises done");
     }
 
     public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException {
