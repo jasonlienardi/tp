@@ -6,6 +6,7 @@ public class Water {
     private static String dateAdded;
 
     public Water(int amount, String dateAdded) {
+        assert amount > 0 : "Water volume must be greater than 0.";
         waterIntake = amount;
         this.dateAdded = dateAdded;
     }

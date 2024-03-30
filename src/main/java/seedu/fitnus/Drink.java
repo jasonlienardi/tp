@@ -18,7 +18,9 @@ public class Drink  {
     private int fat;
 
     public Drink(String name, int volume, String currentDate) {
+        assert name != null: "Name must not be null";
         this.name = name;
+        assert volume > 0: "Drink volume must be greater than 0.";
         this.drinkVolume = volume;
         setNutrientValues(name);
         this.dateAdded = currentDate;
