@@ -237,8 +237,11 @@ public class User {
 
     public void handleListDrinks() {
         System.out.println("here's what you have drank today");
-        if (drinkList.isEmpty()) {
+        if (drinkList.isEmpty() && Water.getWater() == 0) {
             System.out.println("  >> nothing so far :o");
+        } else if (drinkList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+            handleViewWaterIntake();
         } else {
             printDrinkList(1);
             System.out.println();
