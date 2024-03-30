@@ -139,6 +139,9 @@ public class User {
         for (Drink drink: drinkList) {
             caloriesCount += drink.getCalories();
         }
+        for (Exercise exercise: exerciseList) {
+            caloriesCount -= exercise.getCaloriesBurnt();
+        }
         System.out.println("Total Calories: " + caloriesCount);
     }
 
@@ -243,6 +246,15 @@ public class User {
         }
     }
 
+    public void handleListExercises() {
+        System.out.println("here's the exercises you've done today");
+        if (exerciseList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printExerciseList();
+        }
+    }
+
     public void handleListEverything() {
         System.out.println("here's what you have consumed today");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
@@ -255,6 +267,9 @@ public class User {
             System.out.println();
             handleViewWaterIntake();
         }
+
+        System.out.println("       ~~~");
+        handleListExercises();
     }
 
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
@@ -339,8 +354,11 @@ public class User {
         mealList.clear();
         drinkList.clear();
         Water.editWaterIntake(0);
+        exerciseList.clear();
+
         assert mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
+        assert exerciseList.isEmpty(): "clearing of exercise list failed";
 
         System.out.println("All entries have been deleted");
     }
@@ -351,14 +369,5 @@ public class User {
             caloriesBurnt += exercise.getCaloriesBurnt();
         }
         System.out.println("Total calories burnt: " + caloriesBurnt);
-    }
-
-    public void handleListExercises() {
-        System.out.println("here's the exercises you've done today");
-        if (exerciseList.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printExerciseList();
-        }
     }
 }

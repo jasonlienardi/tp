@@ -63,6 +63,8 @@ public class Parser {
                 Exercise.handleInfoExercise(command);
             } else if (command.equals("calories")) {
                 user.handleViewCalories();
+            } else if (command.equals("caloriesBurnt")) {
+                user.handleCaloriesBurnt();
             } else if (command.equals("carbs")) {
                 user.handleViewCarbohydrates();
             } else if (command.equals("protein")) {
@@ -79,10 +81,10 @@ public class Parser {
                 user.handleListMeals();
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
+            } else if (command.equals("listExercises")) {
+                user.handleListExercises();
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
-            }else if (command.equals("listExercises")) {
-                user.handleListExercises();
             } else if (command.startsWith("editMeal")) {
                 User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
@@ -93,8 +95,6 @@ public class Parser {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
                 user.handleDeleteDrink(command);
-            } else if (command.equals("caloriesBurnt")) {
-                user.handleCaloriesBurnt();
             } else if (command.equals("clear")) {
                 user.handleClear();
             } else {
