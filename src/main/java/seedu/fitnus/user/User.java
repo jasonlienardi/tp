@@ -215,8 +215,8 @@ public class User {
     public void printExerciseList() {
         for (int i = 0; i < exerciseList.size(); i++) {
             Exercise currentExercise = exerciseList.get(i);
-            System.out.println((i+1) + ". " + currentExercise.getName() + " | duration: " + currentExercise.getDuration()
-                    + " | intensity: " + currentExercise.getIntensity());
+            System.out.println((i+1) + ". " + currentExercise.getName() + " | duration: " +
+                    currentExercise.getDuration() + " | intensity: " + currentExercise.getIntensity());
         }
     }
     public void handleListMeals() {

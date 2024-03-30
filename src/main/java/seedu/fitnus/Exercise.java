@@ -78,7 +78,8 @@ public class Exercise {
     }
 
     // Method to print exercise details
-    public static void handleInfoExercise(String command) throws UnregisteredExerciseException, IncompleteInfoException {
+    public static void handleInfoExercise(String command) throws UnregisteredExerciseException,
+            IncompleteInfoException {
         String name = Parser.parseInfoExercise(command);
         int[] details = exerciseDetails.get(name);
         if (details == null) {

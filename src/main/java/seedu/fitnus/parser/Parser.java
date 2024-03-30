@@ -234,7 +234,8 @@ public class Parser {
         return infoMealDescription;
     }
 
-    public static String parseInfoExercise(String command) throws UnregisteredExerciseException, IncompleteInfoException {
+    public static String parseInfoExercise(String command) throws UnregisteredExerciseException,
+            IncompleteInfoException {
         int exerciseIndex = 13;
         if (command.length() < exerciseIndex + 1) {
             throw new IncompleteInfoException();
