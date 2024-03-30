@@ -5,6 +5,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
+import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
@@ -210,8 +211,8 @@ public class User {
     public void printExerciseList() {
         for (int i = 0; i < exerciseList.size(); i++) {
             Exercise currentExercise = exerciseList.get(i);
-            System.out.println((i+1) + ". " + currentExercise.getName() + "duration:" + currentExercise.getDuration() +
-                    " (intensity: " + currentExercise.getIntensity() + ")");
+            System.out.println((i+1) + ". " + currentExercise.getName() + " | duration: " + currentExercise.getDuration()
+                    + " | intensity: " + currentExercise.getIntensity());
         }
     }
     public void handleListMeals() {
@@ -293,7 +294,10 @@ public class User {
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
-    public void handleDeleteMeal(String command) throws InvalidListIndexException {
+    public void handleDeleteMeal(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 12) {
+            throw new IncompleteDeleteException();
+        }
         int mealIndex = Integer.parseInt(command.substring(11)) - 1;
 
         if (mealIndex >= mealList.size() || mealIndex < 0) {
@@ -305,7 +309,11 @@ public class User {
         System.out.println("Removed " + mealName + " from meals");
     }
 
-    public void handleDeleteDrink(String command) throws InvalidListIndexException {
+    public void handleDeleteDrink(String command) throws InvalidListIndexException, IncompleteDeleteException {
+        if (command.length() < 13) {
+            throw new IncompleteDeleteException();
+        }
+
         int drinkIndex = Integer.parseInt(command.substring(12)) - 1;
         if (drinkIndex >= drinkList.size() || drinkIndex < 0) {
             throw new InvalidListIndexException();

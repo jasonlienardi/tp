@@ -4,6 +4,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
+import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
@@ -120,6 +121,9 @@ public class Parser {
             System.out.println("Serving Size must be at least 0!");
         } catch (NumberFormatException e) {
             System.out.println("An integer value is expected, try again please :)");
+        } catch (IncompleteDeleteException e) {
+            System.out.println("Please specify an index that you would like to delete. The format should be " +
+                    "[deleteMeal/deleteDrink INDEX]");
         }
     }
 
