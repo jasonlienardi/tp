@@ -16,7 +16,7 @@ public class ParserTest {
     @Test
     public void parseMeal_validInputs_success() throws IncompleteMealException, UnregisteredMealException,
             NegativeValueException {
-        String command = "ate m/chicken rice s/1";
+        String command = "eat m/chicken rice s/1";
         Parser.parseMeal(command);
         assertEquals("chicken rice", Parser.mealDescription);
         assertEquals(1, Parser.mealSize);

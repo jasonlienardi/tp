@@ -58,7 +58,7 @@
 //    @Test
 //    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException,
 //            NegativeValueException {
-//        String command = "ate m/pizza s/3";
+//        String command = "eat m/pizza s/3";
 //        testUser.handleMeal(command);
 //
 //        assertFalse(testMealList.isEmpty());

@@ -55,7 +55,7 @@ public class Parser {
         try {
             if (command.equals("help")) {
                 handleHelp();
-            } else if (command.startsWith("ate")) {
+            } else if (command.startsWith("eat")) {
                 user.handleMeal(command);
             } else if (command.startsWith("drink")) {
                 user.handleDrink(command);
@@ -113,7 +113,7 @@ public class Parser {
         } catch (IncompleteDrinkException e) {
             System.out.println("Incomplete command, the format must be [drink d/DRINK s/SERVING_SIZE].");
         } catch (IncompleteMealException e) {
-            System.out.println("Incomplete command, the format must be [ate m/MEAL s/SERVING_SIZE].");
+            System.out.println("Incomplete command, the format must be [eat m/MEAL s/SERVING_SIZE].");
         } catch (IncompleteExerciseException e) {
             System.out.println("Incomplete command, the format must be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
                     + " > DURATION should be in minutes and INTENSITY can only be HIGH/MEDIUM/LOW.");
@@ -150,7 +150,7 @@ public class Parser {
 
     public static void handleHelp() {
         System.out.println("here's all the valid commands i recognise: ");
-        System.out.println("- Add a meal eaten: ate m/MEAL s/SERVING_SIZE");
+        System.out.println("- Add a meal eaten: eat m/MEAL s/SERVING_SIZE");
         System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
         System.out.println("- Track and exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
                 "i/INTENSITY(HIGH, MEDIUM, LOW)");
