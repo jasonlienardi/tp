@@ -5,13 +5,14 @@ import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDrinkException;
-import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.IncompleteExerciseException;
+import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.InvalidListIndexException;
+import seedu.fitnus.exception.InvalidServingSizeException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
-import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.invalidIndexException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
+import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.user.User;
 
 public class Parser {
@@ -109,11 +110,15 @@ public class Parser {
             System.out.println("Sorry that drink is not registered in the database.");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database.");
-        } catch (invalidIndexException e) {
+        } catch (InvalidListIndexException e) {
             System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
-                    "to view valid " + "indexes.");
+                    "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {
             System.out.println("Sorry that exercise is not registered in the database.");
+        } catch (InvalidServingSizeException e) {
+            System.out.println("Serving Size must be at least 0!");
+        } catch (NumberFormatException e) {
+            System.out.println("An integer value is expected, try again please :)");
         }
     }
 
@@ -147,7 +152,8 @@ public class Parser {
         System.out.println("- Exit the app: exit ");
     }
 
-    public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException {
+    public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException,
+            InvalidServingSizeException {
         if (!command.contains("m/") || !command.contains("s/")) {
             throw new IncompleteMealException();
         }
@@ -164,9 +170,13 @@ public class Parser {
             throw new UnregisteredMealException();
         }
         mealSize = Integer.parseInt(command.substring(sizeIndex).trim());
+        if (mealSize <= 0) {
+            throw new InvalidServingSizeException();
+        }
     }
 
-    public static void parseDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException {
+    public static void parseDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
+            InvalidServingSizeException {
         if (!command.contains("d/") || !command.contains("s/")) {
             throw new IncompleteDrinkException();
         }
@@ -182,7 +192,11 @@ public class Parser {
         if (!Drink.getNutrientDetails().containsKey(drinkDescription) && !drinkDescription.equals("water")) {
             throw new UnregisteredDrinkException();
         }
+
         drinkSize = Integer.parseInt(command.substring(sizeIndex).trim());
+        if (drinkSize <= 0) {
+            throw new InvalidServingSizeException();
+        }
     }
 
     public static String parseInfoMeal(String command) throws UnregisteredMealException {
@@ -212,21 +226,30 @@ public class Parser {
         return infoDrinkDescription;
     }
 
-    public static void parseEditMeal(String command) {
+    public static void parseEditMeal(String command) throws InvalidServingSizeException {
         int mealSizePosition = command.indexOf("/");
         editMealIndex = Integer.parseInt(command.substring(9, mealSizePosition - 2).trim()) - 1;
         editMealSize = Integer.parseInt(command.substring(mealSizePosition + 1).trim());
+        if (editMealSize <= 0) {
+            throw new InvalidServingSizeException();
+        }
     }
 
-    public static void parseEditDrink(String command) {
+    public static void parseEditDrink(String command) throws InvalidServingSizeException {
         int drinkSizePosition = command.indexOf("/");
         editDrinkIndex = Integer.parseInt(command.substring(10, drinkSizePosition - 2).trim()) - 1;
         editDrinkSize = Integer.parseInt(command.substring(drinkSizePosition + 1).trim());
+        if (editDrinkSize <= 0) {
+            throw new InvalidServingSizeException();
+        }
     }
 
-    public static void parseEditWater(String command) {
+    public static void parseEditWater(String command) throws InvalidServingSizeException {
         int waterSizePosition = command.indexOf("s/") + 2;
         editWaterSize = Integer.parseInt(command.substring(waterSizePosition).trim());
+        if (editWaterSize <= 0) {
+            throw new InvalidServingSizeException();
+        }
     }
 
     public static void parseMealStorage(String data) {

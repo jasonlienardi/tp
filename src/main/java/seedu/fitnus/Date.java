@@ -10,8 +10,8 @@ public class Date {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
 
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = DATE_FORMAT.format(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(date);
 
         this.currentDate = formattedDate;
     }
