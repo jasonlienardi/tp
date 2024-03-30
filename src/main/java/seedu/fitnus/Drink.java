@@ -1,5 +1,6 @@
 package seedu.fitnus;
 
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.parser.Parser;
 
@@ -39,7 +40,7 @@ public class Drink  {
         protein = nutrients[3] * drinkVolume / 100;
         fat = nutrients[4] * drinkVolume / 100;
     }
-    public static void handleInfoDrink(String command) throws UnregisteredDrinkException {
+    public static void handleInfoDrink(String command) throws UnregisteredDrinkException, IncompleteInfoException {
         String name = Parser.parseInfoDrink(command);
         int[] nutrients = nutrientDetails.get(name);
         System.out.println("Drink: " + name + " (100 ml)");

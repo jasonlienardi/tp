@@ -7,6 +7,7 @@ import seedu.fitnus.Meal;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteExerciseException;
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
 import seedu.fitnus.exception.InvalidListIndexException;
@@ -109,14 +110,17 @@ public class Parser {
             System.out.println("Incomplete command, the format must be [exercise e/EXERCISE d/DURATION(MINUTES)." +
                     "i/INTENSITY(HIGH, MEDIUM, LOW)");
         } catch (UnregisteredDrinkException e) {
-            System.out.println("Sorry that drink is not registered in the database.");
+            System.out.println("Sorry that drink is not registered in the database.Please check the spelling and " +
+                    "try again");
         } catch (UnregisteredMealException e) {
-            System.out.println("Sorry that meal is not registered in the database.");
+            System.out.println("Sorry that meal is not registered in the database. Please check the spelling and " +
+                    "try again");
         } catch (InvalidListIndexException e) {
             System.out.println("Sorry the index you provided is invalid, check [listMeals or listDrinks] " +
                     "to view valid indexes.");
         } catch (UnregisteredExerciseException e) {
-            System.out.println("Sorry that exercise is not registered in the database.");
+            System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and " +
+                    "try again");
         } catch (InvalidServingSizeException e) {
             System.out.println("Serving Size must be at least 0!");
         } catch (NumberFormatException e) {
@@ -124,6 +128,9 @@ public class Parser {
         } catch (IncompleteDeleteException e) {
             System.out.println("Please specify an index that you would like to delete. The format should be " +
                     "[deleteMeal/deleteDrink INDEX]");
+        } catch (IncompleteInfoException e) {
+            System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
+                    "Type [help] to view the commands format.");
         }
     }
 
@@ -204,17 +211,24 @@ public class Parser {
         }
     }
 
-    public static String parseInfoMeal(String command) throws UnregisteredMealException {
+    public static String parseInfoMeal(String command) throws UnregisteredMealException, IncompleteInfoException {
         int mealIndex = 9;
+        if (command.length() < mealIndex + 1) {
+            throw new IncompleteInfoException();
+        }
         String infoMealDescription = command.substring(mealIndex).trim();
+
         if (!Meal.getNutrientDetails().containsKey(infoMealDescription)) {
             throw new UnregisteredMealException();
         }
         return infoMealDescription;
     }
 
-    public static String parseInfoExercise(String command) throws UnregisteredExerciseException {
+    public static String parseInfoExercise(String command) throws UnregisteredExerciseException, IncompleteInfoException {
         int exerciseIndex = 13;
+        if (command.length() < exerciseIndex + 1) {
+            throw new IncompleteInfoException();
+        }
         String infoExerciseDescription = command.substring(exerciseIndex).trim();
         if (!Exercise.getExerciseDetails().containsKey(infoExerciseDescription)) {
             throw new UnregisteredExerciseException();
@@ -222,8 +236,11 @@ public class Parser {
         return infoExerciseDescription;
     }
 
-    public static String parseInfoDrink(String command) throws UnregisteredDrinkException {
+    public static String parseInfoDrink(String command) throws UnregisteredDrinkException, IncompleteInfoException {
         int drinkIndex = 10;
+        if (command.length() < drinkIndex + 1) {
+            throw new IncompleteInfoException();
+        }
         String infoDrinkDescription = command.substring(drinkIndex).trim();
         if (!Drink.getNutrientDetails().containsKey(infoDrinkDescription)) {
             throw new UnregisteredDrinkException();

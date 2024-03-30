@@ -1,6 +1,7 @@
 package seedu.fitnus.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.InvalidServingSizeException;
@@ -31,7 +32,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseInfoMeal_unregisteredMeal_exceptionThrown() {
+    public void parseInfoMeal_unregisteredMeal_exceptionThrown() throws IncompleteInfoException {
         String command = "infoMeal blablabla";
         try {
             Parser.parseInfoMeal(command);
