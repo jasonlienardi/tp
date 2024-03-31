@@ -107,8 +107,8 @@ public class User {
                     Parser.parseDrinkNutrient(s);
                     String description = Parser.drinkNutrientDescription;
                     int calories = Parser.drinkNutrientCalories;
-                    int carbs = Parser.mealNutrientCarbs;
-                    int sugar = Parser.mealNutrientSugar;
+                    int carbs = Parser.drinkNutrientCarbs;
+                    int sugar = Parser.drinkNutrientSugar;
                     int protein = Parser.drinkNutrientProtein;
                     int fat = Parser.drinkNutrientFat;
                     Drink.nutrientDetails.put(description, new int[]{calories, carbs, sugar, protein, fat});
