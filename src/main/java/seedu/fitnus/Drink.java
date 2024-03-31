@@ -7,7 +7,7 @@ import seedu.fitnus.parser.Parser;
 import java.util.HashMap;
 
 public class Drink  {
-    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
+    public static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int drinkVolume;
     private String dateAdded;
