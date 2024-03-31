@@ -303,6 +303,29 @@ public class User {
         }
     }
 
+    public ArrayList<Drink> getDrinkListToday() {
+        Date currentDate = new Date();
+        ArrayList<Drink> drinkListToday = new ArrayList<>();
+        for (Drink d : drinkList) {
+            String todayDate = currentDate.getDate();
+            if (d.getDate().equals(todayDate)) {
+                drinkListToday.add(d);
+            }
+        }
+        return drinkListToday;
+    }
+
+    public void handleListDrinksToday() {
+        ArrayList<Drink> drinkListToday = getDrinkListToday();
+        System.out.println("here's what you have drank today");
+        if (drinkListToday.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printDrinkList(1, drinkListToday);
+            System.out.println();
+            handleViewWaterIntake();
+        }
+    }
 
     public void handleListDrinks() {
         System.out.println("here's what you have drank so far");
