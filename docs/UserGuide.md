@@ -72,10 +72,10 @@ here's all the valid commands i recognise:
 - Exit the app: exit
 
 ### 1.2 For user to add data
-### 1.2.1 Add a meal eaten: `ate`
+### 1.2.1 Add a meal eaten: `eat`
 Adds a meal to the list of meals  
-**Format**: ate m/MEAL s/SERVING_SIZE  
-**Sample Input**: ate m/Chicken Rice s/1  
+**Format**: eat m/MEAL s/SERVING_SIZE  
+**Sample Input**: eat m/Chicken Rice s/1  
 **Expected Output**: Added 1 serving of Chicken Rice
 
 ### 1.2.2 Add a drink: `drink`
