@@ -295,6 +295,7 @@ public class Parser {
         String[] arrayOfMealData = data.split(delimiter);
         mealStorageDescription = arrayOfMealData[0];
         mealStorageSize = Integer.parseInt(arrayOfMealData[1]);
+        mealStorageDate = arrayOfMealData[2];
     }
 
     public static void parseDrinkStorage(String data) {
@@ -302,6 +303,7 @@ public class Parser {
         String[] arrayOfDrinkData = data.split(delimiter);
         drinkStorageDescription = arrayOfDrinkData[0];
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
+        drinkStorageDate = arrayOfDrinkData[2];
     }
 
     public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
