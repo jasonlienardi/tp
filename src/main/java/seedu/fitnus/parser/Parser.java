@@ -47,9 +47,6 @@ public class Parser {
     public static String exerciseDescription;
     public static int exerciseDuration;
 
-    public static ExerciseIntensity exerciseIntensity;
-    private User user;
-
     public static String mealNutrientDescription;
     public static int mealNutrientCalories;
     public static int mealNutrientCarbs;
@@ -65,6 +62,8 @@ public class Parser {
     public static int drinkNutrientProtein;
     public static int drinkNutrientFat;
 
+    public static ExerciseIntensity exerciseIntensity;
+    private User user;
 
     public Parser(User user) {
         this.user = user;

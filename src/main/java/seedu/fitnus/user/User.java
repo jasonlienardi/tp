@@ -34,10 +34,10 @@ public class User {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
-        loadMeal(mealStorage);
-        loadDrink(drinkStorage);
         loadMealNutrient(mealNutrientStorage);
         loadDrinkNutrient(drinkNutrientStorage);
+        loadMeal(mealStorage);
+        loadDrink(drinkStorage);
     }
 
     public void loadMeal(Storage mealStorage) {
