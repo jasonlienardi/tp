@@ -103,12 +103,18 @@ public class Parser {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
                 user.handleListMeals();
+            } else if (command.equals("listMealsToday")) {
+                user.handleListMealsToday();
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
+            } else if (command.equals("listDrinksToday")) {
+                user.handleListDrinksToday();
             } else if (command.equals("listExercises")) {
                 user.handleListExercises();
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
+            } else if (command.equals("listEverythingToday")) {
+                user.handleListEverythingToday();
             } else if (command.startsWith("editMeal")) {
                 User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
