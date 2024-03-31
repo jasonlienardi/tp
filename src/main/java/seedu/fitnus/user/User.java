@@ -65,7 +65,7 @@ public class User {
                     String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        Water.getInstance(drinkSize, drinkDate);
+                        Water.checkInstance(drinkSize, drinkDate);
                     } else {
                         drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
@@ -125,7 +125,7 @@ public class User {
         Date currentDate = new Date();
 
         if (drinkName.equals("water")) {
-            Water.getInstance(servingSize, currentDate.getDate());
+            Water.checkInstance(servingSize, currentDate.getDate());
         } else {
             drinkList.add(new Drink(drinkName, servingSize, currentDate.getDate()));
         }

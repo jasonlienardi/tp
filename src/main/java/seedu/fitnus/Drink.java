@@ -63,7 +63,7 @@ public class Drink  {
         System.out.print("etc.");
         System.out.println();
     }
-    //testing 123
+
     public String getName() {
         return name;
     }

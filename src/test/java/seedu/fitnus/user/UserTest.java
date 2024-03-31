@@ -58,7 +58,7 @@
 //    @Test
 //    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException,
 //            NegativeValueException {
-//        String command = "ate m/pizza s/3";
+//        String command = "eat m/pizza s/3";
 //        testUser.handleMeal(command);
 //
 //        assertFalse(testMealList.isEmpty());
@@ -108,7 +108,7 @@
 //
 //    @Test
 //    public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-//        Water.getInstance(500, "28-04-2024");
+//        Water.checkInstance(500, "28-04-2024");
 //
 //        testUser.handleViewWaterIntake();
 //        String expectedOutput = "Total water intake: 500";
