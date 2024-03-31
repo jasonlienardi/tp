@@ -44,6 +44,11 @@ public class Parser {
     public static int drinkStorageSize;
     public static String drinkStorageDate;
 
+    public static String exerciseStorageDescription;
+    public static int exerciseStorageDuration;
+    public static ExerciseIntensity exerciseStorageIntensity;
+    public static String exerciseStorageDate;
+
     public static String exerciseDescription;
     public static int exerciseDuration;
 
@@ -328,6 +333,15 @@ public class Parser {
         drinkStorageDescription = arrayOfDrinkData[0];
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
         drinkStorageDate = arrayOfDrinkData[2];
+    }
+
+    public static void parseExerciseStorage(String data) {
+        String delimiter = ",";
+        String[] arrayOfExerciseData = data.split(delimiter);
+        exerciseStorageDescription = arrayOfExerciseData[0];
+        exerciseStorageDuration = Integer.parseInt(arrayOfExerciseData[1]);
+        exerciseStorageIntensity = ExerciseIntensity.valueOf(arrayOfExerciseData[2]);
+        exerciseStorageDate = arrayOfExerciseData[3];
     }
 
     public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,

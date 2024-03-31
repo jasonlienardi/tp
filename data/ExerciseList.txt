@@ -1,0 +1,2 @@
+swimming,100,HIGH,01-04-2024
+running,50,MEDIUM,01-04-2024

@@ -40,6 +40,7 @@ public class UserTest {
     ArrayList<Exercise> testExerciseList;
     private Storage testMealStorage;
     private Storage testDrinkStorage;
+    private Storage testExerciseStorage;
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
 
@@ -49,8 +50,10 @@ public class UserTest {
     public void setUp() throws UnregisteredExerciseException {
         testMealStorage = new Storage("./src/test/resources", "src/test/resources/MealList.txt");
         testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
+        testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
 
-        testUser = new User(testMealStorage, testDrinkStorage, mealNutrientStorage, drinkNutrientStorage);
+        testUser = new User(testMealStorage, testDrinkStorage, mealNutrientStorage, drinkNutrientStorage,
+                testExerciseStorage);
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
@@ -64,7 +67,7 @@ public class UserTest {
         testMealList.add(new Meal("laksa", 10, todayDate));
         testDrinkList.add(new Drink("kopi", 100, todayDate));
         testWaterList.add(new Water( 100, todayDate));
-        testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH));
+        testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH, "30-01-2024"));
 
         System.setOut(new PrintStream(outputStream));
     }
