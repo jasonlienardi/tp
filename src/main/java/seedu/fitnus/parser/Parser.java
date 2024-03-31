@@ -103,6 +103,8 @@ public class Parser {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
                 user.handleListMeals();
+            } else if (command.equals("listMealsToday")) {
+                user.handleListMealsToday();
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
             } else if (command.equals("listExercises")) {

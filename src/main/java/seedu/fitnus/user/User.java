@@ -22,6 +22,7 @@ import seedu.fitnus.exception.InvalidListIndexException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
@@ -248,11 +249,11 @@ public class User {
         System.out.println("Total Sugar: " + sugarCount);
     }
 
-    public void printMealList(int startIndex) {
-        for (int i = 0; i < mealList.size(); i++) {
-            Meal currentMeal = mealList.get(i);
+    public void printMealList(int startIndex, ArrayList<Meal> mealListToPrint) {
+        for (int i = 0; i < mealListToPrint.size(); i++) {
+            Meal currentMeal = mealListToPrint.get(i);
             System.out.println((startIndex+i) + ". " + currentMeal.getName() + " (serving size: "
-                    + currentMeal.getServingSize() + ")");
+                    + currentMeal.getServingSize() + ")" + " | date: " + currentMeal.getDate());
         }
     }
 
@@ -264,31 +265,54 @@ public class User {
         }
     }
     public void handleListMeals() {
-        System.out.println("here's what you have eaten today");
+        System.out.println("here's what you have eaten so far");
         if (mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
-            printMealList(1);
+            printMealList(1, mealList);
         }
     }
 
-    public void printDrinkList(int startIndex) {
-        for (int i = 0; i < drinkList.size(); i++) {
-            Drink currentDrink = drinkList.get(i);
-            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (volume: "
-                    + currentDrink.getDrinkVolumeSize() + "ml)");
+    public ArrayList<Meal> getMealListToday() {
+        Date currentDate = new Date();
+        ArrayList<Meal> mealListToday = new ArrayList<>();
+        for (Meal m : mealList) {
+            String todayDate = currentDate.getDate();
+            if (m.getDate().equals(todayDate)) {
+                mealListToday.add(m);
+            }
+        }
+        return mealListToday;
+    }
+
+    public void handleListMealsToday() {
+        ArrayList<Meal> mealListToday = getMealListToday();
+        System.out.println("here's what you have eaten today");
+        if (mealListToday.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printMealList(1, mealListToday);
         }
     }
+
+    public void printDrinkList(int startIndex, ArrayList<Drink> drinkListToPrint) {
+        for (int i = 0; i < drinkListToPrint.size(); i++) {
+            Drink currentDrink = drinkListToPrint.get(i);
+            System.out.println((startIndex+i) + ". " + currentDrink.getName() + " (volume: "
+                    + currentDrink.getDrinkVolumeSize() + "ml)" + " | date: " + currentDrink.getDate());
+        }
+    }
+
 
     public void handleListDrinks() {
-        System.out.println("here's what you have drank today");
+        System.out.println("here's what you have drank so far");
         if (drinkList.isEmpty() && Water.getWater() == 0) {
             System.out.println("  >> nothing so far :o");
         } else if (drinkList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             handleViewWaterIntake();
         } else {
-            printDrinkList(1);
+            printDrinkList(1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }
@@ -304,14 +328,14 @@ public class User {
     }
 
     public void handleListEverything() {
-        System.out.println("here's what you have consumed today");
+        System.out.println("here's what you have consumed so far");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             System.out.println();
             handleViewWaterIntake();
         } else {
-            printMealList(1);
-            printDrinkList(mealList.size()+1);
+            printMealList(1, mealList);
+            printDrinkList(mealList.size()+1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }
