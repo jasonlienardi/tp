@@ -29,7 +29,6 @@ public class User {
     protected static ArrayList<Drink> drinkList;
     protected static ArrayList<Exercise> exerciseList;
 
-
     public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();

@@ -45,7 +45,7 @@ public class UserTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @BeforeEach
-    public void setUp() throws UnregisteredExerciseException, NegativeValueException, IncompleteMealException, UnregisteredMealException {
+    public void setUp() throws UnregisteredExerciseException {
         testMealStorage = new Storage("./src/test/resources", "src/test/resources/MealList.txt");
         testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
 
@@ -54,6 +54,7 @@ public class UserTest {
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
         testExerciseList = testUser.exerciseList;
+        Water.editWaterIntake(0);
 
         Date currentDate = new Date();
         todayDate = currentDate.getDate();
@@ -62,7 +63,6 @@ public class UserTest {
         testMealList.add(new Meal("laksa", 10, todayDate));
         testDrinkList.add(new Drink("kopi", 100, todayDate));
         testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH));
-//        testExerciseList.add(new Exercise("running", 10, ExerciseIntensity.LOW));
 
         System.setOut(new PrintStream(outputStream));
     }
@@ -97,73 +97,71 @@ public class UserTest {
 
         assertTrue(actualOutput.contains(expectedOutput));
     }
-//
-//    @Test
-//    public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() {
-//        testUser.handleViewCarbohydrates();
-//        String expectedOutput = "Total Carbohydrates: 912";
-//        String actualOutput = outputStream.toString().trim();
-//
-////        assertTrue(actualOutput.contains(expectedOutput));
-//        assertEquals(expectedOutput, actualOutput);
-//    }
-//
-//    @Test
-//    public void handleViewProtein_correctProteinCalculation_viewProteinAccurate() {
-//        System.setOut(new PrintStream(outputStream));
-//
-//        testUser.handleViewProteins();
-//        String expectedOutput = "Total Proteins: 400";
-//        String actualOutput = outputStream.toString().trim();
-//
-//        assertTrue(actualOutput.contains(expectedOutput));
-//    }
-//
-//    @Test
-//    public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-//        Water.checkInstance(500, "28-04-2024");
-//
-//        testUser.handleViewWaterIntake();
-//        String expectedOutput = "Total water intake: 500";
-//        String actualOutput = outputStream.toString().trim();
-//
-//        assertTrue(actualOutput.contains(expectedOutput));
-//    }
-//
-//    @Test
-//    public void handleViewFiber_correctFiberCalculation_viewFiberAccurate() {
-//        System.setOut(new PrintStream(outputStream));
-//
-//        testUser.handleViewFiber();
-//        String expectedOutput = "Total Fiber: 220";
-//        String actualOutput = outputStream.toString().trim();
-//
-//        assertTrue(actualOutput.contains(expectedOutput));
-//    }
-//
-//    @Test
-//    public void handleViewFat_correctFatCalculation_viewFatAccurate() {
-//        System.setOut(new PrintStream(outputStream));
-//
-//        testUser.handleViewFat();
-//        String expectedOutput = "Total Fat: 302";
-//        String actualOutput = outputStream.toString().trim();
-//
-//        assertTrue(actualOutput.contains(expectedOutput));
-//    }
-//
-//    @Test
-//    public void handleViewSugar_correctSugarCalculation_viewSugarAccurate() {
-//        System.setOut(new PrintStream(outputStream));
-//
-//        testUser.handleViewSugar();
-//        String expectedOutput = "Total Sugar: 88";
-//        String actualOutput = outputStream.toString().trim();
-//
-////        assertTrue(actualOutput.contains(expectedOutput));
-//        assertEquals(expectedOutput, actualOutput);
-//    }
-//
+
+    @Test
+    public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() {
+        testUser.handleViewCarbohydrates();
+        String expectedOutput = "Total Carbohydrates: 912";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void handleViewProtein_correctProteinCalculation_viewProteinAccurate() {
+        System.setOut(new PrintStream(outputStream));
+
+        testUser.handleViewProteins();
+        String expectedOutput = "Total Proteins: 215";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
+        Water.checkInstance(500, "28-04-2024");
+
+        testUser.handleViewWaterIntake();
+        String expectedOutput = "Total water intake: 500";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void handleViewFiber_correctFiberCalculation_viewFiberAccurate() {
+        System.setOut(new PrintStream(outputStream));
+
+        testUser.handleViewFiber();
+        String expectedOutput = "Total Fiber: 80";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void handleViewFat_correctFatCalculation_viewFatAccurate() {
+        System.setOut(new PrintStream(outputStream));
+
+        testUser.handleViewFat();
+        String expectedOutput = "Total Fat: 129";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+
+    @Test
+    public void handleViewSugar_correctSugarCalculation_viewSugarAccurate() {
+        System.setOut(new PrintStream(outputStream));
+
+        testUser.handleViewSugar();
+        String expectedOutput = "Total Sugar: 106";
+        String actualOutput = outputStream.toString().trim();
+
+        assertTrue(actualOutput.contains(expectedOutput));
+    }
+    
     @Test
     public void handleListMealsToday_emptyList_printListAccurate() {
         testMealList.clear();
@@ -246,8 +244,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidListIndexException
-    {
+    public void handleEditMealServingSize_invalidMealIndex_exceptionThrown() throws InvalidListIndexException {
         Exception exception = assertThrows(InvalidListIndexException.class, () -> {
             String command = "editMeal 5 s/10";
             testUser.handleEditMealServingSize(command);
