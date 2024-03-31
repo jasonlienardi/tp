@@ -113,6 +113,8 @@ public class Parser {
                 user.handleListExercises();
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
+            } else if (command.equals("listEverythingToday")) {
+                user.handleListEverythingToday();
             } else if (command.startsWith("editMeal")) {
                 User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {

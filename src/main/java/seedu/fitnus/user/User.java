@@ -367,6 +367,25 @@ public class User {
         handleListExercises();
     }
 
+    public void handleListEverythingToday() {
+        ArrayList<Meal> mealListToday = getMealListToday();
+        ArrayList<Drink> drinkListToday = getDrinkListToday();
+        System.out.println("here's what you have consumed today");
+        if (drinkListToday.isEmpty() && mealListToday.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+            System.out.println();
+            handleViewWaterIntake();
+        } else {
+            printMealList(1, mealListToday);
+            printDrinkList(mealListToday.size()+1, drinkListToday);
+            System.out.println();
+            handleViewWaterIntake();
+        }
+
+        System.out.println("       ~~~");
+        handleListExercises();
+    }
+
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
