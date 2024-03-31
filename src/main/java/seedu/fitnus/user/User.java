@@ -30,10 +30,12 @@ public class User {
     protected static ArrayList<Exercise> exerciseList;
 
 
-    public User(Storage mealStorage, Storage drinkStorage) {
+    public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
+        loadMealNutrient(mealNutrientStorage);
+        loadDrinkNutrient(drinkNutrientStorage);
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
     }
@@ -75,6 +77,48 @@ public class User {
             drinkStorage.createFile();
         }
     }
+
+    public void loadMealNutrient(Storage mealNutrientStorage) {
+        try {
+            ArrayList<String> mealNutrientList = mealNutrientStorage.readFile();
+            if (!mealNutrientList.isEmpty()) {
+                for (String s : mealNutrientList) {
+                    Parser.parseMealNutrient(s);
+                    String description = Parser.mealNutrientDescription;
+                    int calories = Parser.mealNutrientCalories;
+                    int carbs = Parser.mealNutrientCarbs;
+                    int protein = Parser.mealNutrientProtein;
+                    int fat = Parser.mealNutrientFat;
+                    int fiber = Parser.mealNutrientFiber;
+                    int sugar = Parser.mealNutrientSugar;
+                    Meal.nutrientDetails.put(description, new int[]{calories, carbs, protein, fat, fiber, sugar});
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Meal nutrient database not found");
+        }
+    }
+
+    public void loadDrinkNutrient(Storage drinkNutrientStorage) {
+        try {
+            ArrayList<String> drinkNutrientList = drinkNutrientStorage.readFile();
+            if (!drinkNutrientList.isEmpty()) {
+                for (String s : drinkNutrientList) {
+                    Parser.parseDrinkNutrient(s);
+                    String description = Parser.drinkNutrientDescription;
+                    int calories = Parser.drinkNutrientCalories;
+                    int carbs = Parser.mealNutrientCarbs;
+                    int sugar = Parser.mealNutrientSugar;
+                    int protein = Parser.drinkNutrientProtein;
+                    int fat = Parser.drinkNutrientFat;
+                    Drink.nutrientDetails.put(description, new int[]{calories, carbs, sugar, protein, fat});
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Drink nutrient database not found");
+        }
+    }
+
 
     public void saveMeal(Storage mealStorage) {
         for (Meal meal : mealList) {

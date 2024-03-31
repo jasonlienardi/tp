@@ -24,15 +24,18 @@ import seedu.fitnus.validator.IntegerValidation;
 public class Parser {
     public static final int MIN_INTEGER_VALUE = -2147483648;
     public static final int MAX_INTEGER_VALUE = 2147483647;
+
     public static String mealDescription;
     public static int mealSize;
     public static String drinkDescription;
     public static int drinkSize;
+
     public static int editMealIndex;
     public static int editMealSize;
     public static int editDrinkIndex;
     public static int editDrinkSize;
     public static int editWaterSize;
+
     public static String mealStorageDescription;
     public static int mealStorageSize;
     public static String mealStorageDate;
@@ -43,6 +46,21 @@ public class Parser {
 
     public static String exerciseDescription;
     public static int exerciseDuration;
+
+    public static String mealNutrientDescription;
+    public static int mealNutrientCalories;
+    public static int mealNutrientCarbs;
+    public static int mealNutrientProtein;
+    public static int mealNutrientFat;
+    public static int mealNutrientFiber;
+    public static int mealNutrientSugar;
+
+    public static String drinkNutrientDescription;
+    public static int drinkNutrientCalories;
+    public static int drinkNutrientCarbs;
+    public static int drinkNutrientSugar;
+    public static int drinkNutrientProtein;
+    public static int drinkNutrientFat;
 
     public static ExerciseIntensity exerciseIntensity;
     private User user;
@@ -295,6 +313,7 @@ public class Parser {
         String[] arrayOfMealData = data.split(delimiter);
         mealStorageDescription = arrayOfMealData[0];
         mealStorageSize = Integer.parseInt(arrayOfMealData[1]);
+        mealStorageDate = arrayOfMealData[2];
     }
 
     public static void parseDrinkStorage(String data) {
@@ -302,6 +321,7 @@ public class Parser {
         String[] arrayOfDrinkData = data.split(delimiter);
         drinkStorageDescription = arrayOfDrinkData[0];
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
+        drinkStorageDate = arrayOfDrinkData[2];
     }
 
     public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
@@ -332,5 +352,28 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new IncompleteExerciseException(); // Invalid intensity
         }
+    }
+
+    public static void parseMealNutrient(String data) {
+        String delimiter = ",";
+        String[] arrayOfMealNutrient = data.split(delimiter);
+        mealNutrientDescription = arrayOfMealNutrient[0].trim().toLowerCase();
+        mealNutrientCalories = Integer.parseInt(arrayOfMealNutrient[1]);
+        mealNutrientCarbs = Integer.parseInt(arrayOfMealNutrient[2]);
+        mealNutrientProtein = Integer.parseInt(arrayOfMealNutrient[3]);
+        mealNutrientFat = Integer.parseInt(arrayOfMealNutrient[4]);
+        mealNutrientFiber = Integer.parseInt(arrayOfMealNutrient[5]);
+        mealNutrientSugar = Integer.parseInt(arrayOfMealNutrient[6]);
+    }
+
+    public static void parseDrinkNutrient(String data) {
+        String delimiter = ",";
+        String[] arrayOfDrinkNutrient = data.split(delimiter);
+        drinkNutrientDescription = arrayOfDrinkNutrient[0].trim().toLowerCase();
+        drinkNutrientCalories = Integer.parseInt(arrayOfDrinkNutrient[1]);
+        drinkNutrientCarbs = Integer.parseInt(arrayOfDrinkNutrient[2]);
+        drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
+        drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
+        drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
     }
 }
