@@ -36,6 +36,7 @@ public class UserTest {
     String todayDate;
     ArrayList<Meal> testMealList;
     ArrayList<Drink> testDrinkList;
+    ArrayList<Water> testWaterList;
     ArrayList<Exercise> testExerciseList;
     private Storage testMealStorage;
     private Storage testDrinkStorage;
@@ -54,7 +55,7 @@ public class UserTest {
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
         testExerciseList = testUser.exerciseList;
-        //Water.editWaterIntake(0);
+        testWaterList = testUser.waterList;
 
         Date currentDate = new Date();
         todayDate = currentDate.getDate();
@@ -62,6 +63,7 @@ public class UserTest {
         testMealList.add(new Meal("kaya toast", 4, todayDate));
         testMealList.add(new Meal("laksa", 10, todayDate));
         testDrinkList.add(new Drink("kopi", 100, todayDate));
+        testWaterList.add(new Water( 100, todayDate));
         testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH));
 
         System.setOut(new PrintStream(outputStream));
@@ -120,12 +122,11 @@ public class UserTest {
 
     @Test
     public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-        new Water (500, "28-04-2024");
+        testWaterList.add(new Water (500, "10-03-2024"));
 
         testUser.handleViewWaterIntake();
-        String expectedOutput = "Total water intake: 500";
+        String expectedOutput = "Total water intake: 600";
         String actualOutput = outputStream.toString().trim();
-
         assertTrue(actualOutput.contains(expectedOutput));
     }
 
@@ -205,7 +206,7 @@ public class UserTest {
 
         String expectedOutput = "here's what you have drank today" + System.lineSeparator() +
                 "1. kopi (volume: 100ml) | date: " + todayDate + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml";
+                "Total water intake: 100 ml";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(expectedOutput, actualOutput);
@@ -220,7 +221,7 @@ public class UserTest {
 
         String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
                 "  >> nothing so far :o" + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
+                "Total water intake: 100 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
                 "here's the exercises you've done today" + System.lineSeparator() +
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
@@ -236,7 +237,7 @@ public class UserTest {
                 "1. kaya toast (serving size: 4) | date: " + todayDate + System.lineSeparator() +
                 "2. laksa (serving size: 10) | date: " + todayDate + System.lineSeparator() +
                 "3. kopi (volume: 100ml) | date: " + todayDate + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
+                "Total water intake: 100 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
                 "here's the exercises you've done today" + System.lineSeparator() +
                 "1. swimming | duration: 20 | intensity: HIGH";
         String actualOutput = outputStream.toString().trim();
