@@ -27,12 +27,14 @@ import java.util.ArrayList;
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
+    protected static ArrayList<Water> waterList;
     protected static ArrayList<Exercise> exerciseList;
 
     public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
+        waterList = new ArrayList<>();
         loadMealNutrient(mealNutrientStorage);
         loadDrinkNutrient(drinkNutrientStorage);
         loadMeal(mealStorage);
@@ -66,7 +68,7 @@ public class User {
                     String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        Water.checkInstance(drinkSize, drinkDate);
+                        waterList.add(new Water (drinkSize, drinkDate));
                     } else {
                         drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
@@ -132,8 +134,10 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
-        String waterSavedData = "water" + "," + Water.getWater() + "," + Water.getDate();
-        drinkStorage.appendTextContent(waterSavedData);
+        for (Water water : waterList) {
+            String waterSavedData = "water" + "," + water.getWater() + "," + water.getDate();
+            drinkStorage.appendTextContent(waterSavedData);
+        }
         for (Drink drink : drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
             drinkStorage.appendTextContent(drinkSavedData);
@@ -167,8 +171,17 @@ public class User {
 
         Date currentDate = new Date();
 
+        boolean waterExist = false; //Water intake for today does not exist flag
         if (drinkName.equals("water")) {
-            Water.checkInstance(servingSize, currentDate.getDate());
+            for (Water water: waterList) {
+                if (currentDate.getDate().equals(water.getDate())) {
+                    water.addWaterIntake(servingSize);
+                    waterExist = true;
+                }
+            }
+            if (!waterExist) {
+                waterList.add(new Water(servingSize, currentDate.getDate()));
+            }
         } else {
             drinkList.add(new Drink(drinkName, servingSize, currentDate.getDate()));
         }
@@ -213,7 +226,9 @@ public class User {
 
     public void handleViewWaterIntake() {
         int waterIntake = 0;
-        waterIntake += Water.getWater();
+        for (Water water: waterList) {
+            waterIntake += water.getWater();
+        }
         System.out.println("Total water intake: " + waterIntake + " ml");
     }
 
@@ -327,7 +342,11 @@ public class User {
 
     public void handleListDrinks() {
         System.out.println("here's what you have drank so far");
-        if (drinkList.isEmpty() && Water.getWater() == 0) {
+        int totalWater = 0;
+        for (Water water : waterList) {
+            totalWater += water.getWater();
+        }
+        if (drinkList.isEmpty() && totalWater == 0) {
             System.out.println("  >> nothing so far :o");
         } else if (drinkList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
@@ -417,7 +436,12 @@ public class User {
     public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
         Parser.parseEditWater(command);
-        Water.editWaterIntake(Parser.editWaterSize);
+        Date currentDate = new Date();
+        for (Water water: waterList) {
+            if (water.getDate().equals(currentDate.getDate())) {
+                water.editWaterIntake(Parser.editWaterSize);
+            }
+        }
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
@@ -481,7 +505,7 @@ public class User {
     public void handleClear() {
         mealList.clear();
         drinkList.clear();
-        Water.editWaterIntake(0);
+        waterList.clear();
         exerciseList.clear();
 
         assert mealList.isEmpty(): "clearing of meal list failed";

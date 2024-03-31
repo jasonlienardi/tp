@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class Date {
     // reference: https://www.javatpoint.com/java-get-current-date
-    private static String currentDate;
+    private String currentDate;
 
     public Date() {
         long millis = System.currentTimeMillis();
@@ -16,7 +16,7 @@ public class Date {
         this.currentDate = formattedDate;
     }
 
-    public static String getDate() {
+    public String getDate() {
         return currentDate;
     }
 }

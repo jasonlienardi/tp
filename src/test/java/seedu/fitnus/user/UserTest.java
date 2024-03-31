@@ -54,7 +54,7 @@ public class UserTest {
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
         testExerciseList = testUser.exerciseList;
-        Water.editWaterIntake(0);
+        //Water.editWaterIntake(0);
 
         Date currentDate = new Date();
         todayDate = currentDate.getDate();
@@ -120,7 +120,7 @@ public class UserTest {
 
     @Test
     public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-        Water.checkInstance(500, "28-04-2024");
+        new Water (500, "28-04-2024");
 
         testUser.handleViewWaterIntake();
         String expectedOutput = "Total water intake: 500";
