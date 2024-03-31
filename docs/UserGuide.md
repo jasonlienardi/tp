@@ -49,7 +49,7 @@ Shows a list of all possible command inputs.
 **Sample Input**: help  
 **Expected Output**:  
 here's all the valid commands i recognise:
-- Add a meal eaten: ate m/MEAL s/SERVING_SIZE
+- Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/SERVING_SIZE
 - Add water: water s/SERVING_SIZE
 - Find the information about a certain meal: infoMeal MEAL
