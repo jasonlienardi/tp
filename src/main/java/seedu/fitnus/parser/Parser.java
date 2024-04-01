@@ -138,11 +138,11 @@ public class Parser {
             } else if (command.startsWith("listEverything") && command.contains("d/")) {
                 user.handleListEverythingDate(command);
             } else if (command.startsWith("editMeal")) {
-                User.handleEditMealServingSize(command);
+                user.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
-                User.handleEditDrinkServingSize(command);
+                user.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWater")) {
-                User.handleEditWaterIntake(command);
+                user.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
@@ -200,7 +200,7 @@ public class Parser {
         System.out.println("here's all the valid commands i recognise: ");
         System.out.println("- Add a meal eaten: eat m/MEAL s/SERVING_SIZE");
         System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
-        System.out.println("- Track and exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
+        System.out.println("- Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
                 "i/INTENSITY(HIGH, MEDIUM, LOW)");
         System.out.println("- Find the information about a certain meal: infoMeal MEAL");
         System.out.println("- Find the information about a certain drink: infoDrink DRINK");
@@ -230,6 +230,7 @@ public class Parser {
         System.out.println("- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
         System.out.println("- Delete certain meal entry: deleteMeal INDEX");
         System.out.println("- Delete certain drink entry: deleteDrink INDEX");
+        System.out.println("- Delete certain exercise entry: deleteExercise INDEX");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
