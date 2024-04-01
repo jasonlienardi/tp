@@ -413,7 +413,12 @@ public class User {
                 mealListDate.add(m);
             }
         }
-        printMealList(1, mealListDate);
+        System.out.println("here's what you have eaten on " + date);
+        if (mealListDate.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printMealList(1, mealListDate);
+        }
     }
 
     public void printDrinkList(int startIndex, ArrayList<Drink> drinkListToPrint) {
@@ -461,6 +466,27 @@ public class User {
         }
     }
 
+    public void handleListDrinksDate(String command) throws InvalidDateException {
+        String date = Parser.parseListDate(command);
+        ArrayList<Drink> drinkListDate = new ArrayList<>();
+        for (Drink d : drinkListAll) {
+            if (d.getDate().equals(date)) {
+                drinkListDate.add(d);
+            }
+        }
+        for (Drink d : drinkList) {
+            if (d.getDate().equals(date)) {
+                drinkListDate.add(d);
+            }
+        }
+        System.out.println("here's what you have drank on " + date);
+        if (drinkListDate.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printDrinkList(1, drinkListDate);
+        }
+    }
+
     public void handleListExercises() {
         System.out.println("here's the exercises you've done today");
         if (exerciseList.isEmpty()) {
@@ -479,6 +505,27 @@ public class User {
             appendedExerciseList.addAll(exerciseListAll);
             appendedExerciseList.addAll(exerciseList);
             printExerciseList(appendedExerciseList);
+        }
+    }
+
+    public void handleListExercisesDate(String command) throws InvalidDateException {
+        String date = Parser.parseListDate(command);
+        ArrayList<Exercise> exercisesListDate = new ArrayList<>();
+        for (Exercise e : exerciseListAll) {
+            if (e.getDate().equals(date)) {
+                exercisesListDate.add(e);
+            }
+        }
+        for (Exercise e : exerciseList) {
+            if (e.getDate().equals(date)) {
+                exercisesListDate.add(e);
+            }
+        }
+        System.out.println("here's the exercises you've done on " + date);
+        if (exercisesListDate.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            printExerciseList(exercisesListDate);
         }
     }
 
@@ -518,6 +565,45 @@ public class User {
         handleListExercisesAll();
     }
 
+    public void handleListEverythingDate(String command) throws InvalidDateException {
+        String date = Parser.parseListDate(command);
+        ArrayList<Meal> mealListDate = new ArrayList<>();
+        for (Meal m : mealListAll) {
+            if (m.getDate().equals(date)) {
+                mealListDate.add(m);
+            }
+        }
+        for (Meal m : mealList) {
+            if (m.getDate().equals(date)) {
+                mealListDate.add(m);
+            }
+        }
+
+        ArrayList<Drink> drinkListDate = new ArrayList<>();
+        for (Drink d : drinkListAll) {
+            if (d.getDate().equals(date)) {
+                drinkListDate.add(d);
+            }
+        }
+        for (Drink d : drinkList) {
+            if (d.getDate().equals(date)) {
+                drinkListDate.add(d);
+            }
+        }
+
+        System.out.println("here's what you have consumed on " + date);
+        if (mealListDate.isEmpty() && drinkListDate.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+            System.out.println();
+        } else {
+            printMealList(1, mealListDate);
+            printDrinkList(1 + mealListDate.size(), drinkListDate);
+            System.out.println();
+        }
+
+        System.out.println("       ~~~");
+        handleListExercisesDate(command);
+    }
 
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {

@@ -107,14 +107,20 @@ public class Parser {
                 user.handleListDrinks();
             } else if (command.equals("listDrinksAll")) {
                 user.handleListDrinksAll();
+            } else if (command.startsWith("listDrinks") && command.contains("d/")) {
+                user.handleListDrinksDate(command);
             } else if (command.equals("listExercises")) {
                 user.handleListExercises();
             } else if (command.equals("listExercisesAll")) {
                 user.handleListExercisesAll();
+            } else if (command.startsWith("listExercises") && command.contains("d/")) {
+                user.handleListExercisesDate(command);
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
             } else if (command.equals("listEverythingAll")) {
                 user.handleListEverythingAll();
+            } else if (command.startsWith("listEverything") && command.contains("d/")) {
+                user.handleListEverythingDate(command);
             } else if (command.startsWith("editMeal")) {
                 User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
