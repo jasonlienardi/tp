@@ -25,10 +25,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class User {
+    // list for today
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
     protected static ArrayList<Water> waterList;
     protected static ArrayList<Exercise> exerciseList;
+    // list for all dates except today
+    protected static ArrayList<Meal> mealListAll;
+    protected static ArrayList<Drink> drinkListAll;
+    protected static ArrayList<Water> waterListAll;
+    protected static ArrayList<Exercise> exerciseListAll;
 
     public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage,
                 Storage exerciseStorage) {
@@ -36,6 +42,10 @@ public class User {
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
         waterList = new ArrayList<>();
+        mealListAll = new ArrayList<>();
+        drinkListAll = new ArrayList<>();
+        exerciseListAll = new ArrayList<>();
+        waterListAll = new ArrayList<>();
         loadMealNutrient(mealNutrientStorage);
         loadDrinkNutrient(drinkNutrientStorage);
         loadMeal(mealStorage);
@@ -52,9 +62,17 @@ public class User {
                     String mealDescription = Parser.mealStorageDescription;
                     int mealSize = Parser.mealStorageSize;
                     String currentDate = Parser.mealStorageDate;
-                    mealList.add(new Meal(mealDescription, mealSize, currentDate));
+                    mealListAll.add(new Meal(mealDescription, mealSize, currentDate));
                 }
             }
+            Date currentDate = new Date();
+            String todayDate = currentDate.getDate();
+            for (Meal m : mealListAll) {
+                if (m.getDate().equals(todayDate)) {
+                    mealList.add(m);
+                }
+            }
+            mealListAll.removeAll(mealList);
         } catch (FileNotFoundException e) {
             mealStorage.createFile();
         }
@@ -70,12 +88,26 @@ public class User {
                     String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        waterList.add(new Water (drinkSize, drinkDate));
+                        waterListAll.add(new Water (drinkSize, drinkDate));
                     } else {
-                        drinkList.add(new Drink(drinkDescription, drinkSize, drinkDate));
+                        drinkListAll.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
                 }
             }
+            Date currentDate = new Date();
+            String todayDate = currentDate.getDate();
+            for (Drink d : drinkListAll) {
+                if (d.getDate().equals(todayDate)) {
+                    drinkList.add(d);
+                }
+            }
+            drinkListAll.removeAll(drinkList);
+            for (Water w : waterListAll) {
+                if (w.getDate().equals(todayDate)) {
+                    waterList.add(w);
+                }
+            }
+            waterListAll.removeAll(waterList);
         } catch (FileNotFoundException e) {
             drinkStorage.createFile();
         }
@@ -91,10 +123,18 @@ public class User {
                     int exerciseDuration = Parser.exerciseStorageDuration;
                     ExerciseIntensity exerciseIntensity = Parser.exerciseStorageIntensity;
                     String currentDate = Parser.exerciseStorageDate;
-                    exerciseList.add(new Exercise(exerciseDescription, exerciseDuration, exerciseIntensity,
+                    exerciseListAll.add(new Exercise(exerciseDescription, exerciseDuration, exerciseIntensity,
                             currentDate));
                 }
             }
+            Date currentDate = new Date();
+            String todayDate = currentDate.getDate();
+            for (Exercise e : exerciseListAll) {
+                if (e.getDate().equals(todayDate)) {
+                    exerciseList.add(e);
+                }
+            }
+            exerciseListAll.removeAll(exerciseList);
         } catch (FileNotFoundException e) {
             exerciseStorage.createFile();
         } catch (UnregisteredExerciseException e) {
@@ -146,6 +186,10 @@ public class User {
 
 
     public void saveMeal(Storage mealStorage) {
+        for (Meal meal : mealListAll) {
+            String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
+            mealStorage.appendTextContent(mealSavedData);
+        }
         for (Meal meal : mealList) {
             String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
             mealStorage.appendTextContent(mealSavedData);
@@ -158,9 +202,17 @@ public class User {
     }
 
     public void saveDrink(Storage drinkStorage) {
+        for (Water water : waterListAll) {
+            String waterSavedData = "water" + "," + water.getWater() + "," + water.getDate();
+            drinkStorage.appendTextContent(waterSavedData);
+        }
         for (Water water : waterList) {
             String waterSavedData = "water" + "," + water.getWater() + "," + water.getDate();
             drinkStorage.appendTextContent(waterSavedData);
+        }
+        for (Drink drink : drinkListAll) {
+            String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
+            drinkStorage.appendTextContent(drinkSavedData);
         }
         for (Drink drink : drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
@@ -174,6 +226,11 @@ public class User {
     }
 
     public void saveExercise(Storage exerciseStorage) {
+        for (Exercise exercise : exerciseListAll) {
+            String exerciseSavedData = exercise.getName() + "," + exercise.getDuration() + ","
+                    + exercise.getIntensity() + "," + exercise.getDate();
+            exerciseStorage.appendTextContent(exerciseSavedData);
+        }
         for (Exercise exercise : exerciseList) {
             String exerciseSavedData = exercise.getName() + "," + exercise.getDuration() + ","
                     + exercise.getIntensity() + "," + exercise.getDate();
@@ -267,7 +324,7 @@ public class User {
         for (Water water: waterList) {
             waterIntake += water.getWater();
         }
-        System.out.println("Total water intake: " + waterIntake + " ml");
+        System.out.println("Total water intake today: " + waterIntake + " ml");
     }
 
     public void handleViewFiber() {
@@ -308,15 +365,16 @@ public class User {
         }
     }
 
-    public void printExerciseList() {
-        for (int i = 0; i < exerciseList.size(); i++) {
-            Exercise currentExercise = exerciseList.get(i);
+    public void printExerciseList(ArrayList<Exercise> exerciseListToPrint) {
+        for (int i = 0; i < exerciseListToPrint.size(); i++) {
+            Exercise currentExercise = exerciseListToPrint.get(i);
             System.out.println((i+1) + ". " + currentExercise.getName() + " | duration: " +
-                    currentExercise.getDuration() + " | intensity: " + currentExercise.getIntensity());
+                    currentExercise.getDuration() + " | intensity: " + currentExercise.getIntensity()
+                    + " | date: " + currentExercise.getDate());
         }
     }
     public void handleListMeals() {
-        System.out.println("here's what you have eaten so far");
+        System.out.println("here's what you have eaten today");
         if (mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
@@ -324,25 +382,13 @@ public class User {
         }
     }
 
-    public ArrayList<Meal> getMealListToday() {
-        Date currentDate = new Date();
-        ArrayList<Meal> mealListToday = new ArrayList<>();
-        for (Meal m : mealList) {
-            String todayDate = currentDate.getDate();
-            if (m.getDate().equals(todayDate)) {
-                mealListToday.add(m);
-            }
-        }
-        return mealListToday;
-    }
-
-    public void handleListMealsToday() {
-        ArrayList<Meal> mealListToday = getMealListToday();
-        System.out.println("here's what you have eaten today");
-        if (mealListToday.isEmpty()) {
+    public void handleListMealsAll() {
+        System.out.println("here's what you have eaten so far");
+        if (mealListAll.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
-            printMealList(1, mealListToday);
+            printMealList(1, mealListAll);
+            printMealList(1 + mealListAll.size(), mealList);
         }
     }
 
@@ -354,32 +400,8 @@ public class User {
         }
     }
 
-    public ArrayList<Drink> getDrinkListToday() {
-        Date currentDate = new Date();
-        ArrayList<Drink> drinkListToday = new ArrayList<>();
-        for (Drink d : drinkList) {
-            String todayDate = currentDate.getDate();
-            if (d.getDate().equals(todayDate)) {
-                drinkListToday.add(d);
-            }
-        }
-        return drinkListToday;
-    }
-
-    public void handleListDrinksToday() {
-        ArrayList<Drink> drinkListToday = getDrinkListToday();
-        System.out.println("here's what you have drank today");
-        if (drinkListToday.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printDrinkList(1, drinkListToday);
-            System.out.println();
-            handleViewWaterIntake();
-        }
-    }
-
     public void handleListDrinks() {
-        System.out.println("here's what you have drank so far");
+        System.out.println("here's what you have drank today");
         int totalWater = 0;
         for (Water water : waterList) {
             totalWater += water.getWater();
@@ -396,17 +418,48 @@ public class User {
         }
     }
 
+    public void handleListDrinksAll() {
+        System.out.println("here's what you have drank so far");
+        int totalWater = 0;
+        for (Water water : waterList) {
+            totalWater += water.getWater();
+        }
+        if (drinkListAll.isEmpty() && drinkList.isEmpty() && totalWater == 0) {
+            System.out.println("  >> nothing so far :o");
+        } else if (drinkListAll.isEmpty() && drinkList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+            handleViewWaterIntake();
+        } else {
+            printDrinkList(1, drinkListAll);
+            printDrinkList(1 + drinkListAll.size(), drinkList);
+            System.out.println();
+            handleViewWaterIntake();
+        }
+    }
+
     public void handleListExercises() {
         System.out.println("here's the exercises you've done today");
         if (exerciseList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
         } else {
-            printExerciseList();
+            printExerciseList(exerciseList);
+        }
+    }
+
+    public void handleListExercisesAll() {
+        System.out.println("here's the exercises you've done so far");
+        if (exerciseListAll.isEmpty() && exerciseList.isEmpty()) {
+            System.out.println("  >> nothing so far :o");
+        } else {
+            ArrayList<Exercise> appendedExerciseList = new ArrayList<>();
+            appendedExerciseList.addAll(exerciseListAll);
+            appendedExerciseList.addAll(exerciseList);
+            printExerciseList(appendedExerciseList);
         }
     }
 
     public void handleListEverything() {
-        System.out.println("here's what you have consumed so far");
+        System.out.println("here's what you have consumed today");
         if (drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             System.out.println();
@@ -422,24 +475,25 @@ public class User {
         handleListExercises();
     }
 
-    public void handleListEverythingToday() {
-        ArrayList<Meal> mealListToday = getMealListToday();
-        ArrayList<Drink> drinkListToday = getDrinkListToday();
-        System.out.println("here's what you have consumed today");
-        if (drinkListToday.isEmpty() && mealListToday.isEmpty()) {
+    public void handleListEverythingAll() {
+        System.out.println("here's what you have consumed so far");
+        if (drinkListAll.isEmpty() && mealListAll.isEmpty() && drinkList.isEmpty() && mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             System.out.println();
             handleViewWaterIntake();
         } else {
-            printMealList(1, mealListToday);
-            printDrinkList(mealListToday.size()+1, drinkListToday);
+            printMealList(1, mealListAll);
+            printMealList(mealListAll.size() + 1, mealList);
+            printDrinkList(mealListAll.size() + mealList.size() + 1, drinkListAll);
+            printDrinkList(mealListAll.size() + mealList.size() + drinkListAll.size() + 1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }
 
         System.out.println("       ~~~");
-        handleListExercises();
+        handleListExercisesAll();
     }
+
 
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
