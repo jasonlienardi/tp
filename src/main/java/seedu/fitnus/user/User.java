@@ -22,12 +22,20 @@ import seedu.fitnus.exception.InvalidListIndexException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class User {
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
     protected static ArrayList<Exercise> exerciseList;
+    private static String currentDate;
+    private static String currentDateSpecific;
+
+
+
+    final static int RECOMMEND_WATER_INTAKE = 2600;
+    final static int RECOMMEND_CALORIE_INTAKE = 2200;
 
     public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
         mealList = new ArrayList<>();
@@ -187,6 +195,38 @@ public class User {
             caloriesCount -= exercise.getCaloriesBurnt();
         }
         System.out.println("Total Calories: " + caloriesCount);
+
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh");
+
+        String currentFormattedDate = dateFormat.format(date);
+        int currentHour = Integer.parseInt(currentFormattedDate);
+        if(currentHour >= 0 && currentHour < 12) {
+            if (caloriesCount < RECOMMEND_CALORIE_INTAKE / 4 - 200  || Math.min(caloriesCount, RECOMMEND_CALORIE_INTAKE / 4) == caloriesCount) {
+                System.out.println("Recommend eating more food. Your daily recommended calories intake by this time is 550 calories. You have:  " + (RECOMMEND_CALORIE_INTAKE - caloriesCount) + "calories left!");
+            } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE / 4 + 200 || Math.max(caloriesCount, RECOMMEND_CALORIE_INTAKE / 4 + 200) == caloriesCount) {
+                System.out.println("Recommend eating less food. ");
+            } else {
+                System.out.println("Eating sufficient amount of calories by this time of day. Good job!");
+            }
+        } else if (currentHour >= 12 && currentHour < 18) {
+            if (caloriesCount < RECOMMEND_CALORIE_INTAKE / 2 - 100 || Math.min(caloriesCount, RECOMMEND_WATER_INTAKE/2) == caloriesCount) {
+                System.out.println("Recommend eating more food. Your daily recommended calories intake by this time is 1100 calories. You have:  " + (RECOMMEND_CALORIE_INTAKE - caloriesCount) + "calories left!");
+            } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE / 4 + 200 || Math.max(caloriesCount, RECOMMEND_CALORIE_INTAKE / 4 + 200) == caloriesCount) {
+                System.out.println("Recommend eating less food. ");
+            } else {
+                System.out.println("Eating sufficient amount of calories by this time of day. Good job!");
+            }
+        } else {
+            if (caloriesCount < RECOMMEND_CALORIE_INTAKE - 100 || Math.min(caloriesCount, RECOMMEND_WATER_INTAKE/2) == caloriesCount) {
+                System.out.println("Recommend eating more food. Your daily recommended calories intake by this time is 1650 calories. You have:  " + (RECOMMEND_CALORIE_INTAKE - caloriesCount) + "calories left!");
+            } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE / 4 + 200 || Math.max(caloriesCount, RECOMMEND_CALORIE_INTAKE / 4 + 200) == caloriesCount) {
+                System.out.println("Recommend eating less food. ");
+            } else {
+                System.out.println("Eating sufficient amount of calories by this time of day. Good job!");
+            }
+        }
     }
 
     public void handleViewCarbohydrates() {
@@ -215,6 +255,32 @@ public class User {
         int waterIntake = 0;
         waterIntake += Water.getWater();
         System.out.println("Total water intake: " + waterIntake + " ml");
+        // if current date time is more than half the day, user should have drank 400 ml of water, if not then print a statement that recommends the user to drink more wate
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh");
+
+        String currentFormattedDate = dateFormat.format(date);
+        int currentHour = Integer.parseInt(currentFormattedDate);
+        if(currentHour >= 0 && currentHour < 12) {
+            if (waterIntake < RECOMMEND_WATER_INTAKE / 4 || Math.min(waterIntake, RECOMMEND_WATER_INTAKE / 4) == waterIntake) {
+                System.out.println("Recommend drinking more water. Your daily recommended water intake by this time is 650ml of water. You have:  " + (RECOMMEND_WATER_INTAKE - waterIntake) + "ml left!");
+            } else {
+                System.out.println("On track with water intake!");
+            }
+        } else if (currentHour >= 12 && currentHour < 18) {
+            if (waterIntake < RECOMMEND_WATER_INTAKE / 2 || Math.min(waterIntake, RECOMMEND_WATER_INTAKE/2) == waterIntake) {
+                System.out.println("Recommend drinking more water. Your daily recommended water intake by this time is 400ml of water. You have:  " + (RECOMMEND_WATER_INTAKE - waterIntake) + "ml left!");
+            } else {
+                System.out.println("On track with water intake!");
+            }
+        } else {
+            if (currentHour < RECOMMEND_WATER_INTAKE || Math.min(waterIntake, RECOMMEND_WATER_INTAKE/2) == waterIntake) {
+                System.out.println("Recommend drinking more water. Your daily recommended water intake by this time is 800ml of water. You have:  " + (RECOMMEND_WATER_INTAKE - waterIntake) + "ml left!");
+            } else {
+                System.out.println("On track with water intake!");
+            }
+        }
     }
 
     public void handleViewFiber() {
