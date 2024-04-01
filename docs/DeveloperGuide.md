@@ -31,10 +31,10 @@ By offering a streamlined interface optimized for keyboard input and CLI interac
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Priority | As a ... | I want to ...          | So that I can ...                                      |
+|----------|----------|------------------------|--------------------------------------------------------|
+| ***      |new user| see usage instructions | refer to them when I forget how to use the application |
+| ***      |user| add a meal | track my daily calorie intake                          |
 
 ## Non-Functional Requirements
 
