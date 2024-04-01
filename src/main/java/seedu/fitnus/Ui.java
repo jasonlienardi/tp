@@ -14,9 +14,10 @@ public class Ui {
 
     private Storage mealStorage = new Storage("./data", "./data/MealList.txt");
     private Storage drinkStorage = new Storage("./data", "./data/DrinkList.txt");
+    private Storage exerciseStorage = new Storage ("./data", "./data/ExerciseList.txt");
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
-    private User user = new User(mealStorage, drinkStorage, mealNutrientStorage, drinkNutrientStorage);
+    private User user = new User(mealStorage, drinkStorage, mealNutrientStorage, drinkNutrientStorage, exerciseStorage);
     private Parser parser = new Parser(user);
 
     /** Prints the welcome message upon the start of the application  */
@@ -36,6 +37,7 @@ public class Ui {
         isExit = true;
         user.saveMeal(mealStorage);
         user.saveDrink(drinkStorage);
+        user.saveExercise(exerciseStorage);
     }
 
     public static void showLine() {

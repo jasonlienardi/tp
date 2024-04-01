@@ -30,7 +30,8 @@ public class User {
     protected static ArrayList<Water> waterList;
     protected static ArrayList<Exercise> exerciseList;
 
-    public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
+    public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage,
+                Storage exerciseStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
@@ -39,6 +40,7 @@ public class User {
         loadDrinkNutrient(drinkNutrientStorage);
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
+        loadExercise(exerciseStorage);
     }
 
     public void loadMeal(Storage mealStorage) {
@@ -76,6 +78,28 @@ public class User {
             }
         } catch (FileNotFoundException e) {
             drinkStorage.createFile();
+        }
+    }
+
+    public void loadExercise(Storage exerciseStorage) {
+        try {
+            ArrayList<String> exerciseStorageList = exerciseStorage.readFile();
+            if (!exerciseStorageList.isEmpty()) {
+                for (String s : exerciseStorageList) {
+                    Parser.parseExerciseStorage(s);
+                    String exerciseDescription = Parser.exerciseStorageDescription;
+                    int exerciseDuration = Parser.exerciseStorageDuration;
+                    ExerciseIntensity exerciseIntensity = Parser.exerciseStorageIntensity;
+                    String currentDate = Parser.exerciseStorageDate;
+                    exerciseList.add(new Exercise(exerciseDescription, exerciseDuration, exerciseIntensity,
+                            currentDate));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            exerciseStorage.createFile();
+        } catch (UnregisteredExerciseException e) {
+            System.out.println("Sorry that meal is not registered in the database. Please check the spelling and " +
+                    "try again");
         }
     }
 
@@ -148,6 +172,20 @@ public class User {
             System.out.println("Failed saving drink: " + e.getMessage());
         }
     }
+
+    public void saveExercise(Storage exerciseStorage) {
+        for (Exercise exercise : exerciseList) {
+            String exerciseSavedData = exercise.getName() + "," + exercise.getDuration() + ","
+                    + exercise.getIntensity() + "," + exercise.getDate();
+            exerciseStorage.appendTextContent(exerciseSavedData);
+        }
+        try {
+            exerciseStorage.writeFile(exerciseStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed saving drink: " + e.getMessage());
+        }
+    }
+
 
     public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
             NegativeValueException {
@@ -496,7 +534,8 @@ public class User {
         String exerciseType = Parser.exerciseDescription;
         int duration = Parser.exerciseDuration;
         ExerciseIntensity intensity = Parser.exerciseIntensity;
-        exerciseList.add(new Exercise(exerciseType, duration, intensity));
+        Date currentDate = new Date();
+        exerciseList.add(new Exercise(exerciseType, duration, intensity, currentDate.getDate()));
         assert !exerciseList.isEmpty(): "failed to track exercise";
 
         System.out.println("Tracked " + duration + " minutes of " + exerciseType);

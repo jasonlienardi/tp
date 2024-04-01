@@ -12,9 +12,11 @@ public class Exercise {
     private int duration; // Duration in minutes
     private ExerciseIntensity intensity;
     private int caloriesBurnt;
+    private String dateAdded;
 
     // Constructor with only duration and exercise name
-    public Exercise(String name, int duration, ExerciseIntensity intensity) throws UnregisteredExerciseException {
+    public Exercise(String name, int duration, ExerciseIntensity intensity, String currentDate)
+            throws UnregisteredExerciseException {
         assert name != null : "Name must not be null";
         this.name = name;
         assert duration > 0 : "Duration must be greater than 0";
@@ -22,6 +24,7 @@ public class Exercise {
         assert isValidIntensity(intensity) : "Intensity must be HIGH, MEDIUM, or LOW";
         this.intensity = intensity;
         setCaloriesBurnt(); // Assign exercise details based on the name and intensity
+        this.dateAdded = currentDate;
     }
 
     // Add exercise details to the static HashMap
@@ -56,6 +59,10 @@ public class Exercise {
 
     public ExerciseIntensity getIntensity() {
         return intensity;
+    }
+
+    public String getDate() {
+        return dateAdded;
     }
 
     // Setter method for name
