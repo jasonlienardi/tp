@@ -1,22 +1,8 @@
 package seedu.fitnus.parser;
 
-import seedu.fitnus.Drink;
-import seedu.fitnus.Exercise;
-import seedu.fitnus.ExerciseIntensity;
-import seedu.fitnus.Meal;
+import seedu.fitnus.*;
 
-import seedu.fitnus.exception.IncompleteDeleteException;
-import seedu.fitnus.exception.IncompleteDrinkException;
-import seedu.fitnus.exception.IncompleteEditException;
-import seedu.fitnus.exception.IncompleteExerciseException;
-import seedu.fitnus.exception.IncompleteInfoException;
-import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.InvalidCommandException;
-import seedu.fitnus.exception.InvalidListIndexException;
-import seedu.fitnus.exception.NegativeValueException;
-import seedu.fitnus.exception.UnregisteredDrinkException;
-import seedu.fitnus.exception.UnregisteredExerciseException;
-import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.*;
 
 import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
@@ -115,6 +101,8 @@ public class Parser {
                 user.handleListMeals();
             } else if (command.equals("listMealsAll")) {
                 user.handleListMealsAll();
+            } else if (command.startsWith("listMeals") && command.contains("d/")) {
+                user.handleListMealsDate(command);
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
             } else if (command.equals("listDrinksAll")) {
@@ -180,6 +168,8 @@ public class Parser {
                     "Type [help] to view the commands format.");
         } catch (NegativeValueException e) {
             System.out.println("Your serving size/exercise duration must be at least 0!");
+        } catch (InvalidDateException e) {
+            System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
         }
 
     }
@@ -414,5 +404,14 @@ public class Parser {
         exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
         exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
         exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
+    }
+
+    public static String parseListDate(String command) throws InvalidDateException {
+        int indexOfDate = command.indexOf("d/") + 2;
+        String date = command.substring(indexOfDate);
+        if (Date.isValidDate(date)) {
+            return date;
+        }
+        throw new InvalidDateException();
     }
 }

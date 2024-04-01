@@ -5,20 +5,10 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
-import seedu.fitnus.exception.IncompleteDeleteException;
-import seedu.fitnus.exception.IncompleteEditException;
-import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.*;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
-
-import seedu.fitnus.exception.IncompleteDrinkException;
-import seedu.fitnus.exception.IncompleteExerciseException;
-import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.UnregisteredDrinkException;
-import seedu.fitnus.exception.UnregisteredExerciseException;
-import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidListIndexException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -408,6 +398,22 @@ public class User {
             printMealList(1, mealListAll);
             printMealList(1 + mealListAll.size(), mealList);
         }
+    }
+
+    public void handleListMealsDate(String command) throws InvalidDateException {
+        String date = Parser.parseListDate(command);
+        ArrayList<Meal> mealListDate = new ArrayList<>();
+        for (Meal m : mealListAll) {
+            if (m.getDate().equals(date)) {
+                mealListDate.add(m);
+            }
+        }
+        for (Meal m : mealList) {
+            if (m.getDate().equals(date)) {
+                mealListDate.add(m);
+            }
+        }
+        printMealList(1, mealListDate);
     }
 
     public void printDrinkList(int startIndex, ArrayList<Drink> drinkListToPrint) {
