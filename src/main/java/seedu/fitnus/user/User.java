@@ -224,7 +224,7 @@ public class User {
             } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE / 4 + 200 || Math.max(caloriesCount, RECOMMEND_CALORIE_INTAKE / 4 + 200) == caloriesCount) {
                 System.out.println("Recommend eating less food. ");
             } else {
-                System.out.println("Eating sufficient amount of calories by this time of day. Good job!");
+                System.out.println("Eating sufficient amount of calories by this time of day. Good job! ");
             }
         }
     }
