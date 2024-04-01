@@ -1,8 +1,24 @@
 package seedu.fitnus.parser;
 
-import seedu.fitnus.*;
+import seedu.fitnus.Drink;
+import seedu.fitnus.Exercise;
+import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.Meal;
+import seedu.fitnus.Date;
 
-import seedu.fitnus.exception.*;
+import seedu.fitnus.exception.IncompleteDeleteException;
+import seedu.fitnus.exception.IncompleteDrinkException;
+import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.IncompleteExerciseException;
+import seedu.fitnus.exception.IncompleteInfoException;
+import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.InvalidListIndexException;
+import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredExerciseException;
+import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.InvalidDateException;
 
 import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
@@ -200,10 +216,15 @@ public class Parser {
         System.out.println("- List today's meal intake: listMeals");
         System.out.println("- List today's drink intake: listDrinks");
         System.out.println("- List today's exercises done: listExercises");
+        System.out.println("- List today's entire food intake and exercises: listEverything");
         System.out.println("- List all meal intake: listMealsAll");
         System.out.println("- List all drink intake: listDrinksAll");
         System.out.println("- List all exercises done: listExercisesAll");
-        System.out.println("- List entire food intake for the day: listEverything");
+        System.out.println("- List all entire food intake and exercises: listEverythingAll");
+        System.out.println("- List meal intake for certain date: listMeals d/dd-MM-yyyy");
+        System.out.println("- List drink intake for certain date: listDrinks d/dd-MM-yyyy");
+        System.out.println("- List exercises done for certain date: listExercises d/dd-MM-yyyy");
+        System.out.println("- List entire food intake and exercises for certain date: listEverything d/dd-MM-yyyy");
         System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
