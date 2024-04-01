@@ -67,6 +67,11 @@ public class Parser {
     public static int drinkNutrientProtein;
     public static int drinkNutrientFat;
 
+    public static String exerciseCaloriesDescription;
+    public static int exerciseCaloriesHigh;
+    public static int exerciseCaloriesMedium;
+    public static int exerciseCaloriesLow;
+
     public static ExerciseIntensity exerciseIntensity;
     private User user;
 
@@ -397,5 +402,14 @@ public class Parser {
         drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
         drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
         drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
+    }
+
+    public static void parseExerciseCalories(String data) {
+        String delimiter = ",";
+        String[] arrayOfExerciseCalories = data.split(delimiter);
+        exerciseCaloriesDescription = arrayOfExerciseCalories[0].trim().toLowerCase();
+        exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
+        exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
+        exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
     }
 }

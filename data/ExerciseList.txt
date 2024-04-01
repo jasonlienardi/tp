@@ -3,3 +3,4 @@ swimming,100,HIGH,01-04-2024
 running,50,MEDIUM,01-04-2024
 cycling,100,LOW,01-04-2024
 running,20,HIGH,01-04-2024
+boxing,10,LOW,01-04-2024

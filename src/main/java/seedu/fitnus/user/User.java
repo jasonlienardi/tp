@@ -36,8 +36,8 @@ public class User {
     protected static ArrayList<Water> waterListAll;
     protected static ArrayList<Exercise> exerciseListAll;
 
-    public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage,
-                Storage exerciseStorage) {
+    public User(Storage mealStorage, Storage drinkStorage, Storage exerciseStorage,
+                Storage mealNutrientStorage, Storage drinkNutrientStorage, Storage exerciseCaloriesStorage) {
         mealList = new ArrayList<>();
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
@@ -48,6 +48,7 @@ public class User {
         waterListAll = new ArrayList<>();
         loadMealNutrient(mealNutrientStorage);
         loadDrinkNutrient(drinkNutrientStorage);
+        loadExerciseCalories(exerciseCaloriesStorage);
         loadMeal(mealStorage);
         loadDrink(drinkStorage);
         loadExercise(exerciseStorage);
@@ -184,6 +185,23 @@ public class User {
         }
     }
 
+    public void loadExerciseCalories(Storage exerciseCaloriesStorage) {
+        try {
+            ArrayList<String> exerciseCaloriesList = exerciseCaloriesStorage.readFile();
+            if (!exerciseCaloriesList.isEmpty()) {
+                for (String s : exerciseCaloriesList) {
+                    Parser.parseExerciseCalories(s);
+                    String description = Parser.exerciseCaloriesDescription;
+                    int caloriesHigh = Parser.exerciseCaloriesHigh;
+                    int caloriesMedium = Parser.exerciseCaloriesMedium;
+                    int caloriesLow = Parser.exerciseCaloriesLow;
+                    Exercise.exerciseDetails.put(description, new int[]{caloriesHigh, caloriesMedium, caloriesLow});
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Exercise calories database not found");
+        }
+    }
 
     public void saveMeal(Storage mealStorage) {
         for (Meal meal : mealListAll) {

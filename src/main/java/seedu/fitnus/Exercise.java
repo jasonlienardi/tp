@@ -7,7 +7,7 @@ import seedu.fitnus.parser.Parser;
 import java.util.HashMap;
 
 public class Exercise {
-    private static HashMap<String, int[]> exerciseDetails = new HashMap<>();
+    public static HashMap<String, int[]> exerciseDetails = new HashMap<>();
     private String name;
     private int duration; // Duration in minutes
     private ExerciseIntensity intensity;

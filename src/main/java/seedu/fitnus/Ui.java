@@ -17,7 +17,9 @@ public class Ui {
     private Storage exerciseStorage = new Storage ("./data", "./data/ExerciseList.txt");
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
-    private User user = new User(mealStorage, drinkStorage, mealNutrientStorage, drinkNutrientStorage, exerciseStorage);
+    private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
+    private User user = new User(mealStorage, drinkStorage, exerciseStorage,
+            mealNutrientStorage, drinkNutrientStorage, exerciseCaloriesStorage);
     private Parser parser = new Parser(user);
 
     /** Prints the welcome message upon the start of the application  */

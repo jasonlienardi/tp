@@ -43,6 +43,7 @@ public class UserTest {
     private Storage testExerciseStorage;
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
+    private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -52,8 +53,8 @@ public class UserTest {
         testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
         testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
 
-        testUser = new User(testMealStorage, testDrinkStorage, mealNutrientStorage, drinkNutrientStorage,
-                testExerciseStorage);
+        testUser = new User(testMealStorage, testDrinkStorage, testExerciseStorage, mealNutrientStorage,
+                drinkNutrientStorage, exerciseCaloriesStorage);
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
