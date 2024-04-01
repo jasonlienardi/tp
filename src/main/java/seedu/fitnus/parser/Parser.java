@@ -67,6 +67,11 @@ public class Parser {
     public static int drinkNutrientProtein;
     public static int drinkNutrientFat;
 
+    public static String exerciseCaloriesDescription;
+    public static int exerciseCaloriesHigh;
+    public static int exerciseCaloriesMedium;
+    public static int exerciseCaloriesLow;
+
     public static ExerciseIntensity exerciseIntensity;
     private User user;
 
@@ -108,18 +113,20 @@ public class Parser {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
                 user.handleListMeals();
-            } else if (command.equals("listMealsToday")) {
-                user.handleListMealsToday();
+            } else if (command.equals("listMealsAll")) {
+                user.handleListMealsAll();
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
-            } else if (command.equals("listDrinksToday")) {
-                user.handleListDrinksToday();
+            } else if (command.equals("listDrinksAll")) {
+                user.handleListDrinksAll();
             } else if (command.equals("listExercises")) {
                 user.handleListExercises();
+            } else if (command.equals("listExercisesAll")) {
+                user.handleListExercisesAll();
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
-            } else if (command.equals("listEverythingToday")) {
-                user.handleListEverythingToday();
+            } else if (command.equals("listEverythingAll")) {
+                user.handleListEverythingAll();
             } else if (command.startsWith("editMeal")) {
                 User.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
@@ -395,5 +402,14 @@ public class Parser {
         drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
         drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
         drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
+    }
+
+    public static void parseExerciseCalories(String data) {
+        String delimiter = ",";
+        String[] arrayOfExerciseCalories = data.split(delimiter);
+        exerciseCaloriesDescription = arrayOfExerciseCalories[0].trim().toLowerCase();
+        exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
+        exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
+        exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
     }
 }
