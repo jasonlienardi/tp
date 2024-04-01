@@ -9,25 +9,30 @@ Users are able to track the meals and drinks they have in a day.
 <!-- TOC -->
 [1) Features List](#1-features-list)
 * [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands:** `help`](#111-viewing-all-commands-help-)
+    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
 * [1.2 For user to add data](#12-for-user-to-add-data)
-    * [1.2.1 Add a meal eaten: `ate`](#121-add-a-meal-eaten-ate)
+    * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
     * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
-    * [1.2.3 Add water: `water`](#123-add-water-water)
+      * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
 * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
-    * [1.3.3 View daily calories consumed: `calories`](#133-view-daily-calories-consumed-calories)
-    * [1.3.4 View daily carbohydrates consumed: `carbs`](#134-view-daily-carbohydrates-consumed-carbs)
-    * [1.3.5 View daily proteins consumed: `protein`](#135-view-daily-proteins-consumed-protein)
-    * [1.3.6 View daily fat consumed: `fat`](#136-view-daily-fat-consumed-fat)
-    * [1.3.7 View daily sugar consumed: `sugar`](#137-view-daily-sugar-consumed-sugar)
-    * [1.3.8 View daily fiber consumed: `fiber`](#138-view-daily-fiber-consumed-fiber)
-    * [1.3.9 View daily water consumption: `viewWater`](#139-view-daily-water-consumption-viewwater)
+    * [1.3.3 View daily calories consumed: `calories`](#133-find-the-information-about-a-certain-exercise-infoexercise)
+    * [1.3.4 View daily carbohydrates consumed: `carbs`](#134-view-daily-calories-consumed-calories)
+    * [1.3.5 View daily proteins consumed: `protein`](#135-view-daily-carbohydrates-consumed-carbs)
+    * [1.3.6 View daily fat consumed: `fat`](#136-view-daily-proteins-consumed-protein)
+    * [1.3.7 View daily sugar consumed: `sugar`](#137-view-daily-fat-consumed-fat)
+    * [1.3.8 View daily fiber consumed: `fiber`](#138-view-daily-sugar-consumed-sugar)
+    * [1.3.9 View daily water consumption: `viewWater`](#139-view-daily-fiber-consumed-fiber)
 * [1.4 For listing arrays](#14-for-listing-arrays)
-    * [1.4.1 List meal intake: `listMeals`](#141-list-meal-intake-listmeals)
-    * [1.4.2 List drink intake: `listDrinks`](#142-list-drink-intake-listdrinks)
-    * [1.4.3 List entire food intake for the day: `listEverything`](#143-list-entire-food-intake-for-the-day-listeverything)
+    * [1.4.1 List all meal intake: `listMeals`](#141-list-all-meal-intake-listmeals)
+    * [1.4.2 List all drink intake: `listDrinks`](#142-list-all-drink-intake-listdrinks)
+    * [1.4.3 List all exercises done: `listExercises`](#143-list-all-exercises-done-listexercises)
+    * [1.4.4 List everything inputted: `listEverything`](#144-list-everything-inputted-listeverything)
+    * [1.4.5 List entire app's lifecycle meals intake: `listMealsAll`](#145-list-entire-apps-lifecycle-meals-intake-listmealsall)
+    * [1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`](#146-list-entire-apps-lifecycle-drinks-intake-listdrinksall)
+    * [1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`](#147-list-entire-apps-lifecycle-exercises-done-listexercisesall)
+    * [1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`](#148-list-everything-inputted-for-the-entire-apps-lifecycle-listeverythingall)
 * [1.5 For editing existing data](#15-for-editing-existing-data)
     * [1.5.1 Edit an existing meal after inserted: `editMeal`](#151-edit-an-existing-meal-after-inserted-editmeal)
     * [1.5.2 Edit an existing drink after inserted: `editDrink`](#152-edit-an-existing-drink-after-inserted-editdrink)
@@ -87,8 +92,8 @@ here's all the valid commands I recognise:
 ### 1.2 For user to add data
 ### 1.2.1 Add a meal eaten: `eat`
 Adds a meal to the list of meals  
-**Format**: eat m/MEAL s/SERVING_SIZE  
-**Sample Input**: eat m/Chicken Rice s/1  
+**Format**: `eat m/MEAL s/SERVING_SIZE`  
+**Sample Input**: `eat m/Chicken Rice s/1`  
 **Expected Output**: 
 ~~~
 Added 1 serving of Chicken Rice
@@ -96,17 +101,26 @@ Added 1 serving of Chicken Rice
 
 ### 1.2.2 Add a drink: `drink`
 Adds a drink to the list of drinks  
-**Format**: drink d/DRINK s/SERVING_SIZE  
-**Sample Input**: drink d/Lemon Tea s/100  
+**Format**: `drink d/DRINK s/SERVING_SIZE`  
+**Sample Input**: `drink d/Lemon Tea s/100`  
 **Expected Output**: 
 ~~~
 Added 100ml of Lemon Tea
 ~~~
 
+### 1.2.2.1 Add water: `drink d/water`
+Adds water to the list of water  
+**Format**: `drink d/water s/SERVING_SIZE`  
+**Sample Input**: `drink d/water s/100`  
+**Expected Output**:
+~~~
+Added 100ml of water
+~~~
+
 ### 1.2.3 Add exercise: `exercise`
 Adds exercise to the list of exercises done  
-**Format**: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM,
-**Sample Input**: exercise e/swimming d/30 i/HIGH  
+**Format**: `exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM,`
+**Sample Input**: `exercise e/swimming d/30 i/HIGH`  
 **Expected Output**:
 ~~~
 Tracked 30 minutes of swimming
@@ -115,8 +129,8 @@ Tracked 30 minutes of swimming
 ## 1.3 For data retrieval
 ### 1.3.1 Find the information about a certain meal: `infoMeal`
 For the specified meal, display its nutritional content to the user  
-**Format**: infoMeal MEAL  
-**Sample Input**: infoMeal chicken rice  
+**Format**: `infoMeal MEAL`  
+**Sample Input**: `infoMeal chicken rice`  
 **Expected Output**:  
 ~~~
 Meal: chicken rice (per serving)`
@@ -129,9 +143,9 @@ Sugar: 10
 ~~~
 
 ### 1.3.2 Find the information about a certain drink: `infoDrink`
-For the inputed drink, display its nutritional content to the user  
-**Format**: infoDrink DRINK  
-**Sample input**: infoDrink sprite  
+For the inputted drink, display its nutritional content to the user  
+**Format**: `infoDrink DRINK`  
+**Sample input**: `infoDrink sprite`  
 **Expected output**:    
 ~~~
 Drink: sprite (100 ml)
@@ -143,9 +157,9 @@ Fat: 2
 ~~~
 
 ### 1.3.3 Find the information about a certain exercise: `infoExercise`
-For the inputed exercise, display its calories burnt per minute for different intensities to the user  
-**Format**: infoExercise EXERCISE
-**Sample input**: infoExercise swimming  
+For the inputted exercise, display its calories burnt per minute for different intensities to the user   
+**Format**: `infoExercise EXERCISE`   
+**Sample input**: `infoExercise swimming`   
 **Expected output**:    
 ~~~
 Exercise: swimming
@@ -157,7 +171,7 @@ LOW intensity: 5
 
 ### 1.3.4 View daily calories consumed: `calories`
 Display current total calorie intake for the day   
-**Format**: calories    
+**Format**: `calories`    
 **Expected output**: 
 ~~~
 Total calories: 100 cal
@@ -165,7 +179,7 @@ Total calories: 100 cal
 
 ### 1.3.5 View daily carbohydrates consumed: `carbs`
 Display current total carbohydrates intake for the day  
-**Format**: carbs  
+**Format**: `carbs`  
 **Expected output**: 
 ~~~
 Total Carbohydrates: 150 grams
@@ -173,7 +187,7 @@ Total Carbohydrates: 150 grams
 
 ### 1.3.6 View daily proteins consumed: `protein`
 Display current total protein intake for the day  
-**Format**: protein  
+**Format**: `protein`  
 **Expected output**: 
 ~~~
 Total proteins: 100 grams
@@ -181,7 +195,7 @@ Total proteins: 100 grams
 
 ### 1.3.7 View daily fat consumed: `fat`
 Display current total fat intake for the day  
-**Format**: fat  
+**Format**: `fat`  
 **Expected output**: 
 ~~~
 Total fat: 50 grams
@@ -189,7 +203,7 @@ Total fat: 50 grams
 
 ### 1.3.8 View daily sugar consumed: `sugar`
 Display current total sugar intake for the day  
-**Format**: sugar  
+**Format**: `sugar`  
 **Expected output**: 
 ~~~
 Total sugar: 20 grams
@@ -197,7 +211,7 @@ Total sugar: 20 grams
 
 ### 1.3.9 View daily fiber consumed: `fiber`
 Display current total fiber intake (g) for the day  
-**Format**: viewFiber  
+**Format**: `fiber`  
 **Expected output**: 
 ~~~
 Total fiber: 20 grams
@@ -205,7 +219,7 @@ Total fiber: 20 grams
 
 ### 1.3.10 View daily water consumption: `viewWater`
 Display current total water intake (in ml) for the day  
-**Format**: viewWater  
+**Format**: `viewWater`  
 **Expected output**: 
 ~~~
 Total water intake: 0 ml
@@ -213,7 +227,7 @@ Total water intake: 0 ml
 
 ### 1.3.11 View daily calories consumed: `caloriesBurnt`
 Display current total calorie burnt for the day   
-**Format**: caloriesBurnt    
+**Format**: `caloriesBurnt`    
 **Expected output**: 
 ~~~
 Total calories burnt: 70
@@ -221,8 +235,8 @@ Total calories burnt: 70
 
 ## 1.4 For listing arrays
 ### 1.4.1 List all meal intake: `listMeals`
-List all the meals user input today
-**Format**: listMeals   
+Display all the meals user input today   
+**Format**: `listMeals`   
 **Expected output**:
 ~~~
 here's what you have eaten today
@@ -230,8 +244,8 @@ here's what you have eaten today
 ~~~
 
 ### 1.4.2 List all drink intake: `listDrinks`
-List all the drinks user input today  
-**Format**: listDrinks  
+Display all the drinks user input today  
+**Format**: `listDrinks`  
 **Expected output**:  
 ~~~
 here's what you have drank today
@@ -240,18 +254,18 @@ here's what you have drank today
 Total water intake today: 0 ml
 ~~~
 
-### 1.4.3 List all drink intake: `listExercises`
-List all the exercises user tracked today  
-**Format**: listDrinks  
-**Expected output**:  
-here's the exercises you've done today
+### 1.4.3 List all exercises done: `listExercises`
+Display all the exercises user tracked today  
+**Format**: `listExercises`  
+**Expected output**: 
 ~~~
+here's the exercises you've done today
 1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
 ~~~
 
-### 1.4.4 List all drink intake: `listEverything`
-List all the meals, drinks and exercises user tracked today  
-**Format**: listDrinks  
+### 1.4.4 List everything inputted: `listEverything`
+Display all the meals, drinks and exercises user tracked today  
+**Format**: `listEverything`  
 **Expected output**:  
 ~~~
 here's what you have consumed today
@@ -264,9 +278,9 @@ here's the exercises you've done today
 1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
 ~~~
 
-### 1.4.5 List today's meal intake: `listMealsAll`
-List all the meals user input
-**Format**: listMealsToday   
+### 1.4.5 List entire app's lifecycle meals intake: `listMealsAll`
+Display all the meals user inputted for the entire app lifecycle   
+**Format**: `listMealsAll`   
 **Expected output**:   
 ~~~
 here's what you have eaten so far
@@ -274,9 +288,9 @@ here's what you have eaten so far
 2. chicken rice (serving size: 1) | date: 01-04-2024
 ~~~
 
-### 1.4.6 List today's drink intake: `listDrinksAll`
-List all the drinks user inputted today  
-**Format**: listDrinksToday  
+### 1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`
+Display all the drinks user inputted for the entire app lifecycle  
+**Format**: `listDrinksAll`  
 **Expected output**:  
 ~~~
 here's what you have drank so far
@@ -286,9 +300,9 @@ here's what you have drank so far
 Total water intake today: 100 ml
 ~~~
 
-### 1.4.7 List entire food intake: `listExercisesAll`
-List all the drinks and meals inputted so far  
-**Format**: listEverything  
+### 1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`
+Display all the exercises inputted for the entire app lifecycle  
+**Format**: `listExercisesAll`  
 **Expected output**:  
 ~~~
 here's the exercises you've done so far
@@ -297,9 +311,9 @@ here's the exercises you've done so far
 3. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
 ~~~
 
-### 1.4.8 List entire food intake for today: `listEverythingAll`
-List all the drinks and meals inputted today  
-**Format**: listEverythingToday  
+### 1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`
+Display all the drinks, meals, and exercises inputted for the entire app lifecycle  
+**Format**: `listEverythingAll`  
 **Expected output**:  
 ~~~
 here's what you have consumed so far
