@@ -1,15 +1,10 @@
 package seedu.fitnus.user;
 
-import seedu.fitnus.Date;
-import seedu.fitnus.Drink;
-import seedu.fitnus.Exercise;
-import seedu.fitnus.ExerciseIntensity;
-import seedu.fitnus.Meal;
+import seedu.fitnus.*;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.parser.Parser;
-import seedu.fitnus.Water;
 import seedu.fitnus.storage.Storage;
 
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -26,16 +21,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class User {
+    public static final int RECOMMEND_WATER_INTAKE = 2600;
+    public static final int RECOMMEND_CALORIE_INTAKE = 2200;
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
     protected static ArrayList<Exercise> exerciseList;
     private static String currentDate;
     private static String currentDateSpecific;
 
-
-
-    final static int RECOMMEND_WATER_INTAKE = 2600;
-    final static int RECOMMEND_CALORIE_INTAKE = 2200;
+    private static CSVWriter csvWriter = new CSVWriter();
 
     public User(Storage mealStorage, Storage drinkStorage, Storage mealNutrientStorage, Storage drinkNutrientStorage) {
         mealList = new ArrayList<>();
@@ -165,6 +159,7 @@ public class User {
         assert !mealList.isEmpty(): "failed to add meal";
 
         System.out.println("Added " + servingSize + " serving of " + mealName);
+        csvWriter.writeIntoFile(mealName, "FOOD");
     }
 
     public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,

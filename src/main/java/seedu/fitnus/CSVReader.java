@@ -13,7 +13,6 @@ public class CSVReader {
         String mealCsvFile = "./tp/db//Meal_db.csv";
         String drinkCSVFile = "./db/Drink_db.csv";
         CSVReader.read(mealCsvFile);
-       //  readMealInfo(mealCsvFile, "Pepper lunch");
     }
     public static void read(String filename) {
         try{
