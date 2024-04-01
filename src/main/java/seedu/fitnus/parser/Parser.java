@@ -201,9 +201,12 @@ public class Parser {
         System.out.println("- View daily fiber consumed: fiber");
         System.out.println("- View daily water consumption: viewWater");
         System.out.println("- View daily calories burnt: caloriesBurnt");
-        System.out.println("- List meal intake: listMeals");
-        System.out.println("- List drink intake: listDrinks");
-        System.out.println("- List exercises done: listExercises");
+        System.out.println("- List today's meal intake: listMeals");
+        System.out.println("- List today's drink intake: listDrinks");
+        System.out.println("- List today's exercises done: listExercises");
+        System.out.println("- List all meal intake: listMealsAll");
+        System.out.println("- List all drink intake: listDrinksAll");
+        System.out.println("- List all exercises done: listExercisesAll");
         System.out.println("- List entire food intake for the day: listEverything");
         System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
@@ -262,7 +265,7 @@ public class Parser {
         if (command.length() < mealIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoMealDescription = command.substring(mealIndex).trim();
+        String infoMealDescription = command.substring(mealIndex).trim().toLowerCase();
 
         if (!Meal.getNutrientDetails().containsKey(infoMealDescription)) {
             throw new UnregisteredMealException();
@@ -276,7 +279,7 @@ public class Parser {
         if (command.length() < exerciseIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoExerciseDescription = command.substring(exerciseIndex).trim();
+        String infoExerciseDescription = command.substring(exerciseIndex).trim().toLowerCase();
         if (!Exercise.getExerciseDetails().containsKey(infoExerciseDescription)) {
             throw new UnregisteredExerciseException();
         }
@@ -288,7 +291,7 @@ public class Parser {
         if (command.length() < drinkIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoDrinkDescription = command.substring(drinkIndex).trim();
+        String infoDrinkDescription = command.substring(drinkIndex).trim().toLowerCase();
         if (!Drink.getNutrientDetails().containsKey(infoDrinkDescription)) {
             throw new UnregisteredDrinkException();
         }
