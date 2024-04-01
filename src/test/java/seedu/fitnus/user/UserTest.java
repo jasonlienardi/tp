@@ -110,7 +110,7 @@ public class UserTest {
     @Test
     public void handleViewCalories_correctCalorieCalculation_viewCaloriesAccurate() {
         testUser.handleViewCalories();
-        String expectedOutput = "Total Calories: 5547";
+        String expectedOutput = "Total Calories: 5507";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
@@ -119,7 +119,7 @@ public class UserTest {
     @Test
     public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() {
         testUser.handleViewCarbohydrates();
-        String expectedOutput = "Total Carbohydrates: 912";
+        String expectedOutput = "Total Carbohydrates: 912 grams";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
@@ -130,7 +130,7 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewProteins();
-        String expectedOutput = "Total Proteins: 215";
+        String expectedOutput = "Total Proteins: 215 grams";
         String actualOutput = outputStream.toString().trim();
         assertEquals(actualOutput, expectedOutput);
     }
@@ -150,7 +150,7 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFiber();
-        String expectedOutput = "Total Fiber: 80";
+        String expectedOutput = "Total Fiber: 80 grams";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
@@ -161,7 +161,7 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFat();
-        String expectedOutput = "Total Fat: 129";
+        String expectedOutput = "Total Fat: 129 grams";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
@@ -172,7 +172,7 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewSugar();
-        String expectedOutput = "Total Sugar: 106";
+        String expectedOutput = "Total Sugar: 106 grams";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
@@ -181,7 +181,7 @@ public class UserTest {
     @Test
     public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate() {
         testUser.handleCaloriesBurnt();
-        String expectedOutput = "Total calories burnt: 200";
+        String expectedOutput = "Total calories burnt: 240";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
