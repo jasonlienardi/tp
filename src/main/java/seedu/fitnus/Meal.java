@@ -18,7 +18,6 @@ public class Meal {
     private int fiber;
     private int sugar;
 
-    // Constructor with only serving size and meal name
     public Meal(String name, int servingSize, String currentDate) {
         assert name != null : "Name must not be null";
         this.name = name;
@@ -28,14 +27,12 @@ public class Meal {
         this.dateAdded = currentDate;
     }
 
-    // Add nutrient details to the static HashMap
     static {
         nutrientDetails.put("chicken rice", new int[]{400, 50, 30, 20, 10, 5});
         nutrientDetails.put("fried rice", new int[]{500, 60, 25, 15, 20, 3});
         nutrientDetails.put("pizza", new int[]{600, 70, 20, 25, 30, 2});
     }
 
-    // Method to set nutrient values based on meal name
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * servingSize;
@@ -46,7 +43,6 @@ public class Meal {
         sugar = nutrients[5] * servingSize;
     }
 
-    // Getter methods
     public String getName() {
         return name;
     }
@@ -79,7 +75,6 @@ public class Meal {
         return servingSize;
     }
 
-    // Method to print all meal info
     public static void handleInfoMeal(String command) throws UnregisteredMealException, IncompleteInfoException {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
@@ -92,7 +87,6 @@ public class Meal {
         System.out.println("Sugar: " + nutrients[5]);
     }
 
-    // Print all the available meals registered in the database
     public static void printAvailableMeals() {
         System.out.print("Available meals: ");
         for (String meal : nutrientDetails.keySet()) {

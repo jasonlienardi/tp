@@ -14,7 +14,6 @@ public class Exercise {
     private int caloriesBurnt;
     private String dateAdded;
 
-    // Constructor with only duration and exercise name
     public Exercise(String name, int duration, ExerciseIntensity intensity, String currentDate)
             throws UnregisteredExerciseException {
         assert name != null : "Name must not be null";
@@ -27,14 +26,12 @@ public class Exercise {
         this.dateAdded = currentDate;
     }
 
-    // Add exercise details to the static HashMap
     static {
         exerciseDetails.put("running", new int[]{8, 5, 3});
         exerciseDetails.put("cycling", new int[]{6, 4, 2});
         exerciseDetails.put("swimming", new int[]{10, 7, 4});
     }
 
-    // Method to set exercise details based on exercise name
     private void setCaloriesBurnt() throws UnregisteredExerciseException {
         int[] details = exerciseDetails.get(name);
         if (details == null) {
@@ -48,7 +45,6 @@ public class Exercise {
                 intensity == ExerciseIntensity.LOW;
     }
 
-    // Getter methods
     public String getName() {
         return name;
     }
@@ -65,17 +61,14 @@ public class Exercise {
         return dateAdded;
     }
 
-    // Setter method for name
     public void setName(String name) {
         this.name = name;
     }
 
-    // Setter method for duration
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    // Setter method for intensity
     public void setIntensity(ExerciseIntensity intensity) {
         this.intensity = intensity;
     }
@@ -84,7 +77,6 @@ public class Exercise {
         return caloriesBurnt;
     }
 
-    // Method to print exercise details
     public static void handleInfoExercise(String command) throws UnregisteredExerciseException,
             IncompleteInfoException {
         String name = Parser.parseInfoExercise(command);
@@ -99,7 +91,6 @@ public class Exercise {
         System.out.println("LOW intensity: " + details[2]);
     }
 
-    // Print all available exercises registered in the database
     public static void printAvailableExercises() {
         System.out.print("Available exercises: ");
         for (String exercise : exerciseDetails.keySet()) {

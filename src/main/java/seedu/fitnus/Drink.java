@@ -26,7 +26,6 @@ public class Drink  {
         this.dateAdded = currentDate;
     }
 
-    // Add nutrient details per 100 milliliter to the static HashMap
     static {
         nutrientDetails.put("water", new int[]{0, 0, 0, 0, 0});
         nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2});

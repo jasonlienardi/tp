@@ -263,7 +263,7 @@ public class User {
     }
 
 
-    public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
+    public void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
             NegativeValueException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
@@ -324,7 +324,7 @@ public class User {
         for (Drink drink: drinkList) {
             carbohydratesCount += drink.getCarbs();
         }
-        System.out.println("Total Carbohydrates: " + carbohydratesCount);
+        System.out.println("Total Carbohydrates: " + carbohydratesCount + " grams");
     }
 
     public void handleViewProteins() {
@@ -335,7 +335,7 @@ public class User {
         for (Drink drink: drinkList) {
             proteinCount += drink.getProtein();
         }
-        System.out.println("Total Proteins: " + proteinCount);
+        System.out.println("Total Proteins: " + proteinCount + " grams");
     }
 
     public void handleViewWaterIntake() {
@@ -351,7 +351,7 @@ public class User {
         for (Meal meal: mealList) {
             fibreCount += meal.getFiber();
         }
-        System.out.println("Total Fiber: " + fibreCount);
+        System.out.println("Total Fiber: " + fibreCount + " grams");
     }
 
     public void handleViewFat() {
@@ -362,7 +362,7 @@ public class User {
         for (Drink drink: drinkList) {
             fatCount += drink.getFat();
         }
-        System.out.println("Total Fat: " + fatCount);
+        System.out.println("Total Fat: " + fatCount + " grams");
     }
 
     public void handleViewSugar() {
@@ -373,7 +373,7 @@ public class User {
         for (Drink drink: drinkList) {
             sugarCount += drink.getSugar();
         }
-        System.out.println("Total Sugar: " + sugarCount);
+        System.out.println("Total Sugar: " + sugarCount + " grams");
     }
 
     public void printMealList(int startIndex, ArrayList<Meal> mealListToPrint) {
@@ -616,7 +616,7 @@ public class User {
         handleListExercisesDate(command);
     }
 
-    public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
+    public void handleEditMealServingSize(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
@@ -631,7 +631,7 @@ public class User {
         System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
     }
 
-    public static void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
+    public void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
         Parser.parseEditDrink(command);
 
@@ -646,7 +646,7 @@ public class User {
         System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
     }
 
-    public static void handleEditWaterIntake(String command) throws InvalidListIndexException,
+    public void handleEditWaterIntake(String command) throws InvalidListIndexException,
             NegativeValueException, IncompleteEditException {
         Parser.parseEditWater(command);
         Date currentDate = new Date();
