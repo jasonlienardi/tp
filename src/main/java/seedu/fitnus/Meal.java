@@ -1,13 +1,16 @@
 package seedu.fitnus;
 
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.parser.Parser;
 
 import java.util.HashMap;
 
 public class Meal {
-    private static HashMap<String, int[]> nutrientDetails = new HashMap<>();
+    public static HashMap<String, int[]> nutrientDetails = new HashMap<>();
     private String name;
     private int servingSize;
+    private String dateAdded;
     private int calories;
     private int carbs;
     private int protein;
@@ -16,12 +19,13 @@ public class Meal {
     private int sugar;
 
     // Constructor with only serving size and meal name
-    public Meal(String name, int servingSize) {
+    public Meal(String name, int servingSize, String currentDate) {
         assert name != null : "Name must not be null";
         this.name = name;
         assert servingSize > 0 : "Serving size must be greater than 0";
         this.servingSize = servingSize;
         setNutrientValues(name); // Assign nutrient values based on the name
+        this.dateAdded = currentDate;
     }
 
     // Add nutrient details to the static HashMap
@@ -76,7 +80,7 @@ public class Meal {
     }
 
     // Method to print all meal info
-    public static void handleInfoMeal(String command) throws UnregisteredMealException {
+    public static void handleInfoMeal(String command) throws UnregisteredMealException, IncompleteInfoException {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name + " (per serving)");
@@ -103,4 +107,7 @@ public class Meal {
         return nutrientDetails;
     }
 
+    public String getDate() {
+        return dateAdded;
+    }
 }

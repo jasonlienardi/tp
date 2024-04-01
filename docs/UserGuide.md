@@ -49,7 +49,7 @@ Shows a list of all possible command inputs.
 **Sample Input**: help  
 **Expected Output**:  
 here's all the valid commands i recognise:
-- Add a meal eaten: ate m/MEAL s/SERVING_SIZE
+- Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/SERVING_SIZE
 - Add water: water s/SERVING_SIZE
 - Find the information about a certain meal: infoMeal MEAL
@@ -72,10 +72,10 @@ here's all the valid commands i recognise:
 - Exit the app: exit
 
 ### 1.2 For user to add data
-### 1.2.1 Add a meal eaten: `ate`
+### 1.2.1 Add a meal eaten: `eat`
 Adds a meal to the list of meals  
-**Format**: ate m/MEAL s/SERVING_SIZE  
-**Sample Input**: ate m/Chicken Rice s/1  
+**Format**: eat m/MEAL s/SERVING_SIZE  
+**Sample Input**: eat m/Chicken Rice s/1  
 **Expected Output**: Added 1 serving of Chicken Rice
 
 ### 1.2.2 Add a drink: `drink`
@@ -151,24 +151,48 @@ Display current total water intake (in ml) for the day
 **Expected output**: Total water intake: 0 ml
 
 ## 1.4 For listing arrays
-### 1.4.1 List meal intake: `listMeals`
-List all the meals user inputted today  
+### 1.4.1 List all meal intake: `listMeals`
+List all the meals user inputted so far  
 **Format**: listMeals   
+**Expected output**:   
+here's what you have eaten so far  
+1.pizza (serving size: 1)
+
+### 1.4.2 List today's meal intake: `listMealsToday`
+List all the meals user inputted today  
+**Format**: listMealsToday   
 **Expected output**:   
 here's what you have eaten today  
 1.pizza (serving size: 1)
 
-### 1.4.2 List drink intake: `listDrinks`
-List all the drinks user inputted today  
+### 1.4.3 List all drink intake: `listDrinks`
+List all the drinks user inputted so far  
 **Format**: listDrinks  
+**Expected output**:  
+here's what you have drank so far  
+1.sprite (serving size: 1)  
+Total water intake: 0 ml
+
+### 1.4.4 List today's drink intake: `listDrinksToday`
+List all the drinks user inputted today  
+**Format**: listDrinksToday  
 **Expected output**:  
 here's what you have drank today  
 1.sprite (serving size: 1)  
 Total water intake: 0 ml
 
-### 1.4.3 List entire food intake for the day: `listEverything`
-List all the drinks and meals inputted today  
+### 1.4.5 List entire food intake: `listEverything`
+List all the drinks and meals inputted so far  
 **Format**: listEverything  
+**Expected output**:  
+here's what you have consumed so far  
+1.pizza (serving size: 1)  
+2.sprite (serving size: 1)  
+Total water intake: 0 ml
+
+### 1.4.6 List entire food intake for today: `listEverythingToday`
+List all the drinks and meals inputted today  
+**Format**: listEverythingToday  
 **Expected output**:  
 here's what you have consumed today  
 1.pizza (serving size: 1)  

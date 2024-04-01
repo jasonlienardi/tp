@@ -1,17 +1,12 @@
 package seedu.fitnus.user;
 
-import org.junit.jupiter.api.Test;
+import seedu.fitnus.Date;
 import seedu.fitnus.Drink;
+import seedu.fitnus.Exercise;
+import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
-import seedu.fitnus.Parser;
+
 import seedu.fitnus.Water;
-<<<<<<< Updated upstream
-import seedu.fitnus.exception.IncompleteMealException;
-import seedu.fitnus.exception.IncompleteWaterException;
-import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.IncompleteDrinkException;
-import seedu.fitnus.exception.UnregisteredDrinkException;
-=======
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -24,60 +19,84 @@ import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.storage.Storage;
->>>>>>> Stashed changes
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-<<<<<<< Updated upstream
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-=======
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
->>>>>>> Stashed changes
 
 public class UserTest {
-    ArrayList<Meal> testMealList = new ArrayList<>();
-    ArrayList<Drink> testDrinkList = new ArrayList<>();
+    User testUser;
+    String todayDate;
+    ArrayList<Meal> testMealList;
+    ArrayList<Drink> testDrinkList;
+    ArrayList<Water> testWaterList;
+    ArrayList<Exercise> testExerciseList;
+    private Storage testMealStorage;
+    private Storage testDrinkStorage;
+    private Storage testExerciseStorage;
+    private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
+    private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
+    private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
 
-    @Test
-    public void sampleUser() {
-        assertTrue(true);
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() throws UnregisteredExerciseException {
+        testMealStorage = new Storage("./src/test/resources", "src/test/resources/MealList.txt");
+        testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
+        testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
+
+        testUser = new User(testMealStorage, testDrinkStorage, testExerciseStorage, mealNutrientStorage,
+                drinkNutrientStorage, exerciseCaloriesStorage);
+
+        testMealList = testUser.mealList;
+        testDrinkList = testUser.drinkList;
+        testExerciseList = testUser.exerciseList;
+        testWaterList = testUser.waterList;
+
+        Date currentDate = new Date();
+        todayDate = currentDate.getDate();
+
+        testMealList.add(new Meal("kaya toast", 4, todayDate));
+        testMealList.add(new Meal("laksa", 10, todayDate));
+        testDrinkList.add(new Drink("kopi", 100, todayDate));
+        testWaterList.add(new Water( 100, todayDate));
+        testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH, "30-01-2024"));
+
+        System.setOut(new PrintStream(outputStream));
     }
 
     @Test
-    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException {
-        Meal newMeal = new Meal("pizza", 3);
-        testMealList.add(newMeal);
+    public void handleMeal_validInputs_correctlyAddMeal() throws IncompleteMealException, UnregisteredMealException,
+            NegativeValueException {
+        String command = "eat m/kaya toast s/3";
+        testUser.handleMeal(command);
 
-        assertEquals("pizza", testMealList.get(0).getName());
-        assertEquals(3, testMealList.get(0).getServingSize());
+        assertFalse(testMealList.isEmpty());
+
+        assertEquals("kaya toast", testMealList.get(2).getName());
+        assertEquals(3, testMealList.get(2).getServingSize());
     }
 
     @Test
-    public void handleWater_unknownServingSize_addWaterFailed() throws IncompleteWaterException {
-        try {
-            Parser.parseWater("water 1");
-            new Water(Parser.waterSize);
-        } catch (IncompleteWaterException e) {
-            return;
-        }
+    public void handleDrink_validInputs_correctlyAddDrink() throws IncompleteDrinkException,
+            UnregisteredDrinkException, NegativeValueException {
+        String command = "drink d/kopi s/500";
+        testUser.handleDrink(command);
 
-        String error = "Incomplete command, the format must be [water s/SERVING_SIZE].";
-        fail(error);
+        assertEquals("kopi", testDrinkList.get(1).getName());
+        assertEquals(500, testDrinkList.get(1).getDrinkVolumeSize());
     }
 
-    @Test
-<<<<<<< Updated upstream
-    public void handleDrinks_validInputs_correctlyAddMeal() throws IncompleteDrinkException,
-            UnregisteredDrinkException {
-        Drink newDrink = new Drink("sprite", 100);
-        testDrinkList.add(newDrink);
 
-        assertEquals("sprite", testDrinkList.get(0).getName());
-        assertEquals(100, testDrinkList.get(0).getDrinkVolumeSize());
-=======
+    @Test
     public void handleExercise_validInputs_correctlyAddExercise() throws IncompleteExerciseException,
             UnregisteredExerciseException, NegativeValueException {
         String command = "exercise e/running d/30 i/HIGH";
@@ -113,7 +132,6 @@ public class UserTest {
         testUser.handleViewProteins();
         String expectedOutput = "Total Proteins: 215";
         String actualOutput = outputStream.toString().trim();
-
         assertEquals(actualOutput, expectedOutput);
     }
 
@@ -361,6 +379,5 @@ public class UserTest {
         testUser.handleClear();
         assertEquals(0, testMealList.size());
         assertEquals(0, testDrinkList.size());
->>>>>>> Stashed changes
     }
 }
