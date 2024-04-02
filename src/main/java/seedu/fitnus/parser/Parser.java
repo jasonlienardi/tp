@@ -183,7 +183,8 @@ public class Parser {
         } catch (IncompleteMealException e) {
             System.out.println("Incomplete/Incorrect command, the format MUST be [eat m/MEAL s/SERVING_SIZE].");
         } catch (IncompleteExerciseException e) {
-            System.out.println("Incomplete/Incorrect command, the format MUST be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
+            System.out.println("Incomplete/Incorrect command, " +
+                    "the format MUST be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
                     + " > DURATION should be in minutes and INTENSITY can only be HIGH/MEDIUM/LOW.");
         } catch (UnregisteredDrinkException e) {
             System.out.println("Sorry that drink is not registered in the database.Please check the spelling and " +
