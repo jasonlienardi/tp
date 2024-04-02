@@ -9,4 +9,10 @@ public class IntegerValidation {
             throw new NegativeValueException();
         }
     }
+
+    public static void checkIntegerGreaterOrEqualThanZero (int value) throws NegativeValueException {
+        if (value < 0) {
+            throw new NegativeValueException();
+        }
+    }
 }

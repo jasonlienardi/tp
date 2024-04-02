@@ -430,12 +430,12 @@ public class Parser {
             mealNutrientFiber = Integer.parseInt(arrayOfMealNutrient[5]);
             mealNutrientSugar = Integer.parseInt(arrayOfMealNutrient[6]);
 
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientCalories);
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientCarbs);
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientProtein);
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientFat);
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientFiber);
-            IntegerValidation.checkIntegerGreaterThanZero(mealNutrientSugar);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientCalories);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientCarbs);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientProtein);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientFat);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientFiber);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientSugar);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid numeric format, please input an integer");
         }
@@ -458,11 +458,11 @@ public class Parser {
             drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
             drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
 
-            IntegerValidation.checkIntegerGreaterThanZero(drinkNutrientCalories);
-            IntegerValidation.checkIntegerGreaterThanZero(drinkNutrientCarbs);
-            IntegerValidation.checkIntegerGreaterThanZero(drinkNutrientSugar);
-            IntegerValidation.checkIntegerGreaterThanZero(drinkNutrientProtein);
-            IntegerValidation.checkIntegerGreaterThanZero(drinkNutrientFat);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientCalories);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientCarbs);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientSugar);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientProtein);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientFat);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid numeric format, please input an integer");
         }
