@@ -5,7 +5,12 @@ carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
-Note: To use the app please download the JAR file and 'db' folder. Place them into an empty folder and run the JAR file.
+## Setup 
+To use the app please follow the setup procedures below:
+1. Download the JAR file and 'db' folder. 
+2. Place them into an empty folder. 
+3. Navigate to the folder you just created.
+4. Run the JAR file.
 
 ## Table of Contents
 <!-- TOC -->
