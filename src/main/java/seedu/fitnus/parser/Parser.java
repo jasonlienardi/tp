@@ -220,7 +220,7 @@ public class Parser {
         System.out.println("- List all meal intake: listMealsAll");
         System.out.println("- List all drink intake: listDrinksAll");
         System.out.println("- List all exercises done: listExercisesAll");
-        System.out.println("- List all entire food intake and exercises: listEverythingAll");
+        System.out.println("- List all food intake and exercises: listEverythingAll");
         System.out.println("- List meal intake for certain date: listMeals d/dd-MM-yyyy");
         System.out.println("- List drink intake for certain date: listDrinks d/dd-MM-yyyy");
         System.out.println("- List exercises done for certain date: listExercises d/dd-MM-yyyy");
