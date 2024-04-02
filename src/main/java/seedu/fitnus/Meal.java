@@ -27,12 +27,6 @@ public class Meal {
         this.dateAdded = currentDate;
     }
 
-    static {
-        nutrientDetails.put("chicken rice", new int[]{400, 50, 30, 20, 10, 5});
-        nutrientDetails.put("fried rice", new int[]{500, 60, 25, 15, 20, 3});
-        nutrientDetails.put("pizza", new int[]{600, 70, 20, 25, 30, 2});
-    }
-
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * servingSize;

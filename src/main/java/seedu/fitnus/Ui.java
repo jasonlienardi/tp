@@ -40,6 +40,8 @@ public class Ui {
         user.saveMeal(mealStorage);
         user.saveDrink(drinkStorage);
         user.saveExercise(exerciseStorage);
+        user.saveMealNutrients(mealNutrientStorage);
+        user.saveDrinkNutrients(drinkNutrientStorage);
     }
 
     public static void showLine() {
