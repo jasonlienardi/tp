@@ -7,8 +7,8 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
 
 ## Setup 
 To use the app please follow the setup procedures below:
-1. Download the JAR file and 'db' folder. 
-2. Place them into an empty folder. 
+1. Download the JAR file. 
+2. Place it into an empty folder. 
 3. Navigate to the folder you just created.
 4. Run the JAR file.
 
@@ -16,6 +16,7 @@ To use the app please follow the setup procedures below:
 <!-- TOC -->
 * [User Guide: FitNUS](#user-guide-fitnus)
   * [Project Introduction](#project-introduction)
+  * [Setup](#setup-)
   * [Table of Contents](#table-of-contents)
   * [1) Features List](#1-features-list)
     * [1.1 Information for users](#11-information-for-users)
@@ -30,6 +31,7 @@ To use the app please follow the setup procedures below:
     * [1.2.3 Add exercise: `exercise`](#123-add-exercise-exercise)
     * [1.2.4 Add new meal to available meals: `newMeal`](#124-add-new-meal-to-available-meals-newmeal)
     * [1.2.4 Add new meal to available meals: `newDrink`](#124-add-new-meal-to-available-meals-newdrink)
+    * [1.2.5 Add new exercise to available exercises: `newExercise`](#125-add-new-exercise-to-available-exercises-newexercise)
   * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
@@ -82,6 +84,8 @@ here's all the valid commands i recognise:
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
 - Add a new meal to available meals: newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR
 - Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT
+- Add a new exercise to available exercises: newExercise CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,
+CALORIES_BURNT_LOW"
 - View all meals that you can input: allMeals
 - View all drinks that you can input: allDrinks
 - View all exercises that you can input: allExercises
@@ -264,6 +268,15 @@ Adds a new drink to available drinks
 **Expected Output**:
 ~~~
 Added coke to available drinks
+~~~
+
+### 1.2.5 Add new exercise to available exercises: `newExercise`
+Adds a new exercise to available exercises  
+**Format**: `newExercise CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW`
+**Sample Input**: `newExercise badminton,20,10,5`  
+**Expected Output**:
+~~~
+Added badminton to available exercises
 ~~~
  
 ## 1.3 For data retrieval

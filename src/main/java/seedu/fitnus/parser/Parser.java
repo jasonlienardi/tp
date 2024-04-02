@@ -109,7 +109,9 @@ public class Parser {
                 user.handleAddNewMealNutrient(command);
             } else if (command.startsWith("newDrink")) {
                 user.handleAddNewDrinkNutrient(command);
-            } else if (command.equals("allMeals")) {
+            } else if (command.startsWith("newExercise")) {
+                user.handleAddNewExerciseCalories(command);
+            }else if (command.equals("allMeals")) {
                 Meal.listAvailableMeals();
             } else if (command.equals("allDrinks")) {
                 Drink.listAvailableDrinks();
@@ -271,6 +273,8 @@ public class Parser {
                 "CARBS,PROTEIN,FAT,FIBER,SUGAR");
         System.out.println("- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES," +
                 "CARBS,SUGAR,PROTEIN,FAT");
+        System.out.println("- Add a new exercise to available exercises: newExercise CALORIES_BURNT_HIGH," +
+                "CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
@@ -600,13 +604,27 @@ public class Parser {
      *
      * @param data The calorie data string to be parsed.
      */
-    public static void parseExerciseCalories(String data) {
+    public static void parseExerciseCalories(String data) throws IllegalArgumentException, NegativeValueException {
         String delimiter = ",";
         String[] arrayOfExerciseCalories = data.split(delimiter);
-        exerciseCaloriesDescription = arrayOfExerciseCalories[0].trim().toLowerCase();
-        exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
-        exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
-        exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
+
+        if (arrayOfExerciseCalories.length != 4) {
+            throw new IllegalArgumentException("Invalid number of arguments provided. Expected 4, got "
+                    + arrayOfExerciseCalories.length);
+        }
+
+        try {
+            exerciseCaloriesDescription = arrayOfExerciseCalories[0].trim().toLowerCase();
+            exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
+            exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
+            exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
+
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesHigh);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesMedium);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesLow);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid numeric format, please input an integer");
+        }
     }
 
     /**
@@ -633,5 +651,10 @@ public class Parser {
     public static void parseNewDrink(String command) throws NegativeValueException {
         String drinkNutrients = command.substring(9).trim();
         parseDrinkNutrient(drinkNutrients);
+    }
+
+    public static void parseNewExercise(String command) throws NegativeValueException{
+        String exerciseDetails = command.substring(12).trim();
+        parseExerciseCalories(exerciseDetails);
     }
 }
