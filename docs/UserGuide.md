@@ -9,25 +9,30 @@ Users are able to track the meals and drinks they have in a day.
 <!-- TOC -->
 [1) Features List](#1-features-list)
 * [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands:** `help`](#111-viewing-all-commands-help-)
+    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
 * [1.2 For user to add data](#12-for-user-to-add-data)
-    * [1.2.1 Add a meal eaten: `ate`](#121-add-a-meal-eaten-ate)
+    * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
     * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
-    * [1.2.3 Add water: `water`](#123-add-water-water)
+      * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
 * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
-    * [1.3.3 View daily calories consumed: `calories`](#133-view-daily-calories-consumed-calories)
-    * [1.3.4 View daily carbohydrates consumed: `carbs`](#134-view-daily-carbohydrates-consumed-carbs)
-    * [1.3.5 View daily proteins consumed: `protein`](#135-view-daily-proteins-consumed-protein)
-    * [1.3.6 View daily fat consumed: `fat`](#136-view-daily-fat-consumed-fat)
-    * [1.3.7 View daily sugar consumed: `sugar`](#137-view-daily-sugar-consumed-sugar)
-    * [1.3.8 View daily fiber consumed: `fiber`](#138-view-daily-fiber-consumed-fiber)
-    * [1.3.9 View daily water consumption: `viewWater`](#139-view-daily-water-consumption-viewwater)
+    * [1.3.3 View daily calories consumed: `calories`](#133-find-the-information-about-a-certain-exercise-infoexercise)
+    * [1.3.4 View daily carbohydrates consumed: `carbs`](#134-view-daily-calories-consumed-calories)
+    * [1.3.5 View daily proteins consumed: `protein`](#135-view-daily-carbohydrates-consumed-carbs)
+    * [1.3.6 View daily fat consumed: `fat`](#136-view-daily-proteins-consumed-protein)
+    * [1.3.7 View daily sugar consumed: `sugar`](#137-view-daily-fat-consumed-fat)
+    * [1.3.8 View daily fiber consumed: `fiber`](#138-view-daily-sugar-consumed-sugar)
+    * [1.3.9 View daily water consumption: `viewWater`](#139-view-daily-fiber-consumed-fiber)
 * [1.4 For listing arrays](#14-for-listing-arrays)
-    * [1.4.1 List meal intake: `listMeals`](#141-list-meal-intake-listmeals)
-    * [1.4.2 List drink intake: `listDrinks`](#142-list-drink-intake-listdrinks)
-    * [1.4.3 List entire food intake for the day: `listEverything`](#143-list-entire-food-intake-for-the-day-listeverything)
+    * [1.4.1 List all meal intake: `listMeals`](#141-list-all-meal-intake-listmeals)
+    * [1.4.2 List all drink intake: `listDrinks`](#142-list-all-drink-intake-listdrinks)
+    * [1.4.3 List all exercises done: `listExercises`](#143-list-all-exercises-done-listexercises)
+    * [1.4.4 List everything inputted: `listEverything`](#144-list-everything-inputted-listeverything)
+    * [1.4.5 List entire app's lifecycle meals intake: `listMealsAll`](#145-list-entire-apps-lifecycle-meals-intake-listmealsall)
+    * [1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`](#146-list-entire-apps-lifecycle-drinks-intake-listdrinksall)
+    * [1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`](#147-list-entire-apps-lifecycle-exercises-done-listexercisesall)
+    * [1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`](#148-list-everything-inputted-for-the-entire-apps-lifecycle-listeverythingall)
 * [1.5 For editing existing data](#15-for-editing-existing-data)
     * [1.5.1 Edit an existing meal after inserted: `editMeal`](#151-edit-an-existing-meal-after-inserted-editmeal)
     * [1.5.2 Edit an existing drink after inserted: `editDrink`](#152-edit-an-existing-drink-after-inserted-editdrink)
@@ -48,12 +53,13 @@ Shows a list of all possible command inputs.
 **Format**: help  
 **Sample Input**: help  
 **Expected Output**:  
-here's all the valid commands i recognise:
+here's all the valid commands I recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
-- Add a drink: drink d/DRINK s/SERVING_SIZE
-- Add water: water s/SERVING_SIZE
+- Add a drink: drink d/DRINK s/VOLUME(ML)
+- Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
 - Find the information about a certain meal: infoMeal MEAL
 - Find the information about a certain drink: infoDrink DRINK
+- Find the information about a certain exercise: infoExercise EXERCISE
 - View daily calories consumed: calories
 - View daily carbohydrates consumed: carbs
 - View daily proteins consumed: protein
@@ -61,143 +67,268 @@ here's all the valid commands i recognise:
 - View daily sugar consumed: sugar
 - View daily fiber consumed: fiber
 - View daily water consumption: viewWater
-- List meal intake: listMeals
-- List drink intake: listDrinks
-- List entire food intake for the day: listEverything
+- View daily calories burnt: caloriesBurnt
+- List today's meal intake: listMeals
+- List today's drink intake: listDrinks
+- List today's exercises done: listExercises
+- List today's entire food intake and exercises: listEverything
+- List all meal intake: listMealsAll
+- List all drink intake: listDrinksAll
+- List all exercises done: listExercisesAll
+- List all entire food intake and exercises: listEverythingAll
+- List meal intake for certain date: listMeals d/dd-MM-yyyy
+- List drink intake for certain date: listDrinks d/dd-MM-yyyy
+- List exercises done for certain date: listExercises d/dd-MM-yyyy
+- List entire food intake and exercises for certain date: listEverything d/dd-MM-yyyy
 - Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE
 - Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE
+- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE
 - Delete certain meal entry: deleteMeal INDEX
 - Delete certain drink entry: deleteDrink INDEX
+- Delete certain exercise entry: deleteExercise INDEX
 - Clear all entries: clear
 - Exit the app: exit
 
 ### 1.2 For user to add data
 ### 1.2.1 Add a meal eaten: `eat`
 Adds a meal to the list of meals  
-**Format**: eat m/MEAL s/SERVING_SIZE  
-**Sample Input**: eat m/Chicken Rice s/1  
-**Expected Output**: Added 1 serving of Chicken Rice
+**Format**: `eat m/MEAL s/SERVING_SIZE`  
+**Sample Input**: `eat m/Chicken Rice s/1`  
+**Expected Output**: 
+~~~
+Added 1 serving of Chicken Rice
+~~~
 
 ### 1.2.2 Add a drink: `drink`
 Adds a drink to the list of drinks  
-**Format**: drink d/DRINK s/SERVING_SIZE  
-**Sample Input**: drink d/Lemon Tea s/100  
-**Expected Output**: Added 100ml of Lemon Tea
+**Format**: `drink d/DRINK s/SERVING_SIZE`  
+**Sample Input**: `drink d/Lemon Tea s/100`  
+**Expected Output**: 
+~~~
+Added 100ml of Lemon Tea
+~~~
 
-### 1.2.3 Add water: `water`
-Adds water (in ml) to the daily water intake count  
-**Format**: water s/SERVING_SIZE  
-**Sample Input**: water s/200  
-**Expected Output**: Added 200ml of water
+### 1.2.2.1 Add water: `drink d/water`
+Adds water to the list of water  
+**Format**: `drink d/water s/SERVING_SIZE`  
+**Sample Input**: `drink d/water s/100`  
+**Expected Output**:
+~~~
+Added 100ml of water
+~~~
+
+### 1.2.3 Add exercise: `exercise`
+Adds exercise to the list of exercises done  
+**Format**: `exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM,`
+**Sample Input**: `exercise e/swimming d/30 i/HIGH`  
+**Expected Output**:
+~~~
+Tracked 30 minutes of swimming
+~~~
 
 ## 1.3 For data retrieval
 ### 1.3.1 Find the information about a certain meal: `infoMeal`
 For the specified meal, display its nutritional content to the user  
-**Format**: infoMeal MEAL  
-**Sample Input**: infoMeal chicken rice  
+**Format**: `infoMeal MEAL`  
+**Sample Input**: `infoMeal chicken rice`  
 **Expected Output**:  
-Meal: chicken rice (per serving)  
-Calories: 400  
-Carbs: 50  
-Protein: 30  
-Fat: 20  
-Fiber: 10  
-Sugar: 5
+~~~
+Meal: chicken rice (per serving)`
+Calories: 607
+Carbs: 75
+Protein: 25
+Fat: 23
+Fiber: 2
+Sugar: 10
+~~~
 
 ### 1.3.2 Find the information about a certain drink: `infoDrink`
-For the inputed drink, display its nutritional content to the user  
-**Format**: infoDrink DRINK  
-**Sample input**: infoDrink sprite  
+For the inputted drink, display its nutritional content to the user  
+**Format**: `infoDrink DRINK`  
+**Sample input**: `infoDrink sprite`  
 **Expected output**:    
-SPRITE (473 ml)  
-Calories: 194 kcal  
-Carbs: 50g  
-Protein: 0.2g  
-Fat: 0.1g
+~~~
+Drink: sprite (100 ml)
+Calories: 40
+Carbs: 50
+Sugar: 30
+Protein: 20
+Fat: 2
+~~~
 
-### 1.3.3 View daily calories consumed: `calories`
+### 1.3.3 Find the information about a certain exercise: `infoExercise`
+For the inputted exercise, display its calories burnt per minute for different intensities to the user   
+**Format**: `infoExercise EXERCISE`   
+**Sample input**: `infoExercise swimming`   
+**Expected output**:    
+~~~
+Exercise: swimming
+~ Calories burnt for a 1 minute workout of ~
+HIGH intensity: 12
+MEDIUM intensity: 8
+LOW intensity: 5
+~~~
+
+### 1.3.4 View daily calories consumed: `calories`
 Display current total calorie intake for the day   
-**Format**: calories    
-**Expected output**: Total calories: 100 cal
+**Format**: `calories`    
+**Expected output**: 
+~~~
+Total calories: 100 cal
+~~~
 
-### 1.3.4 View daily carbohydrates consumed: `carbs`
+### 1.3.5 View daily carbohydrates consumed: `carbs`
 Display current total carbohydrates intake for the day  
-**Format**: carbs  
-**Expected output**: Total Carbohydrates: 150 grams
+**Format**: `carbs`  
+**Expected output**: 
+~~~
+Total Carbohydrates: 150 grams
+~~~
 
-### 1.3.5 View daily proteins consumed: `protein`
+### 1.3.6 View daily proteins consumed: `protein`
 Display current total protein intake for the day  
-**Format**: protein  
-**Expected output**: Total proteins: 100 grams
+**Format**: `protein`  
+**Expected output**: 
+~~~
+Total proteins: 100 grams
+~~~
 
-### 1.3.6 View daily fat consumed: `fat`
+### 1.3.7 View daily fat consumed: `fat`
 Display current total fat intake for the day  
-**Format**: fat  
-**Expected output**: Total fat: 50 grams
+**Format**: `fat`  
+**Expected output**: 
+~~~
+Total fat: 50 grams
+~~~
 
-### 1.3.7 View daily sugar consumed: `sugar`
+### 1.3.8 View daily sugar consumed: `sugar`
 Display current total sugar intake for the day  
-**Format**: sugar  
-**Expected output**: Total sugar: 20 grams
+**Format**: `sugar`  
+**Expected output**: 
+~~~
+Total sugar: 20 grams
+~~~
 
-### 1.3.8 View daily fiber consumed: `fiber`
+### 1.3.9 View daily fiber consumed: `fiber`
 Display current total fiber intake (g) for the day  
-**Format**: viewFiber  
-**Expected output**: Total fiber: 20 grams
+**Format**: `fiber`  
+**Expected output**: 
+~~~
+Total fiber: 20 grams
+~~~
 
-### 1.3.9 View daily water consumption: `viewWater`
+### 1.3.10 View daily water consumption: `viewWater`
 Display current total water intake (in ml) for the day  
-**Format**: viewWater  
-**Expected output**: Total water intake: 0 ml
+**Format**: `viewWater`  
+**Expected output**: 
+~~~
+Total water intake: 0 ml
+~~~
+
+### 1.3.11 View daily calories consumed: `caloriesBurnt`
+Display current total calorie burnt for the day   
+**Format**: `caloriesBurnt`    
+**Expected output**: 
+~~~
+Total calories burnt: 70
+~~~
 
 ## 1.4 For listing arrays
 ### 1.4.1 List all meal intake: `listMeals`
-List all the meals user inputted so far  
-**Format**: listMeals   
+Display all the meals user input today   
+**Format**: `listMeals`   
+**Expected output**:
+~~~
+here's what you have eaten today
+1. chicken rice (serving size: 1) | date: 01-04-2024
+~~~
+
+### 1.4.2 List all drink intake: `listDrinks`
+Display all the drinks user input today  
+**Format**: `listDrinks`  
+**Expected output**:  
+~~~
+here's what you have drank today
+1. sprite (volume: 100ml) | date: 01-04-2024
+
+Total water intake today: 0 ml
+~~~
+
+### 1.4.3 List all exercises done: `listExercises`
+Display all the exercises user tracked today  
+**Format**: `listExercises`  
+**Expected output**: 
+~~~
+here's the exercises you've done today
+1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
+
+### 1.4.4 List everything inputted: `listEverything`
+Display all the meals, drinks and exercises user tracked today  
+**Format**: `listEverything`  
+**Expected output**:  
+~~~
+here's what you have consumed today
+1. chicken rice (serving size: 1) | date: 01-04-2024
+2. sprite (volume: 100ml) | date: 01-04-2024
+
+Total water intake today: 100 ml
+       ~~~
+here's the exercises you've done today
+1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
+
+### 1.4.5 List entire app's lifecycle meals intake: `listMealsAll`
+Display all the meals user inputted for the entire app lifecycle   
+**Format**: `listMealsAll`   
 **Expected output**:   
-here's what you have eaten so far  
-1.pizza (serving size: 1)
+~~~
+here's what you have eaten so far
+1. mala (serving size: 2) | date: 30-03-2024
+2. chicken rice (serving size: 1) | date: 01-04-2024
+~~~
 
-### 1.4.2 List today's meal intake: `listMealsToday`
-List all the meals user inputted today  
-**Format**: listMealsToday   
-**Expected output**:   
-here's what you have eaten today  
-1.pizza (serving size: 1)
-
-### 1.4.3 List all drink intake: `listDrinks`
-List all the drinks user inputted so far  
-**Format**: listDrinks  
+### 1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`
+Display all the drinks user inputted for the entire app lifecycle  
+**Format**: `listDrinksAll`  
 **Expected output**:  
-here's what you have drank so far  
-1.sprite (serving size: 1)  
-Total water intake: 0 ml
+~~~
+here's what you have drank so far
+1. milo dinosaur (volume: 200ml) | date: 30-03-2024
+2. sprite (volume: 100ml) | date: 01-04-2024
 
-### 1.4.4 List today's drink intake: `listDrinksToday`
-List all the drinks user inputted today  
-**Format**: listDrinksToday  
-**Expected output**:  
-here's what you have drank today  
-1.sprite (serving size: 1)  
-Total water intake: 0 ml
+Total water intake today: 100 ml
+~~~
 
-### 1.4.5 List entire food intake: `listEverything`
-List all the drinks and meals inputted so far  
-**Format**: listEverything  
+### 1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`
+Display all the exercises inputted for the entire app lifecycle  
+**Format**: `listExercisesAll`  
 **Expected output**:  
-here's what you have consumed so far  
-1.pizza (serving size: 1)  
-2.sprite (serving size: 1)  
-Total water intake: 0 ml
+~~~
+here's the exercises you've done so far
+1. cycling | duration: 100 | intensity: LOW | date: 29-02-2024
+2. swimming | duration: 100 | intensity: HIGH | date: 30-03-2024
+3. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
 
-### 1.4.6 List entire food intake for today: `listEverythingToday`
-List all the drinks and meals inputted today  
-**Format**: listEverythingToday  
+### 1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`
+Display all the drinks, meals, and exercises inputted for the entire app lifecycle  
+**Format**: `listEverythingAll`  
 **Expected output**:  
-here's what you have consumed today  
-1.pizza (serving size: 1)  
-2.sprite (serving size: 1)  
-Total water intake: 0 ml
+~~~
+here's what you have consumed so far
+1. mala (serving size: 2) | date: 30-03-2024
+2. chicken rice (serving size: 1) | date: 01-04-2024
+3. milo dinosaur (volume: 200ml) | date: 30-03-2024
+4. sprite (volume: 100ml) | date: 01-04-2024
+
+Total water intake today: 100 ml
+       ~~~
+here's the exercises you've done so far
+1. cycling | duration: 100 | intensity: LOW | date: 29-02-2024
+2. swimming | duration: 100 | intensity: HIGH | date: 30-03-2024
+3. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
 
 ## 1.5 For editing existing data
 ### 1.5.1 Edit an existing meal after inserted: `editMeal`

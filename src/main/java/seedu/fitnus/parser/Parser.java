@@ -4,6 +4,7 @@ import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
+import seedu.fitnus.Date;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -17,6 +18,7 @@ import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
+import seedu.fitnus.exception.InvalidDateException;
 
 import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
@@ -44,6 +46,11 @@ public class Parser {
     public static int drinkStorageSize;
     public static String drinkStorageDate;
 
+    public static String exerciseStorageDescription;
+    public static int exerciseStorageDuration;
+    public static ExerciseIntensity exerciseStorageIntensity;
+    public static String exerciseStorageDate;
+
     public static String exerciseDescription;
     public static int exerciseDuration;
 
@@ -61,6 +68,11 @@ public class Parser {
     public static int drinkNutrientSugar;
     public static int drinkNutrientProtein;
     public static int drinkNutrientFat;
+
+    public static String exerciseCaloriesDescription;
+    public static int exerciseCaloriesHigh;
+    public static int exerciseCaloriesMedium;
+    public static int exerciseCaloriesLow;
 
     public static ExerciseIntensity exerciseIntensity;
     private User user;
@@ -103,24 +115,34 @@ public class Parser {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
                 user.handleListMeals();
-            } else if (command.equals("listMealsToday")) {
-                user.handleListMealsToday();
+            } else if (command.equals("listMealsAll")) {
+                user.handleListMealsAll();
+            } else if (command.startsWith("listMeals") && command.contains("d/")) {
+                user.handleListMealsDate(command);
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
-            } else if (command.equals("listDrinksToday")) {
-                user.handleListDrinksToday();
+            } else if (command.equals("listDrinksAll")) {
+                user.handleListDrinksAll();
+            } else if (command.startsWith("listDrinks") && command.contains("d/")) {
+                user.handleListDrinksDate(command);
             } else if (command.equals("listExercises")) {
                 user.handleListExercises();
+            } else if (command.equals("listExercisesAll")) {
+                user.handleListExercisesAll();
+            } else if (command.startsWith("listExercises") && command.contains("d/")) {
+                user.handleListExercisesDate(command);
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
-            } else if (command.equals("listEverythingToday")) {
-                user.handleListEverythingToday();
+            } else if (command.equals("listEverythingAll")) {
+                user.handleListEverythingAll();
+            } else if (command.startsWith("listEverything") && command.contains("d/")) {
+                user.handleListEverythingDate(command);
             } else if (command.startsWith("editMeal")) {
-                User.handleEditMealServingSize(command);
+                user.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
-                User.handleEditDrinkServingSize(command);
+                user.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWater")) {
-                User.handleEditWaterIntake(command);
+                user.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
                 user.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
@@ -168,6 +190,8 @@ public class Parser {
                     "Type [help] to view the commands format.");
         } catch (NegativeValueException e) {
             System.out.println("Your serving size/exercise duration must be at least 0!");
+        } catch (InvalidDateException e) {
+            System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
         }
 
     }
@@ -176,7 +200,7 @@ public class Parser {
         System.out.println("here's all the valid commands i recognise: ");
         System.out.println("- Add a meal eaten: eat m/MEAL s/SERVING_SIZE");
         System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
-        System.out.println("- Track and exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
+        System.out.println("- Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
                 "i/INTENSITY(HIGH, MEDIUM, LOW)");
         System.out.println("- Find the information about a certain meal: infoMeal MEAL");
         System.out.println("- Find the information about a certain drink: infoDrink DRINK");
@@ -189,15 +213,24 @@ public class Parser {
         System.out.println("- View daily fiber consumed: fiber");
         System.out.println("- View daily water consumption: viewWater");
         System.out.println("- View daily calories burnt: caloriesBurnt");
-        System.out.println("- List meal intake: listMeals");
-        System.out.println("- List drink intake: listDrinks");
-        System.out.println("- List exercises done: listExercises");
-        System.out.println("- List entire food intake for the day: listEverything");
+        System.out.println("- List today's meal intake: listMeals");
+        System.out.println("- List today's drink intake: listDrinks");
+        System.out.println("- List today's exercises done: listExercises");
+        System.out.println("- List today's entire food intake and exercises: listEverything");
+        System.out.println("- List all meal intake: listMealsAll");
+        System.out.println("- List all drink intake: listDrinksAll");
+        System.out.println("- List all exercises done: listExercisesAll");
+        System.out.println("- List all entire food intake and exercises: listEverythingAll");
+        System.out.println("- List meal intake for certain date: listMeals d/dd-MM-yyyy");
+        System.out.println("- List drink intake for certain date: listDrinks d/dd-MM-yyyy");
+        System.out.println("- List exercises done for certain date: listExercises d/dd-MM-yyyy");
+        System.out.println("- List entire food intake and exercises for certain date: listEverything d/dd-MM-yyyy");
         System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
         System.out.println("- Delete certain meal entry: deleteMeal INDEX");
         System.out.println("- Delete certain drink entry: deleteDrink INDEX");
+        System.out.println("- Delete certain exercise entry: deleteExercise INDEX");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
@@ -250,7 +283,7 @@ public class Parser {
         if (command.length() < mealIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoMealDescription = command.substring(mealIndex).trim();
+        String infoMealDescription = command.substring(mealIndex).trim().toLowerCase();
 
         if (!Meal.getNutrientDetails().containsKey(infoMealDescription)) {
             throw new UnregisteredMealException();
@@ -264,7 +297,7 @@ public class Parser {
         if (command.length() < exerciseIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoExerciseDescription = command.substring(exerciseIndex).trim();
+        String infoExerciseDescription = command.substring(exerciseIndex).trim().toLowerCase();
         if (!Exercise.getExerciseDetails().containsKey(infoExerciseDescription)) {
             throw new UnregisteredExerciseException();
         }
@@ -276,7 +309,7 @@ public class Parser {
         if (command.length() < drinkIndex + 1) {
             throw new IncompleteInfoException();
         }
-        String infoDrinkDescription = command.substring(drinkIndex).trim();
+        String infoDrinkDescription = command.substring(drinkIndex).trim().toLowerCase();
         if (!Drink.getNutrientDetails().containsKey(infoDrinkDescription)) {
             throw new UnregisteredDrinkException();
         }
@@ -330,6 +363,15 @@ public class Parser {
         drinkStorageDate = arrayOfDrinkData[2];
     }
 
+    public static void parseExerciseStorage(String data) {
+        String delimiter = ",";
+        String[] arrayOfExerciseData = data.split(delimiter);
+        exerciseStorageDescription = arrayOfExerciseData[0];
+        exerciseStorageDuration = Integer.parseInt(arrayOfExerciseData[1]);
+        exerciseStorageIntensity = ExerciseIntensity.valueOf(arrayOfExerciseData[2]);
+        exerciseStorageDate = arrayOfExerciseData[3];
+    }
+
     public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
             NegativeValueException {
         if (!command.contains("e/") || !command.contains("d/") || !command.contains("i/")) {
@@ -381,5 +423,23 @@ public class Parser {
         drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
         drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
         drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
+    }
+
+    public static void parseExerciseCalories(String data) {
+        String delimiter = ",";
+        String[] arrayOfExerciseCalories = data.split(delimiter);
+        exerciseCaloriesDescription = arrayOfExerciseCalories[0].trim().toLowerCase();
+        exerciseCaloriesHigh = Integer.parseInt(arrayOfExerciseCalories[1]);
+        exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
+        exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
+    }
+
+    public static String parseListDate(String command) throws InvalidDateException {
+        int indexOfDate = command.indexOf("d/") + 2;
+        String date = command.substring(indexOfDate);
+        if (Date.isValidDate(date)) {
+            return date;
+        }
+        throw new InvalidDateException();
     }
 }

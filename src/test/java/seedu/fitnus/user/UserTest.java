@@ -11,12 +11,13 @@ import seedu.fitnus.Water;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteMealException;
+import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.storage.Storage;
 
 import java.io.ByteArrayOutputStream;
@@ -29,18 +30,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
     User testUser;
     String todayDate;
     ArrayList<Meal> testMealList;
     ArrayList<Drink> testDrinkList;
+    ArrayList<Water> testWaterList;
     ArrayList<Exercise> testExerciseList;
     private Storage testMealStorage;
     private Storage testDrinkStorage;
+    private Storage testExerciseStorage;
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
+    private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -48,13 +51,15 @@ public class UserTest {
     public void setUp() throws UnregisteredExerciseException {
         testMealStorage = new Storage("./src/test/resources", "src/test/resources/MealList.txt");
         testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
+        testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
 
-        testUser = new User(testMealStorage, testDrinkStorage, mealNutrientStorage, drinkNutrientStorage);
+        testUser = new User(testMealStorage, testDrinkStorage, testExerciseStorage, mealNutrientStorage,
+                drinkNutrientStorage, exerciseCaloriesStorage);
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
         testExerciseList = testUser.exerciseList;
-        Water.editWaterIntake(0);
+        testWaterList = testUser.waterList;
 
         Date currentDate = new Date();
         todayDate = currentDate.getDate();
@@ -62,7 +67,8 @@ public class UserTest {
         testMealList.add(new Meal("kaya toast", 4, todayDate));
         testMealList.add(new Meal("laksa", 10, todayDate));
         testDrinkList.add(new Drink("kopi", 100, todayDate));
-        testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH));
+        testWaterList.add(new Water( 100, todayDate));
+        testExerciseList.add(new Exercise("swimming", 20, ExerciseIntensity.HIGH, "30-01-2024"));
 
         System.setOut(new PrintStream(outputStream));
     }
@@ -89,22 +95,34 @@ public class UserTest {
         assertEquals(500, testDrinkList.get(1).getDrinkVolumeSize());
     }
 
+
+    @Test
+    public void handleExercise_validInputs_correctlyAddExercise() throws IncompleteExerciseException,
+            UnregisteredExerciseException, NegativeValueException {
+        String command = "exercise e/running d/30 i/HIGH";
+        testUser.handleExercise(command);
+
+        assertEquals("running", testExerciseList.get(1).getName());
+        assertEquals(30, testExerciseList.get(1).getDuration());
+        assertEquals(ExerciseIntensity.HIGH, testExerciseList.get(1).getIntensity());
+    }
+
     @Test
     public void handleViewCalories_correctCalorieCalculation_viewCaloriesAccurate() {
         testUser.handleViewCalories();
-        String expectedOutput = "Total Calories: 5547";
+        String expectedOutput = "Total Calories: 5507";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() {
         testUser.handleViewCarbohydrates();
-        String expectedOutput = "Total Carbohydrates: 912";
+        String expectedOutput = "Total Carbohydrates: 912 grams";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
@@ -112,21 +130,19 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewProteins();
-        String expectedOutput = "Total Proteins: 215";
+        String expectedOutput = "Total Proteins: 215 grams";
         String actualOutput = outputStream.toString().trim();
-
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-        Water.checkInstance(500, "28-04-2024");
+        testWaterList.add(new Water (500, todayDate));
 
         testUser.handleViewWaterIntake();
-        String expectedOutput = "Total water intake: 500";
+        String expectedOutput = "Total water intake today: 600 ml";
         String actualOutput = outputStream.toString().trim();
-
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
@@ -134,10 +150,10 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFiber();
-        String expectedOutput = "Total Fiber: 80";
+        String expectedOutput = "Total Fiber: 80 grams";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
@@ -145,10 +161,10 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFat();
-        String expectedOutput = "Total Fat: 129";
+        String expectedOutput = "Total Fat: 129 grams";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
@@ -156,16 +172,25 @@ public class UserTest {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewSugar();
-        String expectedOutput = "Total Sugar: 106";
+        String expectedOutput = "Total Sugar: 106 grams";
         String actualOutput = outputStream.toString().trim();
 
-        assertTrue(actualOutput.contains(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
+    }
+
+    @Test
+    public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate() {
+        testUser.handleCaloriesBurnt();
+        String expectedOutput = "Total calories burnt: 240";
+        String actualOutput = outputStream.toString().trim();
+
+        assertEquals(actualOutput, expectedOutput);
     }
     
     @Test
-    public void handleListMealsToday_emptyList_printListAccurate() {
+    public void handleListMeals_emptyList_printListAccurate() {
         testMealList.clear();
-        testUser.handleListMealsToday();
+        testUser.handleListMeals();
 
         String expectedOutput = "here's what you have eaten today" + System.lineSeparator() +
                 "  >> nothing so far :o";
@@ -175,8 +200,8 @@ public class UserTest {
     }
 
     @Test
-    public void handleListMealsToday_validList_printListAccurate() {
-        testUser.handleListMealsToday();
+    public void handleListMeals_validList_printListAccurate() {
+        testUser.handleListMeals();
 
         String expectedOutput = "here's what you have eaten today" + System.lineSeparator() +
                 "1. kaya toast (serving size: 4) | date: " + todayDate + System.lineSeparator() +
@@ -187,9 +212,10 @@ public class UserTest {
     }
 
     @Test
-    public void handleListDrinksToday_emptyList_printListAccurate() {
+    public void handleListDrinks_emptyList_printListAccurate() {
         testDrinkList.clear();
-        testUser.handleListDrinksToday();
+        testWaterList.clear();
+        testUser.handleListDrinks();
 
         String expectedOutput = "here's what you have drank today" + System.lineSeparator()  +
                 "  >> nothing so far :o";
@@ -200,27 +226,51 @@ public class UserTest {
 
 
     @Test
-    public void handleListDrinksToday_validList_printListAccurate() {
-        testUser.handleListDrinksToday();
+    public void handleListDrinks_validList_printListAccurate() {
+        testUser.handleListDrinks();
 
         String expectedOutput = "here's what you have drank today" + System.lineSeparator() +
                 "1. kopi (volume: 100ml) | date: " + todayDate + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml";
+                "Total water intake today: 100 ml";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
-    public void handleListEverythingToday_allEmptyLists_printListAccurate() {
+    public void handleListExercise_emptyList_printListAccurate() {
+        testExerciseList.clear();
+        testUser.handleListExercises();
+
+        String expectedOutput = "here's the exercises you've done today" + System.lineSeparator()  +
+                "  >> nothing so far :o";
+        String actualOutput = outputStream.toString().trim();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+
+    @Test
+    public void handleListExercise_validList_printListAccurate() {
+        testUser.handleListExercises();
+
+        String expectedOutput = "here's the exercises you've done today" + System.lineSeparator() +
+                "1. swimming | duration: 20 | intensity: HIGH | date: 30-01-2024";
+        String actualOutput = outputStream.toString().trim();
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void handleListEverything_allEmptyLists_printListAccurate() {
         testMealList.clear();
         testDrinkList.clear();
         testExerciseList.clear();
-        testUser.handleListEverythingToday();
+        testUser.handleListEverything();
 
         String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
                 "  >> nothing so far :o" + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
+                "Total water intake today: 100 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
                 "here's the exercises you've done today" + System.lineSeparator() +
                 "  >> nothing so far :o";
         String actualOutput = outputStream.toString().trim();
@@ -229,16 +279,16 @@ public class UserTest {
     }
 
     @Test
-    public void handleListEverythingToday_validList_printListAccurate() {
-        testUser.handleListEverythingToday();
+    public void handleListEverything_validList_printListAccurate() {
+        testUser.handleListEverything();
 
         String expectedOutput = "here's what you have consumed today" + System.lineSeparator() +
                 "1. kaya toast (serving size: 4) | date: " + todayDate + System.lineSeparator() +
                 "2. laksa (serving size: 10) | date: " + todayDate + System.lineSeparator() +
                 "3. kopi (volume: 100ml) | date: " + todayDate + System.lineSeparator() + System.lineSeparator() +
-                "Total water intake: 0 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
+                "Total water intake today: 100 ml" + System.lineSeparator() + "       ~~~" + System.lineSeparator() +
                 "here's the exercises you've done today" + System.lineSeparator() +
-                "1. swimming | duration: 20 | intensity: HIGH";
+                "1. swimming | duration: 20 | intensity: HIGH | date: 30-01-2024";
         String actualOutput = outputStream.toString().trim();
         assertEquals(expectedOutput, actualOutput);
     }
@@ -268,7 +318,7 @@ public class UserTest {
         String command = "editDrink 1 s/100000000";
         testUser.handleEditDrinkServingSize(command);
 
-        int drinkIndex = 1 - 1;
+        int drinkIndex = 0;
         assertEquals("kopi", testDrinkList.get(drinkIndex).getName());
         assertEquals(100000000, testDrinkList.get(drinkIndex).getDrinkVolumeSize());
     }
@@ -314,6 +364,14 @@ public class UserTest {
         String command = "deleteDrink 1";
         testUser.handleDeleteDrink(command);
         assertEquals(0, testDrinkList.size());
+    }
+
+    @Test
+    public void handleDeleteExercise_validCommand_deleteMealSuccessful() throws InvalidListIndexException,
+            IncompleteDeleteException {
+        String command = "deleteExercise 1";
+        testUser.handleDeleteExercise(command);
+        assertEquals(0, testExerciseList.size());
     }
 
     @Test
