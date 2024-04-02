@@ -8,7 +8,9 @@ public class FitNus {
         ui = new Ui();
     }
 
-    /** Runs the program until termination.  */
+    /**
+     * Begins the program until termination.
+     */
     public void run() {
         ui.printWelcomeMessage();
         while (!ui.isExit) {

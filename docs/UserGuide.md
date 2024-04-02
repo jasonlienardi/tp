@@ -1,62 +1,76 @@
 # User Guide: FitNUS
 ## Project Introduction
 FitNUS is a CLI application that aims to help combat diabetes and the overconsumption of calories, sugar, and
-carbohydrates. Promote healthy lifestyle.
+carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
-Users are able to track the meals and drinks they have in a day.
+Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
 ## Table of Contents
 <!-- TOC -->
-[1) Features List](#1-features-list)
-* [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
-* [1.2 For user to add data](#12-for-user-to-add-data)
+* [User Guide: FitNUS](#user-guide-fitnus)
+  * [Project Introduction](#project-introduction)
+  * [Table of Contents](#table-of-contents)
+  * [1) Features List](#1-features-list)
+    * [1.1 Information for users](#11-information-for-users)
+    * [1.1.1 Viewing all commands:** `help`](#111-viewing-all-commands-help)
+    * [1.2 For user to add data](#12-for-user-to-add-data)
     * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
     * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
-      * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
-* [1.3 For data retrieval](#13-for-data-retrieval)
+    * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
+    * [1.2.3 Add exercise: `exercise`](#123-add-exercise-exercise)
+  * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
-    * [1.3.3 View daily calories consumed: `calories`](#133-find-the-information-about-a-certain-exercise-infoexercise)
-    * [1.3.4 View daily carbohydrates consumed: `carbs`](#134-view-daily-calories-consumed-calories)
-    * [1.3.5 View daily proteins consumed: `protein`](#135-view-daily-carbohydrates-consumed-carbs)
-    * [1.3.6 View daily fat consumed: `fat`](#136-view-daily-proteins-consumed-protein)
-    * [1.3.7 View daily sugar consumed: `sugar`](#137-view-daily-fat-consumed-fat)
-    * [1.3.8 View daily fiber consumed: `fiber`](#138-view-daily-sugar-consumed-sugar)
-    * [1.3.9 View daily water consumption: `viewWater`](#139-view-daily-fiber-consumed-fiber)
-* [1.4 For listing arrays](#14-for-listing-arrays)
-    * [1.4.1 List all meal intake: `listMeals`](#141-list-all-meal-intake-listmeals)
-    * [1.4.2 List all drink intake: `listDrinks`](#142-list-all-drink-intake-listdrinks)
-    * [1.4.3 List all exercises done: `listExercises`](#143-list-all-exercises-done-listexercises)
-    * [1.4.4 List everything inputted: `listEverything`](#144-list-everything-inputted-listeverything)
+    * [1.3.3 Find the information about a certain exercise: `infoExercise`](#133-find-the-information-about-a-certain-exercise-infoexercise)
+    * [1.3.4 View daily calories consumed: `calories`](#134-view-daily-calories-consumed-calories)
+    * [1.3.5 View daily carbohydrates consumed: `carbs`](#135-view-daily-carbohydrates-consumed-carbs)
+    * [1.3.6 View daily proteins consumed: `protein`](#136-view-daily-proteins-consumed-protein)
+    * [1.3.7 View daily fat consumed: `fat`](#137-view-daily-fat-consumed-fat)
+    * [1.3.8 View daily sugar consumed: `sugar`](#138-view-daily-sugar-consumed-sugar)
+    * [1.3.9 View daily fiber consumed: `fiber`](#139-view-daily-fiber-consumed-fiber)
+    * [1.3.10 View daily water consumption: `viewWater`](#1310-view-daily-water-consumption-viewwater)
+    * [1.3.11 View daily calories consumed: `caloriesBurnt`](#1311-view-daily-calories-consumed-caloriesburnt)
+    * [1.3.12 View daily calories and water intake recommendation: `recommend`](#1312-view-daily-calories-and-water-intake-recommendation-recommend)
+  * [1.4 For listing arrays](#14-for-listing-arrays)
+    * [1.4.1 List today's meal intake: `listMeals`](#141-list-todays-meal-intake-listmeals)
+    * [1.4.2 List today's drink intake: `listDrinks`](#142-list-todays-drink-intake-listdrinks)
+    * [1.4.3 List today's exercises done: `listExercises`](#143-list-todays-exercises-done-listexercises)
+    * [1.4.4 List everything inputted today: `listEverything`](#144-list-everything-inputted-today-listeverything)
     * [1.4.5 List entire app's lifecycle meals intake: `listMealsAll`](#145-list-entire-apps-lifecycle-meals-intake-listmealsall)
     * [1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`](#146-list-entire-apps-lifecycle-drinks-intake-listdrinksall)
     * [1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`](#147-list-entire-apps-lifecycle-exercises-done-listexercisesall)
     * [1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`](#148-list-everything-inputted-for-the-entire-apps-lifecycle-listeverythingall)
-* [1.5 For editing existing data](#15-for-editing-existing-data)
+    * [1.4.9 List meal intake for a certain date: `listMeals d/[DATE]`](#149-list-meal-intake-for-a-certain-date-listmeals-ddate)
+    * [1.4.10 List drink intake for a certain date: `listDrinks d/[DATE]`](#1410-list-drink-intake-for-a-certain-date-listdrinks-ddate)
+    * [1.4.11 List exercise done for a certain date: `listExercises d/[DATE]`](#1411-list-exercise-done-for-a-certain-date-listexercises-ddate)
+    * [1.4.12 List entire food intake and exercise done for a certain date: `listEverything d/[DATE]`](#1412-list-entire-food-intake-and-exercise-done-for-a-certain-date-listeverything-ddate)
+  * [1.5 For editing existing data](#15-for-editing-existing-data)
     * [1.5.1 Edit an existing meal after inserted: `editMeal`](#151-edit-an-existing-meal-after-inserted-editmeal)
     * [1.5.2 Edit an existing drink after inserted: `editDrink`](#152-edit-an-existing-drink-after-inserted-editdrink)
     * [1.5.3 Edit water intake after inserted: `editWater`](#153-edit-water-intake-after-inserted-editwater)
-* [1.6 For deleting data](#16-for-deleting-data)
+  * [1.6 For deleting data](#16-for-deleting-data)
     * [1.6.1 Delete certain meal entry: `deleteMeal`](#161-delete-certain-meal-entry-deletemeal)
     * [1.6.2 Delete certain drink entry: `deleteDrink`](#162-delete-certain-drink-entry-deletedrink)
-* [1.7 For clearing data](#17-for-clearing-data-)
+  * [1.7 For clearing data](#17-for-clearing-data)
     * [1.7.1 Clear all entries: `clear`](#171-clear-all-entries-clear)
-* [1.8: Exit program](#18-exit-program)
+  * [1.8: Exit program](#18-exit-program)
     * [1.8.1 Exit the app: `exit`](#181-exit-the-app-exit)
 <!-- TOC -->
 
 ## 1) Features List
 ### 1.1 Information for users
-### 1.1.1 Viewing all commands:** `help`
+### 1.1.1 Viewing all commands: `help`
 Shows a list of all possible command inputs.  
-**Format**: help  
-**Sample Input**: help  
-**Expected Output**:  
-here's all the valid commands I recognise:
+**Format**: `help`   
+**Expected Output**:
+~~~
+here's all the valid commands i recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/VOLUME(ML)
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
+- View all meals that you can input: allMeals
+- View all drinks that you can input: allDrinks
+- View all exercises that you can input: allExercises
 - Find the information about a certain meal: infoMeal MEAL
 - Find the information about a certain drink: infoDrink DRINK
 - Find the information about a certain exercise: infoExercise EXERCISE
@@ -75,7 +89,7 @@ here's all the valid commands I recognise:
 - List all meal intake: listMealsAll
 - List all drink intake: listDrinksAll
 - List all exercises done: listExercisesAll
-- List all entire food intake and exercises: listEverythingAll
+- List all food intake and exercises: listEverythingAll
 - List meal intake for certain date: listMeals d/dd-MM-yyyy
 - List drink intake for certain date: listDrinks d/dd-MM-yyyy
 - List exercises done for certain date: listExercises d/dd-MM-yyyy
@@ -88,6 +102,100 @@ here's all the valid commands I recognise:
 - Delete certain exercise entry: deleteExercise INDEX
 - Clear all entries: clear
 - Exit the app: exit
+~~~
+### 1.1.2 Viewing all pre-defined meals: `allMeals`
+Shows a list of all pre-defined meals. These meals will have their nutritional content defined per serving size and can
+be inputted immediately.  
+**Format**: `allMeals`   
+**Expected Output**:
+~~~
+Available meals: 
+- char kway teow
+- ban mian
+- tau huay
+- nasi goreng
+- soup kambeng
+- nasi lemak
+- pepper lunch
+- char siew rice
+- pork satay with satay sauce
+- roti prata
+- mee goreng
+- chendol
+- wanton mee
+- oyster omlette
+- pizza
+- ice kachang
+- chicken rice
+- fried rice
+- kaya toast
+- mala
+- laksa
+- hokkien prawn mee
+- durian
+
+You may also input a meal that isn't here.
+~~~
+
+### 1.1.3 Viewing all pre-defined drinks: `allDrinks`
+Shows a list of all pre-defined drinks. These drinks will have their nutritional content defined per 100ml
+and can be inputted immediately.  
+**Format**: allDrinks
+**Expected Output**:
+~~~
+Available drinks: 
+- milo dinosaur
+- chrysanthemun juice
+- honey lemon tea
+- soursop juice
+- lemon tea
+- kopi c
+- kalamansi juice
+- kopi o
+- milo
+- plum juice
+- water
+- 100 plus
+- milk coffee
+- teh c bing
+- kopi
+- guava juice
+- tiger beer
+- teh tarik
+- sugarcane juice
+- teh
+- sprite
+- iced lemon tea
+- bandung
+
+You may also input a drink that isn't here.
+~~~
+
+### 1.1.3 Viewing all pre-defined exercises: `allExercises`
+Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
+high/medium/low intensity workout defined per minute and can be inputted immediately.  
+**Format**: allExercises
+**Expected Output**:
+~~~
+Available exercises: 
+- soccer
+- rugby
+- yoga
+- badminton
+- hiking
+- cycling
+- tennis
+- running
+- weightlifting
+- swimming
+- basketball
+- rowing
+- boxing
+- volleyball
+- skipping
+
+You may also input an exercise that isn't here.
+~~~
 
 ### 1.2 For user to add data
 ### 1.2.1 Add a meal eaten: `eat`
@@ -233,8 +341,18 @@ Display current total calorie burnt for the day
 Total calories burnt: 70
 ~~~
 
+### 1.3.12 View daily calories and water intake recommendation: `recommend`
+Display today's recommended water and calories intake  
+**Format**: `recommend`    
+**Expected output**:
+~~~
+Great! You are on track with the water intake!
+  ~~
+Recommend eating more food. Please eat 500 more calories
+~~~
+
 ## 1.4 For listing arrays
-### 1.4.1 List all meal intake: `listMeals`
+### 1.4.1 List today's meal intake: `listMeals`
 Display all the meals user input today   
 **Format**: `listMeals`   
 **Expected output**:
@@ -243,7 +361,7 @@ here's what you have eaten today
 1. chicken rice (serving size: 1) | date: 01-04-2024
 ~~~
 
-### 1.4.2 List all drink intake: `listDrinks`
+### 1.4.2 List today's drink intake: `listDrinks`
 Display all the drinks user input today  
 **Format**: `listDrinks`  
 **Expected output**:  
@@ -254,7 +372,7 @@ here's what you have drank today
 Total water intake today: 0 ml
 ~~~
 
-### 1.4.3 List all exercises done: `listExercises`
+### 1.4.3 List today's exercises done: `listExercises`
 Display all the exercises user tracked today  
 **Format**: `listExercises`  
 **Expected output**: 
@@ -263,7 +381,7 @@ here's the exercises you've done today
 1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
 ~~~
 
-### 1.4.4 List everything inputted: `listEverything`
+### 1.4.4 List everything inputted today: `listEverything`
 Display all the meals, drinks and exercises user tracked today  
 **Format**: `listEverything`  
 **Expected output**:  
@@ -330,45 +448,117 @@ here's the exercises you've done so far
 3. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
 ~~~
 
+### 1.4.9 List meal intake for a certain date: `listMeals d/[DATE]`
+Display all the meals user inputted for the specified date  
+**Format**: `listMeals d/dd-MM-yyyy`  
+**Expected output**:
+~~~
+here's what you have eaten on 01-04-2024
+1. soup kambeng (serving size: 2) | date: 01-04-2024
+2. nasi lemak (serving size: 2) | date: 01-04-2024
+3. tau huay (serving size: 1) | date: 01-04-2024
+4. roti prata (serving size: 2) | date: 01-04-2024
+~~~
+
+### 1.4.10 List drink intake for a certain date: `listDrinks d/[DATE]`
+Display all the drinks user inputted for the specified date (excluding water)  
+**Format**: `listDrinks d/dd-MM-yyyy`  
+**Expected output**:
+~~~
+here's what you have drank on 01-04-2024
+1. honey lemon tea (volume: 200ml) | date: 01-04-2024
+2. kopi c (volume: 500ml) | date: 01-04-2024
+3. milo (volume: 200ml) | date: 01-04-2024
+~~~
+
+### 1.4.11 List exercise done for a certain date: `listExercises d/[DATE]`
+Display all the exercises user inputted for the specified date  
+**Format**: `listExercises d/dd-MM-yyyy`  
+**Expected output**:
+~~~
+here's the exercises you've done on 01-04-2024
+1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
+
+### 1.4.12 List entire food intake and exercise done for a certain date: `listEverything d/[DATE]`
+Display all the meals, drinks, and exercises user inputted for the specified date  
+**Format**: `listEverything d/dd-MM-yyyy`  
+**Expected output**:
+~~~
+here's what you have consumed on 01-04-2024
+1. soup kambeng (serving size: 2) | date: 01-04-2024
+2. nasi lemak (serving size: 2) | date: 01-04-2024
+3. tau huay (serving size: 1) | date: 01-04-2024
+4. roti prata (serving size: 2) | date: 01-04-2024
+5. honey lemon tea (volume: 200ml) | date: 01-04-2024
+6. kopi c (volume: 500ml) | date: 01-04-2024
+7. milo (volume: 200ml) | date: 01-04-2024
+
+       ~~~
+here's the exercises you've done on 01-04-2024
+1. boxing | duration: 10 | intensity: LOW | date: 01-04-2024
+~~~
+
 ## 1.5 For editing existing data
 ### 1.5.1 Edit an existing meal after inserted: `editMeal`
 For a meal that was inputted in the day, edit its serving size  
-**Format**: editMealServingSize INDEX s/NEW_SERVING_SIZE  
-**Sample input**: editMeal 2 s/2  
-**Expected output**: Pizza has been edited to 2 servings
+**Format**: `editMeal INDEX s/NEW_SERVING_SIZE`  
+**Sample input**: `editMeal 2 s/2`  
+**Expected output**:
+~~~
+Pizza has been edited to 2 servings
+~~~
 
 ### 1.5.2 Edit an existing drink after inserted: `editDrink`
 For a drink that was inputted in the day, edit its serving size  
-**Format**: editDrinkServingSize INDEX s/NEW_SERVING_SIZE  
+**Format**: `editDrink INDEX s/NEW_SERVING_SIZE`  
 **Sample input**: editDrink 1 s/200  
-**Expected output**: Sprite has been edited to 200 ml
+**Expected output**:
+~~~
+Sprite has been edited to 200 ml
+~~~
 
 ### 1.5.3 Edit water intake after inserted: `editWater`
 Edit serving size of total water intake  
-**Format**: editWaterIntake s/TOTAL_WATER_INTAKE  
-**Sample input**: editWaterIntake 200  
-**Expected output**: Total water has been edited to 200 ml
+**Format**: `editWater s/TOTAL_WATER_INTAKE`  
+**Sample input**: `editWater 200`  
+**Expected output**: 
+~~~
+Total water has been edited to 200 ml
+~~~
 
 ## 1.6 For deleting data
 ### 1.6.1 Delete certain meal entry: `deleteMeal`
 For a meal that was inputted in the day, delete its input based on its index in the meal list
-**Format**: deleteMeal INDEX
-**Sample Input**: deleteMeal 1
-**Expected output**: Removed Chicken Rice From Meals
+**Format**: `deleteMeal INDEX`
+**Sample Input**: `deleteMeal 1`
+**Expected output**:
+~~~
+Removed Chicken Rice From Meals
+~~~
 
 ### 1.6.2 Delete certain drink entry: `deleteDrink`
 For a drink that was inputted in the day, delete its input based on its index in the drink list  
-**Format**: deleteDrink INDEX  
-**Sample input**: deleteDrink 1  
-**Expected output:**  Removed Iced Lemon Tea From Drinks
+**Format**: `deleteDrink INDEX`  
+**Sample input**: `deleteDrink 1`  
+**Expected output:**  
+~~~
+Removed Iced Lemon Tea From Drinks
+~~~
 
 ## 1.7 For clearing data
 ### 1.7.1 Clear all entries: `clear`
 Clear all entries in mealList and drinkList  
-**Format**: clear  
-**Expected output**: All entries have been deleted
+**Format**: `clear`  
+**Expected output**:
+~~~
+All entries have been deleted
+~~~
 
 ## 1.8: Exit program
 ### 1.8.1 Exit the app: `exit`
-**Format**: exit  
-**Expected output**: Bye. Hope to see you again soon!
+**Format**: `exit`  
+**Expected output**:
+~~~
+Bye. Hope to see you again soon!
+~~~

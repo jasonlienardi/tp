@@ -16,6 +16,18 @@
 - Using a hashmap, access the data regarding the amount of calories burnt per hour for the given exercise and calculate the total calories burnt for the given duration.
 - Store the total calories burnt through exercise in the User class
 
+### CSV Storage
+- Create three CSV files for storing meal nutrients, drink nutrients, and exercise calories information.
+- For each line in the CSV, parse the string with "," as the delimiter, with the first element being the name and the others being the nutrient/calories information 
+- Save each description name and nutrient/calories information in the corresponding hashmap (meal, drink, and exercise) to be used by other functions. 
+
+### Saved Meal, Drink, Exercises Storage
+- Each meal object in the meal list corresponds to a string with a format of `meal_name,serving_size,date`
+- Each drink object in the drink list corresponds to a string with a format of `drink_name,volume,date`
+- Each exercise object in the exercise list corresponds to a string with a format of `exercise_name,duration,intensity,date`
+- To store, convert all objects (meal, drink, exercise) in the list into its corresponding string, then write the appended strings into a .txt file
+- To retrieve, parse each string using "," as its delimiter and convert it into its corresponding objects, then add all the entries to the object list (mealList, drinkList, exerciseList)
+
 
 ## Product scope
 ### Target user profile
@@ -27,7 +39,7 @@
 ### Value proposition
 
 The fitness app aims to help users manage their dietary habits and exercise routines more efficiently compared to traditional GUI-driven apps. 
-By offering a streamlined interface optimized for keyboard input and CLI interactions, users can track their meals, drinks, and exercises swiftly, allowing them to focus more on their fitness goals and less on navigating through complex user interfaces.
+By offering a streamlined interface optimized for keyboard input and CLI interactions, users can track their meals, drinks, and exercises swiftly, allowing them to focus more on their fitness and nutritional goals and less on navigating through complex user interfaces.
 
 ## User Stories
 
@@ -38,7 +50,7 @@ By offering a streamlined interface optimized for keyboard input and CLI interac
 
 ## Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+1. Should work on any mainstream OS (Linux, Windows, MacOS) as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
@@ -56,5 +68,15 @@ By offering a streamlined interface optimized for keyboard input and CLI interac
 
 
 ## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app on your own device.
+### Launch and Shutdown
+1. Initial Launch
+   1. Create an empty folder, download the jar file, and place the file inside the folder.
+   2. Open the terminal and navigate to the folder you just created.
+   3. Type `java -jar [name of the jar]`, e.g.`(java -jar FitNUS.jar)` on the CLI.
+2. Window Preference
+   1. Resize the window to an optimum size. Ideally full screen, as some text might not be displayed correctly.
+3. App Features and Commands
+4. Save and Shutdown
+   1. Type `exit` to shut down the FitNUS app.
+   2. Upon exiting, all entries inputted will be updated to the database locally.

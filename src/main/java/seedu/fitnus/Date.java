@@ -3,10 +3,16 @@ package seedu.fitnus;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Class that handles any references to the current date and time.
+ */
 public class Date {
-    // reference: https://www.javatpoint.com/java-get-current-date
     private String currentDate;
 
+    /**
+     * Constructor that gets the current system date and formats it in the stated format.
+     * This date is then saved as a string.
+     */
     public Date() {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
@@ -17,10 +23,22 @@ public class Date {
         this.currentDate = formattedDate;
     }
 
+    /**
+     * Returns the current system date.
+     *
+     * @return current system date
+     */
     public String getDate() {
         return currentDate;
     }
 
+    /**
+     * Returns true if the date inputted by the user is a valid date.
+     * The method verifies the day, month and year are in the correct range.
+     *
+     * @param date string containing the date to check if valid
+     * @return true if the date inputted by the user is a valid date.
+     */
     public static boolean isValidDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         dateFormat.setLenient(false);
