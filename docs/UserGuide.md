@@ -218,16 +218,16 @@ Adds a meal to the list of meals
 **Sample Input**: `eat m/Chicken Rice s/1`  
 **Expected Output**: 
 ~~~
-Added 1 serving of Chicken Rice
+Added 1 serving of chicken rice
 ~~~
 
 ### 1.2.2 Add a drink: `drink`
 Adds a drink to the list of drinks  
 **Format**: `drink d/DRINK s/SERVING_SIZE`  
-**Sample Input**: `drink d/Lemon Tea s/100`  
+**Sample Input**: `drink d/Iced Lemon Tea s/200`  
 **Expected Output**: 
 ~~~
-Added 100ml of Lemon Tea
+Added 200 ml of iced lemon tea
 ~~~
 
 ### 1.2.2.1 Add water: `drink d/water`
@@ -241,7 +241,7 @@ Added 100ml of water
 
 ### 1.2.3 Add exercise: `exercise`
 Adds exercise to the list of exercises done  
-**Format**: `exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM,`
+**Format**: `exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)`  
 **Sample Input**: `exercise e/swimming d/30 i/HIGH`  
 **Expected Output**:
 ~~~
@@ -285,15 +285,15 @@ Sugar: 10
 ### 1.3.2 Find the information about a certain drink: `infoDrink`
 For the inputted drink, display its nutritional content to the user  
 **Format**: `infoDrink DRINK`  
-**Sample input**: `infoDrink sprite`  
+**Sample input**: `infoDrink milo`  
 **Expected output**:    
 ~~~
-Drink: sprite (100 ml)
-Calories: 40
-Carbs: 50
-Sugar: 30
-Protein: 20
-Fat: 2
+Drink: milo (100 ml)
+Calories: 124
+Carbs: 20
+Sugar: 3
+Protein: 3
+Fat: 1
 ~~~
 
 ### 1.3.3 Find the information about a certain exercise: `infoExercise`
@@ -314,7 +314,7 @@ Display current total calorie intake for the day
 **Format**: `calories`    
 **Expected output**: 
 ~~~
-Total calories: 100 cal
+Total Calories: 100
 ~~~
 
 ### 1.3.5 View daily carbohydrates consumed: `carbs`
@@ -330,7 +330,7 @@ Display current total protein intake for the day
 **Format**: `protein`  
 **Expected output**: 
 ~~~
-Total proteins: 100 grams
+Total Proteins: 100 grams
 ~~~
 
 ### 1.3.7 View daily fat consumed: `fat`
@@ -338,7 +338,7 @@ Display current total fat intake for the day
 **Format**: `fat`  
 **Expected output**: 
 ~~~
-Total fat: 50 grams
+Total Fat: 50 grams
 ~~~
 
 ### 1.3.8 View daily sugar consumed: `sugar`
@@ -346,7 +346,7 @@ Display current total sugar intake for the day
 **Format**: `sugar`  
 **Expected output**: 
 ~~~
-Total sugar: 20 grams
+Total Sugar: 20 grams
 ~~~
 
 ### 1.3.9 View daily fiber consumed: `fiber`
@@ -354,7 +354,7 @@ Display current total fiber intake (g) for the day
 **Format**: `fiber`  
 **Expected output**: 
 ~~~
-Total fiber: 20 grams
+Total Fiber: 20 grams
 ~~~
 
 ### 1.3.10 View daily water consumption: `viewWater`
@@ -362,7 +362,7 @@ Display current total water intake (in ml) for the day
 **Format**: `viewWater`  
 **Expected output**: 
 ~~~
-Total water intake: 0 ml
+Total water intake today: 0 ml
 ~~~
 
 ### 1.3.11 View daily calories consumed: `caloriesBurnt`

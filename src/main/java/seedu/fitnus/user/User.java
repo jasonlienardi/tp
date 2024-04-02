@@ -336,7 +336,6 @@ public class User {
             result.append("\n");
         }
         mealNutrientStorage.appendTextContent(result.toString());
-        System.out.println(mealNutrientStorage.textContent);
         try {
             mealNutrientStorage.writeFile(mealNutrientStorage.textContent);
         } catch (IOException e) {
