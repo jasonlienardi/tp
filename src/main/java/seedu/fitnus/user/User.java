@@ -29,6 +29,8 @@ import java.util.ArrayList;
  * Handles all methods related to the user's meals, drinks and exercise.
  */
 public class User {
+    public static final int RECOMMEND_WATER_INTAKE = 2600;
+    public static final int RECOMMEND_CALORIE_INTAKE = 2200;
     // list for today
     protected static ArrayList<Meal> mealList;
     protected static ArrayList<Drink> drinkList;
@@ -979,5 +981,39 @@ public class User {
             caloriesBurnt += exercise.getCaloriesBurnt();
         }
         System.out.println("Total calories burnt: " + caloriesBurnt);
+    }
+
+    public void handleRecommendations() {
+        int waterIntake = 0;
+        for (Water water: waterList) {
+            waterIntake += water.getWater();
+        }
+        int waterDifference = RECOMMEND_WATER_INTAKE -waterIntake;
+        if (waterIntake < RECOMMEND_WATER_INTAKE) {
+            System.out.println("Recommend drinking more water. Please drink " +
+                    waterDifference + " ml more water");
+        } else {
+            System.out.println("Great! You are on track with the water intake!");
+        }
+        System.out.println("    ~~~");
+        int caloriesCount = 0;
+        for (Meal meal: mealList) {
+            caloriesCount += meal.getCalories();
+        }
+        for (Drink drink: drinkList) {
+            caloriesCount += drink.getCalories();
+        }
+        for (Exercise exercise: exerciseList) {
+            caloriesCount -= exercise.getCaloriesBurnt();
+        }
+        int caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesCount;
+        if (caloriesCount < RECOMMEND_CALORIE_INTAKE) {
+            System.out.println("Recommend eating more food. Please eat " + caloriesDifference + " more calories");
+        } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE && caloriesCount < RECOMMEND_CALORIE_INTAKE + 200) {
+            System.out.println("Great! You are on track with the calorie intake!");
+        } else {
+            System.out.println("You are " + -caloriesDifference
+                    + " above the recommended calorie amount, consider exercising!");
+        }
     }
 }
