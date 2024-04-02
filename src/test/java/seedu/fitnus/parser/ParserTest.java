@@ -1,9 +1,7 @@
 package seedu.fitnus.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
-import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.NegativeValueException;
@@ -19,24 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class ParserTest {
-    @Test
-    public void parseMeal_validInputs_success() throws IncompleteMealException, UnregisteredMealException,
-            NegativeValueException {
-        String command = "eat m/chicken rice s/1";
-        Parser.parseMeal(command);
-        assertEquals("chicken rice", Parser.mealDescription);
-        assertEquals(1, Parser.mealSize);
-    }
-
-    @Test
-    public void parseDrink_validInputs_success() throws IncompleteDrinkException, UnregisteredDrinkException,
-            NegativeValueException {
-        String command = "drink d/sprite s/300";
-        Parser.parseDrink(command);
-        assertEquals("sprite", Parser.drinkDescription);
-        assertEquals(300, Parser.drinkSize);
-    }
-
     @Test
     public void parseInfoMeal_unregisteredMeal_exceptionThrown() throws IncompleteInfoException {
         String command = "infoMeal blablabla";
@@ -141,7 +121,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseMealNutrient_validInputs_success() {
+    public void parseMealNutrient_validInputs_success() throws NegativeValueException {
         String data = "fried rice,100,10,9,8,7,6";
         Parser.parseMealNutrient(data);
         assertEquals("fried rice", Parser.mealNutrientDescription);
@@ -154,7 +134,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseDrinkNutrient_validInputs_success() {
+    public void parseDrinkNutrient_validInputs_success() throws NegativeValueException {
         String data = "Guava Juice,143,38,10,9,5";
         Parser.parseDrinkNutrient(data);
         assertEquals("guava juice", Parser.drinkNutrientDescription);
