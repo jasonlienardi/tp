@@ -983,6 +983,10 @@ public class User {
         System.out.println("Total calories burnt: " + caloriesBurnt);
     }
 
+    /**
+     * Handles when user would like to see what is recommended to them,
+     * only regarding the calorie and water intake.
+     */
     public void handleRecommendations() {
         int waterIntake = 0;
         for (Water water: waterList) {
@@ -990,8 +994,8 @@ public class User {
         }
         int waterDifference = RECOMMEND_WATER_INTAKE -waterIntake;
         if (waterIntake < RECOMMEND_WATER_INTAKE) {
-            System.out.println("Recommend drinking more water. Please drink " +
-                    waterDifference + " ml more water");
+            System.out.println("We recommend drinking more water. Please drink " +
+                    waterDifference + " ml more water to hit the daily water intake goal :)");
         } else {
             System.out.println("Great! You are on track with the water intake!");
         }
@@ -1008,7 +1012,7 @@ public class User {
         }
         int caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesCount;
         if (caloriesCount < RECOMMEND_CALORIE_INTAKE) {
-            System.out.println("Recommend eating more food. Please eat " + caloriesDifference + " more calories");
+            System.out.println("We recommend eating more food. Please eat " + caloriesDifference + " more calories");
         } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE && caloriesCount < RECOMMEND_CALORIE_INTAKE + 200) {
             System.out.println("Great! You are on track with the calorie intake!");
         } else {
