@@ -10,9 +10,11 @@ public class CSVReader {
     private static HashMap<String, String[]> foodItems = new HashMap<>();
 
     public static void main(String[] args){
-        String mealCsvFile = "./tp/db//Meal_db.csv";
+        String mealCsvFile = "./db/Meal_db.csv";
         String drinkCSVFile = "./db/Drink_db.csv";
         CSVReader.read(mealCsvFile);
+        printInfo();
+        readMealInfo(mealCsvFile, "Pepper lunch ");
     }
     public static void read(String filename) {
         try{
@@ -20,7 +22,7 @@ public class CSVReader {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
-            String line = " ";
+            String line = "";
             String[] tempArr;
             while ((line = br.readLine()) != null) {
                 tempArr = line.split(DELIMITER);
@@ -39,9 +41,8 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
-    public static String readMealInfo(String filename, String foodName) {
+    public static void readMealInfo(String filename, String foodName) {
         read(filename);
-        StringBuilder result = new StringBuilder();
         boolean found = false;
         String[] nutrientInfo = null;
         if (foodItems.containsKey(foodName)) {
@@ -51,16 +52,25 @@ public class CSVReader {
             System.out.println("Error! Food not found. Please input a valid item.");
         }
         if (found && nutrientInfo != null) {
-            result.append(foodName);
-            for(int i = 0; i < nutrientInfo.length; i++) {
-                result.append(DELIMITER).append(nutrientInfo[i]);
+            for (String nutrients : nutrientInfo) {
+                System.out.println(nutrients);
             }
         }
-        return result.toString();
     }
 
-    public static void combineKeyandValue(String key) {
-
+    public static void printInfo() {
+        for (HashMap.Entry<String, String[]> entry : foodItems.entrySet()) {
+            String key = entry.getKey();
+            String[] value = entry.getValue();
+            System.out.print("Key: " + key + ", Value: [");
+            for (int i = 0; i < value.length; i++) {
+                System.out.print(value[i]);
+                if (i < value.length - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+        }
     }
 }
 
