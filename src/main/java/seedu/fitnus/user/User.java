@@ -24,6 +24,7 @@ import seedu.fitnus.exception.InvalidDateException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Handles all methods related to the user's meals, drinks and exercise.
@@ -44,20 +45,24 @@ public class User {
 
     public User(Storage mealStorage, Storage drinkStorage, Storage exerciseStorage,
                 Storage mealNutrientStorage, Storage drinkNutrientStorage, Storage exerciseCaloriesStorage) {
-        mealList = new ArrayList<>();
-        drinkList = new ArrayList<>();
-        exerciseList = new ArrayList<>();
-        waterList = new ArrayList<>();
-        mealListAll = new ArrayList<>();
-        drinkListAll = new ArrayList<>();
-        exerciseListAll = new ArrayList<>();
-        waterListAll = new ArrayList<>();
-        loadMealNutrient(mealNutrientStorage);
-        loadDrinkNutrient(drinkNutrientStorage);
-        loadExerciseCalories(exerciseCaloriesStorage);
-        loadMeal(mealStorage);
-        loadDrink(drinkStorage);
-        loadExercise(exerciseStorage);
+        try {
+            mealList = new ArrayList<>();
+            drinkList = new ArrayList<>();
+            exerciseList = new ArrayList<>();
+            waterList = new ArrayList<>();
+            mealListAll = new ArrayList<>();
+            drinkListAll = new ArrayList<>();
+            exerciseListAll = new ArrayList<>();
+            waterListAll = new ArrayList<>();
+            loadMealNutrient(mealNutrientStorage);
+            loadDrinkNutrient(drinkNutrientStorage);
+            loadExerciseCalories(exerciseCaloriesStorage);
+            loadMeal(mealStorage);
+            loadDrink(drinkStorage);
+            loadExercise(exerciseStorage);
+        } catch (NegativeValueException e) {
+            System.out.println("Nutrient details must be greater than 0");
+        }
     }
 
     /**
@@ -173,7 +178,7 @@ public class User {
      *
      * @param mealNutrientStorage contains filePath and folderPath of where the pre-defined meals are stored.
      */
-    public void loadMealNutrient(Storage mealNutrientStorage) {
+    public void loadMealNutrient(Storage mealNutrientStorage) throws NegativeValueException{
         try {
             ArrayList<String> mealNutrientList = mealNutrientStorage.readFile();
             if (!mealNutrientList.isEmpty()) {
@@ -199,7 +204,7 @@ public class User {
      *
      * @param drinkNutrientStorage contains filePath and folderPath of where the pre-defined drinks are stored.
      */
-    public void loadDrinkNutrient(Storage drinkNutrientStorage) {
+    public void loadDrinkNutrient(Storage drinkNutrientStorage) throws NegativeValueException{
         try {
             ArrayList<String> drinkNutrientList = drinkNutrientStorage.readFile();
             if (!drinkNutrientList.isEmpty()) {
@@ -317,6 +322,72 @@ public class User {
         } catch (IOException e) {
             System.out.println("Failed saving drink: " + e.getMessage());
         }
+    }
+
+    public void saveMealNutrients(Storage mealNutrientStorage) {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, int[]> entry : Meal.nutrientDetails.entrySet()) {
+            result.append(entry.getKey()).append(",");
+            int[] values = entry.getValue();
+            for (int value : values) {
+                result.append(value).append(",");
+            }
+            result = new StringBuilder(result.substring(0, result.length() - 1));
+            result.append("\n");
+        }
+        mealNutrientStorage.appendTextContent(result.toString());
+        System.out.println(mealNutrientStorage.textContent);
+        try {
+            mealNutrientStorage.writeFile(mealNutrientStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed adding meal nutrients: " + e.getMessage());
+        }
+    }
+
+    public void saveDrinkNutrients(Storage drinkNutrientStorage) {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, int[]> entry : Drink.nutrientDetails.entrySet()) {
+            result.append(entry.getKey()).append(",");
+            int[] values = entry.getValue();
+            for (int value : values) {
+                result.append(value).append(",");
+            }
+            result = new StringBuilder(result.substring(0, result.length() - 1));
+            result.append("\n");
+        }
+        drinkNutrientStorage.appendTextContent(result.toString());
+        try {
+            drinkNutrientStorage.writeFile(drinkNutrientStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed adding drink nutrients: " + e.getMessage());
+        }
+    }
+
+    public void handleAddNewMealNutrient(String command) throws NegativeValueException{
+        Parser.parseNewMeal(command);
+        String description = Parser.mealNutrientDescription;
+        int calories = Parser.mealNutrientCalories;
+        int carbs = Parser.mealNutrientCarbs;
+        int protein = Parser.mealNutrientProtein;
+        int fat = Parser.mealNutrientFat;
+        int fiber = Parser.mealNutrientFiber;
+        int sugar = Parser.mealNutrientSugar;
+        Meal.nutrientDetails.put(description, new int[]{calories, carbs, protein, fat, fiber, sugar});
+
+        System.out.println("Added " + description + " to available meals");
+    }
+
+    public void handleAddNewDrinkNutrient(String command) throws NegativeValueException{
+        Parser.parseNewDrink(command);
+        String description = Parser.drinkNutrientDescription;
+        int calories = Parser.drinkNutrientCalories;
+        int carbs = Parser.drinkNutrientCarbs;
+        int sugar = Parser.drinkNutrientSugar;
+        int protein = Parser.drinkNutrientProtein;
+        int fat = Parser.drinkNutrientFat;
+        Drink.nutrientDetails.put(description, new int[]{calories, carbs, sugar, protein, fat});
+
+        System.out.println("Added " + description + " to available drinks");
     }
 
     /**

@@ -105,6 +105,10 @@ public class Parser {
                 user.handleDrink(command);
             } else if (command.startsWith("exercise")) {
                 user.handleExercise(command);
+            } else if (command.startsWith("newMeal")) {
+                user.handleAddNewMealNutrient(command);
+            } else if (command.startsWith("newDrink")) {
+                user.handleAddNewDrinkNutrient(command);
             } else if (command.equals("allMeals")) {
                 Meal.listAvailableMeals();
             } else if (command.equals("allDrinks")) {
@@ -215,6 +219,8 @@ public class Parser {
             System.out.println("Your serving size/exercise duration must be at least 0!");
         } catch (InvalidDateException e) {
             System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
 
     }
@@ -261,6 +267,10 @@ public class Parser {
         System.out.println("- Delete certain meal entry: deleteMeal INDEX");
         System.out.println("- Delete certain drink entry: deleteDrink INDEX");
         System.out.println("- Delete certain exercise entry: deleteExercise INDEX");
+        System.out.println("- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES," +
+                "CARBS,PROTEIN,FAT,FIBER,SUGAR");
+        System.out.println("- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES," +
+                "CARBS,SUGAR,PROTEIN,FAT");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
@@ -524,16 +534,33 @@ public class Parser {
      *
      * @param data The nutrient data string to be parsed.
      */
-    public static void parseMealNutrient(String data) {
+    public static void parseMealNutrient(String data) throws  IllegalArgumentException, NegativeValueException{
         String delimiter = ",";
         String[] arrayOfMealNutrient = data.split(delimiter);
-        mealNutrientDescription = arrayOfMealNutrient[0].trim().toLowerCase();
-        mealNutrientCalories = Integer.parseInt(arrayOfMealNutrient[1]);
-        mealNutrientCarbs = Integer.parseInt(arrayOfMealNutrient[2]);
-        mealNutrientProtein = Integer.parseInt(arrayOfMealNutrient[3]);
-        mealNutrientFat = Integer.parseInt(arrayOfMealNutrient[4]);
-        mealNutrientFiber = Integer.parseInt(arrayOfMealNutrient[5]);
-        mealNutrientSugar = Integer.parseInt(arrayOfMealNutrient[6]);
+
+        if (arrayOfMealNutrient.length != 7) {
+            throw new IllegalArgumentException("Invalid number of arguments provided. Expected 7, got "
+                    + arrayOfMealNutrient.length);
+        }
+
+        try {
+            mealNutrientDescription = arrayOfMealNutrient[0].trim().toLowerCase();
+            mealNutrientCalories = Integer.parseInt(arrayOfMealNutrient[1]);
+            mealNutrientCarbs = Integer.parseInt(arrayOfMealNutrient[2]);
+            mealNutrientProtein = Integer.parseInt(arrayOfMealNutrient[3]);
+            mealNutrientFat = Integer.parseInt(arrayOfMealNutrient[4]);
+            mealNutrientFiber = Integer.parseInt(arrayOfMealNutrient[5]);
+            mealNutrientSugar = Integer.parseInt(arrayOfMealNutrient[6]);
+
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientCalories);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientCarbs);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientProtein);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientFat);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientFiber);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(mealNutrientSugar);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid numeric format, please input an integer");
+        }
     }
 
     /**
@@ -541,15 +568,31 @@ public class Parser {
      *
      * @param data The nutrient data string to be parsed.
      */
-    public static void parseDrinkNutrient(String data) {
+    public static void parseDrinkNutrient(String data) throws  IllegalArgumentException, NegativeValueException {
         String delimiter = ",";
         String[] arrayOfDrinkNutrient = data.split(delimiter);
-        drinkNutrientDescription = arrayOfDrinkNutrient[0].trim().toLowerCase();
-        drinkNutrientCalories = Integer.parseInt(arrayOfDrinkNutrient[1]);
-        drinkNutrientCarbs = Integer.parseInt(arrayOfDrinkNutrient[2]);
-        drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
-        drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
-        drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
+
+        if (arrayOfDrinkNutrient.length != 6) {
+            throw new IllegalArgumentException("Invalid number of arguments provided. Expected 6, got "
+                    + arrayOfDrinkNutrient.length);
+        }
+
+        try {
+            drinkNutrientDescription = arrayOfDrinkNutrient[0].trim().toLowerCase();
+            drinkNutrientCalories = Integer.parseInt(arrayOfDrinkNutrient[1]);
+            drinkNutrientCarbs = Integer.parseInt(arrayOfDrinkNutrient[2]);
+            drinkNutrientSugar = Integer.parseInt(arrayOfDrinkNutrient[3]);
+            drinkNutrientProtein = Integer.parseInt(arrayOfDrinkNutrient[4]);
+            drinkNutrientFat = Integer.parseInt(arrayOfDrinkNutrient[5]);
+
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientCalories);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientCarbs);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientSugar);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientProtein);
+            IntegerValidation.checkIntegerGreaterOrEqualThanZero(drinkNutrientFat);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid numeric format, please input an integer");
+        }
     }
 
     /**
@@ -580,5 +623,15 @@ public class Parser {
             return date;
         }
         throw new InvalidDateException();
+    }
+
+    public static void parseNewMeal(String command) throws NegativeValueException {
+        String mealNutrients = command.substring(8).trim();
+        parseMealNutrient(mealNutrients);
+    }
+
+    public static void parseNewDrink(String command) throws NegativeValueException {
+        String drinkNutrients = command.substring(9).trim();
+        parseDrinkNutrient(drinkNutrients);
     }
 }

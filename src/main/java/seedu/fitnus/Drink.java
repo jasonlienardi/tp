@@ -34,13 +34,6 @@ public class Drink  {
         this.dateAdded = currentDate;
     }
 
-    static {
-        nutrientDetails.put("water", new int[]{0, 0, 0, 0, 0});
-        nutrientDetails.put("sprite", new int[]{40, 50, 30, 20, 2});
-        nutrientDetails.put("lemon tea", new int[]{150, 30, 25, 1, 20});
-        nutrientDetails.put("milk coffee", new int[]{20, 27, 25, 4, 3});
-    }
-
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * drinkVolume / 100;
