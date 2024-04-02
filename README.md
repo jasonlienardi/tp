@@ -1,4 +1,4 @@
-# User Guide: FitNUS
+# FitNUS
 ## Project Introduction
 FitNUS is a CLI application that aims to help combat diabetes and the overconsumption of calories, sugar, and
 carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
