@@ -61,9 +61,9 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
 ### 1.1 Information for users
 ### 1.1.1 Viewing all commands: `help`
 Shows a list of all possible command inputs.  
-**Format**: help  
-**Sample Input**: help  
-**Expected Output**:  
+**Format**: `help`   
+**Expected Output**:
+~~~
 here's all the valid commands i recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/VOLUME(ML)
@@ -102,21 +102,100 @@ here's all the valid commands i recognise:
 - Delete certain exercise entry: deleteExercise INDEX
 - Clear all entries: clear
 - Exit the app: exit
-
+~~~
 ### 1.1.2 Viewing all pre-defined meals: `allMeals`
 Shows a list of all pre-defined meals. These meals will have their nutritional content defined per serving size and can
 be inputted immediately.  
-**Format**: allMeals
+**Format**: `allMeals`   
+**Expected Output**:
+~~~
+Available meals: 
+- char kway teow
+- ban mian
+- tau huay
+- nasi goreng
+- soup kambeng
+- nasi lemak
+- pepper lunch
+- char siew rice
+- pork satay with satay sauce
+- roti prata
+- mee goreng
+- chendol
+- wanton mee
+- oyster omlette
+- pizza
+- ice kachang
+- chicken rice
+- fried rice
+- kaya toast
+- mala
+- laksa
+- hokkien prawn mee
+- durian
+
+You may also input a meal that isn't here.
+~~~
 
 ### 1.1.3 Viewing all pre-defined drinks: `allDrinks`
 Shows a list of all pre-defined drinks. These drinks will have their nutritional content defined per 100ml
 and can be inputted immediately.  
 **Format**: allDrinks
+**Expected Output**:
+~~~
+Available drinks: 
+- milo dinosaur
+- chrysanthemun juice
+- honey lemon tea
+- soursop juice
+- lemon tea
+- kopi c
+- kalamansi juice
+- kopi o
+- milo
+- plum juice
+- water
+- 100 plus
+- milk coffee
+- teh c bing
+- kopi
+- guava juice
+- tiger beer
+- teh tarik
+- sugarcane juice
+- teh
+- sprite
+- iced lemon tea
+- bandung
+
+You may also input a drink that isn't here.
+~~~
 
 ### 1.1.3 Viewing all pre-defined exercises: `allExercises`
 Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
 high/medium/low intensity workout defined per minute and can be inputted immediately.  
 **Format**: allExercises
+**Expected Output**:
+~~~
+Available exercises: 
+- soccer
+- rugby
+- yoga
+- badminton
+- hiking
+- cycling
+- tennis
+- running
+- weightlifting
+- swimming
+- basketball
+- rowing
+- boxing
+- volleyball
+- skipping
+
+You may also input an exercise that isn't here.
+~~~
 
 ### 1.2 For user to add data
 ### 1.2.1 Add a meal eaten: `eat`
