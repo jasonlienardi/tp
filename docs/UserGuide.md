@@ -68,6 +68,8 @@ here's all the valid commands i recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/VOLUME(ML)
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
+- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR
+- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT
 - View all meals that you can input: allMeals
 - View all drinks that you can input: allDrinks
 - View all exercises that you can input: allExercises
@@ -171,7 +173,7 @@ Available drinks:
 You may also input a drink that isn't here.
 ~~~
 
-### 1.1.3 Viewing all pre-defined exercises: `allExercises`
+### 1.1.4 Viewing all pre-defined exercises: `allExercises`
 Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
 high/medium/low intensity workout defined per minute and can be inputted immediately.  
 **Format**: allExercises
@@ -234,6 +236,24 @@ Adds exercise to the list of exercises done
 Tracked 30 minutes of swimming
 ~~~
 
+### 1.2.4 Add new meal to available meals: `newMeal`
+Adds a new meal to available meals  
+**Format**: `newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR`
+**Sample Input**: `newMeal mie,607,75,25,23,2,10`  
+**Expected Output**:
+~~~
+Added mie to available meals
+~~~
+
+### 1.2.4 Add new meal to available meals: `newDrink`
+Adds a new drink to available drinks  
+**Format**: `newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT`
+**Sample Input**: `newDrink coke,153,32,1,2,1`  
+**Expected Output**:
+~~~
+Added coke to available drinks
+~~~
+ 
 ## 1.3 For data retrieval
 ### 1.3.1 Find the information about a certain meal: `infoMeal`
 For the specified meal, display its nutritional content to the user  
