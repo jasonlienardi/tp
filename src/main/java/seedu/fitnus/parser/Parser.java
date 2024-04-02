@@ -151,6 +151,8 @@ public class Parser {
                 user.handleDeleteExercise(command);
             } else if (command.equals("clear")) {
                 user.handleClear();
+            } else if (command.equals("recommend")) {
+                user.handleRecommendations();
             } else {
                 throw new InvalidCommandException();
             }
