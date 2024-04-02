@@ -59,15 +59,18 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
 
 ## 1) Features List
 ### 1.1 Information for users
-### 1.1.1 Viewing all commands:** `help`
+### 1.1.1 Viewing all commands: `help`
 Shows a list of all possible command inputs.  
 **Format**: help  
 **Sample Input**: help  
 **Expected Output**:  
-here's all the valid commands I recognise:
+here's all the valid commands i recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/VOLUME(ML)
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
+- View all meals that you can input: allMeals
+- View all drinks that you can input: allDrinks
+- View all exercises that you can input: allExercises
 - Find the information about a certain meal: infoMeal MEAL
 - Find the information about a certain drink: infoDrink DRINK
 - Find the information about a certain exercise: infoExercise EXERCISE
@@ -79,7 +82,6 @@ here's all the valid commands I recognise:
 - View daily fiber consumed: fiber
 - View daily water consumption: viewWater
 - View daily calories burnt: caloriesBurnt
-- View daily calories and water intake recommendation: recommend
 - List today's meal intake: listMeals
 - List today's drink intake: listDrinks
 - List today's exercises done: listExercises
@@ -87,7 +89,7 @@ here's all the valid commands I recognise:
 - List all meal intake: listMealsAll
 - List all drink intake: listDrinksAll
 - List all exercises done: listExercisesAll
-- List all entire food intake and exercises: listEverythingAll
+- List all food intake and exercises: listEverythingAll
 - List meal intake for certain date: listMeals d/dd-MM-yyyy
 - List drink intake for certain date: listDrinks d/dd-MM-yyyy
 - List exercises done for certain date: listExercises d/dd-MM-yyyy
@@ -100,6 +102,21 @@ here's all the valid commands I recognise:
 - Delete certain exercise entry: deleteExercise INDEX
 - Clear all entries: clear
 - Exit the app: exit
+
+### 1.1.2 Viewing all pre-defined meals: `allMeals`
+Shows a list of all pre-defined meals. These meals will have their nutritional content defined per serving size and can
+be inputted immediately.  
+**Format**: allMeals
+
+### 1.1.3 Viewing all pre-defined drinks: `allDrinks`
+Shows a list of all pre-defined drinks. These drinks will have their nutritional content defined per 100ml
+and can be inputted immediately.  
+**Format**: allDrinks
+
+### 1.1.3 Viewing all pre-defined exercises: `allExercises`
+Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
+high/medium/low intensity workout defined per minute and can be inputted immediately.  
+**Format**: allExercises
 
 ### 1.2 For user to add data
 ### 1.2.1 Add a meal eaten: `eat`
