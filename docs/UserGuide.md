@@ -61,8 +61,7 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
 ### 1.1 Information for users
 ### 1.1.1 Viewing all commands: `help`
 Shows a list of all possible command inputs.  
-**Format**: help  
-**Sample Input**: help  
+**Format**: `help`   
 **Expected Output**:
 ~~~
 here's all the valid commands i recognise:
