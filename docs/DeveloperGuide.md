@@ -2,11 +2,44 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Below are the references used on the project:
+1. [Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+2. [User Guide](https://se-education.org/addressbook-level3/UserGuide.html)
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+
+The architecture diagram belows shows the overall design of our FitNUS CLI app and how each component interact with each other.
+
+![Architecture Diagram](../docs/diagrams/diagrams_png/ArchitectureDiagram.png)
+
+**Main Components of The Architecture**
+
+- `FitNUS`: FitNUS main code which runs the program until termination
+- `Ui`: The user interface of the app that reads in user input
+- `Storage`: Handles stored all `recipe`, `ingredient` and `shortcut` that the user has input
+- `Parser`: Parses user input
+- `User`: Handles user input and stores the `Exercise`, `Drink`, `Meal`, and `Water` created by user
+- `Date`: Handles user's local machine date
+- `Exercise`: Exercises completed and its duration created by user
+- `Drink`: Drinks intake and its nutritional values created by user
+- `Meal`: Meals intake and its nutritional values created by user
+- `Water`: Water intake created by user
+
+### Exercise Component
+![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
+
+1. Upon starting up the application, User will call `loadExercises` to fetch all data from `ExerciseList.txt` and add it into `exerciseListAll`.
+2. A `User` class consists of zero to as many `Exercise` objects in the ArrayList.
+3. Each `Exercise` contains exactly one enumeration of `ExerciseIntensity`.
+### Drink Component
+
+### Water Component
+
+### Storage Component
+
+## Implementation
 
 ### Tracking Exercise Feature
 - Create a CSV which stores data regarding how many calories are burnt per hour for each exercise type (eg. swimming, running, cycling).
