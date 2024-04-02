@@ -232,6 +232,7 @@ public class Parser {
         System.out.println("- View daily fiber consumed: fiber");
         System.out.println("- View daily water consumption: viewWater");
         System.out.println("- View daily calories burnt: caloriesBurnt");
+        System.out.println("- View daily calories and water intake recommendation: recommend");
         System.out.println("- List today's meal intake: listMeals");
         System.out.println("- List today's drink intake: listDrinks");
         System.out.println("- List today's exercises done: listExercises");
