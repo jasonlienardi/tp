@@ -1,9 +1,9 @@
 # User Guide: FitNUS
 ## Project Introduction
 FitNUS is a CLI application that aims to help combat diabetes and the overconsumption of calories, sugar, and
-carbohydrates. Promote healthy lifestyle.
+carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
-Users are able to track the meals and drinks they have in a day.
+Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
 ## Table of Contents
 <!-- TOC -->
@@ -30,6 +30,7 @@ Users are able to track the meals and drinks they have in a day.
     * [1.3.9 View daily fiber consumed: `fiber`](#139-view-daily-fiber-consumed-fiber)
     * [1.3.10 View daily water consumption: `viewWater`](#1310-view-daily-water-consumption-viewwater)
     * [1.3.11 View daily calories consumed: `caloriesBurnt`](#1311-view-daily-calories-consumed-caloriesburnt)
+    * [1.3.12 View daily calories and water intake recommendation: `recommend`](#1312-view-daily-calories-and-water-intake-recommendation-recommend)
   * [1.4 For listing arrays](#14-for-listing-arrays)
     * [1.4.1 List today's meal intake: `listMeals`](#141-list-todays-meal-intake-listmeals)
     * [1.4.2 List today's drink intake: `listDrinks`](#142-list-todays-drink-intake-listdrinks)
@@ -78,6 +79,7 @@ here's all the valid commands I recognise:
 - View daily fiber consumed: fiber
 - View daily water consumption: viewWater
 - View daily calories burnt: caloriesBurnt
+- View daily calories and water intake recommendation: recommend
 - List today's meal intake: listMeals
 - List today's drink intake: listDrinks
 - List today's exercises done: listExercises
@@ -243,6 +245,16 @@ Display current total calorie burnt for the day
 Total calories burnt: 70
 ~~~
 
+### 1.3.12 View daily calories and water intake recommendation: `recommend`
+Display today's recommended water and calories intake  
+**Format**: `recommend`    
+**Expected output**:
+~~~
+Great! You are on track with the water intake!
+  ~~
+Recommend eating more food. Please eat 500 more calories
+~~~
+
 ## 1.4 For listing arrays
 ### 1.4.1 List today's meal intake: `listMeals`
 Display all the meals user input today   
@@ -394,42 +406,63 @@ here's the exercises you've done on 01-04-2024
 ## 1.5 For editing existing data
 ### 1.5.1 Edit an existing meal after inserted: `editMeal`
 For a meal that was inputted in the day, edit its serving size  
-**Format**: editMealServingSize INDEX s/NEW_SERVING_SIZE  
-**Sample input**: editMeal 2 s/2  
-**Expected output**: Pizza has been edited to 2 servings
+**Format**: `editMeal INDEX s/NEW_SERVING_SIZE`  
+**Sample input**: `editMeal 2 s/2`  
+**Expected output**:
+~~~
+Pizza has been edited to 2 servings
+~~~
 
 ### 1.5.2 Edit an existing drink after inserted: `editDrink`
 For a drink that was inputted in the day, edit its serving size  
-**Format**: editDrinkServingSize INDEX s/NEW_SERVING_SIZE  
+**Format**: `editDrink INDEX s/NEW_SERVING_SIZE`  
 **Sample input**: editDrink 1 s/200  
-**Expected output**: Sprite has been edited to 200 ml
+**Expected output**:
+~~~
+Sprite has been edited to 200 ml
+~~~
 
 ### 1.5.3 Edit water intake after inserted: `editWater`
 Edit serving size of total water intake  
-**Format**: editWaterIntake s/TOTAL_WATER_INTAKE  
-**Sample input**: editWaterIntake 200  
-**Expected output**: Total water has been edited to 200 ml
+**Format**: `editWater s/TOTAL_WATER_INTAKE`  
+**Sample input**: `editWater 200`  
+**Expected output**: 
+~~~
+Total water has been edited to 200 ml
+~~~
 
 ## 1.6 For deleting data
 ### 1.6.1 Delete certain meal entry: `deleteMeal`
 For a meal that was inputted in the day, delete its input based on its index in the meal list
-**Format**: deleteMeal INDEX
-**Sample Input**: deleteMeal 1
-**Expected output**: Removed Chicken Rice From Meals
+**Format**: `deleteMeal INDEX`
+**Sample Input**: `deleteMeal 1`
+**Expected output**:
+~~~
+Removed Chicken Rice From Meals
+~~~
 
 ### 1.6.2 Delete certain drink entry: `deleteDrink`
 For a drink that was inputted in the day, delete its input based on its index in the drink list  
-**Format**: deleteDrink INDEX  
-**Sample input**: deleteDrink 1  
-**Expected output:**  Removed Iced Lemon Tea From Drinks
+**Format**: `deleteDrink INDEX`  
+**Sample input**: `deleteDrink 1`  
+**Expected output:**  
+~~~
+Removed Iced Lemon Tea From Drinks
+~~~
 
 ## 1.7 For clearing data
 ### 1.7.1 Clear all entries: `clear`
 Clear all entries in mealList and drinkList  
-**Format**: clear  
-**Expected output**: All entries have been deleted
+**Format**: `clear`  
+**Expected output**:
+~~~
+All entries have been deleted
+~~~
 
 ## 1.8: Exit program
 ### 1.8.1 Exit the app: `exit`
-**Format**: exit  
-**Expected output**: Bye. Hope to see you again soon!
+**Format**: `exit`  
+**Expected output**:
+~~~
+Bye. Hope to see you again soon!
+~~~

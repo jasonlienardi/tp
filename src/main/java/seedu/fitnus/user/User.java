@@ -999,7 +999,7 @@ public class User {
         } else {
             System.out.println("Great! You are on track with the water intake!");
         }
-        System.out.println("    ~~~");
+        System.out.println("    ~~");
         int caloriesCount = 0;
         for (Meal meal: mealList) {
             caloriesCount += meal.getCalories();
