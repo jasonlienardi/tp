@@ -5,6 +5,13 @@ carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
+## Setup 
+To use the app please follow the setup procedures below:
+1. Download the JAR file and 'db' folder. 
+2. Place them into an empty folder. 
+3. Navigate to the folder you just created.
+4. Run the JAR file.
+
 ## Table of Contents
 <!-- TOC -->
 * [User Guide: FitNUS](#user-guide-fitnus)
@@ -12,12 +19,17 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
   * [Table of Contents](#table-of-contents)
   * [1) Features List](#1-features-list)
     * [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands:** `help`](#111-viewing-all-commands-help)
+    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
+    * [1.1.2 Viewing all pre-defined meals: `allMeals`](#112-viewing-all-pre-defined-meals-allmeals)
+    * [1.1.3 Viewing all pre-defined drinks: `allDrinks`](#113-viewing-all-pre-defined-drinks-alldrinks)
+    * [1.1.4 Viewing all pre-defined exercises: `allExercises`](#114-viewing-all-pre-defined-exercises-allexercises)
     * [1.2 For user to add data](#12-for-user-to-add-data)
     * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
     * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
     * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
     * [1.2.3 Add exercise: `exercise`](#123-add-exercise-exercise)
+    * [1.2.4 Add new meal to available meals: `newMeal`](#124-add-new-meal-to-available-meals-newmeal)
+    * [1.2.4 Add new meal to available meals: `newDrink`](#124-add-new-meal-to-available-meals-newdrink)
   * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
@@ -68,6 +80,8 @@ here's all the valid commands i recognise:
 - Add a meal eaten: eat m/MEAL s/SERVING_SIZE
 - Add a drink: drink d/DRINK s/VOLUME(ML)
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
+- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR
+- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT
 - View all meals that you can input: allMeals
 - View all drinks that you can input: allDrinks
 - View all exercises that you can input: allExercises
@@ -171,7 +185,7 @@ Available drinks:
 You may also input a drink that isn't here.
 ~~~
 
-### 1.1.3 Viewing all pre-defined exercises: `allExercises`
+### 1.1.4 Viewing all pre-defined exercises: `allExercises`
 Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
 high/medium/low intensity workout defined per minute and can be inputted immediately.  
 **Format**: allExercises
@@ -234,6 +248,24 @@ Adds exercise to the list of exercises done
 Tracked 30 minutes of swimming
 ~~~
 
+### 1.2.4 Add new meal to available meals: `newMeal`
+Adds a new meal to available meals  
+**Format**: `newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR`
+**Sample Input**: `newMeal mie,607,75,25,23,2,10`  
+**Expected Output**:
+~~~
+Added mie to available meals
+~~~
+
+### 1.2.4 Add new meal to available meals: `newDrink`
+Adds a new drink to available drinks  
+**Format**: `newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT`
+**Sample Input**: `newDrink coke,153,32,1,2,1`  
+**Expected Output**:
+~~~
+Added coke to available drinks
+~~~
+ 
 ## 1.3 For data retrieval
 ### 1.3.1 Find the information about a certain meal: `infoMeal`
 For the specified meal, display its nutritional content to the user  
