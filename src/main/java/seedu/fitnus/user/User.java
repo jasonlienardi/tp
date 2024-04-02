@@ -1017,7 +1017,7 @@ public class User {
             System.out.println("Great! You are on track with the calorie intake!");
         } else {
             System.out.println("You are " + -caloriesDifference
-                    + " above the recommended calorie amount, consider exercising!");
+                    + " calories above the recommended calorie amount, consider exercising!");
         }
     }
 }
