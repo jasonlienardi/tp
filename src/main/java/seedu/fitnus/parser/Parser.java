@@ -105,6 +105,12 @@ public class Parser {
                 user.handleDrink(command);
             } else if (command.startsWith("exercise")) {
                 user.handleExercise(command);
+            } else if (command.startsWith("allMeals")) {
+                Meal.listAvailableMeals();
+            } else if (command.startsWith("allDrinks")) {
+                Drink.listAvailableDrinks();
+            } else if (command.startsWith("allExercises")) {
+                Exercise.listAvailableExercises();
             } else if (command.startsWith("infoMeal")) {
                 Meal.handleInfoMeal(command);
             } else if (command.startsWith("infoDrink")) {
@@ -221,6 +227,9 @@ public class Parser {
         System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
         System.out.println("- Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
                 "i/INTENSITY(HIGH, MEDIUM, LOW)");
+        System.out.println("- View all meals that you can input: allMeals");
+        System.out.println("- View all drinks that you can input: allDrinks");
+        System.out.println("- View all exercises that you can input: allExercises");
         System.out.println("- Find the information about a certain meal: infoMeal MEAL");
         System.out.println("- Find the information about a certain drink: infoDrink DRINK");
         System.out.println("- Find the information about a certain exercise: infoExercise EXERCISE");
@@ -232,6 +241,7 @@ public class Parser {
         System.out.println("- View daily fiber consumed: fiber");
         System.out.println("- View daily water consumption: viewWater");
         System.out.println("- View daily calories burnt: caloriesBurnt");
+        System.out.println("- View daily calories and water intake recommendation: recommend");
         System.out.println("- List today's meal intake: listMeals");
         System.out.println("- List today's drink intake: listDrinks");
         System.out.println("- List today's exercises done: listExercises");

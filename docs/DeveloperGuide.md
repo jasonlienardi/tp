@@ -39,7 +39,7 @@
 ### Value proposition
 
 The fitness app aims to help users manage their dietary habits and exercise routines more efficiently compared to traditional GUI-driven apps. 
-By offering a streamlined interface optimized for keyboard input and CLI interactions, users can track their meals, drinks, and exercises swiftly, allowing them to focus more on their fitness goals and less on navigating through complex user interfaces.
+By offering a streamlined interface optimized for keyboard input and CLI interactions, users can track their meals, drinks, and exercises swiftly, allowing them to focus more on their fitness and nutritional goals and less on navigating through complex user interfaces.
 
 ## User Stories
 
@@ -50,7 +50,7 @@ By offering a streamlined interface optimized for keyboard input and CLI interac
 
 ## Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+1. Should work on any mainstream OS (Linux, Windows, MacOS) as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
@@ -68,5 +68,15 @@ By offering a streamlined interface optimized for keyboard input and CLI interac
 
 
 ## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app on your own device.
+### Launch and Shutdown
+1. Initial Launch
+   1. Create an empty folder, download the jar file, and place the file inside the folder.
+   2. Open the terminal and navigate to the folder you just created.
+   3. Type `java -jar [name of the jar]`, e.g.`(java -jar FitNUS.jar)` on the CLI.
+2. Window Preference
+   1. Resize the window to an optimum size. Ideally full screen, as some text might not be displayed correctly.
+3. App Features and Commands
+4. Save and Shutdown
+   1. Type `exit` to shut down the FitNUS app.
+   2. Upon exiting, all entries inputted will be updated to the database locally.
