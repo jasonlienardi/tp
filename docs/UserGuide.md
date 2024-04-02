@@ -5,6 +5,8 @@ carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
+Note: To use the app please download the JAR file and 'db' folder. Place them into an empty folder and run the JAR file.
+
 ## Table of Contents
 <!-- TOC -->
 * [User Guide: FitNUS](#user-guide-fitnus)
@@ -12,12 +14,17 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
   * [Table of Contents](#table-of-contents)
   * [1) Features List](#1-features-list)
     * [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands:** `help`](#111-viewing-all-commands-help)
+    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
+    * [1.1.2 Viewing all pre-defined meals: `allMeals`](#112-viewing-all-pre-defined-meals-allmeals)
+    * [1.1.3 Viewing all pre-defined drinks: `allDrinks`](#113-viewing-all-pre-defined-drinks-alldrinks)
+    * [1.1.4 Viewing all pre-defined exercises: `allExercises`](#114-viewing-all-pre-defined-exercises-allexercises)
     * [1.2 For user to add data](#12-for-user-to-add-data)
     * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
     * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
     * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
     * [1.2.3 Add exercise: `exercise`](#123-add-exercise-exercise)
+    * [1.2.4 Add new meal to available meals: `newMeal`](#124-add-new-meal-to-available-meals-newmeal)
+    * [1.2.4 Add new meal to available meals: `newDrink`](#124-add-new-meal-to-available-meals-newdrink)
   * [1.3 For data retrieval](#13-for-data-retrieval)
     * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
     * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
