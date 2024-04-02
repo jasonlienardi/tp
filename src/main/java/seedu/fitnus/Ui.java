@@ -48,6 +48,7 @@ public class Ui {
         user.saveExercise(exerciseStorage);
         user.saveMealNutrients(mealNutrientStorage);
         user.saveDrinkNutrients(drinkNutrientStorage);
+        user.saveExerciseCalories(exerciseCaloriesStorage);
     }
 
     /**

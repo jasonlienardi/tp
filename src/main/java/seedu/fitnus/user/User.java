@@ -230,7 +230,7 @@ public class User {
      *
      * @param exerciseCaloriesStorage contains filePath and folderPath of where the pre-defined exercises are stored.
      */
-    public void loadExerciseCalories(Storage exerciseCaloriesStorage) {
+    public void loadExerciseCalories(Storage exerciseCaloriesStorage) throws NegativeValueException {
         try {
             ArrayList<String> exerciseCaloriesList = exerciseCaloriesStorage.readFile();
             if (!exerciseCaloriesList.isEmpty()) {
@@ -387,6 +387,36 @@ public class User {
         Drink.nutrientDetails.put(description, new int[]{calories, carbs, sugar, protein, fat});
 
         System.out.println("Added " + description + " to available drinks");
+    }
+
+    public void saveExerciseCalories(Storage exerciseCaloriesStorage) {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, int[]> entry : Exercise.exerciseDetails.entrySet()) {
+            result.append(entry.getKey()).append(",");
+            int[] values = entry.getValue();
+            for (int value : values) {
+                result.append(value).append(",");
+            }
+            result = new StringBuilder(result.substring(0, result.length() - 1));
+            result.append("\n");
+        }
+        exerciseCaloriesStorage.appendTextContent(result.toString());
+        try {
+            exerciseCaloriesStorage.writeFile(exerciseCaloriesStorage.textContent);
+        } catch (IOException e) {
+            System.out.println("Failed adding exercise calories: " + e.getMessage());
+        }
+    }
+
+    public void handleAddNewExerciseCalories(String command) throws NegativeValueException{
+        Parser.parseNewExercise(command);
+        String description = Parser.exerciseCaloriesDescription;
+        int high = Parser.exerciseCaloriesHigh;
+        int medium = Parser.exerciseCaloriesMedium;
+        int low = Parser.exerciseCaloriesLow;
+        Exercise.exerciseDetails.put(description, new int[]{high, medium, low});
+
+        System.out.println("Added " + description + " to available exercises");
     }
 
     /**

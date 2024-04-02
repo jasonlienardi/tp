@@ -146,7 +146,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseExerciseCalories_validInputs_success() {
+    public void parseExerciseCalories_validInputs_success() throws NegativeValueException {
         String data = "Running,14,10,7";
         Parser.parseExerciseCalories(data);
         assertEquals("running", Parser.exerciseCaloriesDescription);
