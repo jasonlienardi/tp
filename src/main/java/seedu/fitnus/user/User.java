@@ -195,7 +195,7 @@ public class User {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Meal nutrient database not found");
+            mealNutrientStorage.createFile();
         }
     }
 
@@ -220,7 +220,7 @@ public class User {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Drink nutrient database not found");
+            drinkNutrientStorage.createFile();
         }
     }
 
@@ -244,7 +244,7 @@ public class User {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Exercise calories database not found");
+            exerciseCaloriesStorage.createFile();
         }
     }
 
