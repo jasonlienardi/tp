@@ -105,11 +105,11 @@ public class Parser {
                 user.handleDrink(command);
             } else if (command.startsWith("exercise")) {
                 user.handleExercise(command);
-            } else if (command.startsWith("allMeals")) {
+            } else if (command.equals("allMeals")) {
                 Meal.listAvailableMeals();
-            } else if (command.startsWith("allDrinks")) {
+            } else if (command.equals("allDrinks")) {
                 Drink.listAvailableDrinks();
-            } else if (command.startsWith("allExercises")) {
+            } else if (command.equals("allExercises")) {
                 Exercise.listAvailableExercises();
             } else if (command.startsWith("infoMeal")) {
                 Meal.handleInfoMeal(command);
@@ -179,11 +179,12 @@ public class Parser {
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command, type [help] to view all commands.");
         } catch (IncompleteDrinkException e) {
-            System.out.println("Incomplete command, the format must be [drink d/DRINK s/SERVING_SIZE].");
+            System.out.println("Incomplete/Incorrect command, the format MUST be [drink d/DRINK s/SERVING_SIZE].");
         } catch (IncompleteMealException e) {
-            System.out.println("Incomplete command, the format must be [eat m/MEAL s/SERVING_SIZE].");
+            System.out.println("Incomplete/Incorrect command, the format MUST be [eat m/MEAL s/SERVING_SIZE].");
         } catch (IncompleteExerciseException e) {
-            System.out.println("Incomplete command, the format must be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
+            System.out.println("Incomplete/Incorrect command, " +
+                    "the format MUST be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
                     + " > DURATION should be in minutes and INTENSITY can only be HIGH/MEDIUM/LOW.");
         } catch (UnregisteredDrinkException e) {
             System.out.println("Sorry that drink is not registered in the database.Please check the spelling and " +
@@ -279,9 +280,11 @@ public class Parser {
         }
         int descriptionIndex = command.indexOf("m/") + 2;
         int sizeIndex = command.indexOf("s/") + 2;
-        if (sizeIndex >= command.length()) {
+
+        if (sizeIndex >= command.length() || sizeIndex < descriptionIndex) {
             throw new IncompleteMealException();
         }
+
         mealDescription = command.substring(descriptionIndex, sizeIndex - 2).trim().toLowerCase();
         if (mealDescription.isEmpty()) {
             throw new IncompleteMealException();
@@ -308,7 +311,7 @@ public class Parser {
         }
         int descriptionIndex = command.indexOf("d/") + 2;
         int sizeIndex = command.indexOf("s/") + 2;
-        if (sizeIndex >= command.length()) {
+        if (sizeIndex >= command.length() || sizeIndex < descriptionIndex) {
             throw new IncompleteDrinkException();
         }
         drinkDescription = command.substring(descriptionIndex, sizeIndex - 2).trim().toLowerCase();
@@ -493,7 +496,8 @@ public class Parser {
         int descriptionIndex = command.indexOf("e/") + 2;
         int durationIndex = command.indexOf("d/") + 2;
         int intensityIndex = command.indexOf("i/") + 2;
-        if (intensityIndex >= command.length()) {
+        if (intensityIndex >= command.length() || durationIndex < descriptionIndex || intensityIndex < descriptionIndex
+                || intensityIndex < durationIndex) {
             throw new IncompleteExerciseException();
         }
         exerciseDescription = command.substring(descriptionIndex, durationIndex - 2).trim().toLowerCase();
