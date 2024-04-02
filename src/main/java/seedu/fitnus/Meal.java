@@ -39,6 +39,8 @@ public class Meal {
         nutrientDetails.put("chicken rice", new int[]{400, 50, 30, 20, 10, 5});
         nutrientDetails.put("fried rice", new int[]{500, 60, 25, 15, 15, 5});
         nutrientDetails.put("pizza", new int[]{600, 80, 50, 40, 30, 20});
+        nutrientDetails.put("kaya toast", new int[]{459, 44, 8, 27, 10, 1});
+        nutrientDetails.put("laksa", new int[]{377, 71, 18, 2, 4, 10});
     }
 
     private void setNutrientValues(String name) {

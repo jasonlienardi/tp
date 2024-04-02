@@ -36,9 +36,9 @@ public class Exercise {
     }
 
     static {
-        exerciseDetails.put("running", new int[]{8, 5, 3});
-        exerciseDetails.put("cycling", new int[]{6, 4, 2});
-        exerciseDetails.put("swimming", new int[]{10, 7, 4});
+        exerciseDetails.put("running", new int[]{14, 10, 7});
+        exerciseDetails.put("cycling", new int[]{10, 7, 4});
+        exerciseDetails.put("swimming", new int[]{12, 8, 5});
     }
 
     /**
