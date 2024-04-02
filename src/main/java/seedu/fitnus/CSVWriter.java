@@ -9,16 +9,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CSVWriter {
+    private static CSVReader csvreader = new CSVReader();
+
     public static void main(String[] args) {
-        writeIntoFile("hi", "FOOD");
+        writeIntoFile("Chicken Rice", "FOOD");
     }
     public static void writeIntoFile(String foodItem, String fileName) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         File file = null;
+        String readFromFile = "";
         if (fileName.toLowerCase().contains("food")) {
-            file = new File("./db/Output_Food_" + df.format(new Date())+".csv");
+            file = new File("./tp/db/Output_Food_" + df.format(new Date())+".csv");
+            readFromFile += "./tp/db//Meal_db.csv";
         } else {
-            file = new File("./db/Output_Drink_" + df.format(new Date())+".csv");
+            file = new File("./tp/db/Output_Drink_" + df.format(new Date())+".csv");
+            readFromFile += "./tp/db//Drink_db.csv";
+
         }
         if (!file.exists()) {
             try{
@@ -29,11 +35,14 @@ public class CSVWriter {
         }
         try (FileWriter fw = new FileWriter(file)){
             BufferedWriter writer = new BufferedWriter(fw);
-            writer.write(foodItem);
+            writer.write(csvreader.readMealInfo(readFromFile, foodItem));
             writer.newLine();
             writer.close();
         } catch (IOException e) {
-            System.out.println("error trying to add something into the file");
+            e.printStackTrace();
         }
+    }
+    public static void deleteFromFile(String foodItem, String fileName) {
+
     }
 }

@@ -1,5 +1,5 @@
-Chicken Rice,607,75,25,23,2,10
-Char Kway Teow,744,76,23,29,7,10
+chicken rice,607,75,25,23,2,10
+char kway teow,744,76,23,29,7,10
 Laksa,377,71,18,2,4,10
 Hokkien Prawn Mee,522,69,18,19,4,10
 Kaya Toast,459,44,8,27,10,1
@@ -10,9 +10,9 @@ roti prata ,209,32,5,7,2,10
 Pork Satay with Satay Sauce ,36,1,5,2,10,0
 Nasi Goreng,346,45,13,12,10,2
 Wanton Mee,555,97,15,14,13,10
-Mala ,583,72,12,30,10,7
-Oyster Omlette ,467,40,19,24,10,1
-Pepper lunch ,500,50,40,11,4,5
+Mala,583,72,12,30,10,7
+Oyster Omlette,467,40,19,24,10,1
+Pepper lunch,500,50,40,11,4,5
 Ban Mian,475,48,22,22,3,10
 Soup Kambeng,203,6,28,7,2,5
 Durian,147,27,2,5,3,5
