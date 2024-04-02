@@ -38,6 +38,7 @@ public class Drink  {
         nutrientDetails.put("sprite", new int[]{270, 42, 7, 8, 2});
         nutrientDetails.put("iced lemon tea", new int[]{95, 21, 1, 1, 1});
         nutrientDetails.put("milo", new int[]{124, 20, 3, 3, 1});
+        nutrientDetails.put("kopi", new int[]{141, 26, 2, 3, 1});
     }
 
     private void setNutrientValues(String name) {
