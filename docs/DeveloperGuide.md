@@ -41,6 +41,13 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 
 ## Implementation
 
+### Information on a Particular Meal Feature
+The `infoMeal` feature is executed on the `User` class. Let's say we want to find out about the nutrient values of chicken rice.   
+**Sample Input**: `infoMeal chicken rice`
+
+![InfoMeal Sequence Diagram](../docs/diagrams/diagrams_png/InfoMealSequenceDiagram.png)
+
+
 ### Tracking Exercise Feature
 - Create a CSV which stores data regarding how many calories are burnt per hour for each exercise type (eg. swimming, running, cycling).
 - Implement a 'track exercise' function which will be parsed with the format:

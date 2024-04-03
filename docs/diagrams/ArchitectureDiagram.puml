@@ -12,12 +12,12 @@ Package " "{
     Class FitNUS MAIN_COLOR
     Class Storage STORAGE_COLOR
     Class Parser PARSER_COLOR
-    Class User COMMAND_COLOR
-    Class Date INGREDIENT_COLOR
-    Class Exercise RECIPE_COLOR
-    Class Drink RECIPE_COLOR
-    Class Meal RECIPE_COLOR
-    Class Water RECIPE_COLOR
+    Class User USER_COLOR
+    Class Date DATE_COLOR
+    Class Exercise LIST_COLOR
+    Class Drink LIST_COLOR
+    Class Meal LIST_COLOR
+    Class Water LIST_COLOR
 }
 
 Class "<$user>" as Icon PERSON_COLOR
