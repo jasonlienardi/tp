@@ -1,0 +1,44 @@
+@startuml
+!include Style.puml
+
+!include <office/Users/user>
+!include <office/Concepts/documents>
+
+hide footbox
+hide members
+
+Package " "{
+    Class Ui UI_COLOR
+    Class FitNUS MAIN_COLOR
+    Class Storage STORAGE_COLOR
+    Class Parser PARSER_COLOR
+    Class User USER_COLOR
+    Class Date DATE_COLOR
+    Class Exercise LIST_COLOR
+    Class Drink LIST_COLOR
+    Class Meal LIST_COLOR
+    Class Water LIST_COLOR
+}
+
+Class "<$user>" as Icon PERSON_COLOR
+Class "<$documents>" as File PERSON_COLOR
+
+Icon .> Ui
+FitNUS -> Ui
+
+Ui -> Parser
+Ui --> User
+Ui --> Storage
+
+User -> Date
+User .> Parser
+User .> Storage
+User --> Exercise
+User --> Meal
+User --> Drink
+User --> Water
+
+Parser -> User
+Storage .> File
+
+@enduml

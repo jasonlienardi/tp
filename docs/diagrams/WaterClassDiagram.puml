@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+
+Class User {
+    # <u>exerciseList: ArrayList<Exercise>
+    # <u>exerciseListAll: ArrayList<Exercise>
+    # etc
+
+    + loadExercise (exerciseStorage: Storage): void
+    + loadExerciseCalories (exerciseCaloriesStorage: Storage): void
+    + saveExercise (exerciseStorage: Storage): void
+    + saveExerciseCalories (exerciseCaloriesStorage: Storage): void
+    + printExerciseList (exerciseListToPrint: ArrayList<Exercise>): void
+    + handleListExercises (): void
+    + handleListExercisesAll (): void
+    + handleListExercisesDate (command: String): void
+    + handleDeleteExercisesDate (command: String): void
+    + handleExercises (command: String): void
+    + handleCaloriesBurnt(): void
+    + etc()
+}
+
+Class Exercise {
+    - name: String
+    - duration: int
+    - intensity: ExerciseIntensity
+    - caloriesBurnt: int
+    - dateAdded: String
+    + <u>exerciseDetails: HashMap<String, int[]>
+    + Exercise(name: String, duration: int, intensity: ExerciseIntensity, currentDate: String)
+    + getName(): String
+    + getDuration(): int
+    + getIntensity(): ExerciseIntensity
+    + getDate(): String
+    + getCaloriesBurnt(): int
+    + <u>handleInfoExercise(command: String): void
+    + <u>printAvailableExercises(): void
+    + <u>listAvailableExercises(): void
+    + <u>getExerciseDetails(): HashMap<String, int[]>
+    - setCaloriesBurnt(): void
+    - isValidIntensity(intensity: ExerciseIntensity): boolean
+}
+
+Class "<<enumeration>>\nExerciseIntensity" as ExerciseIntensity {
+    HIGH
+    MEDIUM
+    LOW
+}
+
+User -down-> "*" Exercise
+
+Exercise "*" *-down-> "1" ExerciseIntensity
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+!include Style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+
+participant ":Ui" as Ui MAIN_COLOR
+participant ":Parser" as Parser PARSER_COLOR
+participant "<<class>>\nMeal" as Meal INTERFACE_COLOR
+
+User-> Ui : input: infoMeal chicken rice
+activate Ui
+
+Ui -> Parser : handleCommand("infoMeal chicken rice")
+activate Parser
+
+Parser -> Meal : handleInfoMeal("infoMeal chicken rice")
+activate Meal
+Meal --> Parser : parseInfoMeal("infoMeal chicken rice")
+Parser -> Meal : return name
+deactivate Parser
+
+Meal -> Meal : printNutrientDetails(name)
+Meal --> Ui
+deactivate Meal
+
+Ui --> User
+
+@enduml
