@@ -1,9 +1,9 @@
 package seedu.fitnus.parser;
 
 import seedu.fitnus.Drink;
+import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.Meal;
 import seedu.fitnus.Date;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
@@ -100,7 +100,7 @@ public class Parser {
             if (command.equals("help")) {
                 handleHelp();
             } else if (command.startsWith("eat")) {
-                user.handleMeal(command);
+                user.myMealList.handleMeal(command);
             } else if (command.startsWith("drink")) {
                 user.handleDrink(command);
             } else if (command.startsWith("exercise")) {
@@ -140,11 +140,11 @@ public class Parser {
             } else if (command.equals("fiber")) {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
-                user.handleListMeals();
+                user.myMealList.handleListMeals();
             } else if (command.equals("listMealsAll")) {
-                user.handleListMealsAll();
+                user.myMealList.handleListMealsAll();
             } else if (command.startsWith("listMeals") && command.contains("d/")) {
-                user.handleListMealsDate(command);
+                user.myMealList.handleListMealsDate(command);
             } else if (command.equals("listDrinks")) {
                 user.handleListDrinks();
             } else if (command.equals("listDrinksAll")) {
@@ -164,13 +164,13 @@ public class Parser {
             } else if (command.startsWith("listEverything") && command.contains("d/")) {
                 user.handleListEverythingDate(command);
             } else if (command.startsWith("editMeal")) {
-                user.handleEditMealServingSize(command);
+                user.myMealList.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
                 user.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWater")) {
                 user.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
-                user.handleDeleteMeal(command);
+                user.myMealList.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
                 user.handleDeleteDrink(command);
             } else if (command.startsWith("deleteExercise")) {

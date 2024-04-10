@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.meal;
 
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredMealException;
