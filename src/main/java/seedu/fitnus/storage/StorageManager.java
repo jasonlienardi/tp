@@ -3,8 +3,8 @@ package seedu.fitnus.storage;
 import seedu.fitnus.Date;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.Drink;
-import seedu.fitnus.ExerciseIntensity;
-import seedu.fitnus.Exercise;
+import seedu.fitnus.exercise.ExerciseIntensity;
+import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.Water;
 import seedu.fitnus.user.User;
 import seedu.fitnus.exception.NegativeValueException;
@@ -119,18 +119,19 @@ public class StorageManager {
                     int exerciseDuration = Parser.exerciseStorageDuration;
                     ExerciseIntensity exerciseIntensity = Parser.exerciseStorageIntensity;
                     String currentDate = Parser.exerciseStorageDate;
-                    User.exerciseListAll.add(new Exercise(exerciseDescription, exerciseDuration, exerciseIntensity,
+                    User.myExerciseList.exerciseListAll.add(new Exercise(exerciseDescription,
+                            exerciseDuration, exerciseIntensity,
                             currentDate));
                 }
             }
             Date currentDate = new Date();
             String todayDate = currentDate.getDate();
-            for (Exercise e : User.exerciseListAll) {
+            for (Exercise e : User.myExerciseList.exerciseListAll) {
                 if (e.getDate().equals(todayDate)) {
-                    User.exerciseList.add(e);
+                    User.myExerciseList.exerciseList.add(e);
                 }
             }
-            User.exerciseListAll.removeAll(User.exerciseList);
+            User.myExerciseList.exerciseListAll.removeAll(User.myExerciseList.exerciseList);
         } catch (FileNotFoundException e) {
             exerciseStorage.createFile();
         } catch (UnregisteredExerciseException e) {
@@ -273,12 +274,12 @@ public class StorageManager {
      * @param exerciseStorage contains filePath and folderPath of where the saved exerciseList are stored.
      */
     public void saveExercise(Storage exerciseStorage) {
-        for (Exercise exercise : User.exerciseListAll) {
+        for (Exercise exercise : User.myExerciseList.exerciseListAll) {
             String exerciseSavedData = exercise.getName() + "," + exercise.getDuration() + ","
                     + exercise.getIntensity() + "," + exercise.getDate();
             exerciseStorage.appendTextContent(exerciseSavedData);
         }
-        for (Exercise exercise : User.exerciseList) {
+        for (Exercise exercise : User.myExerciseList.exerciseList) {
             String exerciseSavedData = exercise.getName() + "," + exercise.getDuration() + ","
                     + exercise.getIntensity() + "," + exercise.getDate();
             exerciseStorage.appendTextContent(exerciseSavedData);
