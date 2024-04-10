@@ -2,6 +2,7 @@ package seedu.fitnus;
 
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.storage.Storage;
+import seedu.fitnus.storage.StorageManager;
 import seedu.fitnus.user.User;
 
 import java.util.Scanner;
@@ -17,7 +18,8 @@ public class Ui {
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
     private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
-    private User user = new User(mealStorage, drinkStorage, exerciseStorage,
+    private User user = new User();
+    private StorageManager storageManager = new StorageManager(mealStorage, drinkStorage, exerciseStorage,
             mealNutrientStorage, drinkNutrientStorage, exerciseCaloriesStorage);
     private Parser parser = new Parser(user);
 
@@ -43,12 +45,12 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
         input.close();
         isExit = true;
-        user.saveMeal(mealStorage);
-        user.saveDrink(drinkStorage);
-        user.saveExercise(exerciseStorage);
-        user.saveMealNutrients(mealNutrientStorage);
-        user.saveDrinkNutrients(drinkNutrientStorage);
-        user.saveExerciseCalories(exerciseCaloriesStorage);
+        storageManager.saveMeal(mealStorage);
+        storageManager.saveDrink(drinkStorage);
+        storageManager.saveExercise(exerciseStorage);
+        storageManager.saveMealNutrients(mealNutrientStorage);
+        storageManager.saveDrinkNutrients(drinkNutrientStorage);
+        storageManager.saveExerciseCalories(exerciseCaloriesStorage);
     }
 
     /**
