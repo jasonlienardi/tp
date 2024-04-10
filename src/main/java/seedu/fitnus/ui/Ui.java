@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.ui;
 
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.meal.Meal;
