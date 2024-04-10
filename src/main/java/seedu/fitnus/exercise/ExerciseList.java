@@ -86,7 +86,8 @@ public class ExerciseList {
      * @param command string inputted by the user, containing the date of which they would like to list exercises of
      * @throws InvalidDateException if the date inputted by user is invalid
      */
-    public void handleListExercisesDate(String command) throws InvalidDateException, FutureDateException, ParseException {
+    public void handleListExercisesDate(String command) throws InvalidDateException, FutureDateException,
+            ParseException {
         String date = Parser.parseListDate(command);
         ArrayList<Exercise> exercisesListDate = new ArrayList<>();
         for (Exercise e : exerciseListAll) {

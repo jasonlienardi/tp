@@ -641,7 +641,7 @@ public class Parser {
      * @return The parsed date string.
      * @throws InvalidDateException If the date format is invalid.
      */
-    public static String parseListDate(String command) throws InvalidDateException, FutureDateException, ParseException {
+    public static String parseListDate(String command) throws FutureDateException, ParseException {
         int indexOfDate = command.indexOf("d/") + 2;
         String date = command.substring(indexOfDate);
         return DateValidation.formatDateIfValid(date);

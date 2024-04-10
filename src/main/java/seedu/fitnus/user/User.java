@@ -191,7 +191,8 @@ public class User {
      * @param command string inputted by the user, containing the date of which they would like to list
      * @throws InvalidDateException if the date inputted by user is invalid
      */
-    public void handleListEverythingDate(String command) throws InvalidDateException, FutureDateException, ParseException {
+    public void handleListEverythingDate(String command) throws InvalidDateException, FutureDateException,
+            ParseException {
         String date = Parser.parseListDate(command);
         ArrayList<Meal> mealListDate = new ArrayList<>();
         for (Meal m : myMealList.mealListAll) {

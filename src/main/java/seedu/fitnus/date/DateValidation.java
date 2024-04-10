@@ -24,20 +24,6 @@ public class DateValidation extends Date {
         formattedDate = dateFormat.format(javaDate);
 
         return formattedDate;
-
-//
-//
-//        String[] arrayOfDates = date.split("-");
-//        int day = Integer.parseInt(arrayOfDates[0]);
-//        int month = Integer.parseInt(arrayOfDates[1]);
-//        int year = Integer.parseInt(arrayOfDates[2]);
-//        if (day < 1 || month < 1 || month > 12 || year < 0) {
-//            return false;
-//        }
-//        int[] dayInMonth = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-//        if (day > dayInMonth[month - 1]) {
-//            return false;
-//        }
     }
 
     public static boolean checkDateHasPassed(java.util.Date inputDate) throws FutureDateException {

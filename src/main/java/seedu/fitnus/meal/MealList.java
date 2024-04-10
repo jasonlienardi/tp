@@ -99,7 +99,8 @@ public class MealList {
      * @throws InvalidDateException if the date inputted by user is invalid
      */
     //@@author edwardhumi
-    public static void handleListMealsDate(String command) throws InvalidDateException, FutureDateException, ParseException {
+    public static void handleListMealsDate(String command) throws InvalidDateException, FutureDateException,
+            ParseException {
         String date = Parser.parseListDate(command);
         ArrayList<Meal> mealListDate = new ArrayList<>();
         for (Meal m : mealListAll) {
