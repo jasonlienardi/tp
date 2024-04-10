@@ -221,7 +221,7 @@ public class Parser {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");
         } catch (NegativeValueException e) {
-            System.out.println("Your serving size/exercise duration must be at least 0!");
+            System.out.println("Your serving size/exercise duration must be more than 0!");
         } catch (InvalidDateException e) {
             System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
         } catch (FutureDateException e) {
