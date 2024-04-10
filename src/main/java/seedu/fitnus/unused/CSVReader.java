@@ -1,10 +1,11 @@
-package seedu.fitnus;
+package seedu.fitnus.unused;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+//@@author tinaliu27-unused
 public class CSVReader {
     public static final String DELIMITER = ",";
     private static HashMap<String, String[]> foodItems = new HashMap<>();
