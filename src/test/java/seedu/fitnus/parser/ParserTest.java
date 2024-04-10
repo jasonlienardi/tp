@@ -9,7 +9,7 @@ import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.InvalidDateException;
-import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.exercise.ExerciseIntensity;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

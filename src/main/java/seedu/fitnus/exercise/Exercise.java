@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.exercise;
 
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredExerciseException;

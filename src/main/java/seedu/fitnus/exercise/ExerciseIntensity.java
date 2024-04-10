@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.exercise;
 public enum ExerciseIntensity {
     HIGH,
     MEDIUM,
