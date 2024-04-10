@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.fitnus.storage.StorageManager;
 //import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -34,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserTest {
     User testUser;
     String todayDate;
+    StorageManager testStorageManager;
     ArrayList<Meal> testMealList;
     ArrayList<Drink> testDrinkList;
     ArrayList<Water> testWaterList;
@@ -53,8 +55,9 @@ public class UserTest {
         testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
         testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
 
-        testUser = new User(testMealStorage, testDrinkStorage, testExerciseStorage, mealNutrientStorage,
-                drinkNutrientStorage, exerciseCaloriesStorage);
+        testUser = new User();
+        testStorageManager = new StorageManager(testMealStorage, testDrinkStorage, testExerciseStorage,
+                mealNutrientStorage, drinkNutrientStorage, exerciseCaloriesStorage);
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
