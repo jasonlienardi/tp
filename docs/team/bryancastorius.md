@@ -13,4 +13,4 @@ Given below are my contributions to the project.
   * Architecture diagrams
   * Class diagrams
   * Object diagrams
-  * Sequence diagramsS
+  * Sequence diagrams
