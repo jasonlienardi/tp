@@ -331,7 +331,8 @@ public class User {
             MealList.printMealList(1, myMealList.mealListAll);
             MealList.printMealList(myMealList.mealListAll.size() + 1, myMealList.mealList);
             printDrinkList(myMealList.mealListAll.size() + myMealList.mealList.size() + 1, drinkListAll);
-            printDrinkList(myMealList.mealListAll.size() + myMealList.mealList.size() + drinkListAll.size() + 1, drinkList);
+            printDrinkList(myMealList.mealListAll.size() + myMealList.mealList.size()
+                    + drinkListAll.size() + 1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }

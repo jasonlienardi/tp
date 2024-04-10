@@ -1,7 +1,5 @@
 package seedu.fitnus.storage;
 
-import seedu.fitnus.user.User;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
