@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.drink;
 
 public class Water {
     private int waterIntake;

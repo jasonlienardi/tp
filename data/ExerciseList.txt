@@ -1,2 +1,2 @@
-badminton,20,HIGH,02-04-2024
-running,10,HIGH,10-04-2024
+running,100,LOW,10-04-2024
+running,50,LOW,10-04-2024
