@@ -2,10 +2,10 @@ package seedu.fitnus.storage;
 
 import seedu.fitnus.Date;
 import seedu.fitnus.meal.Meal;
-import seedu.fitnus.Drink;
+import seedu.fitnus.drink.Drink;
 import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.exercise.Exercise;
-import seedu.fitnus.Water;
+import seedu.fitnus.drink.Water;
 import seedu.fitnus.user.User;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
@@ -78,26 +78,26 @@ public class StorageManager {
                     String drinkDate = Parser.drinkStorageDate;
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
-                        User.waterListAll.add(new Water(drinkSize, drinkDate));
+                        User.myDrinkList.waterListAll.add(new Water(drinkSize, drinkDate));
                     } else {
-                        User.drinkListAll.add(new Drink(drinkDescription, drinkSize, drinkDate));
+                        User.myDrinkList.drinkListAll.add(new Drink(drinkDescription, drinkSize, drinkDate));
                     }
                 }
             }
             Date currentDate = new Date();
             String todayDate = currentDate.getDate();
-            for (Drink d : User.drinkListAll) {
+            for (Drink d : User.myDrinkList.drinkListAll) {
                 if (d.getDate().equals(todayDate)) {
-                    User.drinkList.add(d);
+                    User.myDrinkList.drinkList.add(d);
                 }
             }
-            User.drinkListAll.removeAll(User.drinkList);
-            for (Water w : User.waterListAll) {
+            User.myDrinkList.drinkListAll.removeAll(User.myDrinkList.drinkList);
+            for (Water w : User.myDrinkList.waterListAll) {
                 if (w.getDate().equals(todayDate)) {
-                    User.waterList.add(w);
+                    User.myDrinkList.waterList.add(w);
                 }
             }
-            User.waterListAll.removeAll(User.waterList);
+            User.myDrinkList.waterListAll.removeAll(User.myDrinkList.waterList);
         } catch (FileNotFoundException e) {
             drinkStorage.createFile();
         }
@@ -244,19 +244,19 @@ public class StorageManager {
      * @param drinkStorage contains filePath and folderPath of where the saved drinksList are stored.
      */
     public void saveDrink(Storage drinkStorage) {
-        for (Water water : User.waterListAll) {
+        for (Water water : User.myDrinkList.waterListAll) {
             String waterSavedData = "water" + "," + water.getWater() + "," + water.getDate();
             drinkStorage.appendTextContent(waterSavedData);
         }
-        for (Water water : User.waterList) {
+        for (Water water : User.myDrinkList.waterList) {
             String waterSavedData = "water" + "," + water.getWater() + "," + water.getDate();
             drinkStorage.appendTextContent(waterSavedData);
         }
-        for (Drink drink : User.drinkListAll) {
+        for (Drink drink : User.myDrinkList.drinkListAll) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
             drinkStorage.appendTextContent(drinkSavedData);
         }
-        for (Drink drink : User.drinkList) {
+        for (Drink drink : User.myDrinkList.drinkList) {
             String drinkSavedData = drink.getName() + "," + drink.getDrinkVolumeSize() + "," + drink.getDate();
             drinkStorage.appendTextContent(drinkSavedData);
         }
