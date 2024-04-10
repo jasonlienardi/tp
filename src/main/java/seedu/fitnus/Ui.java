@@ -1,5 +1,6 @@
 package seedu.fitnus;
 
+import seedu.fitnus.meal.Meal;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.storage.Storage;
 import seedu.fitnus.storage.StorageManager;

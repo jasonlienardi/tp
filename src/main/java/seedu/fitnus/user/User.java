@@ -4,7 +4,8 @@ import seedu.fitnus.Date;
 import seedu.fitnus.Drink;
 import seedu.fitnus.Exercise;
 import seedu.fitnus.ExerciseIntensity;
-import seedu.fitnus.Meal;
+import seedu.fitnus.meal.Meal;
+import seedu.fitnus.meal.MealList;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
 
@@ -12,12 +13,10 @@ import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteExerciseException;
-import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
-import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.InvalidDateException;
 
 import java.util.ArrayList;
@@ -28,23 +27,21 @@ import java.util.ArrayList;
 public class User {
     public static final int RECOMMEND_WATER_INTAKE = 2600;
     public static final int RECOMMEND_CALORIE_INTAKE = 2200;
-    // list for today
-    public static ArrayList<Meal> mealList;
     public static ArrayList<Drink> drinkList;
     public static ArrayList<Water> waterList;
     public static ArrayList<Exercise> exerciseList;
-    // list for all dates except today
-    public static ArrayList<Meal> mealListAll;
     public static ArrayList<Drink> drinkListAll;
     public static ArrayList<Water> waterListAll;
     public static ArrayList<Exercise> exerciseListAll;
+    public static MealList myMealList;
 
     public User() {
-        mealList = new ArrayList<>();
+        myMealList = new MealList();
+
         drinkList = new ArrayList<>();
         exerciseList = new ArrayList<>();
         waterList = new ArrayList<>();
-        mealListAll = new ArrayList<>();
+
         drinkListAll = new ArrayList<>();
         exerciseListAll = new ArrayList<>();
         waterListAll = new ArrayList<>();
@@ -89,28 +86,6 @@ public class User {
     }
 
     /**
-     * Adds a meal to the user's current mealList, based on what the user has eaten and the serving size consumed.
-     *
-     * @param command string inputted by the user, containing the meal they ate and its serving size
-     * @throws IncompleteMealException if the user did not comply with the required format
-     * @throws UnregisteredMealException if the user has inputted a meal that was not pre-defined
-     * @throws NegativeValueException if the provided serving size is a negative value
-     */
-    public void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            NegativeValueException {
-        Parser.parseMeal(command);
-        String mealName = Parser.mealDescription;
-        int servingSize = Parser.mealSize;
-
-        Date currentDate = new Date();
-
-        mealList.add(new Meal(mealName, servingSize, currentDate.getDate()));
-        assert !mealList.isEmpty(): "failed to add meal";
-
-        System.out.println("Added " + servingSize + " serving of " + mealName);
-    }
-
-    /**
      * Adds a drink to the user's current drinkList, based on what the user has drank and the serving size consumed.
      *
      * @param command string inputted by the user, containing the drink they consumed and its serving size
@@ -149,7 +124,7 @@ public class User {
      */
     public void handleViewCalories() {
         int caloriesCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             caloriesCount += meal.getCalories();
         }
         for (Drink drink: drinkList) {
@@ -167,7 +142,7 @@ public class User {
      */
     public void handleViewCarbohydrates() {
         int carbohydratesCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             carbohydratesCount += meal.getCarbs();
         }
         for (Drink drink: drinkList) {
@@ -182,7 +157,7 @@ public class User {
      */
     public void handleViewProteins() {
         int proteinCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             proteinCount += meal.getProtein();
         }
         for (Drink drink: drinkList) {
@@ -208,7 +183,7 @@ public class User {
      */
     public void handleViewFiber() {
         int fibreCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             fibreCount += meal.getFiber();
         }
         System.out.println("Total Fiber: " + fibreCount + " grams");
@@ -220,7 +195,7 @@ public class User {
      */
     public void handleViewFat() {
         int fatCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             fatCount += meal.getFat();
         }
         for (Drink drink: drinkList) {
@@ -235,7 +210,7 @@ public class User {
      */
     public void handleViewSugar() {
         int sugarCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             sugarCount += meal.getSugar();
         }
         for (Drink drink: drinkList) {
@@ -244,20 +219,6 @@ public class User {
         System.out.println("Total Sugar: " + sugarCount + " grams");
     }
 
-    /**
-     * Prints all the meals in the mealListToPrint,
-     * inclusive of the serving size and date.
-     *
-     * @param startIndex starting integer value when printing the list, where startIndex >= 1
-     * @param mealListToPrint arraylist containing the meals that should be printed
-     */
-    public void printMealList(int startIndex, ArrayList<Meal> mealListToPrint) {
-        for (int i = 0; i < mealListToPrint.size(); i++) {
-            Meal currentMeal = mealListToPrint.get(i);
-            System.out.println((startIndex+i) + ". " + currentMeal.getName() + " (serving size: "
-                    + currentMeal.getServingSize() + ")" + " | date: " + currentMeal.getDate());
-        }
-    }
 
     /**
      * Prints all the exercises in the exerciseListToPrint,
@@ -274,61 +235,8 @@ public class User {
         }
     }
 
-    /**
-     * Handles when the user is listing the meals they have eaten today.
-     * Method first checks if the list is empty.
-     */
-    public void handleListMeals() {
-        System.out.println("here's what you have eaten today");
-        if (mealList.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printMealList(1, mealList);
-        }
-    }
 
-    /**
-     * Handles when the user is listing all meals they have eaten, inclusive of previously saved meals.
-     * Method first checks if the list is empty.
-     */
-    public void handleListMealsAll() {
-        System.out.println("here's what you have eaten so far");
-        if (mealListAll.isEmpty() && mealList.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printMealList(1, mealListAll);
-            printMealList(1 + mealListAll.size(), mealList);
-        }
-    }
 
-    /**
-     * Handles when the user is listing the meals they have eaten on a certain date.
-     * Method will first extract all meals that have this corresponding date,
-     * before printing.
-     *
-     * @param command string inputted by the user, containing the date of which they would like to list meals of
-     * @throws InvalidDateException if the date inputted by user is invalid
-     */
-    public void handleListMealsDate(String command) throws InvalidDateException {
-        String date = Parser.parseListDate(command);
-        ArrayList<Meal> mealListDate = new ArrayList<>();
-        for (Meal m : mealListAll) {
-            if (m.getDate().equals(date)) {
-                mealListDate.add(m);
-            }
-        }
-        for (Meal m : mealList) {
-            if (m.getDate().equals(date)) {
-                mealListDate.add(m);
-            }
-        }
-        System.out.println("here's what you have eaten on " + date);
-        if (mealListDate.isEmpty()) {
-            System.out.println("  >> nothing so far :o");
-        } else {
-            printMealList(1, mealListDate);
-        }
-    }
 
     /**
      * Prints all the drinks in the drinkListToPrint,
@@ -484,13 +392,13 @@ public class User {
      */
     public void handleListEverything() {
         System.out.println("here's what you have consumed today");
-        if (drinkList.isEmpty() && mealList.isEmpty()) {
+        if (drinkList.isEmpty() && myMealList.mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             System.out.println();
             handleViewWaterIntake();
         } else {
-            printMealList(1, mealList);
-            printDrinkList(mealList.size()+1, drinkList);
+            MealList.printMealList(1, myMealList.mealList);
+            printDrinkList(myMealList.mealList.size()+1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }
@@ -506,15 +414,16 @@ public class User {
      */
     public void handleListEverythingAll() {
         System.out.println("here's what you have consumed so far");
-        if (drinkListAll.isEmpty() && mealListAll.isEmpty() && drinkList.isEmpty() && mealList.isEmpty()) {
+        if (drinkListAll.isEmpty() && myMealList.mealListAll.isEmpty() && drinkList.isEmpty()
+                && myMealList.mealList.isEmpty()) {
             System.out.println("  >> nothing so far :o");
             System.out.println();
             handleViewWaterIntake();
         } else {
-            printMealList(1, mealListAll);
-            printMealList(mealListAll.size() + 1, mealList);
-            printDrinkList(mealListAll.size() + mealList.size() + 1, drinkListAll);
-            printDrinkList(mealListAll.size() + mealList.size() + drinkListAll.size() + 1, drinkList);
+            MealList.printMealList(1, myMealList.mealListAll);
+            MealList.printMealList(myMealList.mealListAll.size() + 1, myMealList.mealList);
+            printDrinkList(myMealList.mealListAll.size() + myMealList.mealList.size() + 1, drinkListAll);
+            printDrinkList(myMealList.mealListAll.size() + myMealList.mealList.size() + drinkListAll.size() + 1, drinkList);
             System.out.println();
             handleViewWaterIntake();
         }
@@ -534,12 +443,12 @@ public class User {
     public void handleListEverythingDate(String command) throws InvalidDateException {
         String date = Parser.parseListDate(command);
         ArrayList<Meal> mealListDate = new ArrayList<>();
-        for (Meal m : mealListAll) {
+        for (Meal m : myMealList.mealListAll) {
             if (m.getDate().equals(date)) {
                 mealListDate.add(m);
             }
         }
-        for (Meal m : mealList) {
+        for (Meal m : myMealList.mealList) {
             if (m.getDate().equals(date)) {
                 mealListDate.add(m);
             }
@@ -562,7 +471,7 @@ public class User {
             System.out.println("  >> nothing so far :o");
             System.out.println();
         } else {
-            printMealList(1, mealListDate);
+            MealList.printMealList(1, mealListDate);
             printDrinkList(1 + mealListDate.size(), drinkListDate);
             System.out.println();
         }
@@ -571,28 +480,6 @@ public class User {
         handleListExercisesDate(command);
     }
 
-    /**
-     * Handles when the user would like to edit the serving size of a previously inputted meal.
-     *
-     * @param command string inputted by the user, containing the index of the meal to edit and the new serving size
-     * @throws InvalidListIndexException if the provided index is not a valid index in mealList
-     * @throws NegativeValueException if the provided serving size is a negative value
-     * @throws IncompleteEditException if the user did not comply with the required command format
-     */
-    public void handleEditMealServingSize(String command) throws InvalidListIndexException,
-            NegativeValueException, IncompleteEditException {
-        Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
-        if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
-            throw new InvalidListIndexException();
-        }
-
-        String mealName = mealList.get(Parser.editMealIndex).getName();
-        String mealDate = mealList.get(Parser.editMealIndex).getDate();
-
-        Meal updatedMeal = new Meal(mealName, Parser.editMealSize, mealDate);
-        mealList.set(Parser.editMealIndex, updatedMeal);
-        System.out.println(mealName + " has been edited to " + Parser.editMealSize + " serving(s)");
-    }
 
     /**
      * Handles when the user would like to edit the serving size of a previously inputted drink.
@@ -635,27 +522,6 @@ public class User {
         System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
     }
 
-    /**
-     * Handles when the user would like to delete a previously inputted meal.
-     *
-     * @param command string inputted by the user, containing the index of the meal to delete
-     * @throws InvalidListIndexException if the provided index is not a valid index in mealList
-     * @throws IncompleteDeleteException if the user did not comply with the required command format
-     */
-    public void handleDeleteMeal(String command) throws InvalidListIndexException, IncompleteDeleteException {
-        if (command.length() < 12) {
-            throw new IncompleteDeleteException();
-        }
-        int mealIndex = Integer.parseInt(command.substring(11).trim()) - 1;
-
-        if (mealIndex >= mealList.size() || mealIndex < 0) {
-            throw new InvalidListIndexException();
-        }
-
-        String mealName = mealList.get(mealIndex).getName();
-        mealList.remove(mealIndex);
-        System.out.println("Removed " + mealName + " from meals");
-    }
 
     /**
      * Handles when the user would like to delete a previously inputted drink.
@@ -729,12 +595,12 @@ public class User {
      * This includes all meals, drinks and exercise.
      */
     public void handleClear() {
-        mealList.clear();
+        myMealList.mealList.clear();
         drinkList.clear();
         waterList.clear();
         exerciseList.clear();
 
-        assert mealList.isEmpty(): "clearing of meal list failed";
+        assert myMealList.mealList.isEmpty(): "clearing of meal list failed";
         assert drinkList.isEmpty(): "clearing of drink list failed";
         assert exerciseList.isEmpty(): "clearing of exercise list failed";
 
@@ -770,7 +636,7 @@ public class User {
         }
         System.out.println("    ~~");
         int caloriesCount = 0;
-        for (Meal meal: mealList) {
+        for (Meal meal: myMealList.mealList) {
             caloriesCount += meal.getCalories();
         }
         for (Drink drink: drinkList) {

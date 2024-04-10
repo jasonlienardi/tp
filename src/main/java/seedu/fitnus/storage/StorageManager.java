@@ -1,7 +1,7 @@
 package seedu.fitnus.storage;
 
 import seedu.fitnus.Date;
-import seedu.fitnus.Meal;
+import seedu.fitnus.meal.Meal;
 import seedu.fitnus.Drink;
 import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Exercise;
@@ -46,17 +46,17 @@ public class StorageManager {
                     String mealDescription = Parser.mealStorageDescription;
                     int mealSize = Parser.mealStorageSize;
                     String currentDate = Parser.mealStorageDate;
-                    User.mealListAll.add(new Meal(mealDescription, mealSize, currentDate));
+                    User.myMealList.mealListAll.add(new Meal(mealDescription, mealSize, currentDate));
                 }
             }
             Date currentDate = new Date();
             String todayDate = currentDate.getDate();
-            for (Meal m : User.mealListAll) {
+            for (Meal m : User.myMealList.mealListAll) {
                 if (m.getDate().equals(todayDate)) {
-                    User.mealList.add(m);
+                    User.myMealList.mealList.add(m);
                 }
             }
-            User.mealListAll.removeAll(User.mealList);
+            User.myMealList.mealListAll.removeAll(User.myMealList.mealList);
         } catch (FileNotFoundException e) {
             mealStorage.createFile();
         }
@@ -221,11 +221,11 @@ public class StorageManager {
      * @param mealStorage contains filePath and folderPath of where the saved meals are stored.
      */
     public void saveMeal(Storage mealStorage) {
-        for (Meal meal : User.mealListAll) {
+        for (Meal meal : User.myMealList.mealListAll) {
             String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
             mealStorage.appendTextContent(mealSavedData);
         }
-        for (Meal meal : User.mealList) {
+        for (Meal meal : User.myMealList.mealList) {
             String mealSavedData = meal.getName() + "," + meal.getServingSize() + "," + meal.getDate();
             mealStorage.appendTextContent(mealSavedData);
         }

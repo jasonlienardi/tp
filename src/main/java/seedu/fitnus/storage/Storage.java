@@ -13,7 +13,6 @@ public class Storage {
     public String textContent;
     public String folderPath;
     public String filePath;
-    private User user;
 
     public Storage(String folderPath, String filePath) {
         this.textContent = "";
