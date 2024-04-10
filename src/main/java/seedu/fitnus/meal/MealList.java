@@ -1,6 +1,7 @@
 package seedu.fitnus.meal;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteMealException;
@@ -97,7 +98,7 @@ public class MealList {
      * @throws InvalidDateException if the date inputted by user is invalid
      */
     //@@author edwardhumi
-    public static void handleListMealsDate(String command) throws InvalidDateException {
+    public static void handleListMealsDate(String command) throws InvalidDateException, FutureDateException {
         String date = Parser.parseListDate(command);
         ArrayList<Meal> mealListDate = new ArrayList<>();
         for (Meal m : mealListAll) {

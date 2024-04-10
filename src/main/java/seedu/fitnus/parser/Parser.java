@@ -1,6 +1,8 @@
 package seedu.fitnus.parser;
 
+import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
@@ -221,6 +223,8 @@ public class Parser {
             System.out.println("Your serving size/exercise duration must be at least 0!");
         } catch (InvalidDateException e) {
             System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
+        } catch (FutureDateException e) {
+            System.out.println("Specified date has not passed. Please try another date.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -634,10 +638,10 @@ public class Parser {
      * @return The parsed date string.
      * @throws InvalidDateException If the date format is invalid.
      */
-    public static String parseListDate(String command) throws InvalidDateException {
+    public static String parseListDate(String command) throws InvalidDateException, FutureDateException {
         int indexOfDate = command.indexOf("d/") + 2;
         String date = command.substring(indexOfDate);
-        if (Date.isValidDate(date)) {
+        if (DateValidation.isValidDate(date) ) {
             return date;
         }
         throw new InvalidDateException();

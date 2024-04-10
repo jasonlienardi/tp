@@ -1,6 +1,7 @@
 package seedu.fitnus.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
@@ -156,7 +157,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseListDate_validInputs_success() throws InvalidDateException {
+    public void parseListDate_validInputs_success() throws InvalidDateException, FutureDateException {
         String command = "listMeals d/12-02-2024";
         String date = Parser.parseListDate(command);
         assertEquals("12-02-2024", date);

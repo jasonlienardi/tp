@@ -1,6 +1,7 @@
 package seedu.fitnus.drink;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
@@ -153,7 +154,7 @@ public class DrinkList {
      * @throws InvalidDateException if the date inputted by user is invalid
      */
     //@@author edwardhumi
-    public void handleListDrinksDate(String command) throws InvalidDateException {
+    public void handleListDrinksDate(String command) throws InvalidDateException, FutureDateException {
         String date = Parser.parseListDate(command);
         ArrayList<Drink> drinkListDate = new ArrayList<>();
         for (Drink d : drinkListAll) {
