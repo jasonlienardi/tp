@@ -1,6 +1,6 @@
 package seedu.fitnus.meal;
 
-import seedu.fitnus.Date;
+import seedu.fitnus.date.Date;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.IncompleteMealException;

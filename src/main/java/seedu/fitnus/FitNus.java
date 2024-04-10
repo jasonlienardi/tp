@@ -1,5 +1,7 @@
 package seedu.fitnus;
 
+import seedu.fitnus.ui.Ui;
+
 public class FitNus {
 
     private static Ui ui;

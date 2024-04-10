@@ -1,4 +1,4 @@
-package seedu.fitnus;
+package seedu.fitnus.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

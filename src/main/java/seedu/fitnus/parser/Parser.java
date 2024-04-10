@@ -4,7 +4,7 @@ import seedu.fitnus.drink.Drink;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.Date;
+import seedu.fitnus.date.Date;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;

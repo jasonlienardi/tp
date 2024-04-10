@@ -1,6 +1,6 @@
 package seedu.fitnus.storage;
 
-import seedu.fitnus.Date;
+import seedu.fitnus.date.Date;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.exercise.ExerciseIntensity;
