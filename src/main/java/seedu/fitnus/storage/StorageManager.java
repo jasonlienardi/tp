@@ -1,6 +1,11 @@
 package seedu.fitnus.storage;
 
-import seedu.fitnus.*;
+import seedu.fitnus.Date;
+import seedu.fitnus.Meal;
+import seedu.fitnus.Drink;
+import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.Exercise;
+import seedu.fitnus.Water;
 import seedu.fitnus.user.User;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredExerciseException;

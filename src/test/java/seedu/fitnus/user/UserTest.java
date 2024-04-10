@@ -35,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserTest {
     User testUser;
     String todayDate;
+    StorageManager testStorageManager;
     ArrayList<Meal> testMealList;
     ArrayList<Drink> testDrinkList;
     ArrayList<Water> testWaterList;
@@ -45,7 +46,6 @@ public class UserTest {
     private Storage mealNutrientStorage = new Storage("./db", "./db/Meal_db.csv");
     private Storage drinkNutrientStorage = new Storage("./db", "./db/Drink_db.csv");
     private Storage exerciseCaloriesStorage = new Storage("./db", "./db/Exercise_db.csv");
-    StorageManager testStorageManager;
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -56,8 +56,8 @@ public class UserTest {
         testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
 
         testUser = new User();
-        testStorageManager = new StorageManager(testMealStorage, testDrinkStorage, testExerciseStorage, mealNutrientStorage,
-                drinkNutrientStorage, exerciseCaloriesStorage);
+        testStorageManager = new StorageManager(testMealStorage, testDrinkStorage, testExerciseStorage,
+                mealNutrientStorage, drinkNutrientStorage, exerciseCaloriesStorage);
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;

@@ -7,7 +7,6 @@ import seedu.fitnus.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.Water;
-import seedu.fitnus.storage.Storage;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -21,10 +20,7 @@ import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exception.InvalidDateException;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Handles all methods related to the user's meals, drinks and exercise.
