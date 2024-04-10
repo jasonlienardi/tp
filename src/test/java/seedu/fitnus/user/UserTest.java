@@ -2,8 +2,8 @@ package seedu.fitnus.user;
 
 import seedu.fitnus.Date;
 import seedu.fitnus.Drink;
-import seedu.fitnus.Exercise;
-import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.exercise.Exercise;
+import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.Meal;
 
 import seedu.fitnus.Water;
@@ -61,7 +61,7 @@ public class UserTest {
 
         testMealList = testUser.mealList;
         testDrinkList = testUser.drinkList;
-        testExerciseList = testUser.exerciseList;
+        testExerciseList = testUser.myExerciseList.exerciseList;
         testWaterList = testUser.waterList;
 
         Date currentDate = new Date();
@@ -103,7 +103,7 @@ public class UserTest {
     public void handleExercise_validInputs_correctlyAddExercise() throws IncompleteExerciseException,
             UnregisteredExerciseException, NegativeValueException {
         String command = "exercise e/running d/30 i/HIGH";
-        testUser.handleExercise(command);
+        testUser.myExerciseList.handleExercise(command);
 
         assertEquals("running", testExerciseList.get(1).getName());
         assertEquals(30, testExerciseList.get(1).getDuration());
@@ -183,7 +183,7 @@ public class UserTest {
 
     @Test
     public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate() {
-        testUser.handleCaloriesBurnt();
+        testUser.myExerciseList.handleCaloriesBurnt();
         String expectedOutput = "Total calories burnt: 240";
         String actualOutput = outputStream.toString().trim();
 
@@ -243,7 +243,7 @@ public class UserTest {
     @Test
     public void handleListExercise_emptyList_printListAccurate() {
         testExerciseList.clear();
-        testUser.handleListExercises();
+        testUser.myExerciseList.handleListExercises();
 
         String expectedOutput = "here's the exercises you've done today" + System.lineSeparator()  +
                 "  >> nothing so far :o";
@@ -255,7 +255,7 @@ public class UserTest {
 
     @Test
     public void handleListExercise_validList_printListAccurate() {
-        testUser.handleListExercises();
+        testUser.myExerciseList.handleListExercises();
 
         String expectedOutput = "here's the exercises you've done today" + System.lineSeparator() +
                 "1. swimming | duration: 20 | intensity: HIGH | date: 30-01-2024";
@@ -373,7 +373,7 @@ public class UserTest {
     public void handleDeleteExercise_validCommand_deleteMealSuccessful() throws InvalidListIndexException,
             IncompleteDeleteException {
         String command = "deleteExercise 1";
-        testUser.handleDeleteExercise(command);
+        testUser.myExerciseList.handleDeleteExercise(command);
         assertEquals(0, testExerciseList.size());
     }
 

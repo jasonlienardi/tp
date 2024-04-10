@@ -1,8 +1,8 @@
 package seedu.fitnus.parser;
 
 import seedu.fitnus.Drink;
-import seedu.fitnus.Exercise;
-import seedu.fitnus.ExerciseIntensity;
+import seedu.fitnus.exercise.Exercise;
+import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.Meal;
 import seedu.fitnus.Date;
 
@@ -104,13 +104,13 @@ public class Parser {
             } else if (command.startsWith("drink")) {
                 user.handleDrink(command);
             } else if (command.startsWith("exercise")) {
-                user.handleExercise(command);
+                user.myExerciseList.handleExercise(command);
             } else if (command.startsWith("newMeal")) {
                 user.handleAddNewMealNutrient(command);
             } else if (command.startsWith("newDrink")) {
                 user.handleAddNewDrinkNutrient(command);
             } else if (command.startsWith("newExercise")) {
-                user.handleAddNewExerciseCalories(command);
+                user.myExerciseList.handleAddNewExerciseCalories(command);
             }else if (command.equals("allMeals")) {
                 Meal.listAvailableMeals();
             } else if (command.equals("allDrinks")) {
@@ -126,7 +126,7 @@ public class Parser {
             } else if (command.equals("calories")) {
                 user.handleViewCalories();
             } else if (command.equals("caloriesBurnt")) {
-                user.handleCaloriesBurnt();
+                user.myExerciseList.handleCaloriesBurnt();
             } else if (command.equals("carbs")) {
                 user.handleViewCarbohydrates();
             } else if (command.equals("protein")) {
@@ -152,11 +152,11 @@ public class Parser {
             } else if (command.startsWith("listDrinks") && command.contains("d/")) {
                 user.handleListDrinksDate(command);
             } else if (command.equals("listExercises")) {
-                user.handleListExercises();
+                user.myExerciseList.handleListExercises();
             } else if (command.equals("listExercisesAll")) {
-                user.handleListExercisesAll();
+                user.myExerciseList.handleListExercisesAll();
             } else if (command.startsWith("listExercises") && command.contains("d/")) {
-                user.handleListExercisesDate(command);
+                user.myExerciseList.handleListExercisesDate(command);
             } else if (command.equals("listEverything")) {
                 user.handleListEverything();
             } else if (command.equals("listEverythingAll")) {
@@ -174,7 +174,7 @@ public class Parser {
             } else if (command.startsWith("deleteDrink")) {
                 user.handleDeleteDrink(command);
             } else if (command.startsWith("deleteExercise")) {
-                user.handleDeleteExercise(command);
+                user.myExerciseList.handleDeleteExercise(command);
             } else if (command.equals("clear")) {
                 user.handleClear();
             } else if (command.equals("recommend")) {
@@ -273,8 +273,8 @@ public class Parser {
                 "CARBS,PROTEIN,FAT,FIBER,SUGAR");
         System.out.println("- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES," +
                 "CARBS,SUGAR,PROTEIN,FAT");
-        System.out.println("- Add a new exercise to available exercises: newExercise CALORIES_BURNT_HIGH," +
-                "CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW");
+        System.out.println("- Add a new exercise to available exercises: newExercise EXERCISE_NAME," +
+                "CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
