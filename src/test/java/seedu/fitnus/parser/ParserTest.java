@@ -13,6 +13,8 @@ import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exercise.ExerciseIntensity;
 
 
+import java.text.ParseException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -157,7 +159,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseListDate_validInputs_success() throws InvalidDateException, FutureDateException {
+    public void parseListDate_validInputs_success() throws InvalidDateException, FutureDateException, ParseException {
         String command = "listMeals d/12-02-2024";
         String date = Parser.parseListDate(command);
         assertEquals("12-02-2024", date);

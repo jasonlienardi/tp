@@ -11,6 +11,7 @@ import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.parser.Parser;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class MealList {
@@ -98,7 +99,7 @@ public class MealList {
      * @throws InvalidDateException if the date inputted by user is invalid
      */
     //@@author edwardhumi
-    public static void handleListMealsDate(String command) throws InvalidDateException, FutureDateException {
+    public static void handleListMealsDate(String command) throws InvalidDateException, FutureDateException, ParseException {
         String date = Parser.parseListDate(command);
         ArrayList<Meal> mealListDate = new ArrayList<>();
         for (Meal m : mealListAll) {

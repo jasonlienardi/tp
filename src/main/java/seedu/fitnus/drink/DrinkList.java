@@ -11,6 +11,7 @@ import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.parser.Parser;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class DrinkList {
@@ -154,7 +155,7 @@ public class DrinkList {
      * @throws InvalidDateException if the date inputted by user is invalid
      */
     //@@author edwardhumi
-    public void handleListDrinksDate(String command) throws InvalidDateException, FutureDateException {
+    public void handleListDrinksDate(String command) throws InvalidDateException, FutureDateException, ParseException {
         String date = Parser.parseListDate(command);
         ArrayList<Drink> drinkListDate = new ArrayList<>();
         for (Drink d : drinkListAll) {
