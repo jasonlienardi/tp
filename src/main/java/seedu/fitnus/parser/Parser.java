@@ -1,10 +1,10 @@
 package seedu.fitnus.parser;
 
-import seedu.fitnus.Drink;
+import seedu.fitnus.drink.Drink;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.Date;
+import seedu.fitnus.date.Date;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -102,13 +102,13 @@ public class Parser {
             } else if (command.startsWith("eat")) {
                 user.myMealList.handleMeal(command);
             } else if (command.startsWith("drink")) {
-                user.handleDrink(command);
+                user.myDrinkList.handleDrink(command);
             } else if (command.startsWith("exercise")) {
                 user.myExerciseList.handleExercise(command);
             } else if (command.startsWith("newMeal")) {
                 user.handleAddNewMealNutrient(command);
             } else if (command.startsWith("newDrink")) {
-                user.handleAddNewDrinkNutrient(command);
+                user.myDrinkList.handleAddNewDrinkNutrient(command);
             } else if (command.startsWith("newExercise")) {
                 user.myExerciseList.handleAddNewExerciseCalories(command);
             }else if (command.equals("allMeals")) {
@@ -136,7 +136,7 @@ public class Parser {
             } else if (command.equals("fat")) {
                 user.handleViewFat();
             } else if (command.equals("viewWater")) {
-                user.handleViewWaterIntake();
+                user.myDrinkList.handleViewWaterIntake();
             } else if (command.equals("fiber")) {
                 user.handleViewFiber();
             } else if (command.equals("listMeals")) {
@@ -146,11 +146,11 @@ public class Parser {
             } else if (command.startsWith("listMeals") && command.contains("d/")) {
                 user.myMealList.handleListMealsDate(command);
             } else if (command.equals("listDrinks")) {
-                user.handleListDrinks();
+                user.myDrinkList.handleListDrinks();
             } else if (command.equals("listDrinksAll")) {
-                user.handleListDrinksAll();
+                user.myDrinkList.handleListDrinksAll();
             } else if (command.startsWith("listDrinks") && command.contains("d/")) {
-                user.handleListDrinksDate(command);
+                user.myDrinkList.handleListDrinksDate(command);
             } else if (command.equals("listExercises")) {
                 user.myExerciseList.handleListExercises();
             } else if (command.equals("listExercisesAll")) {
@@ -166,13 +166,13 @@ public class Parser {
             } else if (command.startsWith("editMeal")) {
                 user.myMealList.handleEditMealServingSize(command);
             } else if (command.startsWith("editDrink")) {
-                user.handleEditDrinkServingSize(command);
+                user.myDrinkList.handleEditDrinkServingSize(command);
             } else if (command.startsWith("editWater")) {
-                user.handleEditWaterIntake(command);
+                user.myDrinkList.handleEditWaterIntake(command);
             } else if (command.startsWith("deleteMeal")) {
                 user.myMealList.handleDeleteMeal(command);
             } else if (command.startsWith("deleteDrink")) {
-                user.handleDeleteDrink(command);
+                user.myDrinkList.handleDeleteDrink(command);
             } else if (command.startsWith("deleteExercise")) {
                 user.myExerciseList.handleDeleteExercise(command);
             } else if (command.equals("clear")) {

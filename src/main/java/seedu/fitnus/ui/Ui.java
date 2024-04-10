@@ -1,5 +1,6 @@
-package seedu.fitnus;
+package seedu.fitnus.ui;
 
+import seedu.fitnus.drink.Drink;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.parser.Parser;
