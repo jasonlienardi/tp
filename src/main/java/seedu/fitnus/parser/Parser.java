@@ -1,11 +1,6 @@
 package seedu.fitnus.parser;
 
 import seedu.fitnus.drink.Drink;
-import seedu.fitnus.meal.Meal;
-import seedu.fitnus.exercise.Exercise;
-import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.date.Date;
-
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
@@ -13,12 +8,17 @@ import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
+import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.InvalidDateException;
+import seedu.fitnus.meal.Meal;
+import seedu.fitnus.exercise.Exercise;
+import seedu.fitnus.exercise.ExerciseIntensity;
+import seedu.fitnus.date.Date;
 
 import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
@@ -106,7 +106,7 @@ public class Parser {
             } else if (command.startsWith("exercise")) {
                 user.myExerciseList.handleExercise(command);
             } else if (command.startsWith("newMeal")) {
-                user.handleAddNewMealNutrient(command);
+                user.myMealList.handleAddNewMealNutrient(command);
             } else if (command.startsWith("newDrink")) {
                 user.myDrinkList.handleAddNewDrinkNutrient(command);
             } else if (command.startsWith("newExercise")) {
@@ -185,7 +185,7 @@ public class Parser {
         } catch (InvalidCommandException e) {
             System.out.println("Invalid command, type [help] to view all commands.");
         } catch (IncompleteDrinkException e) {
-            System.out.println("Incomplete/Incorrect command, the format MUST be [drink d/DRINK s/SERVING_SIZE].");
+            System.out.println("Incomplete/Incorrect command, the format MUST be [drink d/DRINK s/VOLUME(ML)].");
         } catch (IncompleteMealException e) {
             System.out.println("Incomplete/Incorrect command, the format MUST be [eat m/MEAL s/SERVING_SIZE].");
         } catch (IncompleteExerciseException e) {
@@ -217,8 +217,10 @@ public class Parser {
         } catch (IncompleteInfoException e) {
             System.out.println("Please specify a meal/drink/exercise that you would like to view the info of. " +
                     "Type [help] to view the commands format.");
-        } catch (NegativeValueException e) {
-            System.out.println("Your serving size/exercise duration must be at least 0!");
+        } catch (NonPositiveValueException e) {
+            System.out.println("Your serving size/exercise duration must be greater than 0!");
+        }   catch (NegativeValueException e) {
+            System.out.println("Value cannot be negative!");
         } catch (InvalidDateException e) {
             System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
         } catch (IllegalArgumentException e) {
@@ -231,17 +233,25 @@ public class Parser {
      * Displays a list of valid commands and their formats.
      */
     public static void handleHelp() {
-        System.out.println("here's all the valid commands i recognise: ");
-        System.out.println("- Add a meal eaten: eat m/MEAL s/SERVING_SIZE");
-        System.out.println("- Add a drink: drink d/DRINK s/VOLUME(ML)");
+        System.out.println("Here's all the valid commands I recognise: ");
+        System.out.println();
+        System.out.println("Track a meal/drink/exercise: ");
+        System.out.println("- Track a meal eaten: eat m/MEAL s/SERVING_SIZE");
+        System.out.println("- Track a drink: drink d/DRINK s/VOLUME(ML)");
         System.out.println("- Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) " +
                 "i/INTENSITY(HIGH, MEDIUM, LOW)");
+        System.out.println();
+        System.out.println("View available meals/drinks/exercises: ");
         System.out.println("- View all meals that you can input: allMeals");
         System.out.println("- View all drinks that you can input: allDrinks");
         System.out.println("- View all exercises that you can input: allExercises");
+        System.out.println();
+        System.out.println("Find information about a meal/drink/exercise: ");
         System.out.println("- Find the information about a certain meal: infoMeal MEAL");
         System.out.println("- Find the information about a certain drink: infoDrink DRINK");
         System.out.println("- Find the information about a certain exercise: infoExercise EXERCISE");
+        System.out.println();
+        System.out.println("View nutrients and calories: ");
         System.out.println("- View daily calories consumed: calories");
         System.out.println("- View daily carbohydrates consumed: carbs");
         System.out.println("- View daily proteins consumed: protein");
@@ -250,7 +260,8 @@ public class Parser {
         System.out.println("- View daily fiber consumed: fiber");
         System.out.println("- View daily water consumption: viewWater");
         System.out.println("- View daily calories burnt: caloriesBurnt");
-        System.out.println("- View daily calories and water intake recommendation: recommend");
+        System.out.println();
+        System.out.println("List Commands: ");
         System.out.println("- List today's meal intake: listMeals");
         System.out.println("- List today's drink intake: listDrinks");
         System.out.println("- List today's exercises done: listExercises");
@@ -263,18 +274,27 @@ public class Parser {
         System.out.println("- List drink intake for certain date: listDrinks d/dd-MM-yyyy");
         System.out.println("- List exercises done for certain date: listExercises d/dd-MM-yyyy");
         System.out.println("- List entire food intake and exercises for certain date: listEverything d/dd-MM-yyyy");
+        System.out.println();
+        System.out.println("Edit Commands: ");
         System.out.println("- Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE");
         System.out.println("- Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE");
+        System.out.println();
+        System.out.println("Delete Commands: ");
         System.out.println("- Delete certain meal entry: deleteMeal INDEX");
         System.out.println("- Delete certain drink entry: deleteDrink INDEX");
         System.out.println("- Delete certain exercise entry: deleteExercise INDEX");
+        System.out.println();
+        System.out.println("Adding a meal/drink/exercises to available list: ");
         System.out.println("- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES," +
                 "CARBS,PROTEIN,FAT,FIBER,SUGAR");
         System.out.println("- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES," +
                 "CARBS,SUGAR,PROTEIN,FAT");
         System.out.println("- Add a new exercise to available exercises: newExercise EXERCISE_NAME," +
                 "CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW");
+        System.out.println();
+        System.out.println("Miscellaneous: ");
+        System.out.println("- View daily calories and water intake recommendation: recommend");
         System.out.println("- Clear all entries: clear");
         System.out.println("- Exit the app: exit ");
     }
@@ -285,10 +305,10 @@ public class Parser {
      * @param command The command entered by the user.
      * @throws IncompleteMealException If the meal command is incomplete.
      * @throws UnregisteredMealException If the meal is not registered in the database.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      */
     public static void parseMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            NegativeValueException {
+            NonPositiveValueException {
         if (!command.contains("m/") || !command.contains("s/")) {
             throw new IncompleteMealException();
         }
@@ -316,10 +336,10 @@ public class Parser {
      * @param command The command entered by the user.
      * @throws IncompleteDrinkException If the drink command is incomplete.
      * @throws UnregisteredDrinkException If the drink is not registered in the database.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      */
     public static void parseDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            NegativeValueException {
+            NonPositiveValueException {
         if (!command.contains("d/") || !command.contains("s/")) {
             throw new IncompleteDrinkException();
         }
@@ -406,10 +426,10 @@ public class Parser {
      * Parses the command for editing a meal.
      *
      * @param command The command entered by the user.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      * @throws IncompleteEditException If the command is incomplete.
      */
-    public static void parseEditMeal(String command) throws NegativeValueException, IncompleteEditException {
+    public static void parseEditMeal(String command) throws NonPositiveValueException, IncompleteEditException {
         int mealSizePosition = command.indexOf("s/");
         if (mealSizePosition <= 9) {
             throw new IncompleteEditException();
@@ -424,10 +444,10 @@ public class Parser {
      * Parses the command for editing a drink.
      *
      * @param command The command entered by the user.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      * @throws IncompleteEditException If the command is incomplete.
      */
-    public static void parseEditDrink(String command) throws NegativeValueException, IncompleteEditException {
+    public static void parseEditDrink(String command) throws NonPositiveValueException, IncompleteEditException {
         int drinkSizePosition = command.indexOf("s/");
         if (drinkSizePosition <= 10) {
             throw new IncompleteEditException();
@@ -442,10 +462,10 @@ public class Parser {
      * Parses the command for editing water intake.
      *
      * @param command The command entered by the user.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      * @throws IncompleteEditException If the command is incomplete.
      */
-    public static void parseEditWater(String command) throws NegativeValueException, IncompleteEditException {
+    public static void parseEditWater(String command) throws NonPositiveValueException, IncompleteEditException {
         int waterSizePosition = command.indexOf("s/") + 2;
         if (waterSizePosition <= 1) { //-1 + 2
             throw new IncompleteEditException();
@@ -500,10 +520,10 @@ public class Parser {
      * @param command The command entered by the user.
      * @throws IncompleteExerciseException If the exercise command is incomplete.
      * @throws UnregisteredExerciseException If the exercise is not registered in the database.
-     * @throws NegativeValueException If a negative value is encountered.
+     * @throws NonPositiveValueException If a negative value is encountered.
      */
     public static void parseExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
-            NegativeValueException {
+            NonPositiveValueException {
         if (!command.contains("e/") || !command.contains("d/") || !command.contains("i/")) {
             throw new IncompleteExerciseException();
         }
@@ -538,9 +558,13 @@ public class Parser {
      *
      * @param data The nutrient data string to be parsed.
      */
-    public static void parseMealNutrient(String data) throws  IllegalArgumentException, NegativeValueException{
+    public static void parseMealNutrient(String data) throws  IllegalArgumentException, NegativeValueException {
         String delimiter = ",";
         String[] arrayOfMealNutrient = data.split(delimiter);
+
+        for (int i = 0; i < arrayOfMealNutrient.length; i++) {
+            arrayOfMealNutrient[i] = arrayOfMealNutrient[i].trim();
+        }
 
         if (arrayOfMealNutrient.length != 7) {
             throw new IllegalArgumentException("Invalid number of arguments provided. Expected 7, got "
@@ -576,6 +600,10 @@ public class Parser {
         String delimiter = ",";
         String[] arrayOfDrinkNutrient = data.split(delimiter);
 
+        for (int i = 0; i < arrayOfDrinkNutrient.length; i++) {
+            arrayOfDrinkNutrient[i] = arrayOfDrinkNutrient[i].trim();
+        }
+
         if (arrayOfDrinkNutrient.length != 6) {
             throw new IllegalArgumentException("Invalid number of arguments provided. Expected 6, got "
                     + arrayOfDrinkNutrient.length);
@@ -604,9 +632,13 @@ public class Parser {
      *
      * @param data The calorie data string to be parsed.
      */
-    public static void parseExerciseCalories(String data) throws IllegalArgumentException, NegativeValueException {
+    public static void parseExerciseCalories(String data) throws IllegalArgumentException, NonPositiveValueException {
         String delimiter = ",";
         String[] arrayOfExerciseCalories = data.split(delimiter);
+
+        for (int i = 0; i < arrayOfExerciseCalories.length; i++) {
+            arrayOfExerciseCalories[i] = arrayOfExerciseCalories[i].trim();
+        }
 
         if (arrayOfExerciseCalories.length != 4) {
             throw new IllegalArgumentException("Invalid number of arguments provided. Expected 4, got "
@@ -619,9 +651,14 @@ public class Parser {
             exerciseCaloriesMedium = Integer.parseInt(arrayOfExerciseCalories[2]);
             exerciseCaloriesLow = Integer.parseInt(arrayOfExerciseCalories[3]);
 
-            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesHigh);
-            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesMedium);
-            IntegerValidation.checkIntegerGreaterOrEqualThanZero(exerciseCaloriesLow);
+            if (exerciseCaloriesHigh <= exerciseCaloriesMedium || exerciseCaloriesMedium <= exerciseCaloriesLow) {
+                throw new IllegalArgumentException("HIGH intensity must be greater than MEDIUM intensity and MEDIUM " +
+                        "intensity must be larger than LOW intensity.");
+            }
+
+            IntegerValidation.checkIntegerGreaterThanZero(exerciseCaloriesHigh);
+            IntegerValidation.checkIntegerGreaterThanZero(exerciseCaloriesMedium);
+            IntegerValidation.checkIntegerGreaterThanZero(exerciseCaloriesLow);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid numeric format, please input an integer");
         }
@@ -643,17 +680,37 @@ public class Parser {
         throw new InvalidDateException();
     }
 
+    /**
+     * Parses the newMeal command from a command string.
+     *
+     * @param command The command entered by the user containing the new meal they want to add and its nutrient details
+     * @throws NegativeValueException If a negative value is encountered.
+     */
     public static void parseNewMeal(String command) throws NegativeValueException {
         String mealNutrients = command.substring(8).trim();
         parseMealNutrient(mealNutrients);
     }
 
+
+    /**
+     * Parses the newDrink command from a command string.
+     *
+     * @param command The command entered by the user containing the new drink they want to add and its nutrient details
+     * @throws NegativeValueException If a negative value is encountered.
+     */
     public static void parseNewDrink(String command) throws NegativeValueException {
         String drinkNutrients = command.substring(9).trim();
         parseDrinkNutrient(drinkNutrients);
     }
 
-    public static void parseNewExercise(String command) throws NegativeValueException{
+    /**
+     * Parses the newMeal command from a command string.
+     *
+     * @param command The command entered by the user containing the new exercise they want to add and its calories
+     *                burnt details
+     * @throws NonPositiveValueException If a negative value is encountered.
+     */
+    public static void parseNewExercise(String command) throws NonPositiveValueException {
         String exerciseDetails = command.substring(12).trim();
         parseExerciseCalories(exerciseDetails);
     }

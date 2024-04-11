@@ -1,13 +1,14 @@
 package seedu.fitnus.storage;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.drink.Water;
 import seedu.fitnus.user.User;
-import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.parser.Parser;
 
@@ -26,8 +27,10 @@ public class StorageManager {
             loadMeal(mealStorage);
             loadDrink(drinkStorage);
             loadExercise(exerciseStorage);
+        } catch (NonPositiveValueException e) {
+            System.out.println("Calories burnt must be greater than 0");
         } catch (NegativeValueException e) {
-            System.out.println("Nutrient details must be greater than 0");
+            System.out.println("Nutrient details cannot be negative");
         }
     }
 
@@ -145,7 +148,7 @@ public class StorageManager {
      *
      * @param mealNutrientStorage contains filePath and folderPath of where the pre-defined meals are stored.
      */
-    public void loadMealNutrient(Storage mealNutrientStorage) throws NegativeValueException{
+    public void loadMealNutrient(Storage mealNutrientStorage) throws NegativeValueException {
         try {
             ArrayList<String> mealNutrientList = mealNutrientStorage.readFile();
             if (!mealNutrientList.isEmpty()) {
@@ -171,7 +174,7 @@ public class StorageManager {
      *
      * @param drinkNutrientStorage contains filePath and folderPath of where the pre-defined drinks are stored.
      */
-    public void loadDrinkNutrient(Storage drinkNutrientStorage) throws NegativeValueException{
+    public void loadDrinkNutrient(Storage drinkNutrientStorage) throws NegativeValueException {
         try {
             ArrayList<String> drinkNutrientList = drinkNutrientStorage.readFile();
             if (!drinkNutrientList.isEmpty()) {
@@ -197,7 +200,7 @@ public class StorageManager {
      *
      * @param exerciseCaloriesStorage contains filePath and folderPath of where the pre-defined exercises are stored.
      */
-    public void loadExerciseCalories(Storage exerciseCaloriesStorage) throws NegativeValueException {
+    public void loadExerciseCalories(Storage exerciseCaloriesStorage) throws NonPositiveValueException {
         try {
             ArrayList<String> exerciseCaloriesList = exerciseCaloriesStorage.readFile();
             if (!exerciseCaloriesList.isEmpty()) {
