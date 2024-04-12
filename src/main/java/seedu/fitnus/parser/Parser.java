@@ -1,6 +1,13 @@
 package seedu.fitnus.parser;
 
+import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.meal.Meal;
+import seedu.fitnus.exercise.Exercise;
+import seedu.fitnus.exercise.ExerciseIntensity;
+import seedu.fitnus.user.User;
+import seedu.fitnus.validator.IntegerValidation;
+
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
@@ -15,13 +22,9 @@ import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.meal.Meal;
-import seedu.fitnus.exercise.Exercise;
-import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.FutureDateException;
 
-import seedu.fitnus.user.User;
-import seedu.fitnus.validator.IntegerValidation;
+import java.text.ParseException;
 
 /**
  * The Parser class is responsible for parsing user commands and delegating
@@ -219,10 +222,14 @@ public class Parser {
                     "Type [help] to view the commands format.");
         } catch (NonPositiveValueException e) {
             System.out.println("Your serving size/exercise duration must be greater than 0!");
-        }   catch (NegativeValueException e) {
+        } catch (NegativeValueException e) {
             System.out.println("Value cannot be negative!");
         } catch (InvalidDateException e) {
             System.out.println("Invalid date provided. Your date must be in the format of dd-MM-yyyy.");
+        } catch (FutureDateException e) {
+            System.out.println("Specified date has not passed. Please try another date.");
+        } catch (ParseException e) {
+            System.out.println("Specified date is invalid. Please try another date.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -671,13 +678,10 @@ public class Parser {
      * @return The parsed date string.
      * @throws InvalidDateException If the date format is invalid.
      */
-    public static String parseListDate(String command) throws InvalidDateException {
+    public static String parseListDate(String command) throws FutureDateException, ParseException {
         int indexOfDate = command.indexOf("d/") + 2;
         String date = command.substring(indexOfDate);
-        if (Date.isValidDate(date)) {
-            return date;
-        }
-        throw new InvalidDateException();
+        return DateValidation.formatDateIfValid(date);
     }
 
     /**
