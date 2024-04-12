@@ -3,13 +3,14 @@ package seedu.fitnus.parser;
 import org.junit.jupiter.api.Test;
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteEditException;
-import seedu.fitnus.exception.IncompleteInfoException;
-import seedu.fitnus.exception.UnregisteredDrinkException;
-import seedu.fitnus.exception.NegativeValueException;
-import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.IncompleteExerciseException;
+import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.InvalidDateException;
+import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
+import seedu.fitnus.exception.UnregisteredDrinkException;
+import seedu.fitnus.exception.UnregisteredExerciseException;
+import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exercise.ExerciseIntensity;
 
 
@@ -51,7 +52,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseEditMeal_validInputs_success() throws IncompleteEditException, NegativeValueException {
+    public void parseEditMeal_validInputs_success() throws IncompleteEditException, NonPositiveValueException {
         String command = "editMeal 3 s/120";
         Parser.parseEditMeal(command);
         // Meal list starts from 1, however the array index starts from 0, hence the n - 1
@@ -60,7 +61,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseEditDrink_validInputs_success() throws IncompleteEditException, NegativeValueException {
+    public void parseEditDrink_validInputs_success() throws IncompleteEditException, NonPositiveValueException {
         String command = "editDrink 1 s/500";
         Parser.parseEditDrink(command);
         // Drink list starts from 1, however the array index starts from 0, hence the n - 1
@@ -69,7 +70,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseEditDrink_unregisteredMeal_exceptionThrown() throws NegativeValueException {
+    public void parseEditDrink_unregisteredMeal_exceptionThrown() throws NonPositiveValueException {
         String command = "editDrink s/100";
         try {
             Parser.parseEditDrink(command);
@@ -79,7 +80,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseEditWater_validInputs_success() throws IncompleteEditException, NegativeValueException {
+    public void parseEditWater_validInputs_success() throws IncompleteEditException, NonPositiveValueException {
         String command = "editWater s/500";
         Parser.parseEditWater(command);
         assertEquals(500, Parser.editWaterSize);
@@ -114,7 +115,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseExercise_validInputs_success() throws IncompleteExerciseException, NegativeValueException,
+    public void parseExercise_validInputs_success() throws IncompleteExerciseException, NonPositiveValueException,
             UnregisteredExerciseException {
         String command = "exercise e/cycling d/100 i/LOW";
         Parser.parseExercise(command);
@@ -149,7 +150,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseExerciseCalories_validInputs_success() throws NegativeValueException {
+    public void parseExerciseCalories_validInputs_success() throws NonPositiveValueException {
         String data = "Running,14,10,7";
         Parser.parseExerciseCalories(data);
         assertEquals("running", Parser.exerciseCaloriesDescription);

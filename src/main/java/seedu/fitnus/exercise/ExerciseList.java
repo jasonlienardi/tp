@@ -6,7 +6,7 @@ import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exception.InvalidListIndexException;
-import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.parser.Parser;
 
@@ -22,7 +22,14 @@ public class ExerciseList {
         exerciseListAll = new ArrayList<>();
     }
 
-    public void handleAddNewExerciseCalories(String command) throws NegativeValueException {
+    /**
+     * Adds a exercise to available exercises
+     *
+     * @param command string inputted by the user, containing the exercise they want to add to available exercises
+     *                and details regarding the calories burnt
+     * @throws NonPositiveValueException if the calories burnt is a negative value
+     */
+    public void handleAddNewExerciseCalories(String command) throws NonPositiveValueException {
         Parser.parseNewExercise(command);
         String description = Parser.exerciseCaloriesDescription;
         int high = Parser.exerciseCaloriesHigh;
@@ -138,10 +145,10 @@ public class ExerciseList {
      *                intensity.
      * @throws IncompleteExerciseException if the user did not comply with the required format
      * @throws UnregisteredExerciseException if the user has inputted an exercise that was not pre-defined
-     * @throws NegativeValueException if the provided exercise duration is a negative value
+     * @throws NonPositiveValueException if the provided exercise duration is a negative value
      */
     public void handleExercise(String command) throws IncompleteExerciseException, UnregisteredExerciseException,
-            NegativeValueException {
+            NonPositiveValueException {
         Parser.parseExercise(command);
         String exerciseType = Parser.exerciseDescription;
         int duration = Parser.exerciseDuration;
