@@ -2,13 +2,14 @@ package seedu.fitnus.user;
 
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.drink.DrinkList;
+import seedu.fitnus.drink.Water;
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.meal.MealList;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseList;
 import seedu.fitnus.parser.Parser;
-import seedu.fitnus.drink.Water;
+
 import seedu.fitnus.exception.InvalidDateException;
 
 import java.text.ParseException;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class User {
     public static final int RECOMMEND_WATER_INTAKE = 2600;
     public static final int RECOMMEND_CALORIE_INTAKE = 2200;
+
     public static MealList myMealList;
     public static ExerciseList myExerciseList;
     public static DrinkList myDrinkList;
@@ -233,6 +235,7 @@ public class User {
 
         System.out.println("All entries have been deleted");
     }
+
 
     /**
      * Handles when user would like to see what is recommended to them,
