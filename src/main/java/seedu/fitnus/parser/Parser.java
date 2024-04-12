@@ -99,7 +99,7 @@ public class Parser {
      * @param command The command entered by the user.
      */
     public void handleCommand(String command) {
-        String trimmedCommand = command.trim();
+        String trimmedCommand = command.trim(); 
         try {
             if (trimmedCommand.equals("help")) {
                 handleHelp();
