@@ -1,6 +1,5 @@
 package seedu.fitnus.parser;
 
-import seedu.fitnus.date.Date;
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.meal.Meal;
