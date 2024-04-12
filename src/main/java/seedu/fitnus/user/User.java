@@ -8,7 +8,6 @@ import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseList;
 import seedu.fitnus.parser.Parser;
 import seedu.fitnus.drink.Water;
-import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.InvalidDateException;
 
 import java.util.ArrayList;
@@ -27,20 +26,6 @@ public class User {
         myMealList = new MealList();
         myDrinkList = new DrinkList();
         myExerciseList = new ExerciseList();
-    }
-
-    public void handleAddNewMealNutrient(String command) throws NegativeValueException{
-        Parser.parseNewMeal(command);
-        String description = Parser.mealNutrientDescription;
-        int calories = Parser.mealNutrientCalories;
-        int carbs = Parser.mealNutrientCarbs;
-        int protein = Parser.mealNutrientProtein;
-        int fat = Parser.mealNutrientFat;
-        int fiber = Parser.mealNutrientFiber;
-        int sugar = Parser.mealNutrientSugar;
-        Meal.nutrientDetails.put(description, new int[]{calories, carbs, protein, fat, fiber, sugar});
-
-        System.out.println("Added " + description + " to available meals");
     }
 
     /**

@@ -54,6 +54,11 @@ public class Drink  {
         nutrientDetails.put("bandung", new int[]{153, 32, 1, 2, 1});
     }
 
+    /**
+     * Sets nutrients details for a certain drink based on values in hashmap
+     *
+     * @param name name of drink to set nutrients
+     */
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * drinkVolume / 100;

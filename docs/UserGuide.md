@@ -78,20 +78,24 @@ Shows a list of all possible command inputs.
 **Format**: `help`   
 **Expected Output**:
 ~~~
-here's all the valid commands i recognise:
-- Add a meal eaten: eat m/MEAL s/SERVING_SIZE
-- Add a drink: drink d/DRINK s/VOLUME(ML)
+Here's all the valid commands I recognise: 
+
+Track a meal/drink/exercise: 
+- Track a meal eaten: eat m/MEAL s/SERVING_SIZE
+- Track a drink: drink d/DRINK s/VOLUME(ML)
 - Track an exercise: exercise e/EXERCISE d/DURATION(MINUTES) i/INTENSITY(HIGH, MEDIUM, LOW)
-- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR
-- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT
-- Add a new exercise to available exercises: newExercise CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,
-CALORIES_BURNT_LOW"
+
+View available meals/drinks/exercises: 
 - View all meals that you can input: allMeals
 - View all drinks that you can input: allDrinks
 - View all exercises that you can input: allExercises
+
+Find information about a meal/drink/exercise: 
 - Find the information about a certain meal: infoMeal MEAL
 - Find the information about a certain drink: infoDrink DRINK
 - Find the information about a certain exercise: infoExercise EXERCISE
+
+View nutrients and calories: 
 - View daily calories consumed: calories
 - View daily carbohydrates consumed: carbs
 - View daily proteins consumed: protein
@@ -100,6 +104,8 @@ CALORIES_BURNT_LOW"
 - View daily fiber consumed: fiber
 - View daily water consumption: viewWater
 - View daily calories burnt: caloriesBurnt
+
+List Commands: 
 - List today's meal intake: listMeals
 - List today's drink intake: listDrinks
 - List today's exercises done: listExercises
@@ -112,14 +118,26 @@ CALORIES_BURNT_LOW"
 - List drink intake for certain date: listDrinks d/dd-MM-yyyy
 - List exercises done for certain date: listExercises d/dd-MM-yyyy
 - List entire food intake and exercises for certain date: listEverything d/dd-MM-yyyy
+
+Edit Commands: 
 - Edit an existing meal after inserted: editMeal INDEX s/NEW_SERVING_SIZE
 - Edit an existing drink after inserted: editDrink INDEX s/NEW_SERVING_SIZE
 - Edit total water intake after inserted: editWater s/TOTAL_WATER_INTAKE
+
+Delete Commands: 
 - Delete certain meal entry: deleteMeal INDEX
 - Delete certain drink entry: deleteDrink INDEX
 - Delete certain exercise entry: deleteExercise INDEX
+
+Adding a meal/drink/exercises to available list: 
+- Add a new meal to available meals: newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR
+- Add a new drink to available drinks: newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT
+- Add a new exercise to available exercises: newExercise EXERCISE_NAME,CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW
+
+Miscellaneous: 
+- View daily calories and water intake recommendation: recommend
 - Clear all entries: clear
-- Exit the app: exit
+- Exit the app: exit 
 ~~~
 ### 1.1.2 Viewing all pre-defined meals: `allMeals`
 Shows a list of all pre-defined meals. These meals will have their nutritional content defined per serving size and can
@@ -128,29 +146,11 @@ be inputted immediately.
 **Expected Output**:
 ~~~
 Available meals: 
-- char kway teow
-- ban mian
-- tau huay
-- nasi goreng
-- soup kambeng
-- nasi lemak
-- pepper lunch
-- char siew rice
-- pork satay with satay sauce
-- roti prata
-- mee goreng
-- chendol
-- wanton mee
-- oyster omlette
 - pizza
-- ice kachang
 - chicken rice
 - fried rice
 - kaya toast
-- mala
 - laksa
-- hokkien prawn mee
-- durian
 
 You may also input a meal that isn't here.
 ~~~
@@ -162,29 +162,10 @@ and can be inputted immediately.
 **Expected Output**:
 ~~~
 Available drinks: 
-- milo dinosaur
-- chrysanthemun juice
-- honey lemon tea
-- soursop juice
-- lemon tea
-- kopi c
-- kalamansi juice
-- kopi o
-- milo
-- plum juice
-- water
-- 100 plus
-- milk coffee
-- teh c bing
-- kopi
-- guava juice
-- tiger beer
-- teh tarik
-- sugarcane juice
-- teh
 - sprite
+- milo
 - iced lemon tea
-- bandung
+- kopi
 
 You may also input a drink that isn't here.
 ~~~
@@ -196,21 +177,9 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 **Expected Output**:
 ~~~
 Available exercises: 
-- soccer
-- rugby
-- yoga
-- badminton
-- hiking
-- cycling
-- tennis
 - running
-- weightlifting
 - swimming
-- basketball
-- rowing
-- boxing
-- volleyball
-- skipping
+- cycling
 
 You may also input an exercise that isn't here.
 ~~~
@@ -227,7 +196,7 @@ Added 1 serving of chicken rice
 
 ### 1.2.2 Add a drink: `drink`
 Adds a drink to the list of drinks  
-**Format**: `drink d/DRINK s/SERVING_SIZE`  
+**Format**: `drink d/DRINK s/VOLUME(ML)`  
 **Sample Input**: `drink d/Iced Lemon Tea s/200`  
 **Expected Output**: 
 ~~~
@@ -254,7 +223,7 @@ Tracked 30 minutes of swimming
 
 ### 1.2.4 Add new meal to available meals: `newMeal`
 Adds a new meal to available meals  
-**Format**: `newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR`
+**Format**: `newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR`  
 **Sample Input**: `newMeal mie,607,75,25,23,2,10`  
 **Expected Output**:
 ~~~
@@ -263,8 +232,8 @@ Added mie to available meals
 
 ### 1.2.4 Add new meal to available meals: `newDrink`
 Adds a new drink to available drinks  
-**Format**: `newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT`
-**Sample Input**: `newDrink coke,153,32,1,2,1`  
+**Format**: `newDrink DRINK_NAME,CALORIES,CARBS,SUGAR,PROTEIN,FAT`   
+**Sample Input**: `newDrink coke,153,32,1,2,1`   
 **Expected Output**:
 ~~~
 Added coke to available drinks
@@ -272,7 +241,7 @@ Added coke to available drinks
 
 ### 1.2.5 Add new exercise to available exercises: `newExercise`
 Adds a new exercise to available exercises  
-**Format**: `newExercise CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW`
+**Format**: `newExercise EXERCISE_NAME,CALORIES_BURNT_HIGH,CALORIES_BURNT_MEDIUM,CALORIES_BURNT_LOW`   
 **Sample Input**: `newExercise badminton,20,10,5`  
 **Expected Output**:
 ~~~
@@ -287,12 +256,13 @@ For the specified meal, display its nutritional content to the user
 **Expected Output**:  
 ~~~
 Meal: chicken rice (per serving)`
-Calories: 607
-Carbs: 75
-Protein: 25
-Fat: 23
-Fiber: 2
-Sugar: 10
+Calories: 400
+Carbs: 50
+Protein: 30
+Fat: 20
+Fiber: 10
+Sugar: 5
+Sugar: 5
 ~~~
 
 ### 1.3.2 Find the information about a certain drink: `infoDrink`
