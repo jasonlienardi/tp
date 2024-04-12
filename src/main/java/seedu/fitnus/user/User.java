@@ -285,7 +285,8 @@ public class User {
         long caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesIntakeCount;
         if (caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE) {
             System.out.println("We recommend eating more food. Please eat " + caloriesDifference + " more calories");
-        } else if (caloriesIntakeCount > RECOMMEND_CALORIE_INTAKE && caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE + 200) {
+        } else if (caloriesIntakeCount > RECOMMEND_CALORIE_INTAKE 
+                   && caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE + 200) {
             System.out.println("Great! You are on track with the calorie intake!");
         } else {
             System.out.println("You are " + -caloriesDifference
