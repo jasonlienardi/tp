@@ -7,6 +7,7 @@ import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.parser.Parser;
 
@@ -23,15 +24,36 @@ public class MealList {
     }
 
     /**
+     * Adds a meal to available meals
+     *
+     * @param command string inputted by the user, containing the meal they want to add to available meals and
+     *                its nutrient details
+     * @throws NegativeValueException if the nutrient detail is a negative value
+     */
+    public void handleAddNewMealNutrient(String command) throws NegativeValueException {
+        Parser.parseNewMeal(command);
+        String description = Parser.mealNutrientDescription;
+        int calories = Parser.mealNutrientCalories;
+        int carbs = Parser.mealNutrientCarbs;
+        int protein = Parser.mealNutrientProtein;
+        int fat = Parser.mealNutrientFat;
+        int fiber = Parser.mealNutrientFiber;
+        int sugar = Parser.mealNutrientSugar;
+        Meal.nutrientDetails.put(description, new int[]{calories, carbs, protein, fat, fiber, sugar});
+
+        System.out.println("Added " + description + " to available meals");
+    }
+
+    /**
      * Adds a meal to the user's current mealList, based on what the user has eaten and the serving size consumed.
      *
      * @param command string inputted by the user, containing the meal they ate and its serving size
      * @throws IncompleteMealException if the user did not comply with the required format
      * @throws UnregisteredMealException if the user has inputted a meal that was not pre-defined
-     * @throws NegativeValueException if the provided serving size is a negative value
+     * @throws NonPositiveValueException if the provided serving size is a negative value
      */
     public static void handleMeal(String command) throws IncompleteMealException, UnregisteredMealException,
-            NegativeValueException {
+            NonPositiveValueException {
         Parser.parseMeal(command);
         String mealName = Parser.mealDescription;
         int servingSize = Parser.mealSize;
@@ -123,11 +145,11 @@ public class MealList {
      *
      * @param command string inputted by the user, containing the index of the meal to edit and the new serving size
      * @throws InvalidListIndexException if the provided index is not a valid index in mealList
-     * @throws NegativeValueException if the provided serving size is a negative value
+     * @throws NonPositiveValueException if the provided serving size is a negative value
      * @throws IncompleteEditException if the user did not comply with the required command format
      */
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
-            NegativeValueException, IncompleteEditException {
+            NonPositiveValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
         if (Parser.editMealIndex >= mealList.size() || Parser.editMealIndex < 0) {
             throw new InvalidListIndexException();

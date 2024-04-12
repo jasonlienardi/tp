@@ -43,6 +43,11 @@ public class Meal {
         nutrientDetails.put("laksa", new int[]{377, 71, 18, 2, 4, 10});
     }
 
+    /**
+     * Sets nutrients details for a certain meal based on values in hashmap
+     *
+     * @param name name of meal to set nutrients
+     */
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * servingSize;

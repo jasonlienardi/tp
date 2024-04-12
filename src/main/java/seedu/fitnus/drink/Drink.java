@@ -41,6 +41,11 @@ public class Drink  {
         nutrientDetails.put("kopi", new int[]{141, 26, 2, 3, 1});
     }
 
+    /**
+     * Sets nutrients details for a certain drink based on values in hashmap
+     *
+     * @param name name of drink to set nutrients
+     */
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
         calories = nutrients[0] * drinkVolume / 100;

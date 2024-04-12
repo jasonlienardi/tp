@@ -7,6 +7,7 @@ import seedu.fitnus.exception.IncompleteEditException;
 import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.parser.Parser;
 
@@ -25,6 +26,13 @@ public class DrinkList {
         waterListAll = new ArrayList<>();
     }
 
+    /**
+     * Adds a drink to available drinks
+     *
+     * @param command string inputted by the user, containing the drink they want to add to available drinks and
+     *                its nutrient details
+     * @throws NegativeValueException if the nutrient detail is a negative value
+     */
     public void handleAddNewDrinkNutrient(String command) throws NegativeValueException {
         Parser.parseNewDrink(command);
         String description = Parser.drinkNutrientDescription;
@@ -44,10 +52,10 @@ public class DrinkList {
      * @param command string inputted by the user, containing the drink they consumed and its serving size
      * @throws IncompleteDrinkException if the user did not comply with the required format
      * @throws UnregisteredDrinkException if the user has inputted a drink that was not pre-defined
-     * @throws NegativeValueException if the provided serving size is a negative value
+     * @throws NonPositiveValueException if the provided serving size is a negative value
      */
     public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            NegativeValueException {
+            NonPositiveValueException {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
@@ -179,12 +187,12 @@ public class DrinkList {
      *
      * @param command string inputted by the user, containing the index of the drink to edit and the new serving size
      * @throws InvalidListIndexException if the provided index is not a valid index in drinkList
-     * @throws NegativeValueException if the provided serving size is a negative value
+     * @throws NonPositiveValueException if the provided serving size is a negative value
      * @throws IncompleteEditException if the user did not comply with the required command format
      */
     //@@author claribelho
     public void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
-            NegativeValueException, IncompleteEditException {
+            NonPositiveValueException, IncompleteEditException {
         Parser.parseEditDrink(command);
 
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
@@ -203,10 +211,10 @@ public class DrinkList {
      * Handles when the user would like to edit the total volume of the water they consumed today.
      *
      * @param command string inputted by the user, containing the new total volume of water
-     * @throws NegativeValueException if the provided serving size is a negative value
+     * @throws NonPositiveValueException if the provided serving size is a negative value
      * @throws IncompleteEditException if the user did not comply with the required command format
      */
-    public void handleEditWaterIntake(String command) throws NegativeValueException, IncompleteEditException {
+    public void handleEditWaterIntake(String command) throws NonPositiveValueException, IncompleteEditException {
         Parser.parseEditWater(command);
         Date currentDate = new Date();
         for (Water water: waterList) {
