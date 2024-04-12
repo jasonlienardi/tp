@@ -3,12 +3,14 @@ package seedu.fitnus.user;
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.drink.DrinkList;
 import seedu.fitnus.drink.Water;
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.meal.MealList;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseList;
 import seedu.fitnus.parser.Parser;
+import seedu.fitnus.validator.IntegerValidation;
 
 import seedu.fitnus.exception.InvalidDateException;
 
@@ -36,32 +38,44 @@ public class User {
      * Prints the user's total calorie intake of the day.
      * The method sums up the calories from meals and drinks, and subtracts calories burnt from exercise.
      */
-    public void handleViewCalories() {
-        int caloriesCount = 0;
+    public void handleViewCalories() throws ExceedTypeLongException {
+        long caloriesIntakeCount = 0;
         for (Meal meal: myMealList.mealList) {
-            caloriesCount += meal.getCalories();
+            caloriesIntakeCount += meal.getCalories();
         }
         for (Drink drink: myDrinkList.drinkList) {
-            caloriesCount += drink.getCalories();
+            caloriesIntakeCount += drink.getCalories();
         }
-        for (Exercise exercise: myExerciseList.exerciseList) {
-            caloriesCount -= exercise.getCaloriesBurnt();
+        IntegerValidation.checkNoOverflowForSum(caloriesIntakeCount);
+
+        try {
+            int caloriesBurntCount = 0;
+            for (Exercise exercise : myExerciseList.exerciseList) {
+                caloriesBurntCount += exercise.getCaloriesBurnt();
+            }
+            IntegerValidation.checkNoOverflowForSum(caloriesBurntCount);
+
+            long caloriesCount = caloriesIntakeCount - caloriesBurntCount;
+            System.out.println("Total Calories: " + caloriesIntakeCount);
+        } catch (ExceedTypeLongException e) {
+            System.out.println("the amount of calories you burnt has exceeded our data limits. please do a quick " +
+                    "check to make sure your exerciseList is accurate!");
         }
-        System.out.println("Total Calories: " + caloriesCount);
     }
 
     /**
      * Prints the user's total carbohydrate intake of the day.
      * The method sums up the carbohydrates from meals and drinks.
      */
-    public void handleViewCarbohydrates() {
-        int carbohydratesCount = 0;
+    public void handleViewCarbohydrates() throws ExceedTypeLongException {
+        long carbohydratesCount = 0;
         for (Meal meal: myMealList.mealList) {
             carbohydratesCount += meal.getCarbs();
         }
         for (Drink drink: myDrinkList.drinkList) {
             carbohydratesCount += drink.getCarbs();
         }
+        IntegerValidation.checkNoOverflowForSum(carbohydratesCount);
         System.out.println("Total Carbohydrates: " + carbohydratesCount + " grams");
     }
 
@@ -69,14 +83,15 @@ public class User {
      * Prints the user's total protein intake of the day.
      * The method sums up the protein from meals and drinks.
      */
-    public void handleViewProteins() {
-        int proteinCount = 0;
+    public void handleViewProteins() throws ExceedTypeLongException {
+        long proteinCount = 0;
         for (Meal meal: myMealList.mealList) {
             proteinCount += meal.getProtein();
         }
         for (Drink drink: myDrinkList.drinkList) {
             proteinCount += drink.getProtein();
         }
+        IntegerValidation.checkNoOverflowForSum(proteinCount);
         System.out.println("Total Proteins: " + proteinCount + " grams");
     }
 
@@ -84,11 +99,12 @@ public class User {
      * Prints the user's total fiber intake of the day.
      * The method sums up the fiber from meals.
      */
-    public void handleViewFiber() {
-        int fibreCount = 0;
+    public void handleViewFiber() throws ExceedTypeLongException {
+        long fibreCount = 0;
         for (Meal meal: myMealList.mealList) {
             fibreCount += meal.getFiber();
         }
+        IntegerValidation.checkNoOverflowForSum(fibreCount);
         System.out.println("Total Fiber: " + fibreCount + " grams");
     }
 
@@ -96,14 +112,15 @@ public class User {
      * Prints the user's total fat intake of the day.
      * The method sums up the fat from meals and drinks.
      */
-    public void handleViewFat() {
-        int fatCount = 0;
+    public void handleViewFat() throws ExceedTypeLongException {
+        long fatCount = 0;
         for (Meal meal: myMealList.mealList) {
             fatCount += meal.getFat();
         }
         for (Drink drink: myDrinkList.drinkList) {
             fatCount += drink.getFat();
         }
+        IntegerValidation.checkNoOverflowForSum(fatCount);
         System.out.println("Total Fat: " + fatCount + " grams");
     }
 
@@ -111,14 +128,15 @@ public class User {
      * Prints the user's total sugar intake of the day.
      * The method sums up the sugar from meals and drinks.
      */
-    public void handleViewSugar() {
-        int sugarCount = 0;
+    public void handleViewSugar() throws ExceedTypeLongException {
+        long sugarCount = 0;
         for (Meal meal: myMealList.mealList) {
             sugarCount += meal.getSugar();
         }
         for (Drink drink: myDrinkList.drinkList) {
             sugarCount += drink.getSugar();
         }
+        IntegerValidation.checkNoOverflowForSum(sugarCount);
         System.out.println("Total Sugar: " + sugarCount + " grams");
     }
 

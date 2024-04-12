@@ -11,7 +11,7 @@ public class Exercise {
     private String name;
     private int duration; // Duration in minutes
     private ExerciseIntensity intensity;
-    private int caloriesBurnt;
+    private long caloriesBurnt;
     private String dateAdded;
 
     /**
@@ -51,7 +51,7 @@ public class Exercise {
         if (details == null) {
             throw new UnregisteredExerciseException();
         }
-        this.caloriesBurnt = duration * details[intensity.ordinal()];
+        this.caloriesBurnt = (long) duration * details[intensity.ordinal()];
     }
 
     /**
@@ -103,11 +103,11 @@ public class Exercise {
     }
 
     /**
-     * Returns an integer value of the amount of calories burnt from the exercise.
+     * Returns a long value of the amount of calories burnt from the exercise.
      *
-     * @return an integer value of the amount of calories burnt from the exercise
+     * @return a long value of the amount of calories burnt from the exercise
      */
-    public int getCaloriesBurnt() {
+    public long getCaloriesBurnt() {
         return caloriesBurnt;
     }
 

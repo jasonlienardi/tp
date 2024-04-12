@@ -2,6 +2,7 @@ package seedu.fitnus.parser;
 
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
@@ -99,7 +100,7 @@ public class Parser {
      * @param command The command entered by the user.
      */
     public void handleCommand(String command) {
-        String trimmedCommand = command.trim(); 
+        String trimmedCommand = command.trim();
         try {
             if (trimmedCommand.equals("help")) {
                 handleHelp();
@@ -181,7 +182,7 @@ public class Parser {
                 user.myExerciseList.handleDeleteExercise(trimmedCommand);
             } else if (trimmedCommand.equals("clear")) {
                 user.handleClear();
-            } else if (command.equals("recommend")) {
+            } else if (trimmedCommand.equals("recommend")) {
                 user.handleRecommendations();
             } else {
                 throw new InvalidCommandException();
@@ -233,6 +234,10 @@ public class Parser {
             System.out.println("Specified date is invalid. Please try another date.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+        } catch (ExceedTypeLongException e) {
+            System.out.println("the count you would like to view has exceeded our data limits, are you sure you have " +
+                    "consumed so much? Please do a quick check to update your listMeals and/or listDrinks before " +
+                    "viewing again :')");
         }
 
     }

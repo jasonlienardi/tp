@@ -2,6 +2,7 @@ package seedu.fitnus.user;
 
 import seedu.fitnus.date.Date;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.meal.Meal;
@@ -45,7 +46,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewCalories_correctCalorieCalculation_viewCaloriesAccurate() {
+    public void handleViewCalories_correctCalorieCalculation_viewCaloriesAccurate() throws ExceedTypeLongException {
         testUser.handleViewCalories();
         String expectedOutput = "Total Calories: 5507";
         String actualOutput = outputStream.toString().trim();
@@ -54,7 +55,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() {
+    public void handleViewCarbohydrates_correctCarbsCalculation_viewCarbsAccurate() throws ExceedTypeLongException {
         testUser.handleViewCarbohydrates();
         String expectedOutput = "Total Carbohydrates: 912 grams";
         String actualOutput = outputStream.toString().trim();
@@ -63,7 +64,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewProtein_correctProteinCalculation_viewProteinAccurate() {
+    public void handleViewProtein_correctProteinCalculation_viewProteinAccurate() throws ExceedTypeLongException {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewProteins();
@@ -73,7 +74,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewFiber_correctFiberCalculation_viewFiberAccurate() {
+    public void handleViewFiber_correctFiberCalculation_viewFiberAccurate() throws ExceedTypeLongException {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFiber();
@@ -84,7 +85,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewFat_correctFatCalculation_viewFatAccurate() {
+    public void handleViewFat_correctFatCalculation_viewFatAccurate() throws ExceedTypeLongException {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewFat();
@@ -95,7 +96,7 @@ public class UserTest {
     }
 
     @Test
-    public void handleViewSugar_correctSugarCalculation_viewSugarAccurate() {
+    public void handleViewSugar_correctSugarCalculation_viewSugarAccurate() throws ExceedTypeLongException {
         System.setOut(new PrintStream(outputStream));
 
         testUser.handleViewSugar();
