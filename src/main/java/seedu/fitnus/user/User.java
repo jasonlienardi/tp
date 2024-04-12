@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class User {
     public static final int RECOMMEND_WATER_INTAKE = 2600;
-    public static final int RECOMMEND_CALORIE_INTAKE = 2200;
+    public static final long RECOMMEND_CALORIE_INTAKE = 2200;
 
     public static MealList myMealList;
     public static ExerciseList myExerciseList;
@@ -274,24 +274,22 @@ public class User {
             System.out.println("Great! You are on track with the water intake!");
         }
         System.out.println("    ~~");
-        int caloriesCount = 0;
+
+        long caloriesIntakeCount = 0;
         for (Meal meal: myMealList.mealList) {
-            caloriesCount += meal.getCalories();
+            caloriesIntakeCount += meal.getCalories();
         }
         for (Drink drink: myDrinkList.drinkList) {
-            caloriesCount += drink.getCalories();
+            caloriesIntakeCount += drink.getCalories();
         }
-        for (Exercise exercise: myExerciseList.exerciseList) {
-            caloriesCount -= exercise.getCaloriesBurnt();
-        }
-        int caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesCount;
-        if (caloriesCount < RECOMMEND_CALORIE_INTAKE) {
+        long caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesIntakeCount;
+        if (caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE) {
             System.out.println("We recommend eating more food. Please eat " + caloriesDifference + " more calories");
-        } else if (caloriesCount > RECOMMEND_CALORIE_INTAKE && caloriesCount < RECOMMEND_CALORIE_INTAKE + 200) {
+        } else if (caloriesIntakeCount > RECOMMEND_CALORIE_INTAKE && caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE + 200) {
             System.out.println("Great! You are on track with the calorie intake!");
         } else {
             System.out.println("You are " + -caloriesDifference
-                    + " calories above the recommended calorie amount, consider exercising!");
+                    + " calories above the recommended calorie intake amount, consider exercising!");
         }
     }
 }
