@@ -39,6 +39,19 @@ public class Drink  {
         nutrientDetails.put("iced lemon tea", new int[]{95, 21, 1, 1, 1});
         nutrientDetails.put("milo", new int[]{124, 20, 3, 3, 1});
         nutrientDetails.put("kopi", new int[]{141, 26, 2, 3, 1});
+        nutrientDetails.put("soursop juice", new int[]{117, 25, 3, 1, 1});
+        nutrientDetails.put("kopi c", new int[]{117, 20, 1, 4, 0});
+        nutrientDetails.put("kalamansi juice", new int[]{168, 42, 0, 0, 1});
+        nutrientDetails.put("coke", new int[]{153, 32, 1, 2, 1});
+        nutrientDetails.put("kopi o", new int[]{67, 15, 1, 0, 0});
+        nutrientDetails.put("plum juice", new int[]{57, 13, 1, 0, 1});
+        nutrientDetails.put("teh c bing", new int[]{231, 24, 15, 1, 1});
+        nutrientDetails.put("guava juice", new int[]{143, 38, 0, 0, 1});
+        nutrientDetails.put("tiger beer", new int[]{42, 3, 1, 0, 0});
+        nutrientDetails.put("teh tarik", new int[]{124, 21, 3, 3, 0});
+        nutrientDetails.put("sugarcane juice", new int[]{192, 52, 0, 0, 1});
+        nutrientDetails.put("teh", new int[]{151, 29, 4, 1, 1});
+        nutrientDetails.put("bandung", new int[]{153, 32, 1, 2, 1});
     }
 
     /**

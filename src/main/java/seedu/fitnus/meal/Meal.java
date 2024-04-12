@@ -41,6 +41,24 @@ public class Meal {
         nutrientDetails.put("pizza", new int[]{600, 80, 50, 40, 30, 20});
         nutrientDetails.put("kaya toast", new int[]{459, 44, 8, 27, 10, 1});
         nutrientDetails.put("laksa", new int[]{377, 71, 18, 2, 4, 10});
+        nutrientDetails.put("ban mian", new int[]{475, 48, 22, 22, 3, 10});
+        nutrientDetails.put("tau huay", new int[]{153, 32, 14, 1, 5, 1});
+        nutrientDetails.put("nasi goreng", new int[]{346, 45, 13, 12, 10, 2});
+        nutrientDetails.put("babi kecap", new int[]{607, 75, 25, 23, 2, 10});
+        nutrientDetails.put("soup kambeng", new int[]{203, 6, 28, 7, 2, 5});
+        nutrientDetails.put("nasi lemak", new int[]{494, 80, 13, 14, 6, 5});
+        nutrientDetails.put("pepper lunch", new int[]{500, 50, 40, 11, 4, 5});
+        nutrientDetails.put("char siew rice", new int[]{605, 91, 24, 16, 6, 10});
+        nutrientDetails.put("pork satay with satay sauce", new int[]{36, 1, 5, 2, 10, 0});
+        nutrientDetails.put("roti prata", new int[]{209, 32, 5, 7, 2, 10});
+        nutrientDetails.put("mee goreng", new int[]{500, 61, 18, 20, 4, 5});
+        nutrientDetails.put("chendol", new int[]{386, 59, 6, 15, 7, 2});
+        nutrientDetails.put("wanton mee", new int[]{555, 97, 15, 14, 13, 10});
+        nutrientDetails.put("oyster omlette", new int[]{467, 40, 19, 24, 10, 1});
+        nutrientDetails.put("ice kachang", new int[]{257, 58, 6, 1, 10, 2});
+        nutrientDetails.put("mala", new int[]{583, 72, 12, 30, 10, 7});
+        nutrientDetails.put("hokkien prawn mee", new int[]{522, 69, 18, 19, 4, 10});
+        nutrientDetails.put("durian", new int[]{147, 27, 2, 5, 3, 5});
     }
 
     /**
