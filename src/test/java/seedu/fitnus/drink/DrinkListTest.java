@@ -49,17 +49,7 @@ public class DrinkListTest {
         assertEquals("kopi", testDrinkList.get(1).getName());
         assertEquals(500, testDrinkList.get(1).getDrinkVolumeSize());
     }
-
-//    @Test
-//    public void handleViewWaterIntake_correctWaterCalculation_viewWaterAccurate() {
-//        testDrinkList.add(new Drink ("water", 500, todayDate));
-//
-//        testerDrinkList.handleViewWaterIntake();
-//        String expectedOutput = "Total water intake today: 600 ml";
-//        String actualOutput = outputStream.toString().trim();
-//        assertEquals(actualOutput, expectedOutput);
-//    }
-
+    
     @Test
     public void handleListDrinks_emptyList_printListAccurate() {
         testDrinkList.clear();
