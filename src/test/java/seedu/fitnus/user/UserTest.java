@@ -7,7 +7,6 @@ import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.meal.Meal;
 
 import seedu.fitnus.exception.UnregisteredExerciseException;
-import seedu.fitnus.storage.Storage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -15,28 +14,19 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.fitnus.storage.StorageManager;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
     User testUser;
     String todayDate;
-    StorageManager testStorageManager;
     ArrayList<Meal> testMealList;
     ArrayList<Drink> testDrinkList;
     ArrayList<Exercise> testExerciseList;
-    private Storage testMealStorage;
-    private Storage testDrinkStorage;
-    private Storage testExerciseStorage;
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() throws UnregisteredExerciseException {
-        testMealStorage = new Storage("./src/test/resources", "src/test/resources/MealList.txt");
-        testDrinkStorage = new Storage("./src/test/resources", "src/test/resources/DrinkList.txt");
-        testExerciseStorage = new Storage("./src/test/resources", "src/test/resources/ExerciseList.txt");
-
         testUser = new User();
 
         testMealList = testUser.myMealList.mealList;
