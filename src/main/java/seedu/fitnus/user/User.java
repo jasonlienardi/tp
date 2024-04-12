@@ -47,16 +47,18 @@ public class User {
             caloriesIntakeCount += drink.getCalories();
         }
         IntegerValidation.checkNoOverflowForSum(caloriesIntakeCount);
+        assert caloriesIntakeCount >= 0: "total calories intake has to be a non-negative value";
 
         try {
-            int caloriesBurntCount = 0;
+            long caloriesBurntCount = 0;
             for (Exercise exercise : myExerciseList.exerciseList) {
                 caloriesBurntCount += exercise.getCaloriesBurnt();
             }
             IntegerValidation.checkNoOverflowForSum(caloriesBurntCount);
+            assert caloriesBurntCount >= 0: "total calories burnt has to be a non-negative value";
 
             long caloriesCount = caloriesIntakeCount - caloriesBurntCount;
-            System.out.println("Total Calories: " + caloriesIntakeCount);
+            System.out.println("Total Calories: " + caloriesCount);
         } catch (ExceedTypeLongException e) {
             System.out.println("the amount of calories you burnt has exceeded our data limits. please do a quick " +
                     "check to make sure your exerciseList is accurate!");
