@@ -69,7 +69,7 @@ public class Ui {
     public void readCommand() {
         String command = input.nextLine();
         showLine();
-        if (command.equals("exit")) {
+        if (command.trim().equals("exit")) {
             handleExit();
         } else {
             parser.handleCommand(command);

@@ -1,6 +1,7 @@
 package seedu.fitnus.exercise;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteExerciseException;
@@ -9,6 +10,7 @@ import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.parser.Parser;
+import seedu.fitnus.validator.IntegerValidation;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -163,11 +165,12 @@ public class ExerciseList {
     /**
      * Prints the number of calories the user has burnt today.
      */
-    public void handleCaloriesBurnt() {
-        int caloriesBurnt = 0;
+    public void handleCaloriesBurnt() throws ExceedTypeLongException {
+        long caloriesBurnt = 0;
         for (Exercise exercise: exerciseList) {
             caloriesBurnt += exercise.getCaloriesBurnt();
         }
+        IntegerValidation.checkNoOverflowForSum(caloriesBurnt);
         System.out.println("Total calories burnt: " + caloriesBurnt);
     }
 }

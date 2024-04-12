@@ -2,6 +2,7 @@ package seedu.fitnus.parser;
 
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
@@ -99,88 +100,89 @@ public class Parser {
      * @param command The command entered by the user.
      */
     public void handleCommand(String command) {
+        String trimmedCommand = command.trim();
         try {
-            if (command.equals("help")) {
+            if (trimmedCommand.equals("help")) {
                 handleHelp();
-            } else if (command.startsWith("eat")) {
-                user.myMealList.handleMeal(command);
-            } else if (command.startsWith("drink")) {
-                user.myDrinkList.handleDrink(command);
-            } else if (command.startsWith("exercise")) {
-                user.myExerciseList.handleExercise(command);
-            } else if (command.startsWith("newMeal")) {
-                user.myMealList.handleAddNewMealNutrient(command);
-            } else if (command.startsWith("newDrink")) {
-                user.myDrinkList.handleAddNewDrinkNutrient(command);
-            } else if (command.startsWith("newExercise")) {
-                user.myExerciseList.handleAddNewExerciseCalories(command);
-            }else if (command.equals("allMeals")) {
+            } else if (trimmedCommand.startsWith("eat")) {
+                user.myMealList.handleMeal(trimmedCommand);
+            } else if (trimmedCommand.startsWith("drink")) {
+                user.myDrinkList.handleDrink(trimmedCommand);
+            } else if (trimmedCommand.startsWith("exercise")) {
+                user.myExerciseList.handleExercise(trimmedCommand);
+            } else if (trimmedCommand.startsWith("newMeal")) {
+                user.myMealList.handleAddNewMealNutrient(trimmedCommand);
+            } else if (trimmedCommand.startsWith("newDrink")) {
+                user.myDrinkList.handleAddNewDrinkNutrient(trimmedCommand);
+            } else if (trimmedCommand.startsWith("newExercise")) {
+                user.myExerciseList.handleAddNewExerciseCalories(trimmedCommand);
+            }else if (trimmedCommand.equals("allMeals")) {
                 Meal.listAvailableMeals();
-            } else if (command.equals("allDrinks")) {
+            } else if (trimmedCommand.equals("allDrinks")) {
                 Drink.listAvailableDrinks();
-            } else if (command.equals("allExercises")) {
+            } else if (trimmedCommand.equals("allExercises")) {
                 Exercise.listAvailableExercises();
-            } else if (command.startsWith("infoMeal")) {
-                Meal.handleInfoMeal(command);
-            } else if (command.startsWith("infoDrink")) {
-                Drink.handleInfoDrink(command);
-            } else if (command.startsWith("infoExercise")) {
-                Exercise.handleInfoExercise(command);
-            } else if (command.equals("calories")) {
+            } else if (trimmedCommand.startsWith("infoMeal")) {
+                Meal.handleInfoMeal(trimmedCommand);
+            } else if (trimmedCommand.startsWith("infoDrink")) {
+                Drink.handleInfoDrink(trimmedCommand);
+            } else if (trimmedCommand.startsWith("infoExercise")) {
+                Exercise.handleInfoExercise(trimmedCommand);
+            } else if (trimmedCommand.equals("calories")) {
                 user.handleViewCalories();
-            } else if (command.equals("caloriesBurnt")) {
+            } else if (trimmedCommand.equals("caloriesBurnt")) {
                 user.myExerciseList.handleCaloriesBurnt();
-            } else if (command.equals("carbs")) {
+            } else if (trimmedCommand.equals("carbs")) {
                 user.handleViewCarbohydrates();
-            } else if (command.equals("protein")) {
+            } else if (trimmedCommand.equals("protein")) {
                 user.handleViewProteins();
-            } else if (command.equals("sugar")) {
+            } else if (trimmedCommand.equals("sugar")) {
                 user.handleViewSugar();
-            } else if (command.equals("fat")) {
+            } else if (trimmedCommand.equals("fat")) {
                 user.handleViewFat();
-            } else if (command.equals("viewWater")) {
+            } else if (trimmedCommand.equals("viewWater")) {
                 user.myDrinkList.handleViewWaterIntake();
-            } else if (command.equals("fiber")) {
+            } else if (trimmedCommand.equals("fiber")) {
                 user.handleViewFiber();
-            } else if (command.equals("listMeals")) {
+            } else if (trimmedCommand.equals("listMeals")) {
                 user.myMealList.handleListMeals();
-            } else if (command.equals("listMealsAll")) {
+            } else if (trimmedCommand.equals("listMealsAll")) {
                 user.myMealList.handleListMealsAll();
-            } else if (command.startsWith("listMeals") && command.contains("d/")) {
-                user.myMealList.handleListMealsDate(command);
-            } else if (command.equals("listDrinks")) {
+            } else if (trimmedCommand.startsWith("listMeals") && trimmedCommand.contains("d/")) {
+                user.myMealList.handleListMealsDate(trimmedCommand);
+            } else if (trimmedCommand.equals("listDrinks")) {
                 user.myDrinkList.handleListDrinks();
-            } else if (command.equals("listDrinksAll")) {
+            } else if (trimmedCommand.equals("listDrinksAll")) {
                 user.myDrinkList.handleListDrinksAll();
-            } else if (command.startsWith("listDrinks") && command.contains("d/")) {
-                user.myDrinkList.handleListDrinksDate(command);
-            } else if (command.equals("listExercises")) {
+            } else if (trimmedCommand.startsWith("listDrinks") && trimmedCommand.contains("d/")) {
+                user.myDrinkList.handleListDrinksDate(trimmedCommand);
+            } else if (trimmedCommand.equals("listExercises")) {
                 user.myExerciseList.handleListExercises();
-            } else if (command.equals("listExercisesAll")) {
+            } else if (trimmedCommand.equals("listExercisesAll")) {
                 user.myExerciseList.handleListExercisesAll();
-            } else if (command.startsWith("listExercises") && command.contains("d/")) {
+            } else if (trimmedCommand.startsWith("listExercises") && trimmedCommand.contains("d/")) {
                 user.myExerciseList.handleListExercisesDate(command);
-            } else if (command.equals("listEverything")) {
+            } else if (trimmedCommand.equals("listEverything")) {
                 user.handleListEverything();
-            } else if (command.equals("listEverythingAll")) {
+            } else if (trimmedCommand.equals("listEverythingAll")) {
                 user.handleListEverythingAll();
-            } else if (command.startsWith("listEverything") && command.contains("d/")) {
-                user.handleListEverythingDate(command);
-            } else if (command.startsWith("editMeal")) {
-                user.myMealList.handleEditMealServingSize(command);
-            } else if (command.startsWith("editDrink")) {
-                user.myDrinkList.handleEditDrinkServingSize(command);
-            } else if (command.startsWith("editWater")) {
-                user.myDrinkList.handleEditWaterIntake(command);
-            } else if (command.startsWith("deleteMeal")) {
-                user.myMealList.handleDeleteMeal(command);
-            } else if (command.startsWith("deleteDrink")) {
-                user.myDrinkList.handleDeleteDrink(command);
-            } else if (command.startsWith("deleteExercise")) {
-                user.myExerciseList.handleDeleteExercise(command);
-            } else if (command.equals("clear")) {
+            } else if (trimmedCommand.startsWith("listEverything") && trimmedCommand.contains("d/")) {
+                user.handleListEverythingDate(trimmedCommand);
+            } else if (trimmedCommand.startsWith("editMeal")) {
+                user.myMealList.handleEditMealServingSize(trimmedCommand);
+            } else if (trimmedCommand.startsWith("editDrink")) {
+                user.myDrinkList.handleEditDrinkServingSize(trimmedCommand);
+            } else if (trimmedCommand.startsWith("editWater")) {
+                user.myDrinkList.handleEditWaterIntake(trimmedCommand);
+            } else if (trimmedCommand.startsWith("deleteMeal")) {
+                user.myMealList.handleDeleteMeal(trimmedCommand);
+            } else if (trimmedCommand.startsWith("deleteDrink")) {
+                user.myDrinkList.handleDeleteDrink(trimmedCommand);
+            } else if (trimmedCommand.startsWith("deleteExercise")) {
+                user.myExerciseList.handleDeleteExercise(trimmedCommand);
+            } else if (trimmedCommand.equals("clear")) {
                 user.handleClear();
-            } else if (command.equals("recommend")) {
+            } else if (trimmedCommand.equals("recommend")) {
                 user.handleRecommendations();
             } else {
                 throw new InvalidCommandException();
@@ -232,6 +234,10 @@ public class Parser {
             System.out.println("Specified date is invalid. Please try another date.");
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+        } catch (ExceedTypeLongException e) {
+            System.out.println("the count you would like to view has exceeded our data limits, are you sure you have " +
+                    "consumed so much? Please do a quick check to update your listMeals and/or listDrinks before " +
+                    "viewing again :')");
         }
 
     }
