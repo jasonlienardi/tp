@@ -1,11 +1,13 @@
 package seedu.fitnus.parser;
 
+import seedu.fitnus.date.Date;
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
-import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
+import seedu.fitnus.user.User;
+import seedu.fitnus.validator.IntegerValidation;
 
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -21,13 +23,7 @@ import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.meal.Meal;
-import seedu.fitnus.exercise.Exercise;
-import seedu.fitnus.exercise.ExerciseIntensity;
-import seedu.fitnus.date.Date;
-
-import seedu.fitnus.user.User;
-import seedu.fitnus.validator.IntegerValidation;
+import seedu.fitnus.exception.FutureDateException;
 
 import java.text.ParseException;
 
