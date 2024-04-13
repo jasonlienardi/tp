@@ -12,6 +12,10 @@ To use the app please follow the setup procedures below:
 3. Navigate to the folder you just created.
 4. Run the JAR file.
 
+Note:
+1. All files under 'data' and 'db' folders should not be modified by user
+2. Enter "exit" to properly close the program and save the data
+
 ## Table of Contents
 <!-- TOC -->
 * [User Guide: FitNUS](#user-guide-fitnus)
