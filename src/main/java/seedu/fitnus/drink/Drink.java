@@ -11,11 +11,11 @@ public class Drink  {
     private String name;
     private int drinkVolume;
     private String dateAdded;
-    private int calories;
-    private int carbs;
-    private int sugar;
-    private int protein;
-    private int fat;
+    private long calories;
+    private long carbs;
+    private long sugar;
+    private long protein;
+    private long fat;
 
     /**
      * Constructor for a Drink, requires the name and volume of the drink,
@@ -61,11 +61,11 @@ public class Drink  {
      */
     private void setNutrientValues(String name) {
         int[] nutrients = nutrientDetails.get(name);
-        calories = nutrients[0] * drinkVolume / 100;
-        carbs = nutrients[1] * drinkVolume / 100;
-        sugar = nutrients[2] * drinkVolume / 100;
-        protein = nutrients[3] * drinkVolume / 100;
-        fat = nutrients[4] * drinkVolume / 100;
+        calories = (long) nutrients[0] * drinkVolume / 100;
+        carbs = (long) nutrients[1] * drinkVolume / 100;
+        sugar = (long) nutrients[2] * drinkVolume / 100;
+        protein = (long) nutrients[3] * drinkVolume / 100;
+        fat = (long) nutrients[4] * drinkVolume / 100;
     }
 
     /**
@@ -133,47 +133,47 @@ public class Drink  {
     }
 
     /**
-     * Returns an integer value of the amount of calories in the drink.
+     * Returns a long value of the amount of calories in the drink.
      *
-     * @return an integer value of the amount of calories in the drink
+     * @return a long value of the amount of calories in the drink
      */
-    public int getCalories() {
+    public long getCalories() {
         return calories;
     }
 
     /**
-     * Returns an integer value of the amount of carbohydrates in the drink.
+     * Returns a long value of the amount of carbohydrates in the drink.
      *
-     * @return an integer value of the amount of carbohydrates in the drink
+     * @return a long value of the amount of carbohydrates in the drink
      */
-    public int getCarbs() {
+    public long getCarbs() {
         return carbs;
     }
 
     /**
-     * Returns an integer value of the amount of sugar in the drink.
+     * Returns a long value of the amount of sugar in the drink.
      *
-     * @return an integer value of the amount of sugar in the drink
+     * @return a long value of the amount of sugar in the drink
      */
-    public int getSugar() {
+    public long getSugar() {
         return sugar;
     }
 
     /**
-     * Returns an integer value of the amount of protein in the drink.
+     * Returns a long value of the amount of protein in the drink.
      *
-     * @return an integer value of the amount of protein in the drink
+     * @return a long value of the amount of protein in the drink
      */
-    public int getProtein() {
+    public long getProtein() {
         return protein;
     }
 
     /**
-     * Returns an integer value of the amount of fat in the drink.
+     * Returns a long value of the amount of fat in the drink.
      *
-     * @return an integer value of the amount of fat in the drink
+     * @return a long value of the amount of fat in the drink
      */
-    public int getFat() {
+    public long getFat() {
         return fat;
     }
 

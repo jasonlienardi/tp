@@ -123,5 +123,4 @@ public class MealListTest {
         assertEquals(1, testMealList.size());
         assertEquals("laksa", testMealList.get(0).getName());
     }
-
 }

@@ -1,5 +1,6 @@
 package seedu.fitnus.validator;
 
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.NonPositiveValueException;
 
@@ -7,7 +8,6 @@ import seedu.fitnus.exception.NonPositiveValueException;
  * Validates whether an integer value complies with the condition stated.
  */
 public class IntegerValidation {
-
     /**
      * Validates whether the integer value is a positive integer.
      *
@@ -25,4 +25,11 @@ public class IntegerValidation {
             throw new NegativeValueException();
         }
     }
+
+    public static void checkNoOverflowForSum(long value) throws ExceedTypeLongException {
+        if (value < 0) {
+            throw new ExceedTypeLongException();
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package seedu.fitnus.exercise;
 
 import seedu.fitnus.date.Date;
 
+import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.InvalidListIndexException;
@@ -50,7 +51,8 @@ public class ExerciseListTest {
     }
 
     @Test
-    public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate() {
+    public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate()
+            throws ExceedTypeLongException {
         testerExerciseList.handleCaloriesBurnt();
         String expectedOutput = "Total calories burnt: 240";
         String actualOutput = outputStream.toString().trim();
