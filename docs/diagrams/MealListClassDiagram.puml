@@ -34,7 +34,7 @@ Class Meal {
     + <u>handleInfoMeal(command: String): void
     + <u>printAvailableMeals(): void
     + <u>listAvailableMeals(): void
-        + <u>getNutrientDetails(): HashMap<String, int[]>
+    + <u>getNutrientDetails(): HashMap<String, int[]>
     + getName(): String
     + getCalories(): long
     + getCarbs(): long
