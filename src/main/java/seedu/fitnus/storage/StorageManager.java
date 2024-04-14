@@ -1,7 +1,10 @@
 package seedu.fitnus.storage;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.date.DateValidation;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.NegativeValueException;
+import seedu.fitnus.exception.StorageErrorException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.drink.Drink;
 import seedu.fitnus.exercise.ExerciseIntensity;
@@ -14,6 +17,7 @@ import seedu.fitnus.parser.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -48,12 +52,16 @@ public class StorageManager {
                     Parser.parseMealStorage(s);
                     String mealDescription = Parser.mealStorageDescription;
                     int mealSize = Parser.mealStorageSize;
-                    String currentDate = Parser.mealStorageDate;
-                    User.myMealList.mealListAll.add(new Meal(mealDescription, mealSize, currentDate));
+
+                    String savedDate = Parser.mealStorageDate;
+                    DateValidation.formatDateIfValid(savedDate);
+
+                    User.myMealList.mealListAll.add(new Meal(mealDescription, mealSize, savedDate));
                 }
             }
             Date currentDate = new Date();
             String todayDate = currentDate.getDate();
+
             for (Meal m : User.myMealList.mealListAll) {
                 if (m.getDate().equals(todayDate)) {
                     User.myMealList.mealList.add(m);
@@ -62,6 +70,12 @@ public class StorageManager {
             User.myMealList.mealListAll.removeAll(User.myMealList.mealList);
         } catch (FileNotFoundException e) {
             mealStorage.createFile();
+        } catch (NonPositiveValueException | StorageErrorException | NumberFormatException | ParseException |
+                 FutureDateException e) {
+            System.out.println("A saved meal data was corrupted. " +
+                    "Unfortunately, i will need to clear all saved data for your meals. \n" +
+                    "A new file for your mealList will be created for you.");
+            mealStorage.clearFile();
         }
     }
 
@@ -79,6 +93,8 @@ public class StorageManager {
                     Parser.parseDrinkStorage(s);
                     String drinkDescription = Parser.drinkStorageDescription;
                     String drinkDate = Parser.drinkStorageDate;
+                    DateValidation.formatDateIfValid(drinkDate);
+
                     int drinkSize = Parser.drinkStorageSize;
                     if (drinkDescription.equals("water")) {
                         User.myDrinkList.waterListAll.add(new Water(drinkSize, drinkDate));
@@ -103,6 +119,12 @@ public class StorageManager {
             User.myDrinkList.waterListAll.removeAll(User.myDrinkList.waterList);
         } catch (FileNotFoundException e) {
             drinkStorage.createFile();
+        } catch (NonPositiveValueException | StorageErrorException | NumberFormatException | ParseException |
+                 FutureDateException e) {
+            System.out.println("A saved drink data was corrupted. " +
+                    "Unfortunately, i will need to clear all saved data for your drinks. \n" +
+                    "A new file for your drinkList will be created for you.");
+            drinkStorage.clearFile();
         }
     }
 
@@ -121,10 +143,11 @@ public class StorageManager {
                     String exerciseDescription = Parser.exerciseStorageDescription;
                     int exerciseDuration = Parser.exerciseStorageDuration;
                     ExerciseIntensity exerciseIntensity = Parser.exerciseStorageIntensity;
-                    String currentDate = Parser.exerciseStorageDate;
+                    String savedDate = Parser.exerciseStorageDate;
+                    DateValidation.formatDateIfValid(savedDate);
                     User.myExerciseList.exerciseListAll.add(new Exercise(exerciseDescription,
                             exerciseDuration, exerciseIntensity,
-                            currentDate));
+                            savedDate));
                 }
             }
             Date currentDate = new Date();
@@ -138,8 +161,14 @@ public class StorageManager {
         } catch (FileNotFoundException e) {
             exerciseStorage.createFile();
         } catch (UnregisteredExerciseException e) {
-            System.out.println("Sorry that meal is not registered in the database. Please check the spelling and " +
+            System.out.println("Sorry that exercise is not registered in the database. Please check the spelling and " +
                     "try again");
+        } catch (NonPositiveValueException | StorageErrorException | NumberFormatException | ParseException |
+                 FutureDateException e) {
+            System.out.println("A saved data was corrupted. " +
+                    "Unfortunately, i will need to clear all saved data for your exercises. \n" +
+                    "A new file for your exerciseList will be created for you.");
+            exerciseStorage.clearFile();
         }
     }
 

@@ -10,6 +10,7 @@ import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.InvalidDateException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.NonPositiveValueException;
+import seedu.fitnus.exception.StorageErrorException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
@@ -89,7 +90,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseMealStorage_validInputs_success() {
+    public void parseMealStorage_validInputs_success() throws NonPositiveValueException, StorageErrorException {
         String data = "chicken rice,1,12-02-2024";
         Parser.parseMealStorage(data);
         assertEquals("chicken rice", Parser.mealStorageDescription);
@@ -98,7 +99,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseDrinkStorage_validInputs_success() {
+    public void parseDrinkStorage_validInputs_success() throws NonPositiveValueException, StorageErrorException {
         String data = "milo,200,12-02-2024";
         Parser.parseDrinkStorage(data);
         assertEquals("milo", Parser.drinkStorageDescription);
@@ -107,7 +108,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseExerciseStorage_validInputs_success() {
+    public void parseExerciseStorage_validInputs_success() throws NonPositiveValueException, StorageErrorException {
         String data = "cycling,100,LOW,29-02-2024";
         Parser.parseExerciseStorage(data);
         assertEquals("cycling", Parser.exerciseStorageDescription);
