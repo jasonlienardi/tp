@@ -136,14 +136,54 @@ The `infoMeal` feature is executed on the `User` class. Let's say we want to fin
 
 ![InfoMeal Sequence Diagram](../docs/diagrams/diagrams_png/InfoMealSequenceDiagram.png)
 
+### Eat Command
+The `eat` command is responsible for handling the tracking of meal and adding it to the Meal List. 
+The following sequence diagram shows the execution of the `eat` command.
 
-### Tracking Exercise Feature
-- Create a CSV which stores data regarding how many calories are burnt per hour for each exercise type (eg. swimming, running, cycling).
-- Implement a 'track exercise' function which will be parsed with the format:
-  track exercise t/{type of exercise} d/{duration of exercise}
-- Parse the command
-- Using a hashmap, access the data regarding the amount of calories burnt per hour for the given exercise and calculate the total calories burnt for the given duration.
-- Store the total calories burnt through exercise in the User class
+![Eat Command Sequence Diagram](../docs/diagrams/diagrams_png/EatCommandSequenceDiagram.png)
+
+1. The user inputs an `eat` command of the format `eat m/MEAL s/SERVING_SIZE` into the `ui` object
+2. The `ui` object calls the `parseCommand()` method of the `parser` object
+3. The parser parses the command and calls the appropriate method, which in this case is `handleMeal()` of `MealList`
+4. The `MealList` object then calls the `parseMeal` method to retrieve the information from the command such as the meal name and serving size
+5. With the meal details retrieved from the parser, a new `Meal` object with the given parameters (meal name, serving size) is created and returned to `MealList`
+6. When creating a new `Meal` object, it will call its own method `setNutrientDetails()` to set the nutrients for that specific meal using the meal name
+7. The newly created `Meal` object is then added to the `MealList`
+8. Upon successful tracking of a meal a confirmation message is printed
+
+Note: The implementation for `drink` and `exercise` command have similar sequence diagrams
+
+### Edit Meal Command
+The `editMeal` command allows users to edit the serving sizes of their meals that have already been added to the Meal List.
+The following sequence diagram shows the execution of the `editMeal` command.
+
+![Edit Meal Command Sequence Diagram](../docs/diagrams/diagrams_png/EditMealCommandSequenceDiagram.png)
+
+1. The user inputs an `editMeal` command of the format `editMeal INDEX s/NEW_SERVING_SIZE` into the `ui` object
+2. The `ui` object calls the `parseCommand()` method of the `parser` object
+3. The parser parses the command and calls the appropriate method, which in this case is `handleEditMealServingSize()` of `MealList`
+4. The `MealList` object then calls the `parseEditMeal` method to retrieve the information from the command such as the intended meal index and current serving size
+5. With the meal name and current serving size retrieved, the `Meallist` objects retrieves the name and nutrient details of the meal by calling the `getName()` and `getData()` methods of the `Meal` object
+6. A new `Meal` object with the updated serving size is created and returned to `MealList`
+7. The newly created `Meal` object is then replaces the meal at the specified position in this list by calling the `set()` method of `MealList`
+8. Upon successful tracking of a meal a confirmation message is printed
+
+Note: The implementation for `editDrink` and `editWater` command have similar sequence diagrams
+
+### New Meal Command
+The `newMeal` command allows users to add new meal to the list of available meals by specifying the meal name and its nutrients.
+The following sequence diagram shows the execution of the `newMeal` command.
+
+![New Meal Command Sequence Diagram](../docs/diagrams/diagrams_png/NewMealCommandSequenceDiagram.png)
+
+1. The user inputs an `newMeal` command of the format `newMeal MEAL_NAME,CALORIES,CARBS,PROTEIN,FAT,FIBER,SUGAR` into the `ui` object
+2. The `ui` object calls the `parseCommand()` method of the `parser` object
+3. The parser parses the command and calls the appropriate method, which in this case is `handleAddNewMealNutrient()` of `MealList`
+4. The `MealList` object then calls the `parseNewMeal` method to retrieve the information from the command such as the mean name, calories, carbs, protein, fat, fiber and sugar
+5. The Nutrient of the details are then stored in the `nutrientDetails` hashmap attribute of the `Meals` class using the `put()` method of the hashmap
+6. Upon successful tracking of a meal a confirmation message is printed
+
+Note: The implementation for `newDrink` and `newExercise` command have similar sequence diagrams
 
 ## Product scope
 ### Target user profile
