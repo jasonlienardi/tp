@@ -75,4 +75,13 @@ public class Storage {
         fw.write(textToAdd);
         fw.close();
     }
+
+    public void clearFile() {
+        try {
+            assert (filePath != null && !filePath.isEmpty()) : "File path should not be empty";
+            new FileWriter(filePath, false).close();
+        } catch (IOException e) {
+            System.out.println("Failed to clear file. Please manually delete it from your device.");
+        }
+    }
 }

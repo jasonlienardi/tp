@@ -21,6 +21,7 @@ import java.util.ArrayList;
  * Handles all methods related to the user's meals, drinks and exercise.
  */
 public class User {
+    public static final int MAX_WATER_INTAKE = 10000;
     public static final int RECOMMEND_WATER_INTAKE = 2600;
     public static final long RECOMMEND_CALORIE_INTAKE = 2200;
 
@@ -58,7 +59,7 @@ public class User {
             assert caloriesBurntCount >= 0: "total calories burnt has to be a non-negative value";
 
             long caloriesCount = caloriesIntakeCount - caloriesBurntCount;
-            System.out.println("Total Calories: " + caloriesCount);
+            System.out.println("Total Calories: " + caloriesCount + " kcal");
         } catch (ExceedTypeLongException e) {
             System.out.println("the amount of calories you burnt has exceeded our data limits. please do a quick " +
                     "check to make sure your exerciseList is accurate!");
@@ -253,7 +254,8 @@ public class User {
         assert myDrinkList.drinkList.isEmpty(): "clearing of drink list failed";
         assert myExerciseList.exerciseList.isEmpty(): "clearing of exercise list failed";
 
-        System.out.println("All entries have been deleted");
+        System.out.println("All meals, drinks and exercise entries that you added to your lists today have been " +
+                "deleted");
     }
 
 
@@ -266,12 +268,16 @@ public class User {
         for (Water water: myDrinkList.waterList) {
             waterIntake += water.getWater();
         }
-        int waterDifference = RECOMMEND_WATER_INTAKE -waterIntake;
+        int waterDifference = RECOMMEND_WATER_INTAKE - waterIntake;
         if (waterIntake < RECOMMEND_WATER_INTAKE) {
-            System.out.println("We recommend drinking more water. Please drink " +
-                    waterDifference + " ml more water to hit the daily water intake goal :)");
+            System.out.println("We recommend drinking more water.\n Please drink " +
+                    waterDifference + " ml more water by the end of the day to hit the daily water intake goal :)");
+        } else if (waterIntake > MAX_WATER_INTAKE) {
+            System.out.println("You drank more than 10,000ml of water today! Did you really drink so much?\nPlease " +
+                    "editWater if necessary, else be mindful to drink less water tomorrow :)\n" +
+                    "Scientifically, you should drink less than 800ml an hour !");
         } else {
-            System.out.println("Great! You are on track with the water intake!");
+            System.out.println("Great! You are on track with the water intake today!");
         }
         System.out.println("    ~~");
 
@@ -284,12 +290,13 @@ public class User {
         }
         long caloriesDifference = RECOMMEND_CALORIE_INTAKE - caloriesIntakeCount;
         if (caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE) {
-            System.out.println("We recommend eating more food. Please eat " + caloriesDifference + " more calories");
+            System.out.println("We recommend eating more food. Please eat " + caloriesDifference + " more calories by" +
+                    " today :)");
         } else if (caloriesIntakeCount > RECOMMEND_CALORIE_INTAKE 
                    && caloriesIntakeCount < RECOMMEND_CALORIE_INTAKE + 200) {
-            System.out.println("Great! You are on track with the calorie intake!");
+            System.out.println("Great! You are on track with the calorie intake for the day!");
         } else {
-            System.out.println("You are " + -caloriesDifference
+            System.out.println("You ate " + -caloriesDifference
                     + " calories above the recommended calorie intake amount, consider exercising!");
         }
     }

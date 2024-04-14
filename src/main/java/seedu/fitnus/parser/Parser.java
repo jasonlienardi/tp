@@ -2,6 +2,8 @@ package seedu.fitnus.parser;
 
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.ExceedTypeIntException;
+import seedu.fitnus.exception.StorageErrorException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
@@ -245,6 +247,10 @@ public class Parser {
         } catch (IncompleteEditWaterException e) {
             System.out.println("Please specify the new volume of water.\n" +
                     "The format should be [editWater s/NEW_VOLUME(ML)].");
+        } catch (ExceedTypeIntException e) {
+            System.out.println("Adding this amount of water will exceed a total of 2147483647ml water today. Are " +
+                    "you sure you can drink so much water in a day? \nI shall remove this amount for now. EditWater " +
+                    "if you deem fit :/");
         }
 
     }
@@ -499,11 +505,17 @@ public class Parser {
      *
      * @param data The data string to be parsed.
      */
-    public static void parseMealStorage(String data) {
+    public static void parseMealStorage(String data) throws StorageErrorException, NonPositiveValueException,
+            NumberFormatException {
         String delimiter = ",";
         String[] arrayOfMealData = data.split(delimiter);
+        if (arrayOfMealData.length != 3) {
+            throw new StorageErrorException();
+        }
         mealStorageDescription = arrayOfMealData[0];
         mealStorageSize = Integer.parseInt(arrayOfMealData[1]);
+        IntegerValidation.checkIntegerGreaterThanZero(mealStorageSize);
+
         mealStorageDate = arrayOfMealData[2];
     }
 
@@ -512,11 +524,16 @@ public class Parser {
      *
      * @param data The data string to be parsed.
      */
-    public static void parseDrinkStorage(String data) {
+    public static void parseDrinkStorage(String data) throws StorageErrorException, NonPositiveValueException,
+            NumberFormatException {
         String delimiter = ",";
         String[] arrayOfDrinkData = data.split(delimiter);
+        if (arrayOfDrinkData.length != 3) {
+            throw new StorageErrorException();
+        }
         drinkStorageDescription = arrayOfDrinkData[0];
         drinkStorageSize = Integer.parseInt(arrayOfDrinkData[1]);
+        IntegerValidation.checkIntegerGreaterThanZero(drinkStorageSize);
         drinkStorageDate = arrayOfDrinkData[2];
     }
 
@@ -525,11 +542,16 @@ public class Parser {
      *
      * @param data The data string to be parsed.
      */
-    public static void parseExerciseStorage(String data) {
+    public static void parseExerciseStorage(String data) throws NonPositiveValueException, StorageErrorException,
+            NumberFormatException {
         String delimiter = ",";
         String[] arrayOfExerciseData = data.split(delimiter);
+        if (arrayOfExerciseData.length != 4) {
+            throw new StorageErrorException();
+        }
         exerciseStorageDescription = arrayOfExerciseData[0];
         exerciseStorageDuration = Integer.parseInt(arrayOfExerciseData[1]);
+        IntegerValidation.checkIntegerGreaterThanZero(exerciseStorageDuration);
         exerciseStorageIntensity = ExerciseIntensity.valueOf(arrayOfExerciseData[2]);
         exerciseStorageDate = arrayOfExerciseData[3];
     }

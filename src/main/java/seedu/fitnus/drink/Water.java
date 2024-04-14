@@ -1,5 +1,7 @@
 package seedu.fitnus.drink;
 
+import seedu.fitnus.exception.ExceedTypeIntException;
+
 public class Water {
     private int waterIntake;
     private String dateAdded;
@@ -30,8 +32,12 @@ public class Water {
      *
      * @param amount volume of water to add to intake.
      */
-    public void addWaterIntake(int amount) {
+    public void addWaterIntake(int amount) throws ExceedTypeIntException {
         waterIntake += amount;
+        if (waterIntake <= 0) {
+            waterIntake -= amount;
+            throw new ExceedTypeIntException();
+        }
     }
 
     /**
@@ -41,6 +47,7 @@ public class Water {
      */
     public void editWaterIntake(int amount) {
         waterIntake = amount;
+
     }
 
     /**

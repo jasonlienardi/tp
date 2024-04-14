@@ -81,13 +81,13 @@ public class Drink  {
     public static void handleInfoDrink(String command) throws UnregisteredDrinkException, IncompleteInfoException {
         String name = Parser.parseInfoDrink(command);
         int[] nutrients = nutrientDetails.get(name);
-        System.out.println("Drink: " + name + " (100 ml)");
-        System.out.println("Calories: " + nutrients[0]);
-        System.out.println("Carbs: " + nutrients[1]);
+        System.out.println("Drink: " + name + " (per 100 ml)");
+        System.out.println("Calories: " + nutrients[0] + " kcal");
+        System.out.println("Carbs: " + nutrients[1] + " g");
         // Sugar is part of Carbohydrates
-        System.out.println("Sugar: " + nutrients[2]);
-        System.out.println("Protein: " + nutrients[3]);
-        System.out.println("Fat: " + nutrients[4]);
+        System.out.println("Sugar: " + nutrients[2] + " g");
+        System.out.println("Protein: " + nutrients[3] + " g");
+        System.out.println("Fat: " + nutrients[4] + " g");
     }
 
     /**
@@ -119,7 +119,7 @@ public class Drink  {
             System.out.println("- " + drink);
         }
         System.out.println();
-        System.out.println("You may also input a drink that isn't here.");
+        System.out.println("You may also input a drink that isn't here with newDrink.");
     }
 
     /**

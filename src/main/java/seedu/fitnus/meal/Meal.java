@@ -160,12 +160,12 @@ public class Meal {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name + " (per serving)");
-        System.out.println("Calories: " + nutrients[0]);
-        System.out.println("Carbs: " + nutrients[1]);
-        System.out.println("Protein: " + nutrients[2]);
-        System.out.println("Fat: " + nutrients[3]);
-        System.out.println("Fiber: " + nutrients[4]);
-        System.out.println("Sugar: " + nutrients[5]);
+        System.out.println("Calories: " + nutrients[0] + " kcal");
+        System.out.println("Carbs: " + nutrients[1] + " g");
+        System.out.println("Protein: " + nutrients[2] + " g");
+        System.out.println("Fat: " + nutrients[3] + " g");
+        System.out.println("Fiber: " + nutrients[4] + " g");
+        System.out.println("Sugar: " + nutrients[5] + " g");
     }
 
     /**
@@ -197,7 +197,7 @@ public class Meal {
             System.out.println("- " + meal);
         }
         System.out.println();
-        System.out.println("You may also input a meal that isn't here.");
+        System.out.println("You may also input a meal that isn't here with newMeal.");
     }
 
     public static HashMap<String, int[]> getNutrientDetails() {
