@@ -18,7 +18,7 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 
 - `FitNUS`: FitNUS main code which runs the program until termination
 - `Ui`: The user interface of the app that reads in user input
-- `Storage`: Handles stored all `recipe`, `ingredient` and `shortcut` that the user has input
+- `Storage`: Handles storage of all `meal`, `drink` and `exercise` that the user has input
 - `Parser`: Parses user input
 - `User`: Handles user input and stores the `Exercise`, `Drink`, `Meal`, and `Water` created by user
 - `Date`: Handles user's local machine date
@@ -40,6 +40,33 @@ The Ui class will continuously read the user input:
 - Else if the user input corresponds to "exit", Ui will handle the exit.
 
 ### Storage Component
+#### Description
+The Ui component will create a `StorageManager` to manage the reading and writing of the `Storage` (meal, drink, and exercise).
+There are two types of data being stored, one to keep track of what the user has inputted to the app, and one to keep track
+of the nutritional information of the known meal/drinks/exercise.
+
+#### Implementation
+- File Location:
+  - The user's meal, drinks, and exercise data is stored into text files in 
+  `./data/MealList.txt`, `./data/DrinkList.txt`, and `./data/ExerciseList.txt`, respectively. 
+  - The nutritional information of all available meals, drinks, and exercises is stored into csv files in
+  `./db/Meal_db.csv`, `./db/Drink_db.csv`, `./db/Exercise_db.csv`, respectively.
+- Format:
+  - All `Meal` objects in `MealList` will be formatted and stored in a string format of "`MEAL_NAME`,`SERVING_SIZE`,`DATE`"
+  - All `Drink` objects in `DrinkList` will be formatted and stored in a string format of "`DRINK_NAME`,`SERVING_VOLUME`,`DATE`"
+  - All `Exercise` objects in `ExerciseList` will be formatted and stored in a string format of "`EXERCISE_NAME`,`DURATION`,`INTENSITY`,`DATE`"
+  - All meal nutrients are stored in the format of "`MEAL_NAME`,`CALORIES`,`CARBS`,`PROTEIN`,`FAT`,`FIBER`,`SUGAR`"
+  - All drink nutrients are stored in the format of "`DRINK_NAME`,`CALORIES`,`CARBS`,`SUGAR`,`PROTEIN`,`FAT`"
+  - All exercise information is stored in the format of "`EXERCISE_NAME`,`HIGH_INTENSITY`,`MEDIUM_INTENSITY`,`LOW_INTENSITY`"
+- Loading: When the app starts, the `StorageManager` will load and parse all the nutrient information from the csv files and put it into 
+a HashMap in the `Meal`, `Drink`, and `Exercise` class. However, if the csv files are not found, it will create a new csv file
+and store some pre-defined contents. Then, `StorageManager` will load and parse all the user data from the txt files and append it
+into list in the `MealList`, `DrinkList`, and `ExerciseList`. If the txt files are not found, it will create a new txt file.
+- Writing: When the user enter the `exit` command, the `StorageManager` will retrieve all the `Meal`, `Drink`, and `Exercise` objects
+from the list and format it into string. Then, it will append all the strings and write the files to the corresponding `Storage`.
+
+#### Class Diagram
+
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Ui, Storage and StorageManager 
 classes when loading and saving data.  
@@ -100,8 +127,6 @@ User class initialises MealList, DrinkList and ExerciseList for the user to trac
 ### Meal Component
 ![Meal Class Diagram](../docs/diagrams/diagrams_png/MealListClassDiagram.png)
 
-### Storage Component
-
 ## Implementation
 
 ### Information on a Particular Meal Feature
@@ -118,19 +143,6 @@ The `infoMeal` feature is executed on the `User` class. Let's say we want to fin
 - Parse the command
 - Using a hashmap, access the data regarding the amount of calories burnt per hour for the given exercise and calculate the total calories burnt for the given duration.
 - Store the total calories burnt through exercise in the User class
-
-### CSV Storage
-- Create three CSV files for storing meal nutrients, drink nutrients, and exercise calories information.
-- For each line in the CSV, parse the string with "," as the delimiter, with the first element being the name and the others being the nutrient/calories information 
-- Save each description name and nutrient/calories information in the corresponding hashmap (meal, drink, and exercise) to be used by other functions. 
-
-### Saved Meal, Drink, Exercises Storage
-- Each meal object in the meal list corresponds to a string with a format of `meal_name,serving_size,date`
-- Each drink object in the drink list corresponds to a string with a format of `drink_name,volume,date`
-- Each exercise object in the exercise list corresponds to a string with a format of `exercise_name,duration,intensity,date`
-- To store, convert all objects (meal, drink, exercise) in the list into its corresponding string, then write the appended strings into a .txt file
-- To retrieve, parse each string using "," as its delimiter and convert it into its corresponding objects, then add all the entries to the object list (mealList, drinkList, exerciseList)
-
 
 ## Product scope
 ### Target user profile
