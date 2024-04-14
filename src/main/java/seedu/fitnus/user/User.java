@@ -35,7 +35,7 @@ public class User {
     }
 
     /**
-     * Prints the user's total calorie intake of the day.
+     * Prints the user's net calorie intake of the day.
      * The method sums up the calories from meals and drinks, and subtracts calories burnt from exercise.
      */
     public void handleViewCalories() throws ExceedTypeLongException {

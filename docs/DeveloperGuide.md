@@ -31,7 +31,7 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Fitnus, Ui and Parser classes_
 
-![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ui/ParserSequenceDiagram.png)
+![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ParserSequenceDiagram.png)
 When the user first starts the application, the Ui class will be constructed. Within the Ui class, Scanner and Parser 
 similarly will be constructed.
 
@@ -39,6 +39,55 @@ The Ui class will continuously read the user input:
 - If the user input DOES NOT correspond to "exit", Ui will pass the user input to Parser class. Parser class will both 
   parse and handle the command.
 - Else if the user input corresponds to "exit", Ui will handle the exit.
+
+### Storage Component
+#### Sequence Diagram
+_Note: The following sequence diagram captures the interactions only between the Ui, Storage and StorageManager 
+classes when loading and saving data.  
+XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._ 
+
+![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
+
+### User Component
+#### Description
+The User component will create MealList, DrinkList and ExerciseList for the user to track their data. Additionally, 
+this component is in-charge of handling view, listEverything, recommend and clear commands.
+
+#### Implementation
+User Class:
+- Attributes:
+  - `myMealList:` Represents the user's class that managers the meal lists.
+  - `myDrinkList:` Represents the user's class that managers the drink lists.
+  - `myExerciseList:` Represents the user's class that managers the exercise lists.
+
+
+- Methods:
+  - `handleViewCalories()`: Prints the user's net calorie intake of the day.
+  - `handleViewCarbohydrates()`: Prints the user's total carbohydrates intake of the day.
+  - `handleViewProteins()`: Prints the user's total protein intake of the day.
+  - `handleViewFiber()`: Prints the user's total fiber intake of the day.
+  - `handleViewFat()`: Prints the user's total fat intake of the day.
+  - `handleViewSugar()`: Prints the user's total sugar intake of the day.
+  - `handleListEverything()`: Prints all meals and drinks that the user has inputted today.
+  - `handleListEverythingAll()`: Prints all meals and drinks that the user has inputted of all-time.
+  - `handleListEverythingDate()`: Prints all meals and drinks that the user has inputted on a specified date.
+  - `handleClear()`: Clears all user's entries of the day.
+  - `handleRecommendations()`: Give recommendations to the user based on their calorie and water intake.
+
+#### Sequence Diagram
+_Note: The following sequence diagram captures the interactions only between the User, MealList, DrinkList and 
+ExerciseList classes._   
+
+For diagram simplicity, the following choices were made when creating the diagram:
+- Only optional blocks for handleViewXYZ() and handleClear() methods were created.   
+  As such, methods within User such as 
+  handleRecommendations() and handleListEverything()  were omitted.
+- For methods where the user would like to view their nutrional content (handleViewXYZ), XYZ is used as a placeholder 
+  for the specified nutritional content (e.g. calories, carbohydrates, protein etc.)
+
+![User Class Diagram](../docs/diagrams/diagrams_png/UserSequenceDiagram.png)
+
+User class initialises MealList, DrinkList and ExerciseList for the user to track their data.
 
 ### Exercise Component
 ![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
