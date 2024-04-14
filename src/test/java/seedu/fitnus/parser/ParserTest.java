@@ -84,8 +84,8 @@ public class ParserTest {
     @Test
     public void parseEditWater_validInputs_success() throws NonPositiveValueException,
             IncompleteEditWaterException {
-        String command_2 = "editWater s/500";
-        Parser.parseEditWater(command_2);
+        String command2 = "editWater s/500";
+        Parser.parseEditWater(command2);
         assertEquals(500, Parser.editWaterSize);
     }
 
