@@ -31,7 +31,7 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Fitnus, Ui and Parser classes_
 
-![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ui/ParserSequenceDiagram.png)
+![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ParserSequenceDiagram.png)
 When the user first starts the application, the Ui class will be constructed. Within the Ui class, Scanner and Parser 
 similarly will be constructed.
 
