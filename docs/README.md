@@ -19,7 +19,7 @@ To use the app please follow the setup procedures below:
 be inputted immediately: `allMeals`
 3. View all pre-defined drinks. These drinks will have their nutritional content defined per 100ml
 and can be inputted immediately: `allDrinks`
-4 Viewing all pre-defined exercises. These exercises will have the number of calories burnt for a
+4. Viewing all pre-defined exercises. These exercises will have the number of calories burnt for a
 high/medium/low intensity workout defined per minute and can be inputted immediately: `allExercises`
 
 ### 2 For user to add data
@@ -40,7 +40,7 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 7. View daily fat consumed: `fat`
 8. View daily sugar consumed: `sugar`
 9. View daily fiber consumed: `fiber`
-10. View daily water consumption: `viewWater`
+10. View daily water consumption: `water`
 11. View daily calories consumed: `caloriesBurnt`
 12. View daily calories and water intake recommendation, based on current intake: `recommend`
     
@@ -66,7 +66,8 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 ### 6 For users to delete existing data
 1. Delete a meal entry: `deleteMeal`
 2. Delete a drink entry: `deleteDrink`
-3. Clear all entries of meals, drinks and exercise: `clear`
+3. Delete an exercise entry: `deleteExercise`
+4. Clear all entries of meals, drinks and exercise: `clear`
 ***
 ## Exit the program
-Close the appplication: `exit`
+Close the application and save all the changes made: `exit`

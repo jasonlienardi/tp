@@ -30,7 +30,8 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Fitnus, Ui and Parser classes_
 
-![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ParserSequenceDiagram.png)
+![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ParserSequenceDiagram.png)         
+
 When the user first starts the application, the Ui class will be constructed. Within the Ui class, Scanner and Parser 
 similarly will be constructed.
 
@@ -119,15 +120,19 @@ User class initialises MealList, DrinkList and ExerciseList for the user to trac
 ### Exercise Component
 ![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseListClassDiagram.png)
 
-1. Upon starting up the application, User will call `loadExercises` to fetch all data from `ExerciseList.txt` and add it into `exerciseListAll`.
+1. Upon starting up the application, User will call `loadExercise` to fetch all data from `ExerciseList.txt` and add it into `exerciseListAll`.
 2. A `User` class consists of zero to as many `Exercise` objects in the ArrayList.
 3. Each `Exercise` contains exactly one enumeration of `ExerciseIntensity`.
 ### Drink Component
 ![Drink Class Diagram](../docs/diagrams/diagrams_png/DrinkListClassDiagram.png)
 
+1. Upon starting up the application, User will call `loadDrink` to fetch all data from `DrinkList.txt` and add it into `drinkListAll`.
+2. A `User` class consists of zero to as many `Drink` objects in the ArrayList and zero to as many `Water` objects in the ArrayList.
 ### Meal Component
 ![Meal Class Diagram](../docs/diagrams/diagrams_png/MealListClassDiagram.png)
 
+1. Upon starting up the application, User will call `loadMeal` to fetch all data from `Mealist.txt` and add it into `mealListAll`.
+2. A `User` class consists of zero to as many `Meal` objects in the ArrayList.
 ## Implementation
 
 ### Information on a Particular Meal Feature
