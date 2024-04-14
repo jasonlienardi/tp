@@ -397,7 +397,7 @@ Display current total water intake  **in ml**  for the day.
 Total water intake today: 0 ml
 ~~~
 
-### 2.3.11 View daily calories consumed: `caloriesBurnt`
+### 2.3.11 View daily calories burnt: `caloriesBurnt`
 Display current total calorie burnt  **in kcal** for the day.
 
 **Format**: `caloriesBurnt`    
@@ -628,7 +628,7 @@ Total water intake has been edited to 200 ml
 ~~~
 
 ## 2.6 For deleting data
-### 2.6.1 Delete certain meal entry: `deleteMeal`
+### 2.6.1 Delete a certain meal entry: `deleteMeal`
 Delete a meal that was inputted today. You may identify the meal by its index in listMeals.
 
 **Format**: `deleteMeal INDEX`  
@@ -638,7 +638,7 @@ Delete a meal that was inputted today. You may identify the meal by its index in
 Removed chicken rice from meals
 ~~~
 
-### 2.6.2 Delete certain drink entry: `deleteDrink`
+### 2.6.2 Delete a certain drink entry: `deleteDrink`
 Delete a drink that was inputted today. You may identify the drink by its index in listDrinks.
 
 **Format**: `deleteDrink INDEX`  
@@ -646,6 +646,16 @@ Delete a drink that was inputted today. You may identify the drink by its index 
 **Expected output:**
 ~~~
 Removed iced lemon tea from drinks
+~~~
+
+### 2.6.3 Delete a certain exercise entry: `deleteExercise`
+Delete an exercise that was inputted today. You may identify the exercise by its index in listExercises.
+
+**Format**: `deleteExercise INDEX`  
+**Sample input**: `deleteExercise 1`  
+**Expected output:**
+~~~
+Removed swimming from exercises done
 ~~~
 
 ## 2.7 For clearing data

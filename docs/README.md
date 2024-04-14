@@ -10,7 +10,11 @@ To use the app please follow the setup procedures below:
 1. Download the JAR file. 
 2. Place it into an empty folder. 
 3. Navigate to the folder you just created.
-4. Run the JAR file.
+4. Run the JAR file with the following command:
+```
+-$ java -jar FitNUS.jar
+```
+
 ***
 ## Features List
 ### 1 Information for users
@@ -23,9 +27,9 @@ and can be inputted immediately: `allDrinks`
 high/medium/low intensity workout defined per minute and can be inputted immediately: `allExercises`
 
 ### 2 For user to add data
-1. Adds a meal to the list of meals  eaten today: `eat`
-2. Add a drink list of drinks drank today: `drink`
-3. Add exercise to the list of exercises done  : `exercise`
+1. Adds a meal to the list of meals consumed today: `eat`
+2. Add a drink to the list of drinks consumed today: `drink`
+3. Add an exercise to the list of exercises done: `exercise`
 4. Add a custom new meal on top of pre-defined meals: `newMeal`
 5. Add a custom new drink on top of pre-defined drink: `newDrink`
 6. Add a custom new exercise on top of pre-defined exercises: `newExercise`
@@ -34,14 +38,14 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 1. Find nutritional content about a certain meal: `infoMeal`
 2. Find nutritional content about a certain drink: `infoDrink`
 3. Find the calories burnt per minute from a certain exercise: `infoExercise`
-4. View daily calories consumed: `calories`
+4. View daily net calorie count: `calories`
 5. View daily carbohydrates consumed: `carbs`
 6. View daily proteins consumed: `protein`
 7. View daily fat consumed: `fat`
 8. View daily sugar consumed: `sugar`
 9. View daily fiber consumed: `fiber`
 10. View daily water consumption: `water`
-11. View daily calories consumed: `caloriesBurnt`
+11. View daily calories burnt: `caloriesBurnt`
 12. View daily calories and water intake recommendation, based on current intake: `recommend`
     
 ### 4 For users to view their lists and data
@@ -60,14 +64,16 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 
 ### 5 For users to edit existing data
 1. Edit the serving size of a meal that was inputted in the day: `editMeal`
-2. Edit the serving size of a drink that was inputted in the day: `editDrink`
+2. Edit the volume of a drink that was inputted in the day: `editDrink`
 3. Edit total water intake of the day: `editWater`
 
 ### 6 For users to delete existing data
 1. Delete a meal entry: `deleteMeal`
 2. Delete a drink entry: `deleteDrink`
 3. Delete an exercise entry: `deleteExercise`
-4. Clear all entries of meals, drinks and exercise: `clear`
+
+### 7 For users to clear all data
+1. Clear all entries of meals, drinks and exercise: `clear`
 ***
 ## Exit the program
 Close the application and save all the changes made: `exit`
