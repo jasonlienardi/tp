@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Fitnus" as Fitnus
+participant ":Ui" as Ui
+participant "input:Scanner" as Scanner
+participant ":Parser" as Parser
+
+hide footbox
+
+Fitnus -> Ui **: start application
+activate Ui
+Ui -> Scanner**: Scanner()
+activate Scanner
+Ui -> Parser**: Parser()
+activate Parser
+
+Fitnus -> Ui: printWelcomeMessage()
+Ui --> Fitnus
+
+loop !isExit
+Fitnus -> Ui: readCommand()
+
+Ui -> Scanner: nextLine()
+Scanner --> Ui: command
+
+'Ui --> Ui ++: showLine()
+'Ui --> Ui --:
+
+alt input is not exit command
+Ui -> Parser: parseCommand(command)
+Parser --> Ui: command handled
+
+else input is exit command
+deactivate Parser
+
+Ui -> Ui ++: handleExit()
+Ui -> Scanner: close()
+destroy Scanner
+Ui --> Ui --: exit handled
+end
+end
+
+
+Ui --> Fitnus --: exit application
+
+@enduml
