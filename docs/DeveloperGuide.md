@@ -66,13 +66,14 @@ into list in the `MealList`, `DrinkList`, and `ExerciseList`. If the txt files a
 from the list and format it into string. Then, it will append all the strings and write the files to the corresponding `Storage`.
 
 #### Class Diagram
+![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageClassDiagram.png)
 
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Ui, Storage and StorageManager 
 classes when loading and saving data.  
 XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._ 
 
-![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
+![Storage Sequence Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
 
 ### User Component
 #### Description

@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+skinparam classAttributeIconSize 0
+
+Class StorageManager {
+    + StorageManager(mealStorage: Storage, drinkStorage: Storage, exerciseStorage: Storage,
+                      mealNutrientStorage: Storage, drinkNutrientStorage: Storage, exerciseCaloriesStorage: Storage)
+    + loadMeal(mealStorage: Storage): void
+    + loadDrink(drinkStorage: Storage): void
+    + loadExercise(exerciseStorage: Storage): void
+    + loadMealNutrient(mealNutrientStorage: Storage): void
+    + loadDrinkNutrient(drinkNutrientStorage: Storage): void
+    + loadExerciseCalories(exerciseCaloriesStorage: Storage): void
+    + saveMeal(mealStorage: Storage): void
+    + saveDrink(drinkStorage: Storage): void
+    + saveExercise(exerciseStorage:Storage): void
+    + saveMealNutrients(mealNutrientStorage: Storage): void
+    + saveDrinkNutrients(drinkNutrientStorage: Storage): void
+    + saveExerciseCalories(exerciseCaloriesStorage: Storage): void
+}
+
+Class Storage {
+    + textContent: String
+    + folderPath: String
+    + filePath: String
+    + Storage(folderPath: String, filePath: String)
+    + appendTextContent(content: String): void
+    + readFile(): ArrayList<String>
+    + createFile(): void
+    + writeFile(textToAdd: String): void
+}
+
+StorageManager ..> Storage
+@enduml
