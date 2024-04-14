@@ -47,6 +47,22 @@ classes when loading and saving data.
 XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._
 ![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
 
+### User Component
+#### Sequence Diagram
+_Note: The following sequence diagram captures the interactions only between the User, MealList, DrinkList and 
+ExerciseList classes._   
+
+For diagram simplicity, the following choices were made when creating the diagram:
+- Only optional blocks for handleViewXYZ() and handleClear() methods were created.   
+  As such, methods within User such as 
+  handleRecommendations() and handleListEverything()  were omitted.
+- For methods where the user would like to view their nutrional content (handleViewXYZ), XYZ is used as a placeholder 
+  for the specified nutritional content (e.g. calories, carbohydrates, protein etc.)
+
+![User Class Diagram](../docs/diagrams/diagrams_png/UserSequenceDiagram.png)
+
+User class initialises MealList, DrinkList and ExerciseList for the user to track their data.
+
 ### Exercise Component
 ![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
 

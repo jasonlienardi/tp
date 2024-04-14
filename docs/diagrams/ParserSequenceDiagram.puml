@@ -12,7 +12,7 @@ Fitnus -> Ui **: Ui()
 activate Ui
 Ui -> Scanner**: Scanner()
 activate Scanner
-Ui -> Parser**: Parser()
+Ui -> Parser**: Parser(user)
 activate Parser
 
 Fitnus -> Ui: printWelcomeMessage()

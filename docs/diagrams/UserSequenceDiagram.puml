@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Parser" as Parser
+participant ":User" as User
+participant "myMealList:MealList" as MealList
+participant "myDrinkList: DrinkList" as DrinkList
+participant "myExerciseList: ExerciseList" as ExerciseList
+participant "meal:Meal" as Meal
+participant "drink: Drink" as Drink
+participant "exercise: Exercise" as Exercise
+
+hide footbox
+!pragma teoz true
+
+User -> MealList **: MealList()
+activate MealList
+
+
+User -> DrinkList **: DrinkList()
+activate DrinkList
+
+User -> ExerciseList **: ExerciseList()
+activate ExerciseList
+
+|||
+opt user input is viewXYZ
+Parser -> User ++: handleViewXYZ()
+loop all meals in myMealList
+User -> MealList: get XYZ value for meal
+MealList -> Meal ++: getXYZ()
+Meal --> MealList --: XYZ value
+& MealList --> User: increment counter for XYZ
+end
+|||
+opt if user is not viewing fibre
+loop all drinks in myDrinkList
+User -> DrinkList: get XYZ value for drink
+DrinkList -> Drink ++: getXYZ()
+Drink --> DrinkList --: XYZ value
+& DrinkList --> User: increment counter for XYZ
+end
+end
+|||
+opt if user is viewing calories
+loop all exercises in myExerciseList
+User -> ExerciseList: get caloriesBurnt for exercise
+ExerciseList -> Exercise ++: getCaloriesBurnt()
+Exercise --> ExerciseList --: caloriesBurnt value
+& ExerciseList --> User: decrement counter for caloriesCount
+end
+end
+
+User --> Parser --: display to user their XYZ content
+
+end
+
+opt user input is clear
+Parser -> User ++: handleClear()
+User -> MealList: clear mealList
+MealList --> User: mealList cleared
+User -> DrinkList: clear drinkList
+DrinkList --> User: drinkList cleared
+User -> ExerciseList: clear exerciseList
+ExerciseList --> User: exerciseList cleared
+
+User --> Parser --: clearing of lists handled
+
+@enduml
