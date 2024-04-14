@@ -216,7 +216,8 @@ public class DrinkList {
      *
      * @param command string inputted by the user, containing the new total volume of water
      * @throws NonPositiveValueException if the provided serving size is a negative value
-     * @throws IncompleteEditException if the user did not comply with the required command format
+     * @throws IncompleteEditWaterException if the user did not comply with the required command format
+     * @throws InvalidEditWaterException if the user tried to edit water intake before adding water for the ddy
      */
     public void handleEditWaterIntake(String command) throws NonPositiveValueException, IncompleteEditWaterException,
             InvalidEditWaterException {

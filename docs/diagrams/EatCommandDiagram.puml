@@ -1,0 +1,44 @@
+@startuml
+actor User
+participant ":ui" as ui
+participant ":parser" as P
+participant ":MealList" as Foo1
+participant "Parser" as Foo2 << class >>
+participant ":Meal" as Foo3
+
+activate ui
+User -> ui : input eat command
+ui -> P : parseCommand(Command)
+activate P
+P -> Foo1 : handleMeal()
+activate Foo1
+
+Foo1 -> Foo2 : parseMeal(input)
+activate Foo2
+Foo2 --> Foo1 : mealName and mealSize
+deactivate Foo2
+
+Foo1 -> Foo3 : new Meal(mealName, servingSize, currentDate.getDate()
+activate Foo3
+
+Foo3 -> Foo3 : setNutrientDetails(mealName)
+activate Foo3
+deactivate Foo3
+
+Foo3 --> Foo1 : newMeal
+deactivate Foo3
+
+Foo1 -> Foo1 : mealList.add(newMeal)
+activate Foo1
+deactivate Foo1
+
+Foo1 -> Foo1 : print tracked meal eaten
+activate Foo1
+deactivate Foo1
+
+Foo1 --> P
+deactivate Foo1
+P --> ui
+deactivate P
+ui --> User
+@enduml

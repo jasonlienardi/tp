@@ -1,0 +1,56 @@
+@startuml
+actor User
+participant ":ui" as ui
+participant ":parser" as P
+participant ":MealList" as Foo1
+participant ":handleEditMealServingSize" as Foo1
+participant "Parser" as Foo2 << class >>
+participant ":MealList" as Foo3
+participant ":Meal" as Foo4
+
+activate ui
+User -> ui : input editMeal command
+ui -> P : parseCommand(Command)
+activate P
+P -> Foo1 : handleEditMealServingSize()
+activate Foo1
+
+Foo1 -> Foo2 : parseEditMeal(input)
+activate Foo2
+Foo2 --> Foo1 : editMealIndex and editMealSize
+deactivate Foo2
+
+Foo1 -> Foo3 : mealList.get(Parser.editMealIndex).getName()
+activate Foo3
+Foo3 --> Foo1 : mealName
+deactivate Foo3
+
+Foo1 -> Foo3 : mealList.get(Parser.editMealIndex).getDate()
+activate Foo3
+Foo3 --> Foo1 : mealDate
+deactivate Foo3
+
+Foo1 -> Foo4 : new Meal(mealName, Parser.editMealSize, mealDate)
+activate Foo4
+
+Foo4 -> Foo4 : setNutrientDetails(mealName)
+activate Foo4
+deactivate Foo4
+
+Foo4 --> Foo1 : editedMeal
+deactivate Foo4
+
+Foo1 -> Foo1 : mealList.set(Parser.editMealIndex, updatedMeal)
+activate Foo1
+deactivate Foo1
+
+Foo1 -> Foo1 : print meal edited
+activate Foo1
+deactivate Foo1
+
+Foo1 --> P
+deactivate Foo1
+P --> ui
+deactivate P
+ui --> User
+@enduml
