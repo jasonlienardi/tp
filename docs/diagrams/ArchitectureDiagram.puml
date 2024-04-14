@@ -14,10 +14,9 @@ Package " "{
     Class Parser PARSER_COLOR
     Class User USER_COLOR
     Class Date DATE_COLOR
-    Class Exercise LIST_COLOR
-    Class Drink LIST_COLOR
-    Class Meal LIST_COLOR
-    Class Water LIST_COLOR
+    Class ExerciseList LIST_COLOR
+    Class DrinkList LIST_COLOR
+    Class MealList LIST_COLOR
 }
 
 Class "<$user>" as Icon PERSON_COLOR
@@ -33,10 +32,9 @@ Ui --> Storage
 User -> Date
 User .> Parser
 User .> Storage
-User --> Exercise
-User --> Meal
-User --> Drink
-User --> Water
+User --> ExerciseList
+User --> MealList
+User --> DrinkList
 
 Parser -> User
 Storage .> File

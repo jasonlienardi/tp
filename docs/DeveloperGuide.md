@@ -22,10 +22,9 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 - `Parser`: Parses user input
 - `User`: Handles user input and stores the `Exercise`, `Drink`, `Meal`, and `Water` created by user
 - `Date`: Handles user's local machine date
-- `Exercise`: Exercises completed and its duration created by user
-- `Drink`: Drinks intake and its nutritional values created by user
-- `Meal`: Meals intake and its nutritional values created by user
-- `Water`: Water intake created by user
+- `ExerciseList`: Exercises completed and its duration created by user
+- `DrinkList`: Drinks intake (including water) and its nutritional values created by user
+- `MealList`: Meals intake and its nutritional values created by user
 
 ### Ui Component
 #### Sequence Diagram
@@ -90,14 +89,16 @@ For diagram simplicity, the following choices were made when creating the diagra
 User class initialises MealList, DrinkList and ExerciseList for the user to track their data.
 
 ### Exercise Component
-![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
+![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseListClassDiagram.png)
 
 1. Upon starting up the application, User will call `loadExercises` to fetch all data from `ExerciseList.txt` and add it into `exerciseListAll`.
 2. A `User` class consists of zero to as many `Exercise` objects in the ArrayList.
 3. Each `Exercise` contains exactly one enumeration of `ExerciseIntensity`.
 ### Drink Component
+![Drink Class Diagram](../docs/diagrams/diagrams_png/DrinkListClassDiagram.png)
 
-### Water Component
+### Meal Component
+![Meal Class Diagram](../docs/diagrams/diagrams_png/MealListClassDiagram.png)
 
 ### Storage Component
 

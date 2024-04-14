@@ -3,39 +3,37 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor CLASS_ARROW_COLOR
 skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+skinparam classAttributeIconSize 0
 
-Class User {
-    # <u>exerciseList: ArrayList<Exercise>
-    # <u>exerciseListAll: ArrayList<Exercise>
-    # etc...
+Class ExerciseList {
+    + exerciseList: ArrayList<Exercise>
+    + exerciseListAll: ArrayList<Exercise>
 
-    + loadExercise (exerciseStorage: Storage): void
-    + loadExerciseCalories (exerciseCaloriesStorage: Storage): void
-    + saveExercise (exerciseStorage: Storage): void
-    + saveExerciseCalories (exerciseCaloriesStorage: Storage): void
-    + printExerciseList (exerciseListToPrint: ArrayList<Exercise>): void
-    + handleListExercises (): void
-    + handleListExercisesAll (): void
-    + handleListExercisesDate (command: String): void
-    + handleDeleteExercisesDate (command: String): void
-    + handleExercises (command: String): void
+    + ExerciseList()
+    + handleListExercises(): void
+    + handleListExercisesAll(): void
     + handleCaloriesBurnt(): void
-    + etc()...
+    + handleListExercisesDate(command: String): void
+    + handleDeleteExercisesDate(command: String): void
+    + handleExercises (command: String): void
+    + handleAddNewExerciseCalories(command: String): void
+    + printExerciseList(exerciseListToPrint: ArrayList<Exercise>): void
 }
 
 Class Exercise {
+    + <u>exerciseDetails: HashMap<String, int[]>
     - name: String
     - duration: int
     - intensity: ExerciseIntensity
     - caloriesBurnt: int
     - dateAdded: String
-    + <u>exerciseDetails: HashMap<String, int[]>
+
     + Exercise(name: String, duration: int, intensity: ExerciseIntensity, currentDate: String)
     + getName(): String
     + getDuration(): int
     + getIntensity(): ExerciseIntensity
     + getDate(): String
-    + getCaloriesBurnt(): int
+    + getCaloriesBurnt(): long
     + <u>handleInfoExercise(command: String): void
     + <u>printAvailableExercises(): void
     + <u>listAvailableExercises(): void
@@ -50,7 +48,7 @@ Class "<<enumeration>>\nExerciseIntensity" as ExerciseIntensity {
     LOW
 }
 
-User -down-> "*" Exercise
+ExerciseList -down-> "*" Exercise
 
 Exercise "*" *-down-> "1" ExerciseIntensity
 @enduml

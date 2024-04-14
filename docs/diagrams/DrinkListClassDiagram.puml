@@ -1,0 +1,65 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+skinparam classAttributeIconSize 0
+
+Class DrinkList {
+    + <u>drinkList: ArrayList<Drink>
+    + <u>drinkListAll: ArrayList<Drink>
+    + <u>waterList: ArrayList<Water>
+    + <u>waterListAll: ArrayList<Water>
+    + DrinkList()
+    + handleAddNewDrinkNutrient(command: String): void
+    + handleDrink(command: String): void
+    + handleViewWaterIntake(): void
+    + printDrinkList(startIndex: int, drinkListToPrint: ArrayList<Drink>): void
+    + handleListDrinks(): void
+    + handleListDrinksAll(): void
+    + handleListDrinksDate(command: String): void
+    + handleEditDrinkServingSize(command: String): void
+    + handleEditWaterIntake (command: String): void
+    + handleDeleteDrink (command: String): void
+}
+
+Class Drink {
+    + <u>nutrientDetails: HashMap <String, int[]>
+    - name: String
+    - dateAdded: String
+    - drinkVolume: int
+    - carbs: long
+    - sugar: long
+    - calories: long
+    - protein: long
+    - fat: long
+
+    + Drink(name: String, volume: int, currentDate: String)
+    + <u>handleInfoDrink (command: String): void
+    + <u>printAvailableExercises(): void
+    + <u>listAvailableDrinks(): void
+    + <u>getNutrientDetails(): HashMap<String, int[]>
+    + getName(): String
+    + getDrinkVolumeSize(): int
+    + getCalories(): long
+    + getCarbs(): long
+    + getSugar(): long
+    + getProtein(): long
+    + getFat(): long
+    + getDate(): String
+    - setNutrientValues(name: String): void
+}
+
+Class Water {
+    - waterIntake: int
+    - dateAdded: String
+    + Water(amount: int, dateAdded: String)
+    + getWater(): int
+    + addWaterIntake(amount: int): void
+    + editWaterIntake(amount: int): void
+    + getDate(): String
+}
+
+DrinkList -down-> "*" Drink
+DrinkList --> "*" Water
+@enduml
