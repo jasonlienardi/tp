@@ -17,7 +17,6 @@ Package " "{
     Class ExerciseList LIST_COLOR
     Class DrinkList LIST_COLOR
     Class MealList LIST_COLOR
-    Class WaterList LIST_COLOR
 }
 
 Class "<$user>" as Icon PERSON_COLOR
@@ -36,7 +35,6 @@ User .> Storage
 User --> ExerciseList
 User --> MealList
 User --> DrinkList
-User --> WaterList
 
 Parser -> User
 Storage .> File
