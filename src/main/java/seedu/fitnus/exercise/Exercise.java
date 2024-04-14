@@ -138,10 +138,16 @@ public class Exercise {
      * only called when the user first enters the program.
      */
     public static void printAvailableExercises() {
+        int count = 0;
         System.out.print("Available exercises: ");
         for (String exercise : exerciseDetails.keySet()) {
-            System.out.print(exercise);
-            System.out.print(", ");
+            if (count < 3) {
+                System.out.print(exercise);
+                System.out.print(", ");
+                count++;
+            } else {
+                break;
+            }
         }
         System.out.print("etc.");
         System.out.println();

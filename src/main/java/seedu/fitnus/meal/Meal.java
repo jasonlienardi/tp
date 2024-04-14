@@ -173,10 +173,16 @@ public class Meal {
      * only called when the user first enters the program.
      */
     public static void printAvailableMeals() {
+        int count = 0;
         System.out.print("Available meals: ");
         for (String meal : nutrientDetails.keySet()) {
-            System.out.print(meal);
-            System.out.print(", ");
+            if (count < 3) {
+                System.out.print(meal);
+                System.out.print(", ");
+                count ++;
+            } else {
+                break;
+            }
         }
         System.out.print("etc.");
         System.out.println();

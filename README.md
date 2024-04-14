@@ -40,7 +40,7 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 7. View daily fat consumed: `fat`
 8. View daily sugar consumed: `sugar`
 9. View daily fiber consumed: `fiber`
-10. View daily water consumption: `viewWater`
+10. View daily water consumption: `water`
 11. View daily calories consumed: `caloriesBurnt`
 12. View daily calories and water intake recommendation, based on current intake: `recommend`
     
