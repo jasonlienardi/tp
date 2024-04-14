@@ -59,7 +59,7 @@ public class Ui {
     /**
      * Prints the divider line between messages.
      */
-    public static void showLine() {
+    public void showLine() {
         System.out.println(LINE);
     }
 
@@ -72,7 +72,7 @@ public class Ui {
         if (command.trim().equals("exit")) {
             handleExit();
         } else {
-            parser.handleCommand(command);
+            parser.parseCommand(command);
         }
         showLine();
     }

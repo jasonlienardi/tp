@@ -27,6 +27,19 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 - `Meal`: Meals intake and its nutritional values created by user
 - `Water`: Water intake created by user
 
+### Ui Component
+#### Sequence Diagram
+_Note: The following sequence diagram captures the interactions only between the Fitnus, Ui and Parser classes_
+
+![Ui Sequence Diagram](../docs/diagrams/diagrams_png/ui/ParserSequenceDiagram.png)
+When the user first starts the application, the Ui class will be constructed. Within the Ui class, Scanner and Parser 
+similarly will be constructed.
+
+The Ui class will continuously read the user input:
+- If the user input DOES NOT correspond to "exit", Ui will pass the user input to Parser class. Parser class will both 
+  parse and handle the command.
+- Else if the user input corresponds to "exit", Ui will handle the exit.
+
 ### Exercise Component
 ![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
 
