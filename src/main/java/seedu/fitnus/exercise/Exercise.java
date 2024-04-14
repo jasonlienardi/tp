@@ -162,7 +162,7 @@ public class Exercise {
             System.out.println("- " + exercise);
         }
         System.out.println();
-        System.out.println("You may also input an exercise that isn't here.");
+        System.out.println("You may also input an exercise that isn't here with newExercise.");
     }
 
     public static HashMap<String, int[]> getExerciseDetails() {

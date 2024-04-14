@@ -119,7 +119,7 @@ public class Drink  {
             System.out.println("- " + drink);
         }
         System.out.println();
-        System.out.println("You may also input a drink that isn't here.");
+        System.out.println("You may also input a drink that isn't here with newDrink.");
     }
 
     /**

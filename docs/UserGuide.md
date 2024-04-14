@@ -3,7 +3,7 @@
 FitNUS is a CLI application that aims to help combat diabetes and the overconsumption of calories, sugar, and
 carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
-Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
+Users are able to track the meals, drinks, and exercises they have in a day and even view past records. 
 
 ## Setup 
 To use the app please follow the setup procedures below:
@@ -18,61 +18,15 @@ Note:
 
 ## Table of Contents
 <!-- TOC -->
-* [User Guide: FitNUS](#user-guide-fitnus)
-  * [Project Introduction](#project-introduction)
-  * [Setup](#setup-)
-  * [Table of Contents](#table-of-contents)
-  * [1) Features List](#1-features-list)
-    * [1.1 Information for users](#11-information-for-users)
-    * [1.1.1 Viewing all commands: `help`](#111-viewing-all-commands-help)
-    * [1.1.2 Viewing all pre-defined meals: `allMeals`](#112-viewing-all-pre-defined-meals-allmeals)
-    * [1.1.3 Viewing all pre-defined drinks: `allDrinks`](#113-viewing-all-pre-defined-drinks-alldrinks)
-    * [1.1.4 Viewing all pre-defined exercises: `allExercises`](#114-viewing-all-pre-defined-exercises-allexercises)
-    * [1.2 For user to add data](#12-for-user-to-add-data)
-    * [1.2.1 Add a meal eaten: `eat`](#121-add-a-meal-eaten-eat)
-    * [1.2.2 Add a drink: `drink`](#122-add-a-drink-drink)
-    * [1.2.2.1 Add water: `drink d/water`](#1221-add-water-drink-dwater)
-    * [1.2.3 Add exercise: `exercise`](#123-add-exercise-exercise)
-    * [1.2.4 Add new meal to available meals: `newMeal`](#124-add-new-meal-to-available-meals-newmeal)
-    * [1.2.4 Add new meal to available meals: `newDrink`](#124-add-new-meal-to-available-meals-newdrink)
-    * [1.2.5 Add new exercise to available exercises: `newExercise`](#125-add-new-exercise-to-available-exercises-newexercise)
+* [1) Features List](#1-features-list)
+  * [1.1 Information for users](#11-information-for-users)
+  * [1.2 For user to add data](#12-for-user-to-add-data)
   * [1.3 For data retrieval](#13-for-data-retrieval)
-    * [1.3.1 Find the information about a certain meal: `infoMeal`](#131-find-the-information-about-a-certain-meal-infomeal)
-    * [1.3.2 Find the information about a certain drink: `infoDrink`](#132-find-the-information-about-a-certain-drink-infodrink)
-    * [1.3.3 Find the information about a certain exercise: `infoExercise`](#133-find-the-information-about-a-certain-exercise-infoexercise)
-    * [1.3.4 View daily calories consumed: `calories`](#134-view-daily-calories-consumed-calories)
-    * [1.3.5 View daily carbohydrates consumed: `carbs`](#135-view-daily-carbohydrates-consumed-carbs)
-    * [1.3.6 View daily proteins consumed: `protein`](#136-view-daily-proteins-consumed-protein)
-    * [1.3.7 View daily fat consumed: `fat`](#137-view-daily-fat-consumed-fat)
-    * [1.3.8 View daily sugar consumed: `sugar`](#138-view-daily-sugar-consumed-sugar)
-    * [1.3.9 View daily fiber consumed: `fiber`](#139-view-daily-fiber-consumed-fiber)
-    * [1.3.10 View daily water consumption: `water`](#1310-view-daily-water-consumption-viewwater)
-    * [1.3.11 View daily calories consumed: `caloriesBurnt`](#1311-view-daily-calories-consumed-caloriesburnt)
-    * [1.3.12 View daily calories and water intake recommendation: `recommend`](#1312-view-daily-calories-and-water-intake-recommendation-recommend)
   * [1.4 For listing arrays](#14-for-listing-arrays)
-    * [1.4.1 List today's meal intake: `listMeals`](#141-list-todays-meal-intake-listmeals)
-    * [1.4.2 List today's drink intake: `listDrinks`](#142-list-todays-drink-intake-listdrinks)
-    * [1.4.3 List today's exercises done: `listExercises`](#143-list-todays-exercises-done-listexercises)
-    * [1.4.4 List everything inputted today: `listEverything`](#144-list-everything-inputted-today-listeverything)
-    * [1.4.5 List entire app's lifecycle meals intake: `listMealsAll`](#145-list-entire-apps-lifecycle-meals-intake-listmealsall)
-    * [1.4.6 List entire app's lifecycle drinks intake: `listDrinksAll`](#146-list-entire-apps-lifecycle-drinks-intake-listdrinksall)
-    * [1.4.7 List entire app's lifecycle exercises done: `listExercisesAll`](#147-list-entire-apps-lifecycle-exercises-done-listexercisesall)
-    * [1.4.8 List everything inputted for the entire app's lifecycle: `listEverythingAll`](#148-list-everything-inputted-for-the-entire-apps-lifecycle-listeverythingall)
-    * [1.4.9 List meal intake for a certain date: `listMeals d/[DATE]`](#149-list-meal-intake-for-a-certain-date-listmeals-ddate)
-    * [1.4.10 List drink intake for a certain date: `listDrinks d/[DATE]`](#1410-list-drink-intake-for-a-certain-date-listdrinks-ddate)
-    * [1.4.11 List exercise done for a certain date: `listExercises d/[DATE]`](#1411-list-exercise-done-for-a-certain-date-listexercises-ddate)
-    * [1.4.12 List entire food intake and exercise done for a certain date: `listEverything d/[DATE]`](#1412-list-entire-food-intake-and-exercise-done-for-a-certain-date-listeverything-ddate)
   * [1.5 For editing existing data](#15-for-editing-existing-data)
-    * [1.5.1 Edit an existing meal after inserted: `editMeal`](#151-edit-an-existing-meal-after-inserted-editmeal)
-    * [1.5.2 Edit an existing drink after inserted: `editDrink`](#152-edit-an-existing-drink-after-inserted-editdrink)
-    * [1.5.3 Edit water intake after inserted: `editWater`](#153-edit-water-intake-after-inserted-editwater)
   * [1.6 For deleting data](#16-for-deleting-data)
-    * [1.6.1 Delete certain meal entry: `deleteMeal`](#161-delete-certain-meal-entry-deletemeal)
-    * [1.6.2 Delete certain drink entry: `deleteDrink`](#162-delete-certain-drink-entry-deletedrink)
   * [1.7 For clearing data](#17-for-clearing-data)
-    * [1.7.1 Clear all entries: `clear`](#171-clear-all-entries-clear)
   * [1.8: Exit program](#18-exit-program)
-    * [1.8.1 Exit the app: `exit`](#181-exit-the-app-exit)
 <!-- TOC -->
 
 ## 1) Features List
@@ -150,13 +104,31 @@ be inputted immediately.
 **Expected Output**:
 ~~~
 Available meals: 
+- ban mian
+- tau huay
+- nasi goreng
+- babi kecap
+- soup kambeng
+- nasi lemak
+- pepper lunch
+- char siew rice
+- pork satay with satay sauce
+- roti prata
+- mee goreng
+- chendol
+- wanton mee
+- oyster omlette
 - pizza
+- ice kachang
 - chicken rice
 - fried rice
 - kaya toast
+- mala
 - laksa
+- hokkien prawn mee
+- durian
 
-You may also input a meal that isn't here.
+You may also input a meal that isn't here with newMeal.
 ~~~
 
 ### 1.1.3 Viewing all pre-defined drinks: `allDrinks`
@@ -166,12 +138,26 @@ and can be inputted immediately.
 **Expected Output**:
 ~~~
 Available drinks: 
+- water
 - sprite
-- milo
 - iced lemon tea
+- milo
 - kopi
+- soursop juice
+- kopi c
+- kalamansi juice
+- coke
+- kopi o
+- plum juice
+- teh c bing
+- guava juice
+- tiger beer
+- teh tarik
+- sugarcane juice
+- teh
+- bandung
 
-You may also input a drink that isn't here.
+You may also input a drink that isn't here with newDrink.
 ~~~
 
 ### 1.1.4 Viewing all pre-defined exercises: `allExercises`
@@ -185,7 +171,7 @@ Available exercises:
 - swimming
 - cycling
 
-You may also input an exercise that isn't here.
+You may also input an exercise that isn't here with newExercise.
 ~~~
 
 ### 1.2 For user to add data

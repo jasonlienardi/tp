@@ -198,7 +198,7 @@ public class Meal {
             System.out.println("- " + meal);
         }
         System.out.println();
-        System.out.println("You may also input a meal that isn't here.");
+        System.out.println("You may also input a meal that isn't here with newMeal.");
     }
 
     public static HashMap<String, int[]> getNutrientDetails() {
