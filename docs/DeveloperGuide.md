@@ -40,6 +40,13 @@ The Ui class will continuously read the user input:
   parse and handle the command.
 - Else if the user input corresponds to "exit", Ui will handle the exit.
 
+### Storage Component
+#### Sequence Diagram
+_Note: The following sequence diagram captures the interactions only between the Ui, Storage and StorageManager 
+classes when loading and saving data.   
+XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._
+![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
+
 ### Exercise Component
 ![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
 
