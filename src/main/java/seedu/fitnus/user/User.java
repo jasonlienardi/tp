@@ -59,7 +59,7 @@ public class User {
             assert caloriesBurntCount >= 0: "total calories burnt has to be a non-negative value";
 
             long caloriesCount = caloriesIntakeCount - caloriesBurntCount;
-            System.out.println("Total Calories: " + caloriesCount);
+            System.out.println("Total Calories: " + caloriesCount + " kcal");
         } catch (ExceedTypeLongException e) {
             System.out.println("the amount of calories you burnt has exceeded our data limits. please do a quick " +
                     "check to make sure your exerciseList is accurate!");
@@ -255,7 +255,7 @@ public class User {
         assert myExerciseList.exerciseList.isEmpty(): "clearing of exercise list failed";
 
         System.out.println("All meals, drinks and exercise entries that you added to your lists today have been " +
-                "deleted.");
+                "deleted");
     }
 
 
@@ -270,7 +270,7 @@ public class User {
         }
         int waterDifference = RECOMMEND_WATER_INTAKE - waterIntake;
         if (waterIntake < RECOMMEND_WATER_INTAKE) {
-            System.out.println("We recommend drinking more water. Please drink " +
+            System.out.println("We recommend drinking more water.\n Please drink " +
                     waterDifference + " ml more water by the end of the day to hit the daily water intake goal :)");
         } else if (waterIntake > MAX_WATER_INTAKE) {
             System.out.println("You drank more than 10,000ml of water today! Did you really drink so much?\nPlease " +

@@ -92,11 +92,11 @@ public class StorageManager {
                 for (String s : drinkStorageList) {
                     Parser.parseDrinkStorage(s);
                     String drinkDescription = Parser.drinkStorageDescription;
+                    int drinkSize = Parser.drinkStorageSize;
                     String drinkDate = Parser.drinkStorageDate;
                     DateValidation.formatDateIfValid(drinkDate);
 
-                    int drinkSize = Parser.drinkStorageSize;
-                    if (drinkDescription.equals("water")) {
+                    if (drinkDescription.trim().equals("water")) {
                         User.myDrinkList.waterListAll.add(new Water(drinkSize, drinkDate));
                     } else {
                         User.myDrinkList.drinkListAll.add(new Drink(drinkDescription, drinkSize, drinkDate));

@@ -128,9 +128,9 @@ public class Exercise {
         }
         System.out.println("Exercise: " + name);
         System.out.println("~ Calories burnt for a 1 minute workout of ~");
-        System.out.println("HIGH intensity: " + details[0]);
-        System.out.println("MEDIUM intensity: " + details[1]);
-        System.out.println("LOW intensity: " + details[2]);
+        System.out.println("HIGH intensity: " + details[0] + " kcal");
+        System.out.println("MEDIUM intensity: " + details[1] + " kcal");
+        System.out.println("LOW intensity: " + details[2] + " kcal");
     }
 
     /**

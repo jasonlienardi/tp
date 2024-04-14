@@ -1,24 +1,27 @@
-ban mian,475,48,22,22,3,10
-tau huay,153,32,14,1,5,1
 nasi goreng,346,45,13,12,10,2
 babi kecap,607,75,25,23,2,10
-soup kambeng,203,6,28,7,2,5
-nasi lemak,494,80,13,14,6,5
+mie,607,75,25,23,2,100
 pepper lunch,500,50,40,11,4,5
-char siew rice,605,91,24,16,6,10
-pork satay with satay sauce,36,1,5,2,10,0
 roti prata,209,32,5,7,2,10
-mee goreng,500,61,18,20,4,5
-chendol,386,59,6,15,7,2
-wanton mee,555,97,15,14,13,10
 oyster omlette,467,40,19,24,10,1
 pizza,600,80,50,40,30,20
 ice kachang,257,58,6,1,10,2
+kaya toast,459,44,8,27,10,1
+hokkien prawn mee,522,69,18,19,4,10
+ban mian,475,48,22,22,3,10
+tau huay,153,32,14,1,5,1
+cookie,1000,100,100,100,100,100
+soup kambeng,203,6,28,7,2,5
+nasi lemak,494,80,13,14,6,5
+char siew rice,605,91,24,16,6,10
+pork satay with satay sauce,36,1,5,2,10,0
+mee goreng,500,61,18,20,4,5
+chendol,386,59,6,15,7,2
+wanton mee,555,97,15,14,13,10
+1,600,100,1001,100,100,100
 chicken rice,400,50,30,20,10,5
 fried rice,500,60,25,15,15,5
-kaya toast,459,44,8,27,10,1
 mala,583,72,12,30,10,7
 laksa,377,71,18,2,4,10
-hokkien prawn mee,522,69,18,19,4,10
 durian,147,27,2,5,3,5
 

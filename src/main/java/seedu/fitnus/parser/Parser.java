@@ -524,7 +524,8 @@ public class Parser {
      *
      * @param data The data string to be parsed.
      */
-    public static void parseDrinkStorage(String data) throws StorageErrorException, NonPositiveValueException {
+    public static void parseDrinkStorage(String data) throws StorageErrorException, NonPositiveValueException,
+            NumberFormatException {
         String delimiter = ",";
         String[] arrayOfDrinkData = data.split(delimiter);
         if (arrayOfDrinkData.length != 3) {
@@ -541,7 +542,8 @@ public class Parser {
      *
      * @param data The data string to be parsed.
      */
-    public static void parseExerciseStorage(String data) throws NonPositiveValueException, StorageErrorException {
+    public static void parseExerciseStorage(String data) throws NonPositiveValueException, StorageErrorException,
+            NumberFormatException {
         String delimiter = ",";
         String[] arrayOfExerciseData = data.split(delimiter);
         if (arrayOfExerciseData.length != 4) {

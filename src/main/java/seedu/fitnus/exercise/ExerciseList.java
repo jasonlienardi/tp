@@ -171,6 +171,6 @@ public class ExerciseList {
             caloriesBurnt += exercise.getCaloriesBurnt();
         }
         IntegerValidation.checkNoOverflowForSum(caloriesBurnt);
-        System.out.println("Total calories burnt: " + caloriesBurnt);
+        System.out.println("Total calories burnt: " + caloriesBurnt + " kcal");
     }
 }
