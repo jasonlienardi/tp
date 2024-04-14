@@ -4,7 +4,9 @@ FitNUS is a CLI application that aims to help combat diabetes and the overconsum
 carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
-***
+
+---
+
 ## Setup 
 To use the app please follow the setup procedures below:
 1. Download the JAR file. 
@@ -15,7 +17,8 @@ To use the app please follow the setup procedures below:
 -$ java -jar FitNUS.jar
 ```
 
-***
+---
+
 ## Features List
 ### 1 Information for users
 1. View all possible commands: `help`
@@ -74,6 +77,8 @@ high/medium/low intensity workout defined per minute and can be inputted immedia
 
 ### 7 For users to clear all data
 1. Clear all entries of meals, drinks and exercise: `clear`
-***
+
+---
+
 ## Exit the program
 Close the application and save all the changes made: `exit`

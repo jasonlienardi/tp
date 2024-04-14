@@ -4,6 +4,7 @@ FitNUS is a CLI application that aims to help combat diabetes and the overconsum
 carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records.
+
 ---  
 ## Setup
 To use the app please follow the setup procedures below:

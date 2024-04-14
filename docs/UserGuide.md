@@ -11,7 +11,7 @@ Users are able to track the meals, drinks, and exercises they have in a day and 
 
 ## Table of Contents
 <!-- TOC -->
-* [1) Setup](#1-setup-)
+* [1) Setup](#1-setup)
 * [2) Features List](#2-features-list)
   * [2.1 Information for users](#21-information-for-users)
   * [2.2 For user to add data](#22-for-user-to-add-data)
@@ -679,6 +679,7 @@ Safely close the application. Don't worry, all your inputs will be saved while y
 Bye. Hope to see you again soon!
 ~~~
 ---
+
 ## 3) FAQ
 **Q**: How do I save changes made in the app? 
 
