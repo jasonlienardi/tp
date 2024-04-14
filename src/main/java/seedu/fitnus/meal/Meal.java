@@ -160,12 +160,13 @@ public class Meal {
         String name = Parser.parseInfoMeal(command);
         int[] nutrients = nutrientDetails.get(name);
         System.out.println("Meal: " + name + " (per serving)");
-        System.out.println("Calories: " + nutrients[0]);
-        System.out.println("Carbs: " + nutrients[1]);
-        System.out.println("Protein: " + nutrients[2]);
-        System.out.println("Fat: " + nutrients[3]);
-        System.out.println("Fiber: " + nutrients[4]);
-        System.out.println("Sugar: " + nutrients[5]);
+        System.out.println("Drink: " + name + " (per 100 ml)");
+        System.out.println("Calories: " + nutrients[0] + " kcal");
+        System.out.println("Carbs: " + nutrients[1] + " g");
+        System.out.println("Protein: " + nutrients[2] + " g");
+        System.out.println("Fat: " + nutrients[3] + " g");
+        System.out.println("Fiber: " + nutrients[4] + " g");
+        System.out.println("Sugar: " + nutrients[5] + " g");
     }
 
     /**
