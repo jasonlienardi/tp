@@ -567,11 +567,12 @@ Removed Iced Lemon Tea From Drinks
 
 ## 1.7 For clearing data
 ### 1.7.1 Clear all entries: `clear`
-Clear all entries in mealList and drinkList  
+Clear all entries that you added to mealList, drinkList and exerciseList TODAY.  
+Note: These are meals/drinks you consumed today or exercises you have done today.  
 **Format**: `clear`  
 **Expected output**:
 ~~~
-All entries have been deleted
+All meals, drinks and exercise entries that you added to your lists today have been deleted.
 ~~~
 
 ## 1.8: Exit program

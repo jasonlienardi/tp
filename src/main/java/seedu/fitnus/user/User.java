@@ -254,7 +254,8 @@ public class User {
         assert myDrinkList.drinkList.isEmpty(): "clearing of drink list failed";
         assert myExerciseList.exerciseList.isEmpty(): "clearing of exercise list failed";
 
-        System.out.println("All entries have been deleted");
+        System.out.println("All meals, drinks and exercise entries that you added to your lists today have been " +
+                "deleted.");
     }
 
 
