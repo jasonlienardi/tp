@@ -43,11 +43,37 @@ The Ui class will continuously read the user input:
 ### Storage Component
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the Ui, Storage and StorageManager 
-classes when loading and saving data.   
-XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._
+classes when loading and saving data.  
+XYZ is used as a placeholder for Meal / Drink / Exercise for diagram simplicity._ 
+
 ![Storage Class Diagram](../docs/diagrams/diagrams_png/StorageManagerSequenceDiagram.png)
 
 ### User Component
+#### Description
+The User component will create MealList, DrinkList and ExerciseList for the user to track their data. Additionally, 
+this component is in-charge of handling view, listEverything, recommend and clear commands.
+
+#### Implementation
+User Class:
+- Attributes:
+  - `myMealList:` Represents the user's class that managers the meal lists.
+  - `myDrinkList:` Represents the user's class that managers the drink lists.
+  - `myExerciseList:` Represents the user's class that managers the exercise lists.
+
+
+- Methods:
+  - `handleViewCalories()`: Prints the user's net calorie intake of the day.
+  - `handleViewCarbohydrates()`: Prints the user's total carbohydrates intake of the day.
+  - `handleViewProteins()`: Prints the user's total protein intake of the day.
+  - `handleViewFiber()`: Prints the user's total fiber intake of the day.
+  - `handleViewFat()`: Prints the user's total fat intake of the day.
+  - `handleViewSugar()`: Prints the user's total sugar intake of the day.
+  - `handleListEverything()`: Prints all meals and drinks that the user has inputted today.
+  - `handleListEverythingAll()`: Prints all meals and drinks that the user has inputted of all-time.
+  - `handleListEverythingDate()`: Prints all meals and drinks that the user has inputted on a specified date.
+  - `handleClear()`: Clears all user's entries of the day.
+  - `handleRecommendations()`: Give recommendations to the user based on their calorie and water intake.
+
 #### Sequence Diagram
 _Note: The following sequence diagram captures the interactions only between the User, MealList, DrinkList and 
 ExerciseList classes._   
