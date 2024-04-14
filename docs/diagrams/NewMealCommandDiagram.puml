@@ -1,0 +1,38 @@
+@startuml
+actor User
+participant ":ui" as ui
+participant ":parser" as P
+participant ":MealList" as Foo1
+participant "Parser" as Foo2 << class >>
+participant "Meal" as Foo3 << class >>
+
+activate ui
+User -> ui : input newMeal Command
+ui -> P : parseCommand(Command)
+activate P
+P -> Foo1 : handleAddNewMealNutrient()
+activate Foo1
+
+Foo1 -> Foo2 : parseNewMeal(input)
+activate Foo2
+Foo2 --> Foo1 : mealName, calories, carbs, protein, fat, fiber, sugar
+deactivate Foo2
+
+Foo1 -> Foo3 : Meal.nutrientDetails.put(mealName, new int[]{calories, carbs, protein, fat, fiber, sugar})
+activate Foo3
+
+Foo3 -> Foo1
+deactivate Foo3
+
+
+Foo1 -> Foo1 : print added new meal to available meals
+activate Foo1
+deactivate Foo1
+
+Foo1 --> P
+deactivate Foo1
+P --> ui
+deactivate P
+ui --> User
+
+@enduml
