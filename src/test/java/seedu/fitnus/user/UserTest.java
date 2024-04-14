@@ -48,7 +48,7 @@ public class UserTest {
     @Test
     public void handleViewCalories_correctCalorieCalculation_viewCaloriesAccurate() throws ExceedTypeLongException {
         testUser.handleViewCalories();
-        String expectedOutput = "Total Calories: 5507";
+        String expectedOutput = "Total Calories: 5507 kcal";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);

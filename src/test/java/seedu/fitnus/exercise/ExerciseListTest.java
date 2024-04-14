@@ -54,7 +54,7 @@ public class ExerciseListTest {
     public void handleViewCaloriesBurnt_correctCalorieBurntCalculation_viewCaloriesBurntAccurate()
             throws ExceedTypeLongException {
         testerExerciseList.handleCaloriesBurnt();
-        String expectedOutput = "Total calories burnt: 240";
+        String expectedOutput = "Total calories burnt: 240 kcal";
         String actualOutput = outputStream.toString().trim();
 
         assertEquals(actualOutput, expectedOutput);
