@@ -91,7 +91,7 @@ public class DrinkList {
         for (Water water: waterList) {
             waterIntake += water.getWater();
         }
-        System.out.println("Total water intake today: " + waterIntake + " ml.");
+        System.out.println("Total water intake today: " + waterIntake + " ml");
     }
 
     /**
