@@ -1,10 +1,13 @@
 # User Guide: FitNUS
+
+---
 ## Project Introduction
 FitNUS is a CLI application that aims to help combat diabetes and the overconsumption of calories, sugar, and
 carbohydrates. Our vision is to promote healthy lifestyle amongst NUS students.
 
 Users are able to track the meals, drinks, and exercises they have in a day and even past records. 
 
+---
 ## Setup 
 To use the app please follow the setup procedures below:
 1. Download the JAR file. 
@@ -15,7 +18,7 @@ To use the app please follow the setup procedures below:
 Note:
 1. All files under 'data' and 'db' folders should not be modified by user
 2. Enter "exit" to properly close the program and save the data
-
+---
 ## Table of Contents
 <!-- TOC -->
 * [User Guide: FitNUS](#user-guide-fitnus)
@@ -46,7 +49,7 @@ Note:
     * [1.3.7 View daily fat consumed: `fat`](#137-view-daily-fat-consumed-fat)
     * [1.3.8 View daily sugar consumed: `sugar`](#138-view-daily-sugar-consumed-sugar)
     * [1.3.9 View daily fiber consumed: `fiber`](#139-view-daily-fiber-consumed-fiber)
-    * [1.3.10 View daily water consumption: `water`](#1310-view-daily-water-consumption-viewwater)
+    * [1.3.10 View daily water consumption: `water`](#1310-view-daily-water-consumption-water)
     * [1.3.11 View daily calories consumed: `caloriesBurnt`](#1311-view-daily-calories-consumed-caloriesburnt)
     * [1.3.12 View daily calories and water intake recommendation: `recommend`](#1312-view-daily-calories-and-water-intake-recommendation-recommend)
   * [1.4 For listing arrays](#14-for-listing-arrays)
@@ -73,9 +76,13 @@ Note:
     * [1.7.1 Clear all entries: `clear`](#171-clear-all-entries-clear)
   * [1.8: Exit program](#18-exit-program)
     * [1.8.1 Exit the app: `exit`](#181-exit-the-app-exit)
+  * [FAQ](#faq)
 <!-- TOC -->
 
+---
 ## 1) Features List
+
+
 ### 1.1 Information for users
 ### 1.1.1 Viewing all commands: `help`
 Shows a list of all possible command inputs.  
@@ -162,7 +169,7 @@ You may also input a meal that isn't here.
 ### 1.1.3 Viewing all pre-defined drinks: `allDrinks`
 Shows a list of all pre-defined drinks. These drinks will have their nutritional content defined per 100ml
 and can be inputted immediately.  
-**Format**: allDrinks
+**Format**: `allDrinks`   
 **Expected Output**:
 ~~~
 Available drinks: 
@@ -177,7 +184,7 @@ You may also input a drink that isn't here.
 ### 1.1.4 Viewing all pre-defined exercises: `allExercises`
 Shows a list of all pre-defined exercises. These exercises will have the number of calories burnt for a
 high/medium/low intensity workout defined per minute and can be inputted immediately.  
-**Format**: allExercises
+**Format**: `allExercises`   
 **Expected Output**:
 ~~~
 Available exercises: 
@@ -251,7 +258,7 @@ Adds a new exercise to available exercises
 ~~~
 Added badminton to available exercises
 ~~~
- 
+---
 ## 1.3 For data retrieval
 ### 1.3.1 Find the information about a certain meal: `infoMeal`
 For the specified meal, display its nutritional content to the user  
@@ -531,7 +538,7 @@ Pizza has been edited to 2 servings
 ### 1.5.2 Edit an existing drink after inserted: `editDrink`
 For a drink that was inputted in the day, edit its serving size  
 **Format**: `editDrink INDEX s/NEW_SERVING_SIZE`  
-**Sample input**: editDrink 1 s/200  
+**Sample input**: `editDrink 1 s/200`  
 **Expected output**:
 ~~~
 Sprite has been edited to 200 ml
@@ -548,9 +555,9 @@ Total water has been edited to 200 ml
 
 ## 1.6 For deleting data
 ### 1.6.1 Delete certain meal entry: `deleteMeal`
-For a meal that was inputted in the day, delete its input based on its index in the meal list
-**Format**: `deleteMeal INDEX`
-**Sample Input**: `deleteMeal 1`
+For a meal that was inputted in the day, delete its input based on its index in the meal list   
+**Format**: `deleteMeal INDEX`   
+**Sample Input**: `deleteMeal 1`    
 **Expected output**:
 ~~~
 Removed Chicken Rice From Meals
@@ -576,8 +583,39 @@ All entries have been deleted
 
 ## 1.8: Exit program
 ### 1.8.1 Exit the app: `exit`
+Saves all changes made to the app and terminates the program   
 **Format**: `exit`  
 **Expected output**:
 ~~~
 Bye. Hope to see you again soon!
 ~~~
+
+---
+## FAQ
+**Q**: How do I save changes made in the app? 
+
+**A**: All changes will be saved once typing `exit` and terminating the program correctly. Any abrupt termination will 
+cause all changes within the session to be lost.
+
+**Q**: What is the difference between `listMeals` and `listMealsAll`?
+
+**A**: `listMeals` will list out all the meals you have eaten today 
+(with respect to the device current date). Let's say you type `listMeals` on Monday 23:59, 
+and then type it again on Tuesday 00:01, the list displayed will be different (empty if you have not made any changes). 
+`listMealsAll` will list out all the meals you have eaten throughout the lifetime of the app, it could be days ago,
+weeks ago, months, or even years, as long ss you have inputted and saved it correctly and did not delete the data. 
+The same applies for others (e.g. `listDrinks` and `listDrinksAll`)
+
+**Q**: Will `clear` erase all the entries from days ago?
+
+**A**: No. `clear` will only delete all insertions (including post edit) you have made today.
+
+**Q**: Am I able to delete or edit the entries I have inserted from days ago?
+
+**A**: No. All drinks, meals, and exercises, you have inserted from days ago will no longer be able to change. 
+Only changes made today can be edited/deleted, so make sure that everything is correct before the date changes!
+
+**Q**: My `listDrinks` have 3 indexes, but my `listDrinksAll` have 10 indexes, why can't I perform `deleteDrink 10`?
+
+**A**: Referring to the previous question, you can only delete/edit items made today. `listDrinks` and `listDrinksAll` 
+have different list indexes, please follow `listDrinks` index only. This applies to both meal and exercises.
