@@ -28,7 +28,7 @@ The architecture diagram belows shows the overall design of our FitNUS CLI app a
 - `Water`: Water intake created by user
 
 ### Exercise Component
-![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseClassDiagram.png)
+![Exercise Class Diagram](../docs/diagrams/diagrams_png/ExerciseListClassDiagram.png)
 
 1. Upon starting up the application, User will call `loadExercises` to fetch all data from `ExerciseList.txt` and add it into `exerciseListAll`.
 2. A `User` class consists of zero to as many `Exercise` objects in the ArrayList.

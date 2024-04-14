@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor CLASS_ARROW_COLOR
+skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
+skinparam classAttributeIconSize 0
+
+Class MealList {
+    + <u>mealList: ArrayList<Meal>
+    + <u>mealListAll: ArrayList<Meal>
+    + MealList()
+    + handleAddNewMealNutrient(command: String): void
+    + <u>handleMeal(command: String): void
+    + <u>printMealList(startIndex: int, mealListToPrint: ArrayList<Meal>): void
+    + <u>handleListMeals(): void
+    + <u>handleListMealsAll(): void
+    + <u>handleListMealsDate(command: String): void
+    + <u>handleEditMealServingSize(command: String): void
+    + <u>handleDeleteMeal(command: String): void
+}
+
+Class Meal {
+    + <u>nutrientDetails: HashMap<String, int[]>
+    - name: String
+    - servingSize: int
+    - dateAdded: String
+    - calories: long
+    - carbs: long
+    - protein: long
+    - fat: long
+    - fiber: long
+    - sugar: long
+    + Meal(name: String, servingSize: int, currentDate: String)
+    + <u>handleInfoMeal(command: String): void
+    + <u>printAvailableMeals(): void
+    + <u>listAvailableMeals(): void
+        + <u>getNutrientDetails(): HashMap<String, int[]>
+    + getName(): String
+    + getCalories(): long
+    + getCarbs(): long
+    + getProtein(): long
+    + getFat(): long
+    + getFiber(): long
+    + getSugar(): long
+    + getServingSize(): int
+    + getDate(): String
+    - setNutrientValues(name: String): void
+}
+
+MealList -down-> "*" Meal
+@enduml
