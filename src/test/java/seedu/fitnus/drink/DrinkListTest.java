@@ -101,5 +101,4 @@ public class DrinkListTest {
         testerDrinkList.handleDeleteDrink(command);
         assertEquals(0, testDrinkList.size());
     }
-
 }

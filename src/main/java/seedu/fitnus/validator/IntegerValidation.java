@@ -8,8 +8,6 @@ import seedu.fitnus.exception.NonPositiveValueException;
  * Validates whether an integer value complies with the condition stated.
  */
 public class IntegerValidation {
-//    public static final long MIN_LONG_VALUE = -9223372036854775808;
-//    public static final long MAX_LONG_VALUE = 9223372036854775807;
     /**
      * Validates whether the integer value is a positive integer.
      *

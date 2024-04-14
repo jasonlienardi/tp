@@ -5,7 +5,9 @@ import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.IncompleteEditWaterException;
 import seedu.fitnus.exception.InvalidDateException;
+import seedu.fitnus.exception.InvalidEditWaterException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.NonPositiveValueException;
@@ -45,7 +47,7 @@ public class DrinkList {
         int fat = Parser.drinkNutrientFat;
         Drink.nutrientDetails.put(description, new int[]{calories, carbs, sugar, protein, fat});
 
-        System.out.println("Added " + description + " to available drinks");
+        System.out.println("Added " + description + " to available drinks.");
     }
 
     /**
@@ -196,7 +198,6 @@ public class DrinkList {
     public void handleEditDrinkServingSize(String command) throws InvalidListIndexException,
             NonPositiveValueException, IncompleteEditException {
         Parser.parseEditDrink(command);
-
         if (Parser.editDrinkIndex >= drinkList.size() || Parser.editDrinkIndex < 0) {
             throw new InvalidListIndexException();
         }
@@ -205,7 +206,7 @@ public class DrinkList {
 
         Drink updatedDrink = new Drink(drinkName, Parser.editDrinkSize, drinkDate);
         drinkList.set(Parser.editDrinkIndex, updatedDrink);
-        System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml");
+        System.out.println(drinkName + " has been edited to " + Parser.editDrinkSize + " ml.");
     }
 
 
@@ -216,7 +217,8 @@ public class DrinkList {
      * @throws NonPositiveValueException if the provided serving size is a negative value
      * @throws IncompleteEditException if the user did not comply with the required command format
      */
-    public void handleEditWaterIntake(String command) throws NonPositiveValueException, IncompleteEditException {
+    public void handleEditWaterIntake(String command) throws NonPositiveValueException, IncompleteEditWaterException,
+            InvalidEditWaterException {
         Parser.parseEditWater(command);
         Date currentDate = new Date();
         for (Water water: waterList) {
@@ -224,7 +226,10 @@ public class DrinkList {
                 water.editWaterIntake(Parser.editWaterSize);
             }
         }
-        System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml");
+        if (waterList.isEmpty()) {
+            throw new InvalidEditWaterException();
+        }
+        System.out.println("Total water intake has been edited to " + Parser.editWaterSize + " ml.");
     }
 
     /**
@@ -247,7 +252,7 @@ public class DrinkList {
 
         String drinkName = drinkList.get(drinkIndex).getName();
         drinkList.remove(drinkIndex);
-        System.out.println("Removed " + drinkName + " from drinks");
+        System.out.println("Removed " + drinkName + " from drinks.");
     }
 
 

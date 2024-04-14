@@ -2,28 +2,30 @@ package seedu.fitnus.parser;
 
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
-import seedu.fitnus.exception.ExceedTypeLongException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
 import seedu.fitnus.exercise.ExerciseIntensity;
 import seedu.fitnus.user.User;
 import seedu.fitnus.validator.IntegerValidation;
 
+import seedu.fitnus.exception.ExceedTypeLongException;
+import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.IncompleteEditWaterException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.IncompleteMealException;
 import seedu.fitnus.exception.InvalidCommandException;
 import seedu.fitnus.exception.InvalidDateException;
+import seedu.fitnus.exception.InvalidEditWaterException;
 import seedu.fitnus.exception.InvalidListIndexException;
 import seedu.fitnus.exception.NegativeValueException;
 import seedu.fitnus.exception.NonPositiveValueException;
 import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
-import seedu.fitnus.exception.FutureDateException;
 
 import java.text.ParseException;
 
@@ -140,7 +142,7 @@ public class Parser {
                 user.handleViewSugar();
             } else if (trimmedCommand.equals("fat")) {
                 user.handleViewFat();
-            } else if (trimmedCommand.equals("viewWater")) {
+            } else if (trimmedCommand.equals("water")) {
                 user.myDrinkList.handleViewWaterIntake();
             } else if (trimmedCommand.equals("fiber")) {
                 user.handleViewFiber();
@@ -198,7 +200,7 @@ public class Parser {
                     "the format MUST be [exercise e/EXERCISE d/DURATION i/INTENSITY].\n"
                     + " > DURATION should be in minutes and INTENSITY can only be HIGH/MEDIUM/LOW.");
         } catch (UnregisteredDrinkException e) {
-            System.out.println("Sorry that drink is not registered in the database.Please check the spelling and " +
+            System.out.println("Sorry that drink is not registered in the database. Please check the spelling and " +
                     "try again");
         } catch (UnregisteredMealException e) {
             System.out.println("Sorry that meal is not registered in the database. Please check the spelling and " +
@@ -238,6 +240,11 @@ public class Parser {
             System.out.println("the count you would like to view has exceeded our data limits, are you sure you have " +
                     "consumed so much? Please do a quick check to update your listMeals and/or listDrinks before " +
                     "viewing again :')");
+        } catch (InvalidEditWaterException e) {
+            System.out.println("Make sure to add water for the day before editing it.");
+        } catch (IncompleteEditWaterException e) {
+            System.out.println("Please specify the new volume of water.\n" +
+                    "The format should be [editWater s/NEW_VOLUME(ML)].");
         }
 
     }
@@ -271,7 +278,7 @@ public class Parser {
         System.out.println("- View daily fat consumed: fat");
         System.out.println("- View daily sugar consumed: sugar");
         System.out.println("- View daily fiber consumed: fiber");
-        System.out.println("- View daily water consumption: viewWater");
+        System.out.println("- View daily water consumption: water");
         System.out.println("- View daily calories burnt: caloriesBurnt");
         System.out.println();
         System.out.println("List Commands: ");
@@ -478,10 +485,10 @@ public class Parser {
      * @throws NonPositiveValueException If a negative value is encountered.
      * @throws IncompleteEditException If the command is incomplete.
      */
-    public static void parseEditWater(String command) throws NonPositiveValueException, IncompleteEditException {
+    public static void parseEditWater(String command) throws NonPositiveValueException, IncompleteEditWaterException {
         int waterSizePosition = command.indexOf("s/") + 2;
         if (waterSizePosition <= 1) { //-1 + 2
-            throw new IncompleteEditException();
+            throw new IncompleteEditWaterException();
         }
         editWaterSize = Integer.parseInt(command.substring(waterSizePosition).trim());
         IntegerValidation.checkIntegerGreaterThanZero(editWaterSize);
