@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Ui" as Ui
+participant ":StorageManager" as StorageManager
+
+participant "xyzNutrientStorage:Storage" as xyzNutrientStorage
+participant "xyzStorage:Storage" as xyzStorage
+
+hide footbox
+!pragma teoz true
+'
+'Ui -> mealStorage**: Storage(...)
+'Ui -> drinkStorage**: Storage(...)
+'Ui -> exerciseStorage**: Storage(...)
+'Ui -> mealNutrientStorage**: Storage(...)
+'Ui -> drinkNutrientStorage**: Storage(...)
+'Ui -> exerciseCaloriesStorage**: Storage(...)
+activate Ui
+Ui -> StorageManager**: StorageManager(...)
+activate StorageManager
+
+alt successful case
+StorageManager -> StorageManager: loadXYZNutrient(xyzNutrientStorage)
+activate StorageManager
+StorageManager -> xyzNutrientStorage: readFile()
+activate xyzNutrientStorage
+xyzNutrientStorage --> StorageManager: read pre-defined nutritional contents
+deactivate xyzNutrientStorage
+StorageManager --> StorageManager: loaded pre-defined nutritional contents
+deactivate StorageManager
+
+else FileNotFoundException caught
+StorageManager -> xyzNutrientStorage ++: createFile()
+xyzNutrientStorage --> StorageManager --: created file to store pre-defined nutritional contents
+end
+
+|||
+
+alt successful case
+StorageManager -> StorageManager: loadXYZ(xyzStorage)
+activate StorageManager
+StorageManager -> xyzStorage: readFile()
+activate xyzStorage
+xyzStorage --> StorageManager: read user's previously saved data
+deactivate xyzStorage
+StorageManager --> StorageManager: loaded user's previously saved data
+deactivate StorageManager
+
+else FileNotFoundException caught
+StorageManager -> xyzStorage ++: createFile()
+xyzStorage --> StorageManager --: created file to store user's data
+end
+
+|||
+
+alt input is not exit command
+else user input is exit
+Ui -> Ui ++: handleExit()
+Ui -> StorageManager: saveXYZ()
+StorageManager -> xyzStorage++: get saved data in textContent of Storage
+xyzStorage -> xyzStorage ++: writeFile(...)
+
+xyzStorage --> xyzStorage --: data saved into file
+xyzStorage --> StorageManager --: saved user's xyz data
+& StorageManager --> Ui: saved user's xyz data
+
+|||
+
+Ui -> StorageManager: saveXYZNutrients()
+StorageManager -> xyzNutrientStorage++: get saved data in textContent of Storage
+xyzNutrientStorage -> xyzNutrientStorage ++: writeFile(...)
+
+xyzNutrientStorage --> xyzNutrientStorage --: data saved into file
+xyzNutrientStorage --> StorageManager --: saved user's xyzNutrient data
+& StorageManager --> Ui: saved user's xyzNutrient data
+deactivate StorageManager
+deactivate Ui
+Ui --> Ui --: exit handled
+end
+
+@enduml
