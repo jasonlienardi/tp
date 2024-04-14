@@ -219,6 +219,7 @@ public class DrinkList {
      * @throws IncompleteEditWaterException if the user did not comply with the required command format
      * @throws InvalidEditWaterException if the user tried to edit water intake before adding water for the ddy
      */
+    //@@author Bryvo
     public void handleEditWaterIntake(String command) throws NonPositiveValueException, IncompleteEditWaterException,
             InvalidEditWaterException {
         Parser.parseEditWater(command);

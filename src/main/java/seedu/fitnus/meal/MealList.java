@@ -151,6 +151,7 @@ public class MealList {
      * @throws NonPositiveValueException if the provided serving size is a negative value
      * @throws IncompleteEditException if the user did not comply with the required command format
      */
+    //@@author claribelho
     public static void handleEditMealServingSize(String command) throws InvalidListIndexException,
             NonPositiveValueException, IncompleteEditException {
         Parser.parseEditMeal(command); //Parser handles the index, so index can be = 0
