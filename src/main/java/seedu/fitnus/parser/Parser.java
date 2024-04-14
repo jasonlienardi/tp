@@ -2,6 +2,7 @@ package seedu.fitnus.parser;
 
 import seedu.fitnus.date.DateValidation;
 import seedu.fitnus.drink.Drink;
+import seedu.fitnus.exception.ExceedTypeIntException;
 import seedu.fitnus.exception.StorageErrorException;
 import seedu.fitnus.meal.Meal;
 import seedu.fitnus.exercise.Exercise;
@@ -246,6 +247,10 @@ public class Parser {
         } catch (IncompleteEditWaterException e) {
             System.out.println("Please specify the new volume of water.\n" +
                     "The format should be [editWater s/NEW_VOLUME(ML)].");
+        } catch (ExceedTypeIntException e) {
+            System.out.println("Adding this amount of water will exceed a total of 2147483647ml water today. Are " +
+                    "you sure you can drink so much water in a day? \nI shall remove this amount for now. EditWater " +
+                    "if you deem fit :/");
         }
 
     }

@@ -2,6 +2,7 @@ package seedu.fitnus.drink;
 
 import seedu.fitnus.date.Date;
 
+import seedu.fitnus.exception.ExceedTypeIntException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
 import seedu.fitnus.exception.IncompleteEditException;
@@ -42,7 +43,7 @@ public class DrinkListTest {
 
     @Test
     public void handleDrink_validInputs_correctlyAddDrink() throws IncompleteDrinkException,
-            UnregisteredDrinkException, NonPositiveValueException {
+            UnregisteredDrinkException, NonPositiveValueException, ExceedTypeIntException {
         String command = "drink d/kopi s/500";
         testerDrinkList.handleDrink(command);
 

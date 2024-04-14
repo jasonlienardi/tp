@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-//@@author tinaliu27-unused
+//@@author tinaliu27 -unused
 public class CSVReader {
     public static final String DELIMITER = ",";
     private static HashMap<String, String[]> foodItems = new HashMap<>();

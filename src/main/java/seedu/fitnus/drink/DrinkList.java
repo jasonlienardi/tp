@@ -1,6 +1,7 @@
 package seedu.fitnus.drink;
 
 import seedu.fitnus.date.Date;
+import seedu.fitnus.exception.ExceedTypeIntException;
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteDeleteException;
 import seedu.fitnus.exception.IncompleteDrinkException;
@@ -59,7 +60,7 @@ public class DrinkList {
      * @throws NonPositiveValueException if the provided serving size is a negative value
      */
     public void handleDrink(String command) throws IncompleteDrinkException, UnregisteredDrinkException,
-            NonPositiveValueException {
+            NonPositiveValueException, ExceedTypeIntException {
         Parser.parseDrink(command);
         String drinkName = Parser.drinkDescription;
         int servingSize = Parser.drinkSize;
