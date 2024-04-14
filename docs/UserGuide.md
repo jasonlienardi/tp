@@ -46,7 +46,7 @@ Note:
     * [1.3.7 View daily fat consumed: `fat`](#137-view-daily-fat-consumed-fat)
     * [1.3.8 View daily sugar consumed: `sugar`](#138-view-daily-sugar-consumed-sugar)
     * [1.3.9 View daily fiber consumed: `fiber`](#139-view-daily-fiber-consumed-fiber)
-    * [1.3.10 View daily water consumption: `viewWater`](#1310-view-daily-water-consumption-viewwater)
+    * [1.3.10 View daily water consumption: `water`](#1310-view-daily-water-consumption-viewwater)
     * [1.3.11 View daily calories consumed: `caloriesBurnt`](#1311-view-daily-calories-consumed-caloriesburnt)
     * [1.3.12 View daily calories and water intake recommendation: `recommend`](#1312-view-daily-calories-and-water-intake-recommendation-recommend)
   * [1.4 For listing arrays](#14-for-listing-arrays)
@@ -106,7 +106,7 @@ View nutrients and calories:
 - View daily fat consumed: fat
 - View daily sugar consumed: sugar
 - View daily fiber consumed: fiber
-- View daily water consumption: viewWater
+- View daily water consumption: water
 - View daily calories burnt: caloriesBurnt
 
 List Commands: 
@@ -344,9 +344,9 @@ Display current total fiber intake (g) for the day
 Total Fiber: 20 grams
 ~~~
 
-### 1.3.10 View daily water consumption: `viewWater`
+### 1.3.10 View daily water consumption: `water`
 Display current total water intake (in ml) for the day  
-**Format**: `viewWater`  
+**Format**: `water`  
 **Expected output**: 
 ~~~
 Total water intake today: 0 ml

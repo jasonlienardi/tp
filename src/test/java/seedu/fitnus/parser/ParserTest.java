@@ -1,8 +1,10 @@
 package seedu.fitnus.parser;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.fitnus.exception.FutureDateException;
 import seedu.fitnus.exception.IncompleteEditException;
+import seedu.fitnus.exception.IncompleteEditWaterException;
 import seedu.fitnus.exception.IncompleteExerciseException;
 import seedu.fitnus.exception.IncompleteInfoException;
 import seedu.fitnus.exception.InvalidDateException;
@@ -12,7 +14,6 @@ import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.exception.UnregisteredExerciseException;
 import seedu.fitnus.exception.UnregisteredMealException;
 import seedu.fitnus.exercise.ExerciseIntensity;
-
 
 import java.text.ParseException;
 
@@ -80,9 +81,10 @@ public class ParserTest {
     }
 
     @Test
-    public void parseEditWater_validInputs_success() throws IncompleteEditException, NonPositiveValueException {
-        String command = "editWater s/500";
-        Parser.parseEditWater(command);
+    public void parseEditWater_validInputs_success() throws NonPositiveValueException,
+            IncompleteEditWaterException {
+        String command_2 = "editWater s/500";
+        Parser.parseEditWater(command_2);
         assertEquals(500, Parser.editWaterSize);
     }
 

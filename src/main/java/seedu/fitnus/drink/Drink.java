@@ -5,9 +5,10 @@ import seedu.fitnus.exception.UnregisteredDrinkException;
 import seedu.fitnus.parser.Parser;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Drink  {
-    public static HashMap<String, int[]> nutrientDetails = new HashMap<>();
+    public static HashMap<String, int[]> nutrientDetails = new LinkedHashMap<>();
     private String name;
     private int drinkVolume;
     private String dateAdded;
@@ -35,6 +36,7 @@ public class Drink  {
     }
 
     static {
+        nutrientDetails.put("water", new int[]{0, 0, 0, 0, 0});
         nutrientDetails.put("sprite", new int[]{270, 42, 7, 8, 2});
         nutrientDetails.put("iced lemon tea", new int[]{95, 21, 1, 1, 1});
         nutrientDetails.put("milo", new int[]{124, 20, 3, 3, 1});
@@ -93,10 +95,16 @@ public class Drink  {
      * only called when the user first enters the program.
      */
     public static void printAvailableDrinks() {
+        int count = 0;
         System.out.print("Available drinks: ");
         for (String drink : nutrientDetails.keySet()) {
-            System.out.print(drink);
-            System.out.print(", ");
+            if (count < 3) {
+                System.out.print(drink);
+                System.out.print(", ");
+                count ++;
+            } else {
+                break;
+            }
         }
         System.out.print("etc.");
         System.out.println();
