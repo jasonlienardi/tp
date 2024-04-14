@@ -5,6 +5,56 @@ skinparam arrowColor CLASS_ARROW_COLOR
 skinparam classBackgroundColor CLASS_DIAGRAM_COLOR
 skinparam classAttributeIconSize 0
 
+Class Ui {
+    - mealStorage: Storage
+    - drinkStorage: Storage
+    - exerciseStorage: Storage
+    - mealNutrientStorage: Storage
+    - drinkNutrientStorage: Storage
+    - exerciseCaloriesStorage: Storage
+    - storageManager: StorageManager
+    - parser: Parser
+    + handleExit(): void
+}
+
+Class Parser {
+    +<u> parseMealStorage(data: String): void
+    +<u> parseDrinkStorage(data: String): void
+    +<u> parseExerciseStorage(data: String): void
+    +<u> parseMealNutrient(data: String): void
+    +<u> parseDrinkNutrient(data: String): void
+    +<u> parseExerciseCalories(data: String): void
+}
+
+Class User {
+    +<u> myMealList: MealList
+    +<u> myDrinkList: DrinkList
+    +<u> myExerciseList: ExerciseList
+}
+
+Class Storage {
+    + textContent: String
+    + folderPath: String
+    + filePath: String
+    + Storage(folderPath: String, filePath: String)
+    + appendTextContent(content: String): void
+    + readFile(): ArrayList<String>
+    + createFile(): void
+    + writeFile(textToAdd: String): void
+}
+
+Class Meal {
+    +<u> nutrientDetails: HashMap<String, int[]>
+}
+
+Class Drink {
+    +<u> nutrientDetails: HashMap<String, int[]>
+}
+
+Class Exercise {
+    +<u> exerciseDetails: HashMap<String, int[]>
+}
+
 Class StorageManager {
     + StorageManager(mealStorage: Storage, drinkStorage: Storage, exerciseStorage: Storage,
                       mealNutrientStorage: Storage, drinkNutrientStorage: Storage, exerciseCaloriesStorage: Storage)
@@ -22,16 +72,15 @@ Class StorageManager {
     + saveExerciseCalories(exerciseCaloriesStorage: Storage): void
 }
 
-Class Storage {
-    + textContent: String
-    + folderPath: String
-    + filePath: String
-    + Storage(folderPath: String, filePath: String)
-    + appendTextContent(content: String): void
-    + readFile(): ArrayList<String>
-    + createFile(): void
-    + writeFile(textToAdd: String): void
-}
 
-StorageManager ..> Storage
+StorageManager .left.> Storage
+StorageManager .right.> Parser
+StorageManager ..> User
+StorageManager ..> Meal
+StorageManager ..> Drink
+StorageManager ..> Exercise
+Ui -down-> "6" Storage
+Ui -down-> "1" StorageManager
+Ui -down-> "1" Parser
+note "Some parameters and methods omitted for brevity" as N
 @enduml
