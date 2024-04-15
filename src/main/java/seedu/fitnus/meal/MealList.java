@@ -185,7 +185,7 @@ public class MealList {
         }
 
         String mealName = mealList.get(mealIndex).getName();
-        mealList.remove(mealIndex);
+        deleteMeal INDEX;
         System.out.println("Removed " + mealName + " from meals");
     }
 
